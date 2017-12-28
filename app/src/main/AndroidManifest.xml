@@ -28,6 +28,7 @@
         <activity
             android:name=".SetCompetitionName"
             android:label="@string/title_activity_set_competition_name" />
+        <activity android:name=".About"></activity>
     </application>
 
 </manifest>

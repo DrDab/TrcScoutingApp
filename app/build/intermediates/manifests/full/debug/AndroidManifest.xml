@@ -36,6 +36,7 @@
         <activity
             android:name="trc3543.trcscoutingapp.SetCompetitionName"
             android:label="@string/title_activity_set_competition_name" />
+        <activity android:name="trc3543.trcscoutingapp.About" />
 
         <meta-data
             android:name="android.support.VERSION"

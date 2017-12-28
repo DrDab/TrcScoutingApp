@@ -60,7 +60,7 @@ public class AddCompetitions extends AppCompatActivity
         contestList.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
-            public void onItemClick(AdapterView arg0, View arg1,int position, long arg3)
+            public void onItemClick(AdapterView arg0, View arg1, int position, long arg3)
             {
                 // position = position selected
                 AlertDialog alertDialog = new AlertDialog.Builder(AddCompetitions.this).create();
@@ -107,8 +107,11 @@ public class AddCompetitions extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings)
+        if (id == R.id.action_about)
         {
+            // popup about screen
+            Intent intent = new Intent(this, About.class);
+            startActivity(intent);
             return true;
         }
 

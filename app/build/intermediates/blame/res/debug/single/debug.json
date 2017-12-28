@@ -420,6 +420,10 @@
         "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable-xxhdpi-v4/abc_ic_star_black_48dp.png"
     },
     {
+        "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/layout_activity_about.xml.flat",
+        "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/res/layout/activity_about.xml"
+    },
+    {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/anim_design_snackbar_in.xml.flat",
         "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/370bebc2b66da1d84bdb0fd9d28489fa/res/anim/design_snackbar_in.xml"
     },
@@ -676,12 +680,12 @@
         "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/color/switch_thumb_material_light.xml"
     },
     {
-        "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_ic_menu_share_mtrl_alpha.png.flat",
-        "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable-xhdpi-v4/abc_ic_menu_share_mtrl_alpha.png"
-    },
-    {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/layout_abc_action_bar_up_container.xml.flat",
         "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/layout/abc_action_bar_up_container.xml"
+    },
+    {
+        "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_ic_menu_share_mtrl_alpha.png.flat",
+        "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable-xhdpi-v4/abc_ic_menu_share_mtrl_alpha.png"
     },
     {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/layout-v21_notification_template_icon_group.xml.flat",
