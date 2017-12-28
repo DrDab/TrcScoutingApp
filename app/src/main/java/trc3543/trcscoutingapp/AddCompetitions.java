@@ -69,9 +69,18 @@ public class AddCompetitions extends AppCompatActivity
                 // position = position selected
                 AlertDialog alertDialog = new AlertDialog.Builder(AddCompetitions.this).create();
                 alertDialog.setTitle("Game Information");
-                String s = DataStore.CsvFormattedContests.get(position);
-                alertDialog.setMessage(s);
-                alertDialog.show();
+                if (DataStore.CsvFormattedContests.size() >= 1)
+                {
+                    String s = DataStore.CsvFormattedContests.get(position);
+                    alertDialog.setMessage(s);
+                    alertDialog.show();
+                }
+                else
+                {
+                    alertDialog.setMessage("No Games Yet");
+                    alertDialog.show();
+                }
+
             }
         });
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
