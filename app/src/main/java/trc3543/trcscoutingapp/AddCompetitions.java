@@ -2,7 +2,9 @@ package trc3543.trcscoutingapp;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -16,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.io.File;
 import java.io.IOException;
 
 @SuppressWarnings("all")
@@ -143,7 +146,6 @@ public class AddCompetitions extends AppCompatActivity
         {
             try
             {
-                final DataStore waffles = new DataStore();
                 final String[] recipient = {""};
                 final EditText txtUrl = new EditText(this);
                 new AlertDialog.Builder(this)
@@ -153,7 +155,7 @@ public class AddCompetitions extends AppCompatActivity
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 recipient[0] = txtUrl.getText().toString();
-                                waffles.sendEmailWithCSV("results.csv", recipient[0]);
+                                sendEmailWithCSV("results.csv", recipient[0]);
                             }
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -192,7 +194,31 @@ public class AddCompetitions extends AppCompatActivity
         Intent intent = new Intent(this, SetCompetitionName.class);
         startActivity(intent);
     }
-
+    public void sendEmailWithCSV(String filename0, String target)
+    {
+        try
+        {
+            File writeDirectory = new File("/sdcard/TrcScoutingApp/");
+            if (!writeDirectory.exists()) {
+                writeDirectory.mkdir();
+            }
+            String filename = "/sdcard/TrcScoutingApp/" + filename0;
+            File filelocation = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), filename);
+            Uri path = Uri.fromFile(filelocation);
+            Intent emailIntent = new Intent(Intent.ACTION_SEND);
+            emailIntent.setType("vnd.android.cursor.dir/email");
+            String to[] = {target};
+            emailIntent.putExtra(Intent.EXTRA_EMAIL, to);
+            emailIntent.putExtra(Intent.EXTRA_STREAM, path);
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Robotics Scouting Results");
+            startActivity(Intent.createChooser(emailIntent, "Send email..."));
+        }
+        catch (Exception e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
 }
 

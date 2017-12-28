@@ -75,30 +75,4 @@ public class DataStore extends AppCompatActivity
         return dateFormat.format(date);
     }
 
-    public void sendEmailWithCSV(String filename0, String target)
-    {
-        try
-        {
-            File writeDirectory = new File("/sdcard/TrcScoutingApp/");
-            if (!writeDirectory.exists()) {
-                writeDirectory.mkdir();
-            }
-            String filename = "/sdcard/TrcScoutingApp/" + filename0;
-            File filelocation = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), filename);
-            Uri path = Uri.fromFile(filelocation);
-            Intent emailIntent = new Intent(Intent.ACTION_SEND);
-            emailIntent.setType("vnd.android.cursor.dir/email");
-            String to[] = {target};
-            emailIntent.putExtra(Intent.EXTRA_EMAIL, to);
-            emailIntent.putExtra(Intent.EXTRA_STREAM, path);
-            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Robotics Scouting Results");
-            startActivity(Intent.createChooser(emailIntent, "Send email..."));
-        }
-        catch (Exception e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-
 }
