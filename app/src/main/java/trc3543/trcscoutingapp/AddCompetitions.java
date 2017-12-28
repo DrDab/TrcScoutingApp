@@ -144,6 +144,7 @@ public class AddCompetitions extends AppCompatActivity
         }
         else if (id == R.id.action_mailcsv)
         {
+            // mail the CSV
             try
             {
                 final String[] recipient = {""};
@@ -164,11 +165,32 @@ public class AddCompetitions extends AppCompatActivity
                         })
                         .show();
             }
-            catch (NullPointerException arg0)
+            catch (Exception arg0)
             {
                 // TODO Auto-generated catch block
                 arg0.printStackTrace();
             }
+        }
+        else if (id == R.id.action_ac)
+        {
+            // clear the screen
+            // ask for user confirmation
+            new AlertDialog.Builder(this)
+                    .setTitle("Are you sure?")
+                    .setMessage("Are you sure you want to clear the contest history?")
+                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                           DataStore.CsvFormattedContests.clear();
+                           DataStore.contests.clear();
+                           adapter.notifyDataSetChanged();
+                        }
+                    })
+                    .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                        }
+                    })
+                    .show();
+
         }
         return super.onOptionsItemSelected(item);
     }
