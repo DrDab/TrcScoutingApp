@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="trc3543.trcscoutingapp.AddCompetitions">
     <item
+        android:id="@+id/action_makecsv"
+        android:title="Export to CSV..." />
+    <item
         android:id="@+id/action_about"
         android:icon="@android:drawable/ic_menu_info_details"
         android:orderInCategory="100"

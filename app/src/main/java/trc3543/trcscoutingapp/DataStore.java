@@ -1,5 +1,7 @@
 package trc3543.trcscoutingapp;
 
+import android.support.design.widget.Snackbar;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

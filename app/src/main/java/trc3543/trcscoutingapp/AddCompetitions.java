@@ -14,6 +14,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.io.IOException;
+
 @SuppressWarnings("all")
 public class AddCompetitions extends AppCompatActivity
 {
@@ -113,6 +115,18 @@ public class AddCompetitions extends AppCompatActivity
             Intent intent = new Intent(this, About.class);
             startActivity(intent);
             return true;
+        }
+        else if (id == R.id.action_makecsv)
+        {
+            try
+            {
+                DataStore.writeContestsToCsv("results.csv");
+            }
+            catch (IOException e)
+            {
+                // TODO Auto-generated method stub
+                e.printStackTrace();
+            }
         }
 
         return super.onOptionsItemSelected(item);
