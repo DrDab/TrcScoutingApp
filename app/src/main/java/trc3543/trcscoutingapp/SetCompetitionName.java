@@ -8,12 +8,14 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.io.IOException;
+
 @SuppressWarnings("all")
 public class SetCompetitionName extends AppCompatActivity
 {
     /**
      *
-     *  Copyright (c) 2017 _c0da_ (Victor Du)
+     *  Copyright (c) 2017 Titan Robotics Club, _c0da_ (Victor Du)
      *
      *	Permission is hereby granted, free of charge, to any person obtaining a copy
      *	of this software and associated documentation files (the "Software"), to deal
@@ -35,7 +37,6 @@ public class SetCompetitionName extends AppCompatActivity
      */
 
     public static final boolean USE_DEBUG = false;
-    public static final int TEAM_NUMBER = 3543;
 
     static int MatchNumber;
     static String competitionName;
@@ -66,6 +67,17 @@ public class SetCompetitionName extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_competition_name2);
+        try
+        {
+            DataStore.parseTeamNum();
+            DataStore.parseFirstName();
+            DataStore.parseLastName();
+        }
+        catch (IOException e)
+        {
+            // TODO Auto-generated catch block
+        }
+
     }
 
     public void confirmTypes(View view)
@@ -244,7 +256,7 @@ public class SetCompetitionName extends AppCompatActivity
     public void moveToNextScreen(View view)
     {
         String red_savarin = "";
-        if (redAlliance1 == TEAM_NUMBER || redAlliance2 == TEAM_NUMBER || blueAlliance1 == TEAM_NUMBER || blueAlliance2 == TEAM_NUMBER)
+        if (redAlliance1 == DataStore.SELF_TEAM_NUMBER || redAlliance2 == DataStore.SELF_TEAM_NUMBER || blueAlliance1 == DataStore.SELF_TEAM_NUMBER || blueAlliance2 == DataStore.SELF_TEAM_NUMBER)
         {
             red_savarin = "*";
         }

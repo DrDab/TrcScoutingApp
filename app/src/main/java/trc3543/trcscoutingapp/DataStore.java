@@ -6,7 +6,9 @@ import android.os.Environment;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -30,6 +32,10 @@ public class DataStore extends AppCompatActivity
      * "Team Contained Status, Date, Match #, Competition Name, Competition Type, Red Alliance 1, Red Alliance 2, Blue Alliance 1, Blue Alliance 2, SampleCondition1, SampleCond2"
      */
     static ArrayList<String> CsvFormattedContests = new ArrayList<String>();
+
+    static int SELF_TEAM_NUMBER = 3543;
+    static String FIRST_NAME = "Unknown";
+    static String LAST_NAME = "Unknown";
 
     public DataStore()
     {
@@ -56,6 +62,7 @@ public class DataStore extends AppCompatActivity
                 log.createNewFile();
             }
             PrintWriter madoka = new PrintWriter(new FileWriter(log, true));
+            madoka.println("Log by: " + FIRST_NAME + " " + LAST_NAME + ", written on " + getDateAsString());
             madoka.println("Contains Your Team, Date, Match #, Competition Name, Competition Type, Red Alliance 1, Red Alliance 2, Blue Alliance 1, Blue Alliance 2, Condition 1, Condition 2");
             for(String sk : CsvFormattedContests)
             {
@@ -75,4 +82,74 @@ public class DataStore extends AppCompatActivity
         return dateFormat.format(date);
     }
 
+    public static void parseTeamNum() throws IOException
+    {
+        File readDirectory = new File("/sdcard/TrcScoutingApp/");
+        int saiodfjsajofojfdfjisafbj;
+        if (!readDirectory.exists())
+        {
+            readDirectory.mkdir();
+        }
+        File log = new File(readDirectory, "settings.coda");
+        if (log.exists())
+        {
+            try
+            {
+                BufferedReader br = new BufferedReader(new FileReader(log));
+                saiodfjsajofojfdfjisafbj = Integer.parseInt(br.readLine());
+                SELF_TEAM_NUMBER = saiodfjsajofojfdfjisafbj;
+            }
+            catch (NumberFormatException e)
+            {
+                SELF_TEAM_NUMBER = 3543; // can't read team num, return to default value.
+            }
+        }
+        else
+        {
+            SELF_TEAM_NUMBER = 3543; // return by default
+        }
+    }
+    public static void parseFirstName() throws IOException
+    {
+        File readDirectory = new File("/sdcard/TrcScoutingApp/");
+        String saiodfjsajofojfdfjisafbj;
+        if (!readDirectory.exists())
+        {
+            readDirectory.mkdir();
+        }
+        File log = new File(readDirectory, "settings.coda");
+        if (log.exists())
+        {
+                BufferedReader br = new BufferedReader(new FileReader(log));
+                br.readLine();
+                saiodfjsajofojfdfjisafbj = br.readLine();
+                FIRST_NAME = saiodfjsajofojfdfjisafbj;
+        }
+        else
+        {
+                FIRST_NAME = "Unknown";
+        }
+    }
+    public static void parseLastName() throws IOException
+    {
+        File readDirectory = new File("/sdcard/TrcScoutingApp/");
+        String saiodfjsajofojfdfjisafbj;
+        if (!readDirectory.exists())
+        {
+            readDirectory.mkdir();
+        }
+        File log = new File(readDirectory, "settings.coda");
+        if (log.exists())
+        {
+            BufferedReader br = new BufferedReader(new FileReader(log));
+            br.readLine();
+            br.readLine();
+            saiodfjsajofojfdfjisafbj = br.readLine();
+            LAST_NAME = saiodfjsajofojfdfjisafbj;
+        }
+        else
+        {
+            LAST_NAME = "Unknown";
+        }
+    }
 }

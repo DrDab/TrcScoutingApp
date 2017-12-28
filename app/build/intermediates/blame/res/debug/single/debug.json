@@ -4,12 +4,16 @@
         "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable-xxhdpi-v4/abc_cab_background_top_mtrl_alpha.9.png"
     },
     {
+        "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_textfield_activated_mtrl_alpha.9.png.flat",
+        "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable-mdpi-v4/abc_textfield_activated_mtrl_alpha.9.png"
+    },
+    {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_design_ic_visibility.png.flat",
         "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/370bebc2b66da1d84bdb0fd9d28489fa/res/drawable-hdpi-v4/design_ic_visibility.png"
     },
     {
-        "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_textfield_activated_mtrl_alpha.9.png.flat",
-        "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable-mdpi-v4/abc_textfield_activated_mtrl_alpha.9.png"
+        "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable_ic_notifications_black_24dp.xml.flat",
+        "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/res/drawable/ic_notifications_black_24dp.xml"
     },
     {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_tab_indicator_mtrl_alpha.9.png.flat",
@@ -24,12 +28,12 @@
         "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable-mdpi-v4/abc_list_pressed_holo_dark.9.png"
     },
     {
-        "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_spinner_mtrl_am_alpha.9.png.flat",
-        "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable-xxhdpi-v4/abc_spinner_mtrl_am_alpha.9.png"
-    },
-    {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable_abc_btn_borderless_material.xml.flat",
         "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable/abc_btn_borderless_material.xml"
+    },
+    {
+        "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_spinner_mtrl_am_alpha.9.png.flat",
+        "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable-xxhdpi-v4/abc_spinner_mtrl_am_alpha.9.png"
     },
     {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/layout_abc_alert_dialog_button_bar_material.xml.flat",
@@ -84,12 +88,12 @@
         "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable-hdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png"
     },
     {
-        "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable_abc_btn_default_mtrl_shape.xml.flat",
-        "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable/abc_btn_default_mtrl_shape.xml"
-    },
-    {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_ic_star_half_black_36dp.png.flat",
         "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable-mdpi-v4/abc_ic_star_half_black_36dp.png"
+    },
+    {
+        "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable_abc_btn_default_mtrl_shape.xml.flat",
+        "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable/abc_btn_default_mtrl_shape.xml"
     },
     {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_tab_indicator_mtrl_alpha.9.png.flat",
@@ -98,6 +102,10 @@
     {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_ab_share_pack_mtrl_alpha.9.png.flat",
         "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable-mdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/layout_activity_settings.xml.flat",
+        "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/res/layout/activity_settings.xml"
     },
     {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_ic_menu_selectall_mtrl_alpha.png.flat",
@@ -228,6 +236,10 @@
         "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/color/abc_tint_seek_thumb.xml"
     },
     {
+        "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/xml_pref_general.xml.flat",
+        "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/res/xml/pref_general.xml"
+    },
+    {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_scrubber_track_mtrl_alpha.9.png.flat",
         "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable-xxhdpi-v4/abc_scrubber_track_mtrl_alpha.9.png"
     },
@@ -240,12 +252,12 @@
         "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/layout/abc_list_menu_item_layout.xml"
     },
     {
-        "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/layout-v26_abc_screen_toolbar.xml.flat",
-        "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/layout-v26/abc_screen_toolbar.xml"
-    },
-    {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable_abc_seekbar_thumb_material.xml.flat",
         "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable/abc_seekbar_thumb_material.xml"
+    },
+    {
+        "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/layout-v26_abc_screen_toolbar.xml.flat",
+        "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/layout-v26/abc_screen_toolbar.xml"
     },
     {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_textfield_search_activated_mtrl_alpha.9.png.flat",
@@ -292,12 +304,12 @@
         "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable-xxhdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png"
     },
     {
-        "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/layout-v21_notification_action_tombstone.xml.flat",
-        "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/fd3481f02310f8b4fcb0a6b0c2928149/res/layout-v21/notification_action_tombstone.xml"
-    },
-    {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_notification_bg_normal.9.png.flat",
         "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/fd3481f02310f8b4fcb0a6b0c2928149/res/drawable-hdpi-v4/notification_bg_normal.9.png"
+    },
+    {
+        "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/layout-v21_notification_action_tombstone.xml.flat",
+        "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/fd3481f02310f8b4fcb0a6b0c2928149/res/layout-v21/notification_action_tombstone.xml"
     },
     {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable-ldrtl-mdpi-v17_abc_spinner_mtrl_am_alpha.9.png.flat",
@@ -448,12 +460,12 @@
         "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/370bebc2b66da1d84bdb0fd9d28489fa/res/drawable-xxhdpi-v4/design_ic_visibility.png"
     },
     {
-        "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_list_divider_mtrl_alpha.9.png.flat",
-        "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable-mdpi-v4/abc_list_divider_mtrl_alpha.9.png"
-    },
-    {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_list_pressed_holo_dark.9.png.flat",
         "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable-xxhdpi-v4/abc_list_pressed_holo_dark.9.png"
+    },
+    {
+        "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_list_divider_mtrl_alpha.9.png.flat",
+        "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable-mdpi-v4/abc_list_divider_mtrl_alpha.9.png"
     },
     {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable-ldrtl-xxxhdpi-v17_abc_spinner_mtrl_am_alpha.9.png.flat",
@@ -508,16 +520,16 @@
         "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable-ldrtl-hdpi-v17/abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
-        "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/layout_design_layout_tab_icon.xml.flat",
-        "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/370bebc2b66da1d84bdb0fd9d28489fa/res/layout/design_layout_tab_icon.xml"
+        "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_ic_star_half_black_36dp.png.flat",
+        "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable-xxhdpi-v4/abc_ic_star_half_black_36dp.png"
     },
     {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_btn_check_to_on_mtrl_000.png.flat",
         "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable-xxxhdpi-v4/abc_btn_check_to_on_mtrl_000.png"
     },
     {
-        "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_ic_star_half_black_36dp.png.flat",
-        "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable-xxhdpi-v4/abc_ic_star_half_black_36dp.png"
+        "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/layout_design_layout_tab_icon.xml.flat",
+        "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/370bebc2b66da1d84bdb0fd9d28489fa/res/layout/design_layout_tab_icon.xml"
     },
     {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable-ldrtl-hdpi-v17_abc_spinner_mtrl_am_alpha.9.png.flat",
@@ -530,6 +542,10 @@
     {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/color_abc_primary_text_disable_only_material_dark.xml.flat",
         "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/color/abc_primary_text_disable_only_material_dark.xml"
+    },
+    {
+        "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/xml_pref_notification.xml.flat",
+        "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/res/xml/pref_notification.xml"
     },
     {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_text_select_handle_left_mtrl_dark.png.flat",
@@ -750,6 +766,10 @@
     {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_btn_switch_to_on_mtrl_00001.9.png.flat",
         "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable-xxhdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png"
+    },
+    {
+        "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable_ic_info_black_24dp.xml.flat",
+        "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/res/drawable/ic_info_black_24dp.xml"
     },
     {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_btn_check_to_on_mtrl_015.png.flat",
@@ -1028,6 +1048,14 @@
         "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable-mdpi-v4/abc_ic_menu_paste_mtrl_am_alpha.png"
     },
     {
+        "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/xml_pref_headers.xml.flat",
+        "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/res/xml/pref_headers.xml"
+    },
+    {
+        "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/xml_pref_data_sync.xml.flat",
+        "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/res/xml/pref_data_sync.xml"
+    },
+    {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/layout_abc_action_mode_close_item_material.xml.flat",
         "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/layout/abc_action_mode_close_item_material.xml"
     },
@@ -1134,6 +1162,10 @@
     {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable_abc_list_selector_holo_dark.xml.flat",
         "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable/abc_list_selector_holo_dark.xml"
+    },
+    {
+        "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable_ic_sync_black_24dp.xml.flat",
+        "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/res/drawable/ic_sync_black_24dp.xml"
     },
     {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/anim_abc_slide_out_top.xml.flat",
@@ -1642,6 +1674,10 @@
     {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/color-v23_abc_btn_colored_text_material.xml.flat",
         "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/color-v23/abc_btn_colored_text_material.xml"
+    },
+    {
+        "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable_ic_launcher_background.xml.flat",
+        "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/res/drawable/ic_launcher_background.xml"
     },
     {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_list_divider_mtrl_alpha.9.png.flat",

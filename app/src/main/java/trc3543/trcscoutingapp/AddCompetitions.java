@@ -26,7 +26,7 @@ public class AddCompetitions extends AppCompatActivity
 {
     /**
      *
-     *  Copyright (c) 2017 _c0da_ (Victor Du)
+     *  Copyright (c) 2017 Titan Robotics Club, _c0da_ (Victor Du)
      *
      *	Permission is hereby granted, free of charge, to any person obtaining a copy
      *	of this software and associated documentation files (the "Software"), to deal
@@ -191,6 +191,13 @@ public class AddCompetitions extends AppCompatActivity
                     })
                     .show();
 
+        }
+        else if (id == R.id.action_config)
+        {
+            // popup settings window
+            Intent intent = new Intent(this, Settings.class);
+            startActivity(intent);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
