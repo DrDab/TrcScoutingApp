@@ -1,6 +1,10 @@
 package trc3543.trcscoutingapp;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -11,12 +15,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static android.support.v4.content.ContextCompat.startActivity;
+
 /**
  * Created by citrus on 12/26/17.
  */
 
 @SuppressWarnings("All")
-public class DataStore
+public class DataStore extends AppCompatActivity
 {
     static ArrayList<String> contests = new ArrayList<String>();
     /**
@@ -24,6 +30,12 @@ public class DataStore
      * "Team Contained Status, Date, Match #, Competition Name, Competition Type, Red Alliance 1, Red Alliance 2, Blue Alliance 1, Blue Alliance 2, SampleCondition1, SampleCond2"
      */
     static ArrayList<String> CsvFormattedContests = new ArrayList<String>();
+
+    public DataStore()
+    {
+        // TODO nothing
+    }
+
 
     public static boolean writeContestsToCsv(String filename) throws IOException
     {
@@ -63,5 +75,30 @@ public class DataStore
         return dateFormat.format(date);
     }
 
+    public void sendEmailWithCSV(String filename0, String target)
+    {
+        try
+        {
+            File writeDirectory = new File("/sdcard/TrcScoutingApp/");
+            if (!writeDirectory.exists()) {
+                writeDirectory.mkdir();
+            }
+            String filename = "/sdcard/TrcScoutingApp/" + filename0;
+            File filelocation = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), filename);
+            Uri path = Uri.fromFile(filelocation);
+            Intent emailIntent = new Intent(Intent.ACTION_SEND);
+            emailIntent.setType("vnd.android.cursor.dir/email");
+            String to[] = {target};
+            emailIntent.putExtra(Intent.EXTRA_EMAIL, to);
+            emailIntent.putExtra(Intent.EXTRA_STREAM, path);
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Robotics Scouting Results");
+            startActivity(Intent.createChooser(emailIntent, "Send email..."));
+        }
+        catch (Exception e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
 }

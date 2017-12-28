@@ -1,5 +1,6 @@
 package trc3543.trcscoutingapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import java.io.IOException;
@@ -124,11 +126,39 @@ public class AddCompetitions extends AppCompatActivity
             }
             catch (IOException e)
             {
-                // TODO Auto-generated method stub
+                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
-
+        else if (id == R.id.action_mailcsv)
+        {
+            try
+            {
+                final DataStore waffles = new DataStore();
+                final String[] recipient = {""};
+                final EditText txtUrl = new EditText(this);
+                new AlertDialog.Builder(this)
+                        .setTitle("Mail results")
+                        .setMessage("Please enter the recipient's email.")
+                        .setView(txtUrl)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                recipient[0] = txtUrl.getText().toString();
+                                waffles.sendEmailWithCSV("results.csv", recipient[0]);
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                            }
+                        })
+                        .show();
+            }
+            catch (NullPointerException arg0)
+            {
+                // TODO Auto-generated catch block
+                arg0.printStackTrace();
+            }
+        }
         return super.onOptionsItemSelected(item);
     }
 
