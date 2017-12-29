@@ -56,6 +56,7 @@ public class MainRunner
 		  exportToCSV.setBounds(200, 0, 200, 20);
 		  settings.setBounds(400, 0, 200, 20);
 		  about.setBounds(600, 0, 200, 20);
+		  field.setFont(new Font("Consolas", Font.PLAIN, 16));
 		  scroll = new JScrollPane(field);
 		  scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		  scroll.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {  
