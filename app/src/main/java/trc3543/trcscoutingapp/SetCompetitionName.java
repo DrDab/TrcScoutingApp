@@ -54,6 +54,9 @@ public class SetCompetitionName extends AppCompatActivity
     
     static String competitionTypeRawName;
 
+    static String spectatingTeamRawName;
+    static int spectatingTeamResolvedNumber;
+
     static int redAlliance1;    // the team # for red alliance 1
     static int redAlliance2;    // the team # for red alliance 2
     static int blueAlliance1;   // the team # for blue alliance 1
@@ -87,6 +90,7 @@ public class SetCompetitionName extends AppCompatActivity
         boolean breakCond3 = false;
         boolean breakCond4 = false;
         boolean breakCond5 = false;
+        boolean breakCond6 = false;
         // read the match number.
         try
         {
@@ -155,7 +159,7 @@ public class SetCompetitionName extends AppCompatActivity
             }
             else
             {
-                // What the heck?
+                // We have an impossible scenario, where no competition type is selected. [Practice should be selected by default] (Nom d'un chien! - Red Savarin)
                 breakCond3 = true;
             }
         }
@@ -233,6 +237,39 @@ public class SetCompetitionName extends AppCompatActivity
         }
         if (!breakCond4)
         {
+            // read the team you are spectating.
+            Spinner mySpinner=(Spinner) findViewById(R.id.SpectatingSpinner);
+            spectatingTeamRawName= mySpinner.getSelectedItem().toString();
+            if (spectatingTeamRawName.matches(""))
+            {
+                Snackbar.make(view, "Spectating Team cannot be empty.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                breakCond5 = true;
+            }
+            else if (spectatingTeamRawName.matches("Red Alliance 1"))
+            {
+                spectatingTeamResolvedNumber = redAlliance1;
+            }
+            else if (spectatingTeamRawName.matches("Red Alliance 2"))
+            {
+                spectatingTeamResolvedNumber = redAlliance2;
+            }
+            else if (spectatingTeamRawName.matches("Blue Alliance 1"))
+            {
+                spectatingTeamResolvedNumber = blueAlliance1;
+            }
+            else if (spectatingTeamRawName.matches("Blue Alliance 2"))
+            {
+                spectatingTeamResolvedNumber = blueAlliance2;
+            }
+            else
+            {
+                // We have an impossible scenario, where no spectating Team is selected. [Red Alliance 1 should be selected by default] (Nom d'un chien! - Red Savarin)
+                breakCond5 = true;
+            }
+        }
+        if (!breakCond5)
+        {
             // check the objectives won.
             CheckBox cb1 = (CheckBox) findViewById(R.id.conditionI);
             CheckBox cb2 = (CheckBox) findViewById(R.id.conditionII);
@@ -243,10 +280,10 @@ public class SetCompetitionName extends AppCompatActivity
                 // We have an impossible scenario, where we are on more than one team. (Nom d'un chien! - Red Savarin)
                 Snackbar.make(view, "There is a team number conflict.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                breakCond5 = true;
+                breakCond6 = true;
             }
         }
-        if (!breakCond && !breakCond2 && !breakCond3 && !breakCond4 && !breakCond5)
+        if (!breakCond && !breakCond2 && !breakCond3 && !breakCond4 && !breakCond5 && !breakCond6)
         {
            // All values are confirmed, move to next screen.
             moveToNextScreen(view);
@@ -277,8 +314,8 @@ public class SetCompetitionName extends AppCompatActivity
         {
             chocolat_gelato = "Final";
         }
-        String listMsg = "Match # " + MatchNumber + " Type: " + chocolat_gelato + " R: " + red_savarin;
-        String CSVFormat = red_savarin+","+DataStore.getDateAsString() +","+MatchNumber +","+competitionName+","+competitionType+","+redAlliance1+","+redAlliance2+","+blueAlliance1+","+blueAlliance2+","+sampleCond1+","+sampleCond2;
+        String listMsg = "Match # " + MatchNumber + " Type: " + chocolat_gelato + " R: " + red_savarin + " S: " + spectatingTeamResolvedNumber;
+        String CSVFormat = red_savarin+","+DataStore.getDateAsString() +","+MatchNumber +","+competitionName+","+chocolat_gelato+","+redAlliance1+","+redAlliance2+","+blueAlliance1+","+blueAlliance2+","+spectatingTeamResolvedNumber+","+sampleCond1+","+sampleCond2;
         if (USE_DEBUG)
         {
             Snackbar.make(view, CSVFormat, Snackbar.LENGTH_LONG).setAction("Action", null).show();

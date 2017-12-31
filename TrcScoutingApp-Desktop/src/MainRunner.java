@@ -181,6 +181,15 @@ public class MainRunner
 	    JComboBox<String> f_mtype = new JComboBox<String>(types);
 	    f_mtype.setBounds(340, 112, 120, 20);
 		
+	    JLabel l_spec = new JLabel();
+		l_spec.setText("Spectating Team");
+		l_spec.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		l_spec.setBounds(340, 132, 120, 20);
+		
+		String[] spectypes = {"Red Alliance 1", "Red Alliance 2", "Blue Alliance 1", "Blue Alliance 2"};
+	    JComboBox<String> f_spec = new JComboBox<String>(spectypes);
+	    f_spec.setBounds(330, 154, 150, 20);
+	    
 		JLabel l_redalliance1 = new JLabel();
 		l_redalliance1.setText("Red Alliance 1");
 		l_redalliance1.setFont(new Font("Segoe UI", Font.PLAIN, 16));
@@ -236,10 +245,10 @@ public class MainRunner
 		// Initialize the objectives below.
 		
 		JCheckBox obj1 = new JCheckBox("Condition I");
-		obj1.setBounds(350, 200, 150, 15);
+		obj1.setBounds(350, 250, 150, 15);
 		
 		JCheckBox obj2 = new JCheckBox("Condition II");
-		obj2.setBounds(350, 250, 150, 15);
+		obj2.setBounds(350, 300, 150, 15);
 		
 		// Add the initialized objectives below.
 		inputPanel.add(obj1);
@@ -254,6 +263,8 @@ public class MainRunner
 		inputPanel.add(f_name);
 		inputPanel.add(l_mtype);
 		inputPanel.add(f_mtype);
+		inputPanel.add(l_spec);
+		inputPanel.add(f_spec);
 		inputPanel.add(l_redalliance1);
 		inputPanel.add(f_redalliance1);
 		inputPanel.add(l_redalliance2);
@@ -310,12 +321,32 @@ public class MainRunner
 						   containsOurTeam = true;
 					   }
 					   
+					   String specType = f_spec.getSelectedItem().toString();
+					   int specTypeInt = -428957892;
+					   if (specType.matches("Red Alliance 1"))
+					   {
+						   specTypeInt = red1;
+					   }
+					   else if (specType.matches("Red Alliance 2"))
+					   {
+						   specTypeInt = red2;
+					   }
+					   else if (specType.matches("Blue Alliance 1"))
+					   {
+						   specTypeInt = blue1;
+					   }
+					   else
+					   {
+						   specTypeInt = blue2;
+					   }
+					   
 					   System.out.println("Match Number      : " + matchNum);
 					   System.out.println("Competition Name  : " + compName);
 					   System.out.println("Red Alliance I    : " + red1);
 					   System.out.println("Red Alliance II   : " + red2);
 					   System.out.println("Blue Alliance I   : " + blue1);
 					   System.out.println("Blue Alliance II  : " + blue2);
+					   System.out.println("Spectating Team   : " + specTypeInt);
 					   
 					   /**
 						 * ==================================================================
@@ -343,8 +374,8 @@ public class MainRunner
 						  merveille_million = "*";
 					  }
 					  
-					   String CSVFormattedString = merveille_million + "," + DataStore.getDateAsString() + "," + matchNum + "," + compName + "," + compTypeInt + "," + red1 + "," + red2 + "," + blue1 + "," + blue2 + "," + condition1 + "," + condition2;
-					   String DisplayString = "Competition: " + compName + " | Match #: " + matchNum + " | Match Type: " + compType + " | R: " + merveille_million + " | " + DataStore.getDateAsString();
+					   String CSVFormattedString = merveille_million + "," + DataStore.getDateAsString() + "," + matchNum + "," + compName + "," + compTypeInt + "," + red1 + "," + red2 + "," + blue1 + "," + blue2 + "," + specTypeInt + "," + condition1 + "," + condition2;
+					   String DisplayString = "Competition: " + compName + " | Match #: " + matchNum + " | Match Type: " + compType + " | R: " + merveille_million + " | " + " S: " + specTypeInt + " | " + DataStore.getDateAsString();
 					 
 					  
 					   //=============== [ END EDITABLE OBJECTIVE OPTIONS HERE ] ===============//

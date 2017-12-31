@@ -17,12 +17,21 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
     <string-array name="game_types">
         <item>Practice</item>
         <item>Qualification</item>
         <item>Semi-Final</item>
         <item>Final</item>
     </string-array>
+
+    <string-array name="spectating_types">
+        <item>Red Alliance 1</item>
+        <item>Red Alliance 2</item>
+        <item>Blue Alliance 1</item>
+        <item>Blue Alliance 2</item>
+    </string-array>
+
     <string name="title_activity_settings">Settings</string>
 
     <!-- Strings related to Settings -->

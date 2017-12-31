@@ -78,14 +78,14 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="216dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="432dp"
+            android:layout_marginTop="484dp"
             android:contentDescription="Confirm Selection."
             android:onClick="confirmTypes"
             android:text="Confirm"
             android:textStyle="bold"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.986"
+            app:layout_constraintHorizontal_bias="0.902"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -212,13 +212,35 @@
             android:layout_height="51dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="48dp"
-            android:layout_marginTop="432dp"
+            android:layout_marginTop="484dp"
             android:onClick="cancel"
             android:text="Cancel"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.301"
+            app:layout_constraintHorizontal_bias="0.481"
             app:layout_constraintStart_toEndOf="@+id/ConfirmButton"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/describText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:text="Spectating Team"
+            app:layout_constraintBottom_toTopOf="@+id/SpectatingSpinner"
+            app:layout_constraintStart_toStartOf="@+id/SpectatingSpinner" />
+
+        <Spinner
+            android:id="@+id/SpectatingSpinner"
+            android:layout_width="358dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="36dp"
+            android:entries="@array/spectating_types"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/CompType" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
