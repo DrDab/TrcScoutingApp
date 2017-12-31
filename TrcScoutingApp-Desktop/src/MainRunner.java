@@ -5,7 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
+
 import java.io.IOException;
+
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -142,6 +145,7 @@ public class MainRunner
 			  		+ "Welcome to the TRC Scouting app for FIRST Tech Challenge.\n\n"
 			  		+ "There are no match records stored yet.\n"
 			  		+ "Click \"Add Match\" to add a record.\n");
+		  addFunFact();
 	}
 	public static void OpenInputWindow()
 	{
@@ -549,5 +553,132 @@ public class MainRunner
 	public static void addln(String s)
 	{
 		field.append(s+"\n");
+	}
+	
+	public static void addFunFact()
+	{
+		String msg = "I'm inserting this quote because I don't think anyone will see this in the actual program."
+				+ "\n If you see this, something is wrong, really wrong with either the program or your JRE.";
+		Random d25 = new Random();
+		int choice = d25.nextInt(27);
+		if (choice == 0)
+		{
+			msg = "ABC's of FIRST: A is for Altruism.";
+		}
+		else if (choice == 1)
+		{
+			msg = "ABC's of FIRST: C is for Commitment.";
+		}
+		else if (choice == 2)
+		{
+			msg = "ABC's of FIRST: D is for Determination.";
+		}
+		else if (choice == 3)
+		{
+			msg = "ABC's of FIRST: E is for Engineering.";
+		}
+		else if (choice == 4)
+		{
+			msg = "ABC's of FIRST: F is for Fairness.";
+		}
+		else if (choice == 5)
+		{
+			msg = "ABC's of FIRST: G is for Gracious Professionalism.";
+		}
+		else if (choice == 6)
+		{
+			msg = "ABC's of FIRST: H is for Honesty.";
+		}
+		else if (choice == 7)
+		{
+			msg = "ABC's of FIRST: I is for Inspiration.";
+		}
+		else if (choice == 8)
+		{
+			msg = "ABC's of FIRST: L is for Leadership.";
+		}
+		else if (choice == 9)
+		{
+			msg = "ABC's of FIRST: M is for mutual gain and respect.";
+		}
+		else if (choice == 10)
+		{
+			msg = "ABC's of FIRST: N is for Negotiation.";
+		}
+		else if (choice == 11)
+		{
+			msg = "ABC's of FIRST: P is for Persistance.";
+		}
+		else if (choice == 12)
+		{
+			msg = "ABC's of FIRST: R is for Responsibility.";
+		}
+		else if (choice == 13)
+		{
+			msg = "ABC's of FIRST: S is for Self-Improvement.";
+		}
+		else if (choice == 14)
+		{
+			msg = "ABC's of FIRST: T is for Teamwork.";
+		}
+		else if (choice == 15)
+		{
+			msg = "ABC's of FIRST: U is for Unity.";
+		}
+		else if (choice == 16)
+		{
+			msg = "History of FIRST:\n1951: Dean Kamen, the founder of FIRST, is born.\n" + 
+					"	\"Life is so short. We shouldn't waste any of it trying to do anything marginal.\"\n" + 
+					"";
+		}
+		else if (choice == 17)
+		{
+			msg = "History of FIRST:\n1956: Dean Kamen, the founder of FIRST, creates the bed making machine, his first invention.\n";
+		}
+		else if (choice == 18)
+		{
+			msg = "History of FIRST:\n1989: Dean Kamen forms FIRST Robotics.\n" + 
+					"	\"Let's make something new.\"\n" + 
+					"		-Dean Kamen\n";
+		}
+		else if (choice == 19)
+		{
+			msg = "History of FIRST:\n1992: The first FIRST (pardon the pun) Robotics competition is held at a high school gym in New Hampshire. 28 teams attended. \n" + 
+					"";
+		}
+		else if (choice == 20)
+		{
+			msg = "History of FIRST:\n1995-2002: Disney EPCOT hosts FIRST championship.\n" + 
+					"";
+		}
+		else if (choice == 21)
+		{
+			msg = "History of FIRST:\n1996: Inaugural FIRST scholarship made available by WPI (Worcester Polytechnic Institude).\n" + 
+					"";
+		}
+		else if (choice == 22)
+		{
+			msg = "History of FIRST:\n1998: FLL is founded when FIRST cooperates with LEGO.\n" + 
+					"";
+		}
+		else if (choice == 23)
+		{
+			msg = "History of FIRST:\n 2004: FLL (First Lego League) was launched.\n" + 
+					"";
+		}
+		else if (choice == 24)
+		{
+			msg = "History of FIRST:\n 2005: FIRST Tech Challenge is launched after FLL and FRC.\n" + 
+					"";
+		}
+		else if (choice == 25)
+		{
+			msg = "TRC Fun Fact:\n The Titan Robotics Club was founded in 2001 as a club for FIRST Robotics Challenge.\n";
+		}
+		else if (choice == 26)
+		{
+			msg = "TRC Fun Fact:\n The Titan Robotics Club entered FIRST Tech Challenge in 2005.\n";
+		}
+		addln("\n"+msg);
 	}
 }
