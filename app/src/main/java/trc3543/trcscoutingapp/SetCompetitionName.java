@@ -86,11 +86,6 @@ public class SetCompetitionName extends AppCompatActivity
     public void confirmTypes(View view)
     {
         boolean breakCond = false;
-        boolean breakCond2 = false;
-        boolean breakCond3 = false;
-        boolean breakCond4 = false;
-        boolean breakCond5 = false;
-        boolean breakCond6 = false;
         // read the match number.
         try
         {
@@ -120,17 +115,17 @@ public class SetCompetitionName extends AppCompatActivity
                 {
                     Snackbar.make(view, "Competition Name cannot be empty.", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
-                    breakCond2 = true;
+                    breakCond = true;
                 }
             }
             catch(NullPointerException e)
             {
                 Snackbar.make(view, "Competition Name cannot be empty.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                breakCond2 = true;
+                breakCond = true;
             }
         }
-        if (!breakCond2)
+        if (!breakCond)
         {
             // read the competition type.
             Spinner mySpinner=(Spinner) findViewById(R.id.CompType);
@@ -139,7 +134,7 @@ public class SetCompetitionName extends AppCompatActivity
             {
                 Snackbar.make(view, "Competition Type cannot be empty.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                breakCond3 = true;
+                breakCond = true;
             }
             else if (competitionTypeRawName.matches("Practice"))
             {
@@ -160,10 +155,10 @@ public class SetCompetitionName extends AppCompatActivity
             else
             {
                 // We have an impossible scenario, where no competition type is selected. [Practice should be selected by default] (Nom d'un chien! - Red Savarin)
-                breakCond3 = true;
+                breakCond = true;
             }
         }
-        if (!breakCond3)
+        if (!breakCond)
         {
             // read the alliance teams.
             try
@@ -175,13 +170,13 @@ public class SetCompetitionName extends AppCompatActivity
             {
                 Snackbar.make(view, "Issue with alliance number Formatting", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                breakCond4 = true;
+                breakCond = true;
             }
             catch(NullPointerException e)
             {
                 Snackbar.make(view, "Alliance number cannot be empty.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                breakCond4 = true;
+                breakCond = true;
             }
             try
             {
@@ -192,13 +187,13 @@ public class SetCompetitionName extends AppCompatActivity
             {
                 Snackbar.make(view, "Issue with alliance number Formatting", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                breakCond4 = true;
+                breakCond = true;
             }
             catch(NullPointerException e)
             {
                 Snackbar.make(view, "Alliance number cannot be empty.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                breakCond4 = true;
+                breakCond = true;
             }
             try
             {
@@ -209,13 +204,13 @@ public class SetCompetitionName extends AppCompatActivity
             {
                 Snackbar.make(view, "Issue with alliance number Formatting", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                breakCond4 = true;
+                breakCond = true;
             }
             catch(NullPointerException e)
             {
                 Snackbar.make(view, "Alliance number cannot be empty.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                breakCond4 = true;
+                breakCond = true;
             }
             try
             {
@@ -226,16 +221,16 @@ public class SetCompetitionName extends AppCompatActivity
             {
                 Snackbar.make(view, "Issue with alliance number Formatting", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                breakCond4 = true;
+                breakCond = true;
             }
             catch(NullPointerException e)
             {
                 Snackbar.make(view, "Alliance number cannot be empty.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                breakCond4 = true;
+                breakCond = true;
             }
         }
-        if (!breakCond4)
+        if (!breakCond)
         {
             // read the team you are spectating.
             Spinner mySpinner=(Spinner) findViewById(R.id.SpectatingSpinner);
@@ -244,7 +239,7 @@ public class SetCompetitionName extends AppCompatActivity
             {
                 Snackbar.make(view, "Spectating Team cannot be empty.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                breakCond5 = true;
+                breakCond = true;
             }
             else if (spectatingTeamRawName.matches("Red Alliance 1"))
             {
@@ -265,10 +260,10 @@ public class SetCompetitionName extends AppCompatActivity
             else
             {
                 // We have an impossible scenario, where no spectating Team is selected. [Red Alliance 1 should be selected by default] (Nom d'un chien! - Red Savarin)
-                breakCond5 = true;
+                breakCond = true;
             }
         }
-        if (!breakCond5)
+        if (!breakCond)
         {
             // check the objectives won.
             CheckBox cb1 = (CheckBox) findViewById(R.id.conditionI);
@@ -280,10 +275,10 @@ public class SetCompetitionName extends AppCompatActivity
                 // We have an impossible scenario, where we are on more than one team. (Nom d'un chien! - Red Savarin)
                 Snackbar.make(view, "There is a team number conflict.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                breakCond6 = true;
+                breakCond = true;
             }
         }
-        if (!breakCond && !breakCond2 && !breakCond3 && !breakCond4 && !breakCond5 && !breakCond6)
+        if (!breakCond)
         {
            // All values are confirmed, move to next screen.
             moveToNextScreen(view);
