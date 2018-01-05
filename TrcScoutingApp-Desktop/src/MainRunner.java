@@ -25,7 +25,6 @@ import javax.swing.JTextField;
 @SuppressWarnings("all")
 public class MainRunner 
 {
-	
 	static JButton exportToCSV = new JButton("Export to CSV");
 	static JButton settings = new JButton("Settings");
 	static JButton addMatch = new JButton("Add match");
@@ -49,7 +48,7 @@ public class MainRunner
 			  // TODO Auto-generated catch block
 			  e.printStackTrace();
 		  }
-		  home_frame = new JFrame("TRC Scouting App Desktop");
+		  home_frame = new JFrame("TRC Scouting App Desktop | FRC Edition");
 		  home_frame.setResizable(false);
 		  optionpanel = new JPanel();
 		  optionpanel.setLayout(null);
@@ -216,6 +215,17 @@ public class MainRunner
 		f_redalliance2.setBounds(120, 180, 100, 30);
 		f_redalliance2.setForeground(Color.RED);
 		
+		JLabel l_redalliance3 = new JLabel();
+		l_redalliance3.setText("Red Alliance 3");
+		l_redalliance3.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+		l_redalliance3.setBounds(120, 210, 120, 20);
+		l_redalliance3.setForeground(Color.RED);
+		
+		JTextField f_redalliance3 = new JTextField();
+		f_redalliance3.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		f_redalliance3.setBounds(120, 230, 100, 30);
+		f_redalliance3.setForeground(Color.RED);
+		
 		// 580 next
 		
 		JLabel l_bluealliance1 = new JLabel();
@@ -239,6 +249,17 @@ public class MainRunner
 		f_bluealliance2.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		f_bluealliance2.setBounds(570, 180, 100, 30);
 		f_bluealliance2.setForeground(Color.BLUE);
+		
+		JLabel l_bluealliance3 = new JLabel();
+		l_bluealliance3.setText("Blue Alliance 3");
+		l_bluealliance3.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+		l_bluealliance3.setBounds(570, 210, 120, 20);
+		l_bluealliance3.setForeground(Color.BLUE);
+		
+		JTextField f_bluealliance3 = new JTextField();
+		f_bluealliance3.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		f_bluealliance3.setBounds(570, 230, 100, 30);
+		f_bluealliance3.setForeground(Color.BLUE);
 		
 		/**
 		 * ==================================================================
@@ -273,10 +294,14 @@ public class MainRunner
 		inputPanel.add(f_redalliance1);
 		inputPanel.add(l_redalliance2);
 		inputPanel.add(f_redalliance2);
+		inputPanel.add(l_redalliance3);
+		inputPanel.add(f_redalliance3);
 		inputPanel.add(l_bluealliance1);
 		inputPanel.add(f_bluealliance1);
 		inputPanel.add(l_bluealliance2);
 		inputPanel.add(f_bluealliance2);
+		inputPanel.add(l_bluealliance3);
+		inputPanel.add(f_bluealliance3);
 		
 		inputPanel.setVisible(true);
 		
@@ -315,12 +340,14 @@ public class MainRunner
 					   
 					   int red1 = Integer.parseInt(f_redalliance1.getText());
 					   int red2 = Integer.parseInt(f_redalliance2.getText());
+					   int red3 = Integer.parseInt(f_redalliance3.getText());
 					   int blue1 = Integer.parseInt(f_bluealliance1.getText());
 					   int blue2 = Integer.parseInt(f_bluealliance2.getText());
+					   int blue3 = Integer.parseInt(f_bluealliance3.getText());
 					   boolean containsOurTeam = false;
 					   
-					   if (red1 == DataStore.SELF_TEAM_NUMBER || red2 == DataStore.SELF_TEAM_NUMBER
-					   ||  blue1 == DataStore.SELF_TEAM_NUMBER || blue2 == DataStore.SELF_TEAM_NUMBER)
+					   if (red1 == DataStore.SELF_TEAM_NUMBER || red2 == DataStore.SELF_TEAM_NUMBER || red3 == DataStore.SELF_TEAM_NUMBER
+					   ||  blue1 == DataStore.SELF_TEAM_NUMBER || blue2 == DataStore.SELF_TEAM_NUMBER || blue3 == DataStore.SELF_TEAM_NUMBER)
 					   {
 						   containsOurTeam = true;
 					   }
@@ -335,22 +362,32 @@ public class MainRunner
 					   {
 						   specTypeInt = red2;
 					   }
+					   else if (specType.matches("Red Alliance 3"))
+					   {
+						   specTypeInt = red3;
+					   }
 					   else if (specType.matches("Blue Alliance 1"))
 					   {
 						   specTypeInt = blue1;
 					   }
-					   else
+					   else if (specType.matches("Blue Alliance 2"))
 					   {
 						   specTypeInt = blue2;
 					   }
+					   else
+					   {
+						   specTypeInt = blue3;
+					   }
 					   
-					   System.out.println("Match Number      : " + matchNum);
-					   System.out.println("Competition Name  : " + compName);
-					   System.out.println("Red Alliance I    : " + red1);
-					   System.out.println("Red Alliance II   : " + red2);
-					   System.out.println("Blue Alliance I   : " + blue1);
-					   System.out.println("Blue Alliance II  : " + blue2);
-					   System.out.println("Spectating Team   : " + specTypeInt);
+					   System.out.println("Match Number       : " + matchNum);
+					   System.out.println("Competition Name   : " + compName);
+					   System.out.println("Red Alliance I     : " + red1);
+					   System.out.println("Red Alliance II    : " + red2);
+					   System.out.println("Red Alliance III   : " + red3);
+					   System.out.println("Blue Alliance I    : " + blue1);
+					   System.out.println("Blue Alliance II   : " + blue2);
+					   System.out.println("Blue Alliance III  : " + blue3);
+					   System.out.println("Spectating Team    : " + specTypeInt);
 					   
 					   /**
 						 * ==================================================================
@@ -378,7 +415,7 @@ public class MainRunner
 						  merveille_million = "*";
 					  }
 					  
-					   String CSVFormattedString = merveille_million + "," + DataStore.getDateAsString() + "," + matchNum + "," + compName + "," + compTypeInt + "," + red1 + "," + red2 + "," + blue1 + "," + blue2 + "," + specTypeInt + "," + condition1 + "," + condition2;
+					   String CSVFormattedString = merveille_million + "," + DataStore.getDateAsString() + "," + matchNum + "," + compName + "," + compType + "," + red1 + "," + red2 + "," + red3 + "," + blue1 + "," + blue2 + "," + blue3 + "," + specTypeInt + "," + condition1 + "," + condition2;
 					   String DisplayString = "Competition: " + compName + " | Match #: " + matchNum + " | Match Type: " + compType + " | R: " + merveille_million + " | " + " S: " + specTypeInt + " | " + DataStore.getDateAsString();
 					 
 					  
