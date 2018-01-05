@@ -65,7 +65,7 @@
             android:layout_height="28dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="244dp"
+            android:layout_marginTop="272dp"
             android:entries="@array/game_types"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
@@ -131,6 +131,26 @@
             app:layout_constraintTop_toBottomOf="@+id/compName" />
 
         <EditText
+            android:id="@+id/red3"
+            android:layout_width="153dp"
+            android:layout_height="39dp"
+            android:layout_marginBottom="32dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginStart="8dp"
+            android:ems="10"
+            android:hint="Red 3"
+            android:inputType="textPersonName"
+            android:shadowColor="@android:color/holo_red_light"
+            android:textColor="@android:color/holo_red_light"
+            android:textColorHighlight="@android:color/holo_red_light"
+            android:textColorHint="@android:color/holo_red_light"
+            android:textColorLink="@android:color/holo_red_light"
+            app:layout_constraintBottom_toTopOf="@+id/CompType"
+            app:layout_constraintEnd_toStartOf="@+id/blue3"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
             android:id="@+id/blue1"
             android:layout_width="160dp"
             android:layout_height="39dp"
@@ -169,6 +189,23 @@
             app:layout_constraintTop_toTopOf="@+id/blue1"
             app:layout_constraintVertical_bias="0.0" />
 
+        <EditText
+            android:id="@+id/blue3"
+            android:layout_width="164dp"
+            android:layout_height="39dp"
+            android:layout_marginBottom="32dp"
+            android:layout_marginEnd="8dp"
+            android:ems="10"
+            android:hint="Blue 3"
+            android:inputType="textPersonName"
+            android:shadowColor="@android:color/holo_blue_dark"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textColorHighlight="@android:color/holo_blue_dark"
+            android:textColorHint="@android:color/holo_blue_dark"
+            android:textColorLink="@android:color/holo_blue_dark"
+            app:layout_constraintBottom_toTopOf="@+id/CompType"
+            app:layout_constraintEnd_toEndOf="parent" />
+
         <Space
             android:id="@+id/space2"
             android:layout_width="wrap_content"
@@ -197,7 +234,7 @@
             android:id="@+id/conditionII"
             android:layout_width="129dp"
             android:layout_height="55dp"
-            android:layout_marginBottom="36dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:text="Sample Cond. II"
@@ -236,7 +273,7 @@
             android:layout_height="28dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="40dp"
             android:entries="@array/spectating_types"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

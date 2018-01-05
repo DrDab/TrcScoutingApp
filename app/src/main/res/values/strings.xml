@@ -28,8 +28,10 @@
     <string-array name="spectating_types">
         <item>Red Alliance 1</item>
         <item>Red Alliance 2</item>
+        <item>Red Alliance 3</item>
         <item>Blue Alliance 1</item>
         <item>Blue Alliance 2</item>
+        <item>Blue Alliance 3</item>
     </string-array>
 
     <string name="title_activity_settings">Settings</string>

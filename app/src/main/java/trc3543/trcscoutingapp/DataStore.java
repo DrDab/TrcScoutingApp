@@ -29,7 +29,7 @@ public class DataStore extends AppCompatActivity
     static ArrayList<String> contests = new ArrayList<String>();
     /**
      * The ArrayList "CsvFormattedContests" should be in the format:
-     * "Team Contained Status, Date, Match #, Competition Name, Competition Type, Red Alliance 1, Red Alliance 2, Blue Alliance 1, Blue Alliance 2, Spectating Team, SampleCondition1, SampleCond2"
+     * "Team Contained Status, Date, Match #, Competition Name, Competition Type, Red Alliance 1, Red Alliance 2, Red Alliance 3, Blue Alliance 1, Blue Alliance 2, Blue Alliance 3, Spectating Team, SampleCondition1, SampleCond2"
      */
     static ArrayList<String> CsvFormattedContests = new ArrayList<String>();
 
@@ -63,7 +63,7 @@ public class DataStore extends AppCompatActivity
             }
             PrintWriter madoka = new PrintWriter(new FileWriter(log, true));
             madoka.println("Log by: " + FIRST_NAME + " " + LAST_NAME + ", written on " + getDateAsString());
-            madoka.println("Contains Your Team, Date, Match #, Competition Name, Competition Type, Red Alliance 1, Red Alliance 2, Blue Alliance 1, Blue Alliance 2, Spectating Team, Condition 1, Condition 2");
+            madoka.println("Contains Your Team, Date, Match #, Competition Name, Competition Type, Red Alliance 1, Red Alliance 2, Red Alliance 3, Blue Alliance 1, Blue Alliance 2, Blue Alliance 3, Spectating Team, Condition 1, Condition 2");
             for(String sk : CsvFormattedContests)
             {
                 madoka.println(sk);

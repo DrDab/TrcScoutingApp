@@ -59,9 +59,11 @@ public class SetCompetitionName extends AppCompatActivity
 
     static int redAlliance1;    // the team # for red alliance 1
     static int redAlliance2;    // the team # for red alliance 2
+    static int redAlliance3;    // the team # for red alliance 3
     static int blueAlliance1;   // the team # for blue alliance 1
     static int blueAlliance2;   // the team # for blue alliance 2
-    
+    static int blueAlliance3;   // the team # for blue alliance 3
+
     static boolean sampleCond1 = false;
     static boolean sampleCond2 = false;
     
@@ -197,6 +199,23 @@ public class SetCompetitionName extends AppCompatActivity
             }
             try
             {
+                EditText editText = (EditText) findViewById(R.id.red3);
+                redAlliance3 = Integer.parseInt(editText.getText().toString());
+            }
+            catch(NumberFormatException e)
+            {
+                Snackbar.make(view, "Issue with alliance number Formatting", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                breakCond = true;
+            }
+            catch(NullPointerException e)
+            {
+                Snackbar.make(view, "Alliance number cannot be empty.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                breakCond = true;
+            }
+            try
+            {
                 EditText editText = (EditText) findViewById(R.id.blue1);
                 blueAlliance1 = Integer.parseInt(editText.getText().toString());
             }
@@ -216,6 +235,23 @@ public class SetCompetitionName extends AppCompatActivity
             {
                 EditText editText = (EditText) findViewById(R.id.blue2);
                 blueAlliance2 = Integer.parseInt(editText.getText().toString());
+            }
+            catch(NumberFormatException e)
+            {
+                Snackbar.make(view, "Issue with alliance number Formatting", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                breakCond = true;
+            }
+            catch(NullPointerException e)
+            {
+                Snackbar.make(view, "Alliance number cannot be empty.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                breakCond = true;
+            }
+            try
+            {
+                EditText editText = (EditText) findViewById(R.id.blue3);
+                blueAlliance3 = Integer.parseInt(editText.getText().toString());
             }
             catch(NumberFormatException e)
             {
@@ -249,6 +285,10 @@ public class SetCompetitionName extends AppCompatActivity
             {
                 spectatingTeamResolvedNumber = redAlliance2;
             }
+            else if (spectatingTeamRawName.matches("Red Alliance 3"))
+            {
+                spectatingTeamResolvedNumber = redAlliance3;
+            }
             else if (spectatingTeamRawName.matches("Blue Alliance 1"))
             {
                 spectatingTeamResolvedNumber = blueAlliance1;
@@ -256,6 +296,10 @@ public class SetCompetitionName extends AppCompatActivity
             else if (spectatingTeamRawName.matches("Blue Alliance 2"))
             {
                 spectatingTeamResolvedNumber = blueAlliance2;
+            }
+            else if (spectatingTeamRawName.matches("Blue Alliance 3"))
+            {
+                spectatingTeamResolvedNumber = blueAlliance3;
             }
             else
             {
@@ -270,7 +314,7 @@ public class SetCompetitionName extends AppCompatActivity
             CheckBox cb2 = (CheckBox) findViewById(R.id.conditionII);
             sampleCond1 = cb1.isChecked();
             sampleCond2 = cb2.isChecked();
-            if (redAlliance1 == blueAlliance1 || redAlliance1 == blueAlliance2 || redAlliance2 == blueAlliance1 || redAlliance2 == blueAlliance2)
+            if (redAlliance1 == blueAlliance1 || redAlliance1 == blueAlliance2 || redAlliance1 == blueAlliance3 || redAlliance2 == blueAlliance1 || redAlliance2 == blueAlliance2 || redAlliance2 == blueAlliance3 || redAlliance3 == blueAlliance1 || redAlliance3 == blueAlliance2 || redAlliance3 == blueAlliance3)
             {
                 // We have an impossible scenario, where we are on more than one team. (Nom d'un chien! - Red Savarin)
                 Snackbar.make(view, "There is a team number conflict.", Snackbar.LENGTH_LONG)
@@ -310,7 +354,7 @@ public class SetCompetitionName extends AppCompatActivity
             chocolat_gelato = "Final";
         }
         String listMsg = "Match # " + MatchNumber + " Type: " + chocolat_gelato + " R: " + red_savarin + " S: " + spectatingTeamResolvedNumber;
-        String CSVFormat = red_savarin+","+DataStore.getDateAsString() +","+MatchNumber +","+competitionName+","+chocolat_gelato+","+redAlliance1+","+redAlliance2+","+blueAlliance1+","+blueAlliance2+","+spectatingTeamResolvedNumber+","+sampleCond1+","+sampleCond2;
+        String CSVFormat = red_savarin+","+DataStore.getDateAsString() +","+MatchNumber +","+competitionName+","+chocolat_gelato+","+redAlliance1+","+redAlliance2+","+redAlliance3+","+blueAlliance1+","+blueAlliance2+","+blueAlliance3+","+spectatingTeamResolvedNumber+","+sampleCond1+","+sampleCond2;
         if (USE_DEBUG)
         {
             Snackbar.make(view, CSVFormat, Snackbar.LENGTH_LONG).setAction("Action", null).show();
