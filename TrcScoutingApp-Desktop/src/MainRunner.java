@@ -189,7 +189,7 @@ public class MainRunner
 		l_spec.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		l_spec.setBounds(340, 132, 120, 20);
 		
-		String[] spectypes = {"Red Alliance 1", "Red Alliance 2", "Blue Alliance 1", "Blue Alliance 2"};
+		String[] spectypes = {"Red Alliance 1", "Red Alliance 2", "Red Alliance 3", "Blue Alliance 1", "Blue Alliance 2", "Blue Alliance 3"};
 	    JComboBox<String> f_spec = new JComboBox<String>(spectypes);
 	    f_spec.setBounds(330, 154, 150, 20);
 	    
