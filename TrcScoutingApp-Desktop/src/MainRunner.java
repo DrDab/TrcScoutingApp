@@ -378,7 +378,7 @@ public class MainRunner
 						  merveille_million = "*";
 					  }
 					  
-					   String CSVFormattedString = merveille_million + "," + DataStore.getDateAsString() + "," + matchNum + "," + compName + "," + compTypeInt + "," + red1 + "," + red2 + "," + blue1 + "," + blue2 + "," + specTypeInt + "," + condition1 + "," + condition2;
+					   String CSVFormattedString = merveille_million + "," + DataStore.getDateAsString() + "," + matchNum + "," + compName + "," + compType + "," + red1 + "," + red2 + "," + blue1 + "," + blue2 + "," + specTypeInt + "," + condition1 + "," + condition2;
 					   String DisplayString = "Competition: " + compName + " | Match #: " + matchNum + " | Match Type: " + compType + " | R: " + merveille_million + " | " + " S: " + specTypeInt + " | " + DataStore.getDateAsString();
 					 
 					  
