@@ -132,9 +132,10 @@ public class AddCompetitions extends AppCompatActivity
         }
         else if (id == R.id.action_makecsv)
         {
+            String filename = DataStore.FIRST_NAME+"_"+DataStore.LAST_NAME+"_results.csv";
             try
             {
-                DataStore.writeContestsToCsv("results.csv");
+                DataStore.writeContestsToCsv(filename);
             }
             catch (IOException e)
             {
@@ -147,6 +148,7 @@ public class AddCompetitions extends AppCompatActivity
             // mail the CSV
             try
             {
+                final String filename = DataStore.FIRST_NAME+"_"+DataStore.LAST_NAME+"_results.csv";
                 final String[] recipient = {""};
                 final EditText txtUrl = new EditText(this);
                 new AlertDialog.Builder(this)
@@ -156,7 +158,7 @@ public class AddCompetitions extends AppCompatActivity
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 recipient[0] = txtUrl.getText().toString();
-                                sendEmailWithCSV("results.csv", recipient[0]);
+                                sendEmailWithCSV(filename, recipient[0]);
                             }
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
