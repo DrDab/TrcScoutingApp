@@ -152,4 +152,14 @@ public class DataStore extends AppCompatActivity
             LAST_NAME = "Unknown";
         }
     }
+    public static boolean existsSave()
+    {
+        File readDirectory = new File("/sdcard/TrcScoutingApp/");
+        File log = new File(readDirectory, "settings.coda");
+        if (!log.exists())
+        {
+            return false;
+        }
+        return true;
+    }
 }

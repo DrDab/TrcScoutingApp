@@ -104,6 +104,11 @@ public class AddCompetitions extends AppCompatActivity
         {
             addToList("No Entries Yet");
         }
+        if (!DataStore.existsSave())
+        {
+            Intent intent = new Intent(this, Settings.class);
+            startActivity(intent);
+        }
     }
 
     @Override
