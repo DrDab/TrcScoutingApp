@@ -106,6 +106,20 @@ public class AddCompetitions extends AppCompatActivity
         }
         if (!DataStore.existsSave())
         {
+            File writeDirectory = new File("/sdcard/TrcScoutingApp/");
+            if (!writeDirectory.exists())
+            {
+                writeDirectory.mkdir();
+            }
+            File log = new File(writeDirectory, "settings.coda");
+            if(!log.exists())
+            {
+                try {
+                    log.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
             Intent intent = new Intent(this, Settings.class);
             startActivity(intent);
         }
