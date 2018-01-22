@@ -123,6 +123,23 @@ public class AddCompetitions extends AppCompatActivity
             Intent intent = new Intent(this, Settings.class);
             startActivity(intent);
         }
+        // start another thread to automatically save.
+        try {
+            DataStore.parseAutoSaveBoolean();
+            DataStore.parseAutoSaveTime();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Runnable autosaverunnable = new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                AutoSaveThread autosave = new AutoSaveThread();
+                autosave.run();
+            }
+        };
+        new Thread(autosaverunnable).start();
     }
 
     @Override
@@ -217,6 +234,13 @@ public class AddCompetitions extends AppCompatActivity
         {
             // popup settings window
             Intent intent = new Intent(this, Settings.class);
+            startActivity(intent);
+            return true;
+        }
+        else if (id == R.id.action_autosave_set)
+        {
+            // popup automatic save settings window
+            Intent intent = new Intent(this, AutoSaveSettings.class);
             startActivity(intent);
             return true;
         }
