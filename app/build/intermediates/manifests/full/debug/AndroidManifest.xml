@@ -38,6 +38,7 @@
             android:label="@string/title_activity_set_competition_name" />
         <activity android:name="trc3543.trcscoutingapp.About" />
         <activity android:name="trc3543.trcscoutingapp.Settings" />
+        <activity android:name="trc3543.trcscoutingapp.AutoSaveSettings" />
 
         <meta-data
             android:name="android.support.VERSION"

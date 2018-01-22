@@ -1636,6 +1636,10 @@
         "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable-xxhdpi-v4/abc_list_focused_holo.9.png"
     },
     {
+        "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/layout_activity_auto_save_settings.xml.flat",
+        "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/res/layout/activity_auto_save_settings.xml"
+    },
+    {
         "merged": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_ic_star_half_black_48dp.png.flat",
         "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/drawable-hdpi-v4/abc_ic_star_half_black_48dp.png"
     },

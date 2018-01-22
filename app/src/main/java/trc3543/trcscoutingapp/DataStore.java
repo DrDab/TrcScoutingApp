@@ -26,6 +26,9 @@ import static android.support.v4.content.ContextCompat.startActivity;
 @SuppressWarnings("All")
 public class DataStore extends AppCompatActivity
 {
+    static boolean USE_AUTOSAVE = true; // by default, autosave is enabled.
+    static int AUTOSAVE_SECONDS = 300;  // by default, save changes every 5 minutes.
+
     static ArrayList<String> contests = new ArrayList<String>();
     /**
      * The ArrayList "CsvFormattedContests" should be in the format:
@@ -150,6 +153,62 @@ public class DataStore extends AppCompatActivity
         else
         {
             LAST_NAME = "Unknown";
+        }
+    }
+    public static void parseAutoSaveBoolean() throws IOException
+    {
+        File readDirectory = new File("/sdcard/TrcScoutingApp/");
+        String saiodfjsajofojfdfjisafbj;
+        if (!readDirectory.exists())
+        {
+            readDirectory.mkdir();
+        }
+        File log = new File(readDirectory, "autosave.coda");
+        if (log.exists())
+        {
+            BufferedReader br = new BufferedReader(new FileReader(log));
+            saiodfjsajofojfdfjisafbj = br.readLine();
+            if (saiodfjsajofojfdfjisafbj.contains("y"))
+            {
+                USE_AUTOSAVE = true;
+            }
+            else
+            {
+                USE_AUTOSAVE = false;
+            }
+        }
+        else
+        {
+            USE_AUTOSAVE = true;
+        }
+    }
+    public static void parseAutoSaveTime() throws IOException
+    {
+        File readDirectory = new File("/sdcard/TrcScoutingApp/");
+        String saiodfjsajofojfdfjisafbj;
+        if (!readDirectory.exists())
+        {
+            readDirectory.mkdir();
+        }
+        File log = new File(readDirectory, "autosave.coda");
+        if (log.exists())
+        {
+            BufferedReader br = new BufferedReader(new FileReader(log));
+            br.readLine();
+            saiodfjsajofojfdfjisafbj = br.readLine();
+            try
+            {
+                AUTOSAVE_SECONDS = Integer.parseInt(saiodfjsajofojfdfjisafbj);
+            }
+            catch (NumberFormatException e)
+            {
+                AUTOSAVE_SECONDS = 300;
+                e.printStackTrace();
+            }
+        }
+        else
+        {
+            AUTOSAVE_SECONDS = 300;
         }
     }
     public static boolean existsSave()
