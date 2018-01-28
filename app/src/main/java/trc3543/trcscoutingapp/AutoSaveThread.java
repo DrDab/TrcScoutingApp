@@ -37,10 +37,15 @@ public class AutoSaveThread
     public void run()
     {
         // save the entries in RAM every x minutes.
+        boolean done = false;
         for(;;)
         {
             double time = System.currentTimeMillis() / 1000.0;
-            if (time % DataStore.AUTOSAVE_SECONDS == 0 && DataStore.USE_AUTOSAVE) {
+            if (time % DataStore.AUTOSAVE_SECONDS != 0)
+            {
+                done = false;
+            }
+            if (time % DataStore.AUTOSAVE_SECONDS == 0 && !done && DataStore.USE_AUTOSAVE) {
                 Log.d("AutoSave", "Auto saving at time=" + time);
                 String filename = DataStore.FIRST_NAME + "_" + DataStore.LAST_NAME + "_results.csv";
                 try {
@@ -48,6 +53,7 @@ public class AutoSaveThread
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                done = true;
             }
         }
     }

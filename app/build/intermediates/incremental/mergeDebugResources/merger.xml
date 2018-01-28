@@ -2012,6 +2012,11 @@
         <item>Blue Alliance 1</item>
         <item>Blue Alliance 2</item>
         <item>Blue Alliance 3</item>
+    </string-array><string-array name="save_times">
+        <item>2 minutes</item>
+        <item>5 minutes</item>
+        <item>10 minutes</item>
+        <item>20 minutes</item>
     </string-array><string name="title_activity_settings">Settings</string><string name="pref_header_general">General</string><string name="pref_title_social_recommendations">Enable social recommendations</string><string name="pref_description_social_recommendations">Recommendations for people to contact
         based on your message history
     </string><string name="pref_title_display_name">Display name</string><string name="pref_default_display_name">John Smith</string><string name="pref_title_add_friends_to_messages">Add friends to messages</string><string-array name="pref_example_list_titles">
@@ -2044,12 +2049,7 @@
         <item>1</item>
         <item>2</item>
         <item>3</item>
-    </string-array><string-array name="multi_select_list_preference_default_value"/><string name="pref_title_system_sync_settings">System sync settings</string><string name="pref_header_notifications">Notifications</string><string name="pref_title_new_message_notifications">New message notifications</string><string name="pref_title_ringtone">Ringtone</string><string name="pref_ringtone_silent">Silent</string><string name="pref_title_vibrate">Vibrate</string><string-array name="save_times">
-        <item>2 minutes</item>
-        <item>5 minutes</item>
-        <item>10 minutes</item>
-        <item>20 minutes</item>
-    </string-array></file><file path="/home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/res/values/colors.xml" qualifiers=""><color name="colorPrimary">#3F51B5</color><color name="colorPrimaryDark">#303F9F</color><color name="colorAccent">#FF4081</color></file></source><source path="/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/generated/res/rs/debug"/><source path="/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/generated/res/resValues/debug"/></dataSet><dataSet config="debug$Generated" generated="true"><source path="/home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/debug/res"/></dataSet><dataSet config="debug" generated-set="debug$Generated"><source path="/home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/debug/res"/></dataSet><mergedItems><configuration qualifiers=""><declare-styleable name="AlertDialog"><attr name="android:layout"/><attr format="reference" name="buttonPanelSideLayout"/><attr format="reference" name="listLayout"/><attr format="reference" name="multiChoiceItemLayout"/><attr format="reference" name="singleChoiceItemLayout"/><attr format="reference" name="listItemLayout"/><attr format="boolean" name="showTitle"/></declare-styleable><declare-styleable name="AppCompatSeekBar"><attr name="android:thumb"/><attr format="reference" name="tickMark"/><attr format="color" name="tickMarkTint"/><attr name="tickMarkTintMode">
+    </string-array><string-array name="multi_select_list_preference_default_value"/><string name="pref_title_system_sync_settings">System sync settings</string><string name="pref_header_notifications">Notifications</string><string name="pref_title_new_message_notifications">New message notifications</string><string name="pref_title_ringtone">Ringtone</string><string name="pref_ringtone_silent">Silent</string><string name="pref_title_vibrate">Vibrate</string></file><file path="/home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/res/values/colors.xml" qualifiers=""><color name="colorPrimary">#3F51B5</color><color name="colorPrimaryDark">#303F9F</color><color name="colorAccent">#FF4081</color></file></source><source path="/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/generated/res/rs/debug"/><source path="/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/generated/res/resValues/debug"/></dataSet><dataSet config="debug$Generated" generated="true"><source path="/home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/debug/res"/></dataSet><dataSet config="debug" generated-set="debug$Generated"><source path="/home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/debug/res"/></dataSet><mergedItems><configuration qualifiers=""><declare-styleable name="AlertDialog"><attr name="android:layout"/><attr format="reference" name="buttonPanelSideLayout"/><attr format="reference" name="listLayout"/><attr format="reference" name="multiChoiceItemLayout"/><attr format="reference" name="singleChoiceItemLayout"/><attr format="reference" name="listItemLayout"/><attr format="boolean" name="showTitle"/></declare-styleable><declare-styleable name="AppCompatSeekBar"><attr name="android:thumb"/><attr format="reference" name="tickMark"/><attr format="color" name="tickMarkTint"/><attr name="tickMarkTintMode">
             
             <enum name="src_over" value="3"/>
             
