@@ -103,7 +103,20 @@ public class MainRunner
 			   {
 				   try 
 				   {
-					   DataStore.writeContestsToCsv("results.csv");
+					   addln("\nWriting entries to CSV...");
+					   DataStore.writeContestsToCsv(DataStore.FIRST_NAME + "_" + DataStore.LAST_NAME + "_results.csv");
+					   if (DataStore.contests.size() == 0)
+					   {
+						   addln("\nNo changes written.");
+					   }
+					   else if (DataStore.contests.size() == 1)
+					   {
+						   addln("\nDone. 1 entry written to: ~/Desktop/TrcScoutingApp/" + DataStore.FIRST_NAME + "_" + DataStore.LAST_NAME + "_results.csv");
+					   }
+					   else
+					   {
+						   addln("\nDone. " + DataStore.contests.size() +" entries written to: ~/Desktop/TrcScoutingApp/" + DataStore.FIRST_NAME + "_" + DataStore.LAST_NAME + "_results.csv");
+					   }
 				   } 
 				   catch (IOException e)
 				   {
@@ -123,22 +136,22 @@ public class MainRunner
 		  {
 			   public void actionPerformed(ActionEvent ae)
 			   {
-				   addln("\n==========================================\n");
-				   addln("             About TRC Scouting App         \n");
-				   addln("                  Version: 0.1b             \n");
-				   addln("                                            \n");
-				   addln("   This software is open source and freely  \n");
-				   addln("   redistributable.                         \n");
-				   addln("                                            \n");
-				   addln("         (C) Titan Robotics Club 2017       \n");
-				   addln("==========================================\n");
+				   addln("\n================================================");
+				   addln("             About TRC Scouting App               ");
+				   addln("                  Version: 0.2a                   ");
+				   addln("                                                  ");
+				   addln("   This software is open source and freely        ");
+				   addln("   redistributable under the MIT license.         ");
+				   addln("                                                  ");
+				   addln("         (C) Titan Robotics Club 2018             ");
+				   addln("================================================\n");
 			   }
 		  });
 		  home_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		  home_frame.setSize(1200, 800);
 		  home_frame.setVisible(true);
-		  field.setText("TRC Scouting App Desktop edition v0.1b\n"
-			  		+ "(C) 2017 Titan Robotics Club.\n\n"
+		  field.setText("TRC Scouting App Desktop - FRC edition v0.2a\n"
+			  		+ "(C) 2018 Titan Robotics Club.\n\n"
 			  		+ "Name: " + DataStore.FIRST_NAME + " " + DataStore.LAST_NAME + "\n"
 			  		+ "Team Number: " + DataStore.SELF_TEAM_NUMBER + "\n"
 			  		+ "Welcome to the TRC Scouting app for FIRST Tech Challenge.\n\n"
@@ -151,12 +164,12 @@ public class MainRunner
 		JFrame inputFrame = new JFrame("Add Game");
 		inputFrame.setResizable(false);
 		inputFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		inputFrame.setSize(800, 532);
+		inputFrame.setSize(800, 750);
 		JPanel inputPanel = new JPanel();
 		inputPanel.setLayout(null);
 		
 		JButton confirm_button = new JButton("Confirm");
-		confirm_button.setBounds(300, 400, 200, 50);
+		confirm_button.setBounds(300, 600, 200, 50);
 		
 		JLabel l_numb = new JLabel();
 		l_numb.setText("Match #");
@@ -167,16 +180,16 @@ public class MainRunner
 		f_numb.setBounds(350, 30, 100, 20);
 		// field.getText() gets text
 		
-		JLabel l_name = new JLabel();
-		l_name.setText("Competition Name");
-		l_name.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		l_name.setBounds(340, 50, 120, 20);
+		// JLabel l_name = new JLabel();
+		// l_name.setText("Competition Name");
+		// l_name.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		// l_name.setBounds(340, 50, 120, 20);
 		
-		JTextField f_name = new JTextField();
-		f_name.setBounds(335, 70, 130, 20);
+		// JTextField f_name = new JTextField();
+		// f_name.setBounds(335, 70, 130, 20);
 		
 		JLabel l_mtype = new JLabel();
-		l_mtype.setText("Competition Type");
+		l_mtype.setText("Match Type");
 		l_mtype.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		l_mtype.setBounds(340, 90, 120, 20);
 		
@@ -193,73 +206,83 @@ public class MainRunner
 	    JComboBox<String> f_spec = new JComboBox<String>(spectypes);
 	    f_spec.setBounds(330, 154, 150, 20);
 	    
-		JLabel l_redalliance1 = new JLabel();
-		l_redalliance1.setText("Red Alliance 1");
-		l_redalliance1.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		l_redalliance1.setBounds(120, 110, 120, 20);
-		l_redalliance1.setForeground(Color.RED);
+		JLabel l_spec_team_num = new JLabel();
+		l_spec_team_num.setText("Team Number");
+		l_spec_team_num.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		l_spec_team_num.setBounds(355, 45, 120, 20);
+		// l_spec_team_num.setForeground(Color.RED);
 		
-		JTextField f_redalliance1 = new JTextField();
-		f_redalliance1.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		f_redalliance1.setBounds(120, 130, 100, 30);
-		f_redalliance1.setForeground(Color.RED);
+		JTextField f_spec_team_num = new JTextField();
+		f_spec_team_num.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		f_spec_team_num.setBounds(350, 65, 100, 30);
+		// f_redalliance1.setForeground(Color.RED);
 		
-		JLabel l_redalliance2 = new JLabel();
-		l_redalliance2.setText("Red Alliance 2");
-		l_redalliance2.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		l_redalliance2.setBounds(120, 160, 120, 20);
-		l_redalliance2.setForeground(Color.RED);
+		// JLabel l_redalliance2 = new JLabel();
+		// l_redalliance2.setText("Red Alliance 2");
+		// l_redalliance2.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+		// l_redalliance2.setBounds(120, 160, 120, 20);
+		// l_redalliance2.setForeground(Color.RED);
 		
-		JTextField f_redalliance2 = new JTextField();
-		f_redalliance2.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		f_redalliance2.setBounds(120, 180, 100, 30);
-		f_redalliance2.setForeground(Color.RED);
+		// JTextField f_redalliance2 = new JTextField();
+		// f_redalliance2.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		// f_redalliance2.setBounds(120, 180, 100, 30);
+		// f_redalliance2.setForeground(Color.RED);
 		
-		JLabel l_redalliance3 = new JLabel();
-		l_redalliance3.setText("Red Alliance 3");
-		l_redalliance3.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		l_redalliance3.setBounds(120, 210, 120, 20);
-		l_redalliance3.setForeground(Color.RED);
+		// JLabel l_redalliance3 = new JLabel();
+		// l_redalliance3.setText("Red Alliance 3");
+		// l_redalliance3.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+		// l_redalliance3.setBounds(120, 210, 120, 20);
+		// l_redalliance3.setForeground(Color.RED);
 		
-		JTextField f_redalliance3 = new JTextField();
-		f_redalliance3.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		f_redalliance3.setBounds(120, 230, 100, 30);
-		f_redalliance3.setForeground(Color.RED);
+		// JTextField f_redalliance3 = new JTextField();
+		// f_redalliance3.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		// f_redalliance3.setBounds(120, 230, 100, 30);
+		// f_redalliance3.setForeground(Color.RED);
 		
 		// 580 next
 		
-		JLabel l_bluealliance1 = new JLabel();
-		l_bluealliance1.setText("Blue Alliance 1");
-		l_bluealliance1.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		l_bluealliance1.setBounds(570, 110, 120, 20);
-		l_bluealliance1.setForeground(Color.BLUE);
+		// JLabel l_bluealliance1 = new JLabel();
+		// l_bluealliance1.setText("Blue Alliance 1");
+		// l_bluealliance1.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+		// l_bluealliance1.setBounds(570, 110, 120, 20);
+		// l_bluealliance1.setForeground(Color.BLUE);
 		
-		JTextField f_bluealliance1 = new JTextField();
-		f_bluealliance1.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		f_bluealliance1.setBounds(570, 130, 100, 30);
-		f_bluealliance1.setForeground(Color.BLUE);
+		// JTextField f_bluealliance1 = new JTextField();
+		// f_bluealliance1.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		// f_bluealliance1.setBounds(570, 130, 100, 30);
+		// f_bluealliance1.setForeground(Color.BLUE);
 		
-		JLabel l_bluealliance2 = new JLabel();
-		l_bluealliance2.setText("Blue Alliance 2");
-		l_bluealliance2.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		l_bluealliance2.setBounds(570, 160, 120, 20);
-		l_bluealliance2.setForeground(Color.BLUE);
+		// JLabel l_bluealliance2 = new JLabel();
+		// l_bluealliance2.setText("Blue Alliance 2");
+		// l_bluealliance2.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+		// l_bluealliance2.setBounds(570, 160, 120, 20);
+		// l_bluealliance2.setForeground(Color.BLUE);
 		
-		JTextField f_bluealliance2 = new JTextField();
-		f_bluealliance2.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		f_bluealliance2.setBounds(570, 180, 100, 30);
-		f_bluealliance2.setForeground(Color.BLUE);
+		// JTextField f_bluealliance2 = new JTextField();
+		// f_bluealliance2.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		// f_bluealliance2.setBounds(570, 180, 100, 30);
+		// f_bluealliance2.setForeground(Color.BLUE);
 		
-		JLabel l_bluealliance3 = new JLabel();
-		l_bluealliance3.setText("Blue Alliance 3");
-		l_bluealliance3.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		l_bluealliance3.setBounds(570, 210, 120, 20);
-		l_bluealliance3.setForeground(Color.BLUE);
+		// JLabel l_bluealliance3 = new JLabel();
+		// l_bluealliance3.setText("Blue Alliance 3");
+		// l_bluealliance3.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+		// l_bluealliance3.setBounds(570, 210, 120, 20);
+		// l_bluealliance3.setForeground(Color.BLUE);
 		
-		JTextField f_bluealliance3 = new JTextField();
-		f_bluealliance3.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		f_bluealliance3.setBounds(570, 230, 100, 30);
-		f_bluealliance3.setForeground(Color.BLUE);
+		// JTextField f_bluealliance3 = new JTextField();
+		// f_bluealliance3.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		// f_bluealliance3.setBounds(570, 230, 100, 30);
+		// f_bluealliance3.setForeground(Color.BLUE);
+		
+		JLabel autonomous_label = new JLabel();
+		autonomous_label.setText("Autonomous Phase");
+		autonomous_label.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+		autonomous_label.setBounds(100, 200, 200, 20);
+		
+		JLabel teleop_label = new JLabel();
+		teleop_label.setText("Teleoperated Phase");
+		teleop_label.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+		teleop_label.setBounds(100, 350, 200, 20);
 		
 		/**
 		 * ==================================================================
@@ -284,24 +307,26 @@ public class MainRunner
 		inputPanel.add(confirm_button);
 		inputPanel.add(l_numb);
 		inputPanel.add(f_numb);
-		inputPanel.add(l_name);
-		inputPanel.add(f_name);
+		// inputPanel.add(l_name);
+		// inputPanel.add(f_name);
 		inputPanel.add(l_mtype);
 		inputPanel.add(f_mtype);
 		inputPanel.add(l_spec);
 		inputPanel.add(f_spec);
-		inputPanel.add(l_redalliance1);
-		inputPanel.add(f_redalliance1);
-		inputPanel.add(l_redalliance2);
-		inputPanel.add(f_redalliance2);
-		inputPanel.add(l_redalliance3);
-		inputPanel.add(f_redalliance3);
-		inputPanel.add(l_bluealliance1);
-		inputPanel.add(f_bluealliance1);
-		inputPanel.add(l_bluealliance2);
-		inputPanel.add(f_bluealliance2);
-		inputPanel.add(l_bluealliance3);
-		inputPanel.add(f_bluealliance3);
+		inputPanel.add(l_spec_team_num);
+		inputPanel.add(f_spec_team_num);
+		inputPanel.add(autonomous_label);
+		inputPanel.add(teleop_label);
+		// inputPanel.add(l_redalliance2);
+		// inputPanel.add(f_redalliance2);
+		// inputPanel.add(l_redalliance3);
+		// inputPanel.add(f_redalliance3);
+		// inputPanel.add(l_bluealliance1);
+		// inputPanel.add(f_bluealliance1);
+		// inputPanel.add(l_bluealliance2);
+		// inputPanel.add(f_bluealliance2);
+		// inputPanel.add(l_bluealliance3);
+		// inputPanel.add(f_bluealliance3);
 		
 		inputPanel.setVisible(true);
 		
@@ -317,7 +342,7 @@ public class MainRunner
 				   {
 					   // parse the entered values on confirm.
 					   int matchNum = Integer.parseInt(f_numb.getText());
-					   String compName = f_name.getText();
+					   // String compName = f_name.getText();
 					   
 					   String compType = f_mtype.getSelectedItem().toString();
 					   int compTypeInt = -428957892;
@@ -338,56 +363,20 @@ public class MainRunner
 						   compTypeInt = 4;
 					   }
 					   
-					   int red1 = Integer.parseInt(f_redalliance1.getText());
-					   int red2 = Integer.parseInt(f_redalliance2.getText());
-					   int red3 = Integer.parseInt(f_redalliance3.getText());
-					   int blue1 = Integer.parseInt(f_bluealliance1.getText());
-					   int blue2 = Integer.parseInt(f_bluealliance2.getText());
-					   int blue3 = Integer.parseInt(f_bluealliance3.getText());
+					   int spectatingTeamNumber = Integer.parseInt(f_spec_team_num.getText());
+					  
 					   boolean containsOurTeam = false;
 					   
-					   if (red1 == DataStore.SELF_TEAM_NUMBER || red2 == DataStore.SELF_TEAM_NUMBER || red3 == DataStore.SELF_TEAM_NUMBER
-					   ||  blue1 == DataStore.SELF_TEAM_NUMBER || blue2 == DataStore.SELF_TEAM_NUMBER || blue3 == DataStore.SELF_TEAM_NUMBER)
+					   if (spectatingTeamNumber == DataStore.SELF_TEAM_NUMBER)
 					   {
 						   containsOurTeam = true;
 					   }
 					   
 					   String specType = f_spec.getSelectedItem().toString();
-					   int specTypeInt = -428957892;
-					   if (specType.matches("Red Alliance 1"))
-					   {
-						   specTypeInt = red1;
-					   }
-					   else if (specType.matches("Red Alliance 2"))
-					   {
-						   specTypeInt = red2;
-					   }
-					   else if (specType.matches("Red Alliance 3"))
-					   {
-						   specTypeInt = red3;
-					   }
-					   else if (specType.matches("Blue Alliance 1"))
-					   {
-						   specTypeInt = blue1;
-					   }
-					   else if (specType.matches("Blue Alliance 2"))
-					   {
-						   specTypeInt = blue2;
-					   }
-					   else
-					   {
-						   specTypeInt = blue3;
-					   }
 					   
-					   System.out.println("Match Number       : " + matchNum);
-					   System.out.println("Competition Name   : " + compName);
-					   System.out.println("Red Alliance I     : " + red1);
-					   System.out.println("Red Alliance II    : " + red2);
-					   System.out.println("Red Alliance III   : " + red3);
-					   System.out.println("Blue Alliance I    : " + blue1);
-					   System.out.println("Blue Alliance II   : " + blue2);
-					   System.out.println("Blue Alliance III  : " + blue3);
-					   System.out.println("Spectating Team    : " + specTypeInt);
+					   System.out.println("Match Number            : " + matchNum);
+					   System.out.println("Spectating Team Number  : " + spectatingTeamNumber);
+					   System.out.println("Spectating Team Type    : " + specType);
 					   
 					   /**
 						 * ==================================================================
@@ -415,8 +404,8 @@ public class MainRunner
 						  merveille_million = "*";
 					  }
 					  
-					   String CSVFormattedString = merveille_million + "," + DataStore.getDateAsString() + "," + matchNum + "," + compName + "," + compType + "," + red1 + "," + red2 + "," + red3 + "," + blue1 + "," + blue2 + "," + blue3 + "," + specTypeInt + "," + condition1 + "," + condition2;
-					   String DisplayString = "Competition: " + compName + " | Match #: " + matchNum + " | Match Type: " + compType + " | R: " + merveille_million + " | " + " S: " + specTypeInt + " | " + DataStore.getDateAsString();
+					   String CSVFormattedString = merveille_million + "," + DataStore.getDateAsString() + "," + matchNum + "," + compType + "," + spectatingTeamNumber + "," + specType + "," + condition1 + "," + condition2;
+					   String DisplayString = "Match #: " + matchNum + " | Match Type: " + compType + " | R: " + merveille_million + " | " + " S: " + spectatingTeamNumber + " | " + DataStore.getDateAsString();
 					 
 					  
 					   //=============== [ END EDITABLE OBJECTIVE OPTIONS HERE ] ===============//

@@ -18,34 +18,14 @@
             android:id="@+id/matchNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:ems="10"
             android:hint="Match #"
             android:inputType="textPersonName"
-            app:layout_constraintBottom_toTopOf="@+id/compName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.503"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <EditText
-            android:id="@+id/compName"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginBottom="57dp"
-            android:layout_marginEnd="14dp"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="54dp"
-            android:ems="10"
-            android:hint="Competition Name"
-            android:inputType="textPersonName"
-            android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/red2"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -65,7 +45,7 @@
             android:layout_height="28dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="272dp"
+            android:layout_marginTop="176dp"
             android:entries="@array/game_types"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
@@ -86,123 +66,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/red1"
-            android:layout_width="153dp"
-            android:layout_height="39dp"
-            android:layout_marginStart="8dp"
-            android:ems="10"
-            android:hint="Red 1"
-            android:inputType="textPersonName"
-            android:shadowColor="@android:color/holo_red_light"
-            android:textColor="@android:color/holo_red_light"
-            android:textColorHighlight="@android:color/holo_red_light"
-            android:textColorHint="@android:color/holo_red_light"
-            android:textColorLink="@android:color/holo_red_light"
-            app:layout_constraintBottom_toTopOf="@+id/red2"
-            app:layout_constraintEnd_toEndOf="@+id/red2"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/blue1"
-            app:layout_constraintVertical_bias="0.819" />
-
-        <EditText
-            android:id="@+id/red2"
-            android:layout_width="153dp"
-            android:layout_height="39dp"
-            android:layout_marginBottom="32dp"
-            android:layout_marginEnd="35dp"
-            android:layout_marginStart="8dp"
-            android:ems="10"
-            android:hint="Red 2"
-            android:inputType="textPersonName"
-            android:shadowColor="@android:color/holo_red_light"
-            android:textColor="@android:color/holo_red_light"
-            android:textColorHighlight="@android:color/holo_red_light"
-            android:textColorHint="@android:color/holo_red_light"
-            android:textColorLink="@android:color/holo_red_light"
-            app:layout_constraintBottom_toTopOf="@+id/CompType"
-            app:layout_constraintEnd_toStartOf="@+id/blue2"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/compName" />
-
-        <EditText
-            android:id="@+id/red3"
-            android:layout_width="153dp"
-            android:layout_height="39dp"
-            android:layout_marginBottom="32dp"
-            android:layout_marginEnd="48dp"
-            android:layout_marginStart="8dp"
-            android:ems="10"
-            android:hint="Red 3"
-            android:inputType="textPersonName"
-            android:shadowColor="@android:color/holo_red_light"
-            android:textColor="@android:color/holo_red_light"
-            android:textColorHighlight="@android:color/holo_red_light"
-            android:textColorHint="@android:color/holo_red_light"
-            android:textColorLink="@android:color/holo_red_light"
-            app:layout_constraintBottom_toTopOf="@+id/CompType"
-            app:layout_constraintEnd_toStartOf="@+id/blue3"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <EditText
-            android:id="@+id/blue1"
-            android:layout_width="160dp"
-            android:layout_height="39dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="16dp"
-            android:ems="10"
-            android:hint="Blue 1"
-            android:inputType="textPersonName"
-            android:shadowColor="@android:color/holo_blue_dark"
-            android:textColor="@android:color/holo_blue_dark"
-            android:textColorHighlight="@android:color/holo_blue_dark"
-            android:textColorHint="@android:color/holo_blue_dark"
-            android:textColorLink="@android:color/holo_blue_dark"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/blue2"
-            app:layout_constraintTop_toBottomOf="@+id/compName" />
-
-        <EditText
-            android:id="@+id/blue2"
-            android:layout_width="164dp"
-            android:layout_height="39dp"
-            android:layout_marginBottom="29dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="45dp"
-            android:ems="10"
-            android:hint="Blue 2"
-            android:inputType="textPersonName"
-            android:shadowColor="@android:color/holo_blue_dark"
-            android:textColor="@android:color/holo_blue_dark"
-            android:textColorHighlight="@android:color/holo_blue_dark"
-            android:textColorHint="@android:color/holo_blue_dark"
-            android:textColorLink="@android:color/holo_blue_dark"
-            app:layout_constraintBottom_toTopOf="@+id/CompType"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/blue1"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <EditText
-            android:id="@+id/blue3"
-            android:layout_width="164dp"
-            android:layout_height="39dp"
-            android:layout_marginBottom="32dp"
-            android:layout_marginEnd="8dp"
-            android:ems="10"
-            android:hint="Blue 3"
-            android:inputType="textPersonName"
-            android:shadowColor="@android:color/holo_blue_dark"
-            android:textColor="@android:color/holo_blue_dark"
-            android:textColorHighlight="@android:color/holo_blue_dark"
-            android:textColorHint="@android:color/holo_blue_dark"
-            android:textColorLink="@android:color/holo_blue_dark"
-            app:layout_constraintBottom_toTopOf="@+id/CompType"
-            app:layout_constraintEnd_toEndOf="parent" />
-
         <Space
             android:id="@+id/space2"
             android:layout_width="wrap_content"
@@ -221,6 +84,7 @@
             android:text="Sample Cond. I"
             app:layout_constraintBottom_toTopOf="@+id/conditionII"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent" />
 
         <CheckBox
@@ -229,12 +93,12 @@
             android:layout_height="55dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="404dp"
+            android:layout_marginTop="348dp"
             android:text="Sample Cond. II"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/compName" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/goBack"
@@ -278,10 +142,10 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="384dp"
+            android:layout_marginTop="280dp"
             android:text="Autonomous Phase"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.032"
+            app:layout_constraintHorizontal_bias="0.052"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -300,6 +164,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5"
             app:layout_constraintVertical_bias="0.407" />
+
+        <EditText
+            android:id="@+id/teamNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="64dp"
+            android:ems="10"
+            android:hint="Team #"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

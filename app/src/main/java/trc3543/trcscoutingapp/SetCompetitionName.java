@@ -57,12 +57,7 @@ public class SetCompetitionName extends AppCompatActivity
     static String spectatingTeamRawName;
     static int spectatingTeamResolvedNumber;
 
-    static int redAlliance1;    // the team # for red alliance 1
-    static int redAlliance2;    // the team # for red alliance 2
-    static int redAlliance3;    // the team # for red alliance 3
-    static int blueAlliance1;   // the team # for blue alliance 1
-    static int blueAlliance2;   // the team # for blue alliance 2
-    static int blueAlliance3;   // the team # for blue alliance 3
+    static int spectatingTeamNumber;    // the team # for teh team you are spectating
 
     static boolean sampleCond1 = false;
     static boolean sampleCond2 = false;
@@ -108,27 +103,6 @@ public class SetCompetitionName extends AppCompatActivity
         }
         if (!breakCond)
         {
-            // read the competition name.
-            try
-            {
-                EditText editText = (EditText) findViewById(R.id.compName);
-                competitionName = editText.getText().toString();
-                if (competitionName.length() == 0)
-                {
-                    Snackbar.make(view, "Competition Name cannot be empty.", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                    breakCond = true;
-                }
-            }
-            catch(NullPointerException e)
-            {
-                Snackbar.make(view, "Competition Name cannot be empty.", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                breakCond = true;
-            }
-        }
-        if (!breakCond)
-        {
             // read the competition type.
             Spinner mySpinner=(Spinner) findViewById(R.id.CompType);
             competitionTypeRawName = mySpinner.getSelectedItem().toString();
@@ -165,8 +139,8 @@ public class SetCompetitionName extends AppCompatActivity
             // read the alliance teams.
             try
             {
-                EditText editText = (EditText) findViewById(R.id.red1);
-                redAlliance1 = Integer.parseInt(editText.getText().toString());
+                EditText editText = (EditText) findViewById(R.id.teamNum);
+                spectatingTeamNumber = Integer.parseInt(editText.getText().toString());
             }
             catch(NumberFormatException e)
             {
@@ -174,93 +148,7 @@ public class SetCompetitionName extends AppCompatActivity
                         .setAction("Action", null).show();
                 breakCond = true;
             }
-            catch(NullPointerException e)
-            {
-                Snackbar.make(view, "Alliance number cannot be empty.", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                breakCond = true;
-            }
-            try
-            {
-                EditText editText = (EditText) findViewById(R.id.red2);
-                redAlliance2 = Integer.parseInt(editText.getText().toString());
-            }
-            catch(NumberFormatException e)
-            {
-                Snackbar.make(view, "Issue with alliance number Formatting", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                breakCond = true;
-            }
-            catch(NullPointerException e)
-            {
-                Snackbar.make(view, "Alliance number cannot be empty.", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                breakCond = true;
-            }
-            try
-            {
-                EditText editText = (EditText) findViewById(R.id.red3);
-                redAlliance3 = Integer.parseInt(editText.getText().toString());
-            }
-            catch(NumberFormatException e)
-            {
-                Snackbar.make(view, "Issue with alliance number Formatting", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                breakCond = true;
-            }
-            catch(NullPointerException e)
-            {
-                Snackbar.make(view, "Alliance number cannot be empty.", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                breakCond = true;
-            }
-            try
-            {
-                EditText editText = (EditText) findViewById(R.id.blue1);
-                blueAlliance1 = Integer.parseInt(editText.getText().toString());
-            }
-            catch(NumberFormatException e)
-            {
-                Snackbar.make(view, "Issue with alliance number Formatting", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                breakCond = true;
-            }
-            catch(NullPointerException e)
-            {
-                Snackbar.make(view, "Alliance number cannot be empty.", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                breakCond = true;
-            }
-            try
-            {
-                EditText editText = (EditText) findViewById(R.id.blue2);
-                blueAlliance2 = Integer.parseInt(editText.getText().toString());
-            }
-            catch(NumberFormatException e)
-            {
-                Snackbar.make(view, "Issue with alliance number Formatting", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                breakCond = true;
-            }
-            catch(NullPointerException e)
-            {
-                Snackbar.make(view, "Alliance number cannot be empty.", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                breakCond = true;
-            }
-            try
-            {
-                EditText editText = (EditText) findViewById(R.id.blue3);
-                blueAlliance3 = Integer.parseInt(editText.getText().toString());
-            }
-            catch(NumberFormatException e)
-            {
-                Snackbar.make(view, "Issue with alliance number Formatting", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                breakCond = true;
-            }
-            catch(NullPointerException e)
-            {
+            catch(NullPointerException e) {
                 Snackbar.make(view, "Alliance number cannot be empty.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 breakCond = true;
@@ -279,27 +167,27 @@ public class SetCompetitionName extends AppCompatActivity
             }
             else if (spectatingTeamRawName.matches("Red Alliance 1"))
             {
-                spectatingTeamResolvedNumber = redAlliance1;
+                spectatingTeamResolvedNumber = spectatingTeamNumber;
             }
             else if (spectatingTeamRawName.matches("Red Alliance 2"))
             {
-                spectatingTeamResolvedNumber = redAlliance2;
+                spectatingTeamResolvedNumber = spectatingTeamNumber;
             }
             else if (spectatingTeamRawName.matches("Red Alliance 3"))
             {
-                spectatingTeamResolvedNumber = redAlliance3;
+                spectatingTeamResolvedNumber = spectatingTeamNumber;
             }
             else if (spectatingTeamRawName.matches("Blue Alliance 1"))
             {
-                spectatingTeamResolvedNumber = blueAlliance1;
+                spectatingTeamResolvedNumber = spectatingTeamNumber;
             }
             else if (spectatingTeamRawName.matches("Blue Alliance 2"))
             {
-                spectatingTeamResolvedNumber = blueAlliance2;
+                spectatingTeamResolvedNumber = spectatingTeamNumber;
             }
             else if (spectatingTeamRawName.matches("Blue Alliance 3"))
             {
-                spectatingTeamResolvedNumber = blueAlliance3;
+                spectatingTeamResolvedNumber = spectatingTeamNumber;
             }
             else
             {
@@ -314,13 +202,6 @@ public class SetCompetitionName extends AppCompatActivity
             CheckBox cb2 = (CheckBox) findViewById(R.id.conditionII);
             sampleCond1 = cb1.isChecked();
             sampleCond2 = cb2.isChecked();
-            if (redAlliance1 == blueAlliance1 || redAlliance1 == blueAlliance2 || redAlliance1 == blueAlliance3 || redAlliance2 == blueAlliance1 || redAlliance2 == blueAlliance2 || redAlliance2 == blueAlliance3 || redAlliance3 == blueAlliance1 || redAlliance3 == blueAlliance2 || redAlliance3 == blueAlliance3)
-            {
-                // We have an impossible scenario, where we are on more than one team. (Nom d'un chien! - Red Savarin)
-                Snackbar.make(view, "There is a team number conflict.", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                breakCond = true;
-            }
         }
         if (!breakCond)
         {
@@ -332,7 +213,7 @@ public class SetCompetitionName extends AppCompatActivity
     public void moveToNextScreen(View view)
     {
         String red_savarin = "";
-        if (redAlliance1 == DataStore.SELF_TEAM_NUMBER || redAlliance2 == DataStore.SELF_TEAM_NUMBER || blueAlliance1 == DataStore.SELF_TEAM_NUMBER || blueAlliance2 == DataStore.SELF_TEAM_NUMBER)
+        if (spectatingTeamNumber == DataStore.SELF_TEAM_NUMBER)
         {
             red_savarin = "*";
         }
@@ -353,8 +234,8 @@ public class SetCompetitionName extends AppCompatActivity
         {
             chocolat_gelato = "Final";
         }
-        String listMsg = "Match # " + MatchNumber + " Type: " + chocolat_gelato + " R: " + red_savarin + " S: " + spectatingTeamResolvedNumber;
-        String CSVFormat = red_savarin+","+DataStore.getDateAsString() +","+MatchNumber +","+competitionName+","+chocolat_gelato+","+redAlliance1+","+redAlliance2+","+redAlliance3+","+blueAlliance1+","+blueAlliance2+","+blueAlliance3+","+spectatingTeamResolvedNumber+","+sampleCond1+","+sampleCond2;
+        String listMsg = "Match # " + MatchNumber + " Type: " + chocolat_gelato + " R: " + red_savarin + " S: " + spectatingTeamNumber;
+        String CSVFormat = red_savarin+","+DataStore.getDateAsString() +","+MatchNumber +","+chocolat_gelato+","+spectatingTeamNumber+","+spectatingTeamRawName+","+sampleCond1+","+sampleCond2;
         if (USE_DEBUG)
         {
             Snackbar.make(view, CSVFormat, Snackbar.LENGTH_LONG).setAction("Action", null).show();
