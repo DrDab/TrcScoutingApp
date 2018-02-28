@@ -94,19 +94,19 @@ public final class R {
         public static final int parent_matrix = 0x7f090083;
         public static final int right_icon = 0x7f09008c;
         public static final int right_side = 0x7f09008d;
-        public static final int save_image_matrix = 0x7f09008e;
-        public static final int save_non_transition_alpha = 0x7f09008f;
-        public static final int save_scale_type = 0x7f090090;
-        public static final int status_bar_latest_event_content = 0x7f0900b3;
-        public static final int text = 0x7f0900b8;
-        public static final int text2 = 0x7f0900b9;
-        public static final int time = 0x7f0900c5;
-        public static final int title = 0x7f0900c8;
-        public static final int transition_current_scene = 0x7f0900d0;
-        public static final int transition_layout_save = 0x7f0900d1;
-        public static final int transition_position = 0x7f0900d2;
-        public static final int transition_scene_layoutid_cache = 0x7f0900d3;
-        public static final int transition_transform = 0x7f0900d4;
+        public static final int save_image_matrix = 0x7f09008f;
+        public static final int save_non_transition_alpha = 0x7f090090;
+        public static final int save_scale_type = 0x7f090091;
+        public static final int status_bar_latest_event_content = 0x7f0900b4;
+        public static final int text = 0x7f0900b9;
+        public static final int text2 = 0x7f0900ba;
+        public static final int time = 0x7f0900c6;
+        public static final int title = 0x7f0900c9;
+        public static final int transition_current_scene = 0x7f0900d1;
+        public static final int transition_layout_save = 0x7f0900d2;
+        public static final int transition_position = 0x7f0900d3;
+        public static final int transition_scene_layoutid_cache = 0x7f0900d4;
+        public static final int transition_transform = 0x7f0900d5;
     }
     public static final class integer {
         public static final int cancel_button_image_alpha = 0x7f0a0004;
