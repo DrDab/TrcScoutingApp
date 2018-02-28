@@ -5,6 +5,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import java.io.File;
@@ -97,10 +98,13 @@ public class Settings extends AppCompatActivity
         }
         if (!breakCond && !breakCond2 && !breakCond3)
         {
+            // read whether to save directly to file upon confirming Game results
+            CheckBox cb1 = (CheckBox) findViewById(R.id.saveDirectlyCheckBox);
+            boolean saveDirectly = cb1.isChecked();
             // export the settings to a file.
             try
             {
-                writeSettingsToFile(first_name, last_name, teamNumber);
+                writeSettingsToFile(first_name, last_name, teamNumber, saveDirectly);
             }
             catch (IOException e)
             {
@@ -110,7 +114,7 @@ public class Settings extends AppCompatActivity
 
     }
 
-    public void writeSettingsToFile(String firstname, String lastname, int teamNum) throws IOException
+    public void writeSettingsToFile(String firstname, String lastname, int teamNum, boolean saveDirectly) throws IOException
     {
         File writeDirectory = new File("/sdcard/TrcScoutingApp/");
         if (!writeDirectory.exists())
@@ -119,15 +123,17 @@ public class Settings extends AppCompatActivity
         }
         else
         {
+            String saveReading = saveDirectly ? "y" : "n";
             File log = new File(writeDirectory, "settings.coda");
             if(!log.exists())
             {
                 log.createNewFile();
             }
             PrintWriter waffleryebread = new PrintWriter(new FileWriter(log));
-            waffleryebread.println(teamNumber);
-            waffleryebread.println(first_name);
-            waffleryebread.println(last_name);
+            waffleryebread.println(teamNum);
+            waffleryebread.println(firstname);
+            waffleryebread.println(lastname);
+            waffleryebread.println(saveReading);
             waffleryebread.println("\n");
             waffleryebread.flush();
             waffleryebread.close();
