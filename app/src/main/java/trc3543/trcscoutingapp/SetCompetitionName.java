@@ -59,8 +59,28 @@ public class SetCompetitionName extends AppCompatActivity
 
     static int spectatingTeamNumber;    // the team # for teh team you are spectating
 
-    static boolean sampleCond1 = false;
-    static boolean sampleCond2 = false;
+    static String startingPosition;
+
+    // Driver's PoV.
+    static String sideOfOwnSwitchControl;
+    static String sideOfScaleControl;
+    static String sideOfOpponentSwitchControl;
+
+    // Autonomous Phase.
+    static String crossedAutoLine;
+    static String placedBlockOnSwitch;
+    static String placedBlockOnScale;
+    static int numBlocksPlaced = 0;
+
+    // Teleoperated Phase.
+    static int numCubesDelivered = 0;
+    static String robotSpeed;
+    static String vaultCapabilities;
+    static String scaleCapabilities;
+    static String switchCapabilities;
+
+    // Auxiliary Notes.
+    static String notes;
     
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -104,7 +124,7 @@ public class SetCompetitionName extends AppCompatActivity
         if (!breakCond)
         {
             // read the competition type.
-            Spinner mySpinner=(Spinner) findViewById(R.id.CompType);
+            Spinner mySpinner =(Spinner) findViewById(R.id.CompType);
             competitionTypeRawName = mySpinner.getSelectedItem().toString();
             if (competitionTypeRawName.matches(""))
             {
@@ -148,7 +168,8 @@ public class SetCompetitionName extends AppCompatActivity
                         .setAction("Action", null).show();
                 breakCond = true;
             }
-            catch(NullPointerException e) {
+            catch(NullPointerException e)
+            {
                 Snackbar.make(view, "Alliance number cannot be empty.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 breakCond = true;
@@ -157,8 +178,8 @@ public class SetCompetitionName extends AppCompatActivity
         if (!breakCond)
         {
             // read the team you are spectating.
-            Spinner mySpinner=(Spinner) findViewById(R.id.SpectatingSpinner);
-            spectatingTeamRawName= mySpinner.getSelectedItem().toString();
+            Spinner mySpinner = (Spinner) findViewById(R.id.SpectatingSpinner);
+            spectatingTeamRawName = mySpinner.getSelectedItem().toString();
             if (spectatingTeamRawName.matches(""))
             {
                 Snackbar.make(view, "Spectating Team cannot be empty.", Snackbar.LENGTH_LONG)
@@ -197,11 +218,95 @@ public class SetCompetitionName extends AppCompatActivity
         }
         if (!breakCond)
         {
-            // check the objectives won.
-            CheckBox cb1 = (CheckBox) findViewById(R.id.conditionI);
-            CheckBox cb2 = (CheckBox) findViewById(R.id.conditionII);
-            sampleCond1 = cb1.isChecked();
-            sampleCond2 = cb2.isChecked();
+            // read the starting position.
+            Spinner mySpinner = (Spinner) findViewById(R.id.startingPositionForm);
+            startingPosition = mySpinner.getSelectedItem().toString();
+            if (startingPosition.matches(""))
+            {
+                Snackbar.make(view, "Starting Position cannot be empty.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                breakCond = true;
+            }
+        }
+        if (!breakCond)
+        {
+            // read the Driver's PoV info.
+            Spinner switchControlSpinner = (Spinner) findViewById(R.id.ownSwitchControlSide);
+            sideOfOwnSwitchControl = switchControlSpinner.getSelectedItem().toString();
+
+            Spinner scaleControlSpinner = (Spinner) findViewById(R.id.sideOfScaleControl);
+            sideOfScaleControl = scaleControlSpinner.getSelectedItem().toString();
+
+            Spinner opponentSwitchControlSpinner = (Spinner) findViewById(R.id.opponentSwitchControlSide);
+            sideOfOpponentSwitchControl = scaleControlSpinner.getSelectedItem().toString();
+        }
+        if (!breakCond)
+        {
+            // read the Autonomous info.
+            Spinner autoLineSpinner = (Spinner) findViewById(R.id.crossedTheAutoLine);
+            crossedAutoLine = autoLineSpinner.getSelectedItem().toString();
+
+            Spinner blockOnSwitchSpinner = (Spinner) findViewById(R.id.placedBlockOnSwitch);
+            placedBlockOnSwitch = blockOnSwitchSpinner.getSelectedItem().toString();
+
+            Spinner blockOnScaleSpinner = (Spinner) findViewById(R.id.placedBlockOnScale);
+            placedBlockOnScale = blockOnScaleSpinner.getSelectedItem().toString();
+
+            try
+            {
+                EditText editText = (EditText) findViewById(R.id.numOfBlocksPlaced);
+                numBlocksPlaced = Integer.parseInt(editText.getText().toString());
+            }
+            catch(NumberFormatException e)
+            {
+                Snackbar.make(view, "Issue with # Blocks placed Formatting", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                breakCond = true;
+            }
+            catch(NullPointerException e)
+            {
+                Snackbar.make(view, "# of Blocks placed cannot be empty.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                breakCond = true;
+            }
+        }
+        if (!breakCond)
+        {
+            // read the TeleOp info.
+            try
+            {
+                EditText editText = (EditText) findViewById(R.id.numberOfCubesDelivered);
+                numCubesDelivered = Integer.parseInt(editText.getText().toString());
+            }
+            catch(NumberFormatException e)
+            {
+                Snackbar.make(view, "Issue with # cubes delivered Formatting", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                breakCond = true;
+            }
+            catch(NullPointerException e)
+            {
+                Snackbar.make(view, "# of cubes delivered cannot be empty.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                breakCond = true;
+            }
+
+            Spinner speedSpinner = (Spinner) findViewById(R.id.speed);
+            robotSpeed = speedSpinner.getSelectedItem().toString();
+
+            Spinner vaultSpinner = (Spinner) findViewById(R.id.vaultCapabilities);
+            vaultCapabilities = vaultSpinner.getSelectedItem().toString();
+
+            Spinner scaleSpinner = (Spinner) findViewById(R.id.scaleCapabilities);
+            scaleCapabilities = scaleSpinner.getSelectedItem().toString();
+
+            Spinner switchSpinner = (Spinner) findViewById(R.id.switchCapabilities);
+            switchCapabilities = switchSpinner.getSelectedItem().toString();
+        }
+        if (!breakCond)
+        {
+            EditText editText = (EditText) findViewById(R.id.notes);
+            notes = editText.getText().toString();
         }
         if (!breakCond)
         {
@@ -235,7 +340,7 @@ public class SetCompetitionName extends AppCompatActivity
             chocolat_gelato = "Final";
         }
         String listMsg = "Match # " + MatchNumber + " Type: " + chocolat_gelato + " R: " + red_savarin + " S: " + spectatingTeamNumber;
-        String CSVFormat = red_savarin+","+DataStore.getDateAsString() +","+MatchNumber +","+chocolat_gelato+","+spectatingTeamNumber+","+spectatingTeamRawName+","+sampleCond1+","+sampleCond2;
+        String CSVFormat = red_savarin+","+DataStore.getDateAsString() +","+MatchNumber +","+chocolat_gelato+","+spectatingTeamNumber+","+spectatingTeamRawName+","+startingPosition+","+sideOfOwnSwitchControl+","+sideOfScaleControl+","+sideOfOpponentSwitchControl+","+crossedAutoLine+","+placedBlockOnSwitch+","+placedBlockOnScale+","+numBlocksPlaced+","+numCubesDelivered+","+robotSpeed+","+vaultCapabilities+","+scaleCapabilities+","+switchCapabilities+","+notes;
         if (USE_DEBUG)
         {
             Snackbar.make(view, CSVFormat, Snackbar.LENGTH_LONG).setAction("Action", null).show();

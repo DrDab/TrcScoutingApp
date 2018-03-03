@@ -42,6 +42,32 @@
         <item>20 minutes</item>
     </string-array>
 
+    <string-array name="left_or_right">
+        <item>Left</item>
+        <item>Right</item>
+    </string-array>
+
+    <string-array name="yes_or_no">
+        <item>No</item>
+        <item>Yes</item>
+    </string-array>
+
+    <string-array name="starting_positions">
+        <item>Left Up</item>
+        <item>Left Middle</item>
+        <item>Left Down</item>
+        <item>Right Up</item>
+        <item>Right Middle</item>
+        <item>Right Down</item>
+    </string-array>
+
+    <string-array name="speeds">
+        <item>A lot slower than us</item>
+        <item>Slower than us</item>
+        <item>Faster than us</item>
+        <item>A lot faster than us</item>
+    </string-array>
+
     <string name="title_activity_settings">Settings</string>
 
     <!-- Strings related to Settings -->
