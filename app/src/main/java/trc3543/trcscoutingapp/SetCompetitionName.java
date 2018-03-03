@@ -79,6 +79,9 @@ public class SetCompetitionName extends AppCompatActivity
     static String scaleCapabilities;
     static String switchCapabilities;
 
+    // Was the match won?
+    static boolean matchWon = false;
+
     // Auxiliary Notes.
     static String notes;
     
@@ -310,6 +313,11 @@ public class SetCompetitionName extends AppCompatActivity
         }
         if (!breakCond)
         {
+            CheckBox matchWonCheckBox = (CheckBox) findViewById(R.id.matchWon);
+            matchWon = matchWonCheckBox.isChecked();
+        }
+        if (!breakCond)
+        {
            // All values are confirmed, move to next screen.
             moveToNextScreen(view);
         }
@@ -339,8 +347,17 @@ public class SetCompetitionName extends AppCompatActivity
         {
             chocolat_gelato = "Final";
         }
+        String match_won_yes_or_no = "";
+        if (matchWon)
+        {
+            match_won_yes_or_no = "Yes";
+        }
+        else
+        {
+            match_won_yes_or_no = "No";
+        }
         String listMsg = "Match # " + MatchNumber + " Type: " + chocolat_gelato + " R: " + red_savarin + " S: " + spectatingTeamNumber;
-        String CSVFormat = red_savarin+","+DataStore.getDateAsString() +","+MatchNumber +","+chocolat_gelato+","+spectatingTeamNumber+","+spectatingTeamRawName+","+startingPosition+","+sideOfOwnSwitchControl+","+sideOfScaleControl+","+sideOfOpponentSwitchControl+","+crossedAutoLine+","+placedBlockOnSwitch+","+placedBlockOnScale+","+numBlocksPlaced+","+numCubesDelivered+","+robotSpeed+","+vaultCapabilities+","+scaleCapabilities+","+switchCapabilities+","+notes;
+        String CSVFormat = red_savarin+","+DataStore.getDateAsString() +","+MatchNumber +","+chocolat_gelato+","+spectatingTeamNumber+","+spectatingTeamRawName+","+startingPosition+","+sideOfOwnSwitchControl+","+sideOfScaleControl+","+sideOfOpponentSwitchControl+","+crossedAutoLine+","+placedBlockOnSwitch+","+placedBlockOnScale+","+numBlocksPlaced+","+numCubesDelivered+","+robotSpeed+","+vaultCapabilities+","+scaleCapabilities+","+switchCapabilities+","+match_won_yes_or_no + "," +notes;
         if (USE_DEBUG)
         {
             Snackbar.make(view, CSVFormat, Snackbar.LENGTH_LONG).setAction("Action", null).show();

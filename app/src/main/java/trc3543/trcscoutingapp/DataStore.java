@@ -66,7 +66,7 @@ public class DataStore extends AppCompatActivity
             }
             PrintWriter madoka = new PrintWriter(new FileWriter(log, true));
             madoka.println("Log by: " + FIRST_NAME + " " + LAST_NAME + ", written on " + getDateAsString());
-            madoka.println("Contains Your Team, Date, Match #, Competition Type, Team Number, Spectating Team, Starting Position, Side of Own Switch Control, Side of Scale Control, Side of Opponent Switch, Crossed Auto Line, Placed Block On Switch, Placed Block On Scale, # Blocks Placed, # Cubes Delivered, Speed, Vault Cap., Scale Cap., Switch Cap., Notes");
+            madoka.println("Contains Your Team, Date, Match #, Competition Type, Team Number, Spectating Team, Starting Position, Side of Own Switch Control, Side of Scale Control, Side of Opponent Switch, Crossed Auto Line, Placed Block On Switch, Placed Block On Scale, # Blocks Placed, # Cubes Delivered, Speed, Vault Cap., Scale Cap., Switch Cap., Match Won, Notes");
             for(String sk : CsvFormattedContests)
             {
                 madoka.println(sk);

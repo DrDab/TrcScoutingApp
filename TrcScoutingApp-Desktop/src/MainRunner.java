@@ -164,12 +164,12 @@ public class MainRunner
 		JFrame inputFrame = new JFrame("Add Game");
 		inputFrame.setResizable(false);
 		inputFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		inputFrame.setSize(800, 750);
+		inputFrame.setSize(800, 1000);
 		JPanel inputPanel = new JPanel();
 		inputPanel.setLayout(null);
 		
 		JButton confirm_button = new JButton("Confirm");
-		confirm_button.setBounds(300, 600, 200, 50);
+		confirm_button.setBounds(300, 900, 200, 50);
 		
 		JLabel l_numb = new JLabel();
 		l_numb.setText("Match #");
@@ -215,74 +215,30 @@ public class MainRunner
 		JTextField f_spec_team_num = new JTextField();
 		f_spec_team_num.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		f_spec_team_num.setBounds(350, 65, 100, 30);
-		// f_redalliance1.setForeground(Color.RED);
 		
-		// JLabel l_redalliance2 = new JLabel();
-		// l_redalliance2.setText("Red Alliance 2");
-		// l_redalliance2.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		// l_redalliance2.setBounds(120, 160, 120, 20);
-		// l_redalliance2.setForeground(Color.RED);
+		JLabel l_starting_position = new JLabel();
+		l_starting_position.setText("Starting Position");
+		l_starting_position.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		l_starting_position.setBounds(350, 170, 150, 30);
 		
-		// JTextField f_redalliance2 = new JTextField();
-		// f_redalliance2.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		// f_redalliance2.setBounds(120, 180, 100, 30);
-		// f_redalliance2.setForeground(Color.RED);
+		String[] start_pos_types = {"Left Up", "Left Middle", "Left Down", "Right Up", "Right Middle", "Right Down"};
+	    JComboBox<String> f_starting_position = new JComboBox<String>(start_pos_types);
+	    f_starting_position.setBounds(330, 200, 150, 20);
 		
-		// JLabel l_redalliance3 = new JLabel();
-		// l_redalliance3.setText("Red Alliance 3");
-		// l_redalliance3.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		// l_redalliance3.setBounds(120, 210, 120, 20);
-		// l_redalliance3.setForeground(Color.RED);
-		
-		// JTextField f_redalliance3 = new JTextField();
-		// f_redalliance3.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		// f_redalliance3.setBounds(120, 230, 100, 30);
-		// f_redalliance3.setForeground(Color.RED);
-		
-		// 580 next
-		
-		// JLabel l_bluealliance1 = new JLabel();
-		// l_bluealliance1.setText("Blue Alliance 1");
-		// l_bluealliance1.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		// l_bluealliance1.setBounds(570, 110, 120, 20);
-		// l_bluealliance1.setForeground(Color.BLUE);
-		
-		// JTextField f_bluealliance1 = new JTextField();
-		// f_bluealliance1.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		// f_bluealliance1.setBounds(570, 130, 100, 30);
-		// f_bluealliance1.setForeground(Color.BLUE);
-		
-		// JLabel l_bluealliance2 = new JLabel();
-		// l_bluealliance2.setText("Blue Alliance 2");
-		// l_bluealliance2.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		// l_bluealliance2.setBounds(570, 160, 120, 20);
-		// l_bluealliance2.setForeground(Color.BLUE);
-		
-		// JTextField f_bluealliance2 = new JTextField();
-		// f_bluealliance2.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		// f_bluealliance2.setBounds(570, 180, 100, 30);
-		// f_bluealliance2.setForeground(Color.BLUE);
-		
-		// JLabel l_bluealliance3 = new JLabel();
-		// l_bluealliance3.setText("Blue Alliance 3");
-		// l_bluealliance3.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		// l_bluealliance3.setBounds(570, 210, 120, 20);
-		// l_bluealliance3.setForeground(Color.BLUE);
-		
-		// JTextField f_bluealliance3 = new JTextField();
-		// f_bluealliance3.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		// f_bluealliance3.setBounds(570, 230, 100, 30);
-		// f_bluealliance3.setForeground(Color.BLUE);
-		
+	    JLabel drivers_pov_label = new JLabel();
+	    drivers_pov_label.setText("Driver's Point of View");
+	    drivers_pov_label.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+	    drivers_pov_label.setBounds(100, 250, 200, 20);
+	    
 		JLabel autonomous_label = new JLabel();
 		autonomous_label.setText("Autonomous Phase");
 		autonomous_label.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		autonomous_label.setBounds(100, 200, 200, 20);
+		autonomous_label.setBounds(100, 400, 200, 20);
 		
 		JLabel teleop_label = new JLabel();
 		teleop_label.setText("Teleoperated Phase");
 		teleop_label.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		teleop_label.setBounds(100, 350, 200, 20);
+		teleop_label.setBounds(100, 600, 200, 20);
 		
 		/**
 		 * ==================================================================
@@ -292,21 +248,39 @@ public class MainRunner
 		
 		// Initialize the objectives below.
 		
-		JCheckBox obj1 = new JCheckBox("Condition I");
-		obj1.setBounds(350, 250, 150, 15);
+		// Driver's PoV
+		String[] left_or_right = {"Left", "Right"};
 		
-		JCheckBox obj2 = new JCheckBox("Condition II");
-		obj2.setBounds(350, 300, 150, 15);
+		JLabel l_ownSwitchControl = new JLabel();
+		l_ownSwitchControl.setText("Side of Own Switch Control");
+		l_ownSwitchControl.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		l_ownSwitchControl.setBounds(340, 248, 120, 20);
+		
+	    JComboBox<String> ownSwitchControl = new JComboBox<String>(left_or_right);
+	    ownSwitchControl.setBounds(330, 270, 150, 20);
+	    
+	    JLabel l_scaleControl = new JLabel();
+	    l_scaleControl.setText("Side of Scale Control");
+	    l_scaleControl.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+	    l_scaleControl.setBounds(340, 290, 120, 20);
+		
+	    JComboBox<String> scaleControl = new JComboBox<String>(left_or_right);
+	    scaleControl.setBounds(330, 312, 150, 20);
+		
 		
 		// Add the initialized objectives below.
-		inputPanel.add(obj1);
-		inputPanel.add(obj2);
+		inputPanel.add(l_ownSwitchControl);
+		inputPanel.add(ownSwitchControl);
+		inputPanel.add(l_scaleControl);
+		inputPanel.add(scaleControl);
 		
 		//=============== [ END EDITABLE OBJECTIVE OPTIONS HERE ] ===============//
 
 		inputPanel.add(confirm_button);
 		inputPanel.add(l_numb);
 		inputPanel.add(f_numb);
+		inputPanel.add(l_starting_position);
+		inputPanel.add(f_starting_position);
 		// inputPanel.add(l_name);
 		// inputPanel.add(f_name);
 		inputPanel.add(l_mtype);
@@ -315,6 +289,7 @@ public class MainRunner
 		inputPanel.add(f_spec);
 		inputPanel.add(l_spec_team_num);
 		inputPanel.add(f_spec_team_num);
+		inputPanel.add(drivers_pov_label);
 		inputPanel.add(autonomous_label);
 		inputPanel.add(teleop_label);
 		// inputPanel.add(l_redalliance2);
@@ -384,11 +359,7 @@ public class MainRunner
 						 * ==================================================================
 						 */
 					   
-					  boolean condition1 = obj1.isSelected(); 
-					  boolean condition2 = obj2.isSelected(); 
-				      
-					  System.out.println("\nSample Condition I   : " + condition1);
-					  System.out.println("Sample Condition II  : " + condition2+"\n");
+					  
 					   
 					  // format the parsed values into CSV format and store them in DataStore.java.
 					  
@@ -404,7 +375,7 @@ public class MainRunner
 						  merveille_million = "*";
 					  }
 					  
-					   String CSVFormattedString = merveille_million + "," + DataStore.getDateAsString() + "," + matchNum + "," + compType + "," + spectatingTeamNumber + "," + specType + "," + condition1 + "," + condition2;
+					   String CSVFormattedString = merveille_million + "," + DataStore.getDateAsString() + "," + matchNum + "," + compType + "," + spectatingTeamNumber + "," + specType + ",";
 					   String DisplayString = "Match #: " + matchNum + " | Match Type: " + compType + " | R: " + merveille_million + " | " + " S: " + spectatingTeamNumber + " | " + DataStore.getDateAsString();
 					 
 					  
