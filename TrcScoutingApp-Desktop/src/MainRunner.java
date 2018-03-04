@@ -164,12 +164,12 @@ public class MainRunner
 		JFrame inputFrame = new JFrame("Add Game");
 		inputFrame.setResizable(false);
 		inputFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		inputFrame.setSize(800, 1000);
+		inputFrame.setSize(800, 850);
 		JPanel inputPanel = new JPanel();
 		inputPanel.setLayout(null);
 		
 		JButton confirm_button = new JButton("Confirm");
-		confirm_button.setBounds(300, 900, 200, 50);
+		confirm_button.setBounds(300, 750, 200, 50);
 		
 		JLabel l_numb = new JLabel();
 		l_numb.setText("Match #");
@@ -238,7 +238,7 @@ public class MainRunner
 		JLabel teleop_label = new JLabel();
 		teleop_label.setText("Teleoperated Phase");
 		teleop_label.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		teleop_label.setBounds(100, 600, 200, 20);
+		teleop_label.setBounds(100, 500, 200, 20);
 		
 		/**
 		 * ==================================================================
@@ -254,7 +254,7 @@ public class MainRunner
 		JLabel l_ownSwitchControl = new JLabel();
 		l_ownSwitchControl.setText("Side of Own Switch Control");
 		l_ownSwitchControl.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		l_ownSwitchControl.setBounds(340, 248, 120, 20);
+		l_ownSwitchControl.setBounds(340, 248, 200, 20);
 		
 	    JComboBox<String> ownSwitchControl = new JComboBox<String>(left_or_right);
 	    ownSwitchControl.setBounds(330, 270, 150, 20);
@@ -262,10 +262,18 @@ public class MainRunner
 	    JLabel l_scaleControl = new JLabel();
 	    l_scaleControl.setText("Side of Scale Control");
 	    l_scaleControl.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-	    l_scaleControl.setBounds(340, 290, 120, 20);
+	    l_scaleControl.setBounds(340, 290, 160, 20);
 		
 	    JComboBox<String> scaleControl = new JComboBox<String>(left_or_right);
 	    scaleControl.setBounds(330, 312, 150, 20);
+	    
+	    JLabel l_opponentSwitchControl = new JLabel();
+	    l_opponentSwitchControl.setText("Side of Opponent Switch Control");
+	    l_opponentSwitchControl.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+	    l_opponentSwitchControl.setBounds(340, 332, 240, 20);
+		
+	    JComboBox<String> opponentSwitchControl = new JComboBox<String>(left_or_right);
+	    opponentSwitchControl.setBounds(330, 354, 150, 20);
 		
 		
 		// Add the initialized objectives below.
@@ -273,6 +281,8 @@ public class MainRunner
 		inputPanel.add(ownSwitchControl);
 		inputPanel.add(l_scaleControl);
 		inputPanel.add(scaleControl);
+		inputPanel.add(l_opponentSwitchControl);
+		inputPanel.add(opponentSwitchControl);
 		
 		//=============== [ END EDITABLE OBJECTIVE OPTIONS HERE ] ===============//
 

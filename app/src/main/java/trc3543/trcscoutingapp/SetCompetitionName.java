@@ -59,31 +59,56 @@ public class SetCompetitionName extends AppCompatActivity
 
     static int spectatingTeamNumber;    // the team # for teh team you are spectating
 
-    static String startingPosition;
-
     // Driver's PoV.
-    static String sideOfOwnSwitchControl;
-    static String sideOfScaleControl;
-    static String sideOfOpponentSwitchControl;
+    static String startingPosition;
 
     // Autonomous Phase.
     static String crossedAutoLine;
-    static String placedBlockOnSwitch;
-    static String placedBlockOnScale;
-    static int numBlocksPlaced = 0;
+
+    static int cubesPlacedOnScale;
+    static int cubesAttemptedOnScale;
+
+    static int cubesPlacedOnSwitch;
+    static int cubesAttemptedOnSwitch;
 
     // Teleoperated Phase.
-    static int numCubesDelivered = 0;
-    static String robotSpeed;
-    static String vaultCapabilities;
-    static String scaleCapabilities;
-    static String switchCapabilities;
+    static int cubesPlacedFarSwitch;
+    static int cubesAttemptedFarSwitch;
+
+    static int cubesPlacedNearSwitch;
+    static int cubesAttemptedNearSwitch;
+
+    static int cubesPlacedScale;
+    static int cubesAttemptedScale;
+
+    static int cubesPlacedExchange;
+    static int cubesAttemptedExchange;
+
+    static String cubePickupPortal;
+    static String cubePickupGround;
+
+    // Endgame
+    static String endgameClimbAttempt;
+    static String endgameSuccessfulClimb;
+    static String endgameParkedOnPlatform;
+
+    // Robert breakdown
+    static String robotBreakdownStandard;
+
+    // Robert penalties
+    static String herding;
+    static String scalecontact;
+    static String pinning;
+    static String zonecontact;
+    static String other;
+    static int penaltyPoints;
 
     // Was the match won?
     static boolean matchWon = false;
 
     // Auxiliary Notes.
-    static String notes;
+    static String autonotes;
+    static String telenotes;
     
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -233,83 +258,180 @@ public class SetCompetitionName extends AppCompatActivity
         }
         if (!breakCond)
         {
-            // read the Driver's PoV info.
-            Spinner switchControlSpinner = (Spinner) findViewById(R.id.ownSwitchControlSide);
-            sideOfOwnSwitchControl = switchControlSpinner.getSelectedItem().toString();
-
-            Spinner scaleControlSpinner = (Spinner) findViewById(R.id.sideOfScaleControl);
-            sideOfScaleControl = scaleControlSpinner.getSelectedItem().toString();
-
-            Spinner opponentSwitchControlSpinner = (Spinner) findViewById(R.id.opponentSwitchControlSide);
-            sideOfOpponentSwitchControl = scaleControlSpinner.getSelectedItem().toString();
-        }
-        if (!breakCond)
-        {
             // read the Autonomous info.
             Spinner autoLineSpinner = (Spinner) findViewById(R.id.crossedTheAutoLine);
             crossedAutoLine = autoLineSpinner.getSelectedItem().toString();
 
-            Spinner blockOnSwitchSpinner = (Spinner) findViewById(R.id.placedBlockOnSwitch);
-            placedBlockOnSwitch = blockOnSwitchSpinner.getSelectedItem().toString();
+            Spinner cubesPlacedScaleSpinner = (Spinner) findViewById(R.id.cubesPlacedOnScaleAuto);
+            cubesPlacedOnScale = Integer.parseInt(cubesPlacedScaleSpinner.getSelectedItem().toString());
 
-            Spinner blockOnScaleSpinner = (Spinner) findViewById(R.id.placedBlockOnScale);
-            placedBlockOnScale = blockOnScaleSpinner.getSelectedItem().toString();
+            Spinner cubesAttemptedScaleSpinner = (Spinner) findViewById(R.id.cubesAttemptedOnScaleAuto);
+            cubesAttemptedOnScale = Integer.parseInt(cubesAttemptedScaleSpinner.getSelectedItem().toString());
 
-            try
-            {
-                EditText editText = (EditText) findViewById(R.id.numOfBlocksPlaced);
-                numBlocksPlaced = Integer.parseInt(editText.getText().toString());
-            }
-            catch(NumberFormatException e)
-            {
-                Snackbar.make(view, "Issue with # Blocks placed Formatting", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                breakCond = true;
-            }
-            catch(NullPointerException e)
-            {
-                Snackbar.make(view, "# of Blocks placed cannot be empty.", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                breakCond = true;
-            }
+            Spinner cubesPlacedSwitchSpinner = (Spinner) findViewById(R.id.cubesPlacedOnSwitchAuto);
+            cubesPlacedOnSwitch = Integer.parseInt(cubesPlacedSwitchSpinner.getSelectedItem().toString());
+
+            Spinner cubesAttemptedSwitchSpinner = (Spinner) findViewById(R.id.cubesAttemptedOnSwitchAuto);
+            cubesAttemptedOnSwitch = Integer.parseInt(cubesAttemptedSwitchSpinner.getSelectedItem().toString());
         }
         if (!breakCond)
         {
             // read the TeleOp info.
+            Spinner cubesPlacedFarSwitchSpinner = (Spinner) findViewById(R.id.cubesPlacedFarSwitchTeleOp);
+            cubesPlacedFarSwitch = Integer.parseInt(cubesPlacedFarSwitchSpinner.getSelectedItem().toString());
+
+            Spinner cubesAttemptedFarSwitchSpinner = (Spinner) findViewById(R.id.cubesAttemptedFarSwitchTeleOp);
+            cubesAttemptedFarSwitch = Integer.parseInt(cubesAttemptedFarSwitchSpinner.getSelectedItem().toString());
+
+            Spinner cubesPlacedNearSwitchSpinner = (Spinner) findViewById(R.id.cubesPlacedNearSwitchTeleOp);
+            cubesPlacedNearSwitch = Integer.parseInt(cubesPlacedNearSwitchSpinner.getSelectedItem().toString());
+
+            Spinner cubesAttemptedNearSwitchSpinner = (Spinner) findViewById(R.id.cubesAttemptedNearSwitchTeleOp);
+            cubesAttemptedNearSwitch = Integer.parseInt(cubesAttemptedNearSwitchSpinner.getSelectedItem().toString());
+
+            Spinner cubesPlacedScaleSpinner = (Spinner) findViewById(R.id.cubesPlacedScaleTeleOp);
+            cubesPlacedScale = Integer.parseInt(cubesPlacedScaleSpinner.getSelectedItem().toString());
+
+            Spinner cubesAttemptedScaleSpinner = (Spinner) findViewById(R.id.cubesAttemptedScaleTeleOp);
+            cubesAttemptedScale = Integer.parseInt(cubesAttemptedScaleSpinner.getSelectedItem().toString());
+
+            Spinner cubesPlacedExchangeSpinner = (Spinner) findViewById(R.id.cubesPlacedExchangeTeleOp);
+            cubesPlacedExchange = Integer.parseInt(cubesPlacedExchangeSpinner.getSelectedItem().toString());
+
+            Spinner cubesAttemptedExchangeSpinner = (Spinner) findViewById(R.id.cubesAttemptedScaleTeleOp);
+            cubesAttemptedExchange = Integer.parseInt(cubesAttemptedExchangeSpinner.getSelectedItem().toString());
+
+            CheckBox portalCheckBox = (CheckBox) findViewById(R.id.portalChecker);
+            if (portalCheckBox.isChecked())
+            {
+                cubePickupPortal = "Yes";
+            }
+            else
+            {
+                cubePickupPortal = "No";
+            }
+
+            CheckBox groundCheckBox = (CheckBox) findViewById(R.id.groundChecker);
+            if (groundCheckBox.isChecked())
+            {
+                cubePickupGround = "Yes";
+            }
+            else
+            {
+                cubePickupGround = "No";
+            }
+
+            // Endgame values.
+            CheckBox climbAttemptSpinner = (CheckBox) findViewById(R.id.climbAttemptChecker);
+            if (climbAttemptSpinner.isChecked())
+            {
+                endgameClimbAttempt = "Yes";
+            }
+            else
+            {
+                endgameClimbAttempt = "No";
+            }
+
+            CheckBox climbSUCCessSpinner = (CheckBox) findViewById(R.id.climbSuccessChecker);
+            if (climbSUCCessSpinner.isChecked())
+            {
+                endgameSuccessfulClimb = "Yes";
+            }
+            else
+            {
+                endgameSuccessfulClimb = "No";
+            }
+
+            CheckBox platformParkingSpinner = (CheckBox) findViewById(R.id.parkOnPlatformChecker);
+            if (platformParkingSpinner.isChecked())
+            {
+                endgameParkedOnPlatform = "Yes";
+            }
+            else
+            {
+                endgameParkedOnPlatform = "No";
+            }
+        }
+        if (!breakCond)
+        {
+            // Robert breakdown stats.
+            Spinner robotBreakdownSpinner = (Spinner) findViewById(R.id.robotBreakdownSpinner);
+            robotBreakdownStandard = robotBreakdownSpinner.getSelectedItem().toString();
+            // Penalties stats.
+            CheckBox herdingSpinner = (CheckBox) findViewById(R.id.penaltyHerdingSpinner);
+            if (herdingSpinner.isChecked())
+            {
+                herding = "Yes";
+            }
+            else
+            {
+                herding = "No";
+            }
+
+            CheckBox scaleContactSpinner = (CheckBox) findViewById(R.id.penaltyScaleContact);
+            if (scaleContactSpinner.isChecked())
+            {
+                scalecontact = "Yes";
+            }
+            else
+            {
+                scalecontact = "No";
+            }
+
+            CheckBox pinningSpinner = (CheckBox) findViewById(R.id.penaltyPinning);
+            if (pinningSpinner.isChecked())
+            {
+                pinning = "Yes";
+            }
+            else
+            {
+                pinning = "No";
+            }
+
+            CheckBox zoneContactSpinner = (CheckBox) findViewById(R.id.penaltyZoneContact);
+            if (zoneContactSpinner.isChecked())
+            {
+                zonecontact = "Yes";
+            }
+            else
+            {
+                zonecontact = "No";
+            }
+
+            CheckBox otherFidgetSpinner = (CheckBox) findViewById(R.id.penaltyOther);
+            if (otherFidgetSpinner.isChecked())
+            {
+                other = "Yes";
+            }
+            else
+            {
+                other = "No";
+            }
+
             try
             {
-                EditText editText = (EditText) findViewById(R.id.numberOfCubesDelivered);
-                numCubesDelivered = Integer.parseInt(editText.getText().toString());
+                EditText editText = (EditText) findViewById(R.id.penaltyPoints);
+                penaltyPoints = Integer.parseInt(editText.getText().toString());
             }
             catch(NumberFormatException e)
             {
-                Snackbar.make(view, "Issue with # cubes delivered Formatting", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Issue with penalty points input.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 breakCond = true;
             }
             catch(NullPointerException e)
             {
-                Snackbar.make(view, "# of cubes delivered cannot be empty.", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Penalty points cannot be empty.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 breakCond = true;
             }
-
-            Spinner speedSpinner = (Spinner) findViewById(R.id.speed);
-            robotSpeed = speedSpinner.getSelectedItem().toString();
-
-            Spinner vaultSpinner = (Spinner) findViewById(R.id.vaultCapabilities);
-            vaultCapabilities = vaultSpinner.getSelectedItem().toString();
-
-            Spinner scaleSpinner = (Spinner) findViewById(R.id.scaleCapabilities);
-            scaleCapabilities = scaleSpinner.getSelectedItem().toString();
-
-            Spinner switchSpinner = (Spinner) findViewById(R.id.switchCapabilities);
-            switchCapabilities = switchSpinner.getSelectedItem().toString();
         }
         if (!breakCond)
         {
-            EditText editText = (EditText) findViewById(R.id.notes);
-            notes = editText.getText().toString();
+            EditText editText = (EditText) findViewById(R.id.autoNotes);
+            autonotes = editText.getText().toString();
+            EditText editText2 = (EditText) findViewById(R.id.teleopnotes);
+            telenotes = editText2.getText().toString();
         }
         if (!breakCond)
         {
@@ -357,7 +479,7 @@ public class SetCompetitionName extends AppCompatActivity
             match_won_yes_or_no = "No";
         }
         String listMsg = "Match # " + MatchNumber + " Type: " + chocolat_gelato + " R: " + red_savarin + " S: " + spectatingTeamNumber;
-        String CSVFormat = red_savarin+","+DataStore.getDateAsString() +","+MatchNumber +","+chocolat_gelato+","+spectatingTeamNumber+","+spectatingTeamRawName+","+startingPosition+","+sideOfOwnSwitchControl+","+sideOfScaleControl+","+sideOfOpponentSwitchControl+","+crossedAutoLine+","+placedBlockOnSwitch+","+placedBlockOnScale+","+numBlocksPlaced+","+numCubesDelivered+","+robotSpeed+","+vaultCapabilities+","+scaleCapabilities+","+switchCapabilities+","+match_won_yes_or_no + "," +notes;
+        String CSVFormat = red_savarin+","+DataStore.getDateAsString() +","+MatchNumber +","+chocolat_gelato+","+spectatingTeamNumber+","+spectatingTeamRawName+","+startingPosition+", ,"+crossedAutoLine+","+cubesPlacedOnScale+","+cubesAttemptedOnScale+","+cubesPlacedOnSwitch+","+cubesAttemptedOnSwitch+", ,"+cubesPlacedFarSwitch+","+cubesAttemptedFarSwitch+","+cubesPlacedNearSwitch+","+cubesAttemptedNearSwitch+","+cubesPlacedScale+","+cubesAttemptedScale+","+cubesPlacedExchange+","+cubesAttemptedExchange+","+cubePickupPortal+","+cubePickupGround+", ,"+endgameClimbAttempt+","+endgameSuccessfulClimb+","+endgameParkedOnPlatform+","+robotBreakdownStandard+", ,"+herding+","+scalecontact+","+pinning+","+zonecontact+","+other+","+penaltyPoints+","+autonotes+","+telenotes;
         if (USE_DEBUG)
         {
             Snackbar.make(view, CSVFormat, Snackbar.LENGTH_LONG).setAction("Action", null).show();
