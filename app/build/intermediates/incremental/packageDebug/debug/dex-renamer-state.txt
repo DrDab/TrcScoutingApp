@@ -1,4 +1,4 @@
-#Tue Mar 06 20:55:44 PST 2018
+#Wed Mar 07 15:24:00 PST 2018
 base.0=C\:\\Users\\Asriel Dreemurr\\Documents\\Robertics\\TrcScoutingApp\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
 path.0=classes.dex
 renamed.0=classes.dex
