@@ -106,7 +106,7 @@ public class AddCompetitions extends AppCompatActivity
         }
         if (!DataStore.existsSave())
         {
-            File writeDirectory = new File("/sdcard/TrcScoutingApp/");
+            File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
             if (!writeDirectory.exists())
             {
                 writeDirectory.mkdir();
@@ -272,12 +272,12 @@ public class AddCompetitions extends AppCompatActivity
     {
         try
         {
-            File writeDirectory = new File("/sdcard/TrcScoutingApp/");
-            if (!writeDirectory.exists()) {
+            File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+            if (!writeDirectory.exists())
+            {
                 writeDirectory.mkdir();
             }
-            String filename = "/sdcard/TrcScoutingApp/" + filename0;
-            File filelocation = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), filename);
+            File filelocation = new File(writeDirectory, filename0);
             Uri path = Uri.fromFile(filelocation);
             Intent emailIntent = new Intent(Intent.ACTION_SEND);
             emailIntent.setType("vnd.android.cursor.dir/email");

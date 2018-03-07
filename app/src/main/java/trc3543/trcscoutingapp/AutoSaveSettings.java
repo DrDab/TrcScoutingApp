@@ -1,6 +1,7 @@
 package trc3543.trcscoutingapp;
 
 import android.graphics.Color;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -85,7 +86,7 @@ public class AutoSaveSettings extends AppCompatActivity
 
     public void writeSettingsToFile(boolean autoSave, int seconds) throws IOException
     {
-        File writeDirectory = new File("/sdcard/TrcScoutingApp/");
+        File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
         if (!writeDirectory.exists())
         {
             writeDirectory.mkdir();

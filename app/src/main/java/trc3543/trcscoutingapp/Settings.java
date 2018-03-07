@@ -1,6 +1,7 @@
 package trc3543.trcscoutingapp;
 
 import android.graphics.Color;
+import android.os.Environment;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -116,7 +117,7 @@ public class Settings extends AppCompatActivity
 
     public void writeSettingsToFile(String firstname, String lastname, int teamNum, boolean saveDirectly) throws IOException
     {
-        File writeDirectory = new File("/sdcard/TrcScoutingApp/");
+        File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
         if (!writeDirectory.exists())
         {
             writeDirectory.mkdir();

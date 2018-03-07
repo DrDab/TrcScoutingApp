@@ -48,7 +48,7 @@ public class DataStore extends AppCompatActivity
 
     public static boolean writeContestsToCsv(String filename) throws IOException
     {
-        File writeDirectory = new File("/sdcard/TrcScoutingApp/");
+        File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
         if (!writeDirectory.exists())
         {
             writeDirectory.mkdir();
@@ -87,7 +87,7 @@ public class DataStore extends AppCompatActivity
 
     public static void parseTeamNum() throws IOException
     {
-        File readDirectory = new File("/sdcard/TrcScoutingApp/");
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
         int saiodfjsajofojfdfjisafbj;
         if (!readDirectory.exists())
         {
@@ -114,7 +114,7 @@ public class DataStore extends AppCompatActivity
     }
     public static void parseFirstName() throws IOException
     {
-        File readDirectory = new File("/sdcard/TrcScoutingApp/");
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
         String saiodfjsajofojfdfjisafbj;
         if (!readDirectory.exists())
         {
@@ -135,7 +135,7 @@ public class DataStore extends AppCompatActivity
     }
     public static void parseLastName() throws IOException
     {
-        File readDirectory = new File("/sdcard/TrcScoutingApp/");
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
         String saiodfjsajofojfdfjisafbj;
         if (!readDirectory.exists())
         {
@@ -157,7 +157,7 @@ public class DataStore extends AppCompatActivity
     }
     public static void parseAutoSaveBoolean() throws IOException
     {
-        File readDirectory = new File("/sdcard/TrcScoutingApp/");
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
         String saiodfjsajofojfdfjisafbj;
         if (!readDirectory.exists())
         {
@@ -184,7 +184,7 @@ public class DataStore extends AppCompatActivity
     }
     public static void parseAutoSaveTime() throws IOException
     {
-        File readDirectory = new File("/sdcard/TrcScoutingApp/");
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
         String saiodfjsajofojfdfjisafbj;
         if (!readDirectory.exists())
         {
@@ -213,7 +213,7 @@ public class DataStore extends AppCompatActivity
     }
     public static boolean existsSave()
     {
-        File readDirectory = new File("/sdcard/TrcScoutingApp/");
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
         File log = new File(readDirectory, "settings.coda");
         if (!log.exists())
         {
