@@ -18,7 +18,10 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 
 @SuppressWarnings("all")
@@ -26,7 +29,7 @@ public class AddCompetitions extends AppCompatActivity
 {
     /**
      *
-     *  Copyright (c) 2017 Titan Robotics Club, _c0da_ (Victor Du)
+     *  Copyright (c) 2018 Titan Robotics Club, _c0da_ (Victor Du)
      *
      *	Permission is hereby granted, free of charge, to any person obtaining a copy
      *	of this software and associated documentation files (the "Software"), to deal
@@ -104,6 +107,9 @@ public class AddCompetitions extends AppCompatActivity
         {
             addToList("No Entries Yet");
         }
+
+        // check if user information is saved. if not, open the settings window.
+        boolean openSettingsCondition = false;
         if (!DataStore.existsSave())
         {
             File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
@@ -123,11 +129,64 @@ public class AddCompetitions extends AppCompatActivity
             Intent intent = new Intent(this, Settings.class);
             startActivity(intent);
         }
+        else
+        {
+            // if file exists, check that all data is entered.
+            File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+            if (!writeDirectory.exists())
+            {
+                writeDirectory.mkdir();
+            }
+            File log = new File(writeDirectory, "settings.coda");
+            if(!log.exists())
+            {
+                try
+                {
+                    log.createNewFile();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            BufferedReader br = null;
+            try
+            {
+                br = new BufferedReader(new FileReader(log));
+            }
+            catch (FileNotFoundException e)
+            {
+                openSettingsCondition = true;
+            }
+            try
+            {
+                for(int i = 0; i < 6; i++)
+                {
+                    if (br.readLine() == null)
+                    {
+                        openSettingsCondition = true;
+                    }
+                }
+            }
+            catch (IOException e)
+            {
+                openSettingsCondition = true;
+            }
+        }
+        // if all user data is not entered, open a settings screen. (This is if older versions are upgraded)
+        if (openSettingsCondition)
+        {
+            Intent intent = new Intent(this, Settings.class);
+            startActivity(intent);
+        }
+
         // start another thread to automatically save.
-        try {
+        try
+        {
             DataStore.parseAutoSaveBoolean();
             DataStore.parseAutoSaveTime();
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             e.printStackTrace();
         }
         Runnable autosaverunnable = new Runnable()

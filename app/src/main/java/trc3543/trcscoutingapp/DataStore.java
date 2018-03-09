@@ -26,6 +26,29 @@ import static android.support.v4.content.ContextCompat.startActivity;
 @SuppressWarnings("All")
 public class DataStore extends AppCompatActivity
 {
+    /**
+     *
+     *  Copyright (c) 2018 Titan Robotics Club, _c0da_ (Victor Du)
+     *
+     *	Permission is hereby granted, free of charge, to any person obtaining a copy
+     *	of this software and associated documentation files (the "Software"), to deal
+     *	in the Software without restriction, including without limitation the rights
+     *	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+     *	copies of the Software, and to permit persons to whom the Software is
+     *	furnished to do so, subject to the following conditions:
+     *
+     *	The above copyright notice and this permission notice shall be included in all
+     *	copies or substantial portions of the Software.
+     *
+     *	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     *	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     *	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+     *	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     *	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+     *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+     *	SOFTWARE.
+     */
+
     static boolean USE_AUTOSAVE = true; // by default, autosave is enabled.
     static int AUTOSAVE_SECONDS = 300;  // by default, save changes every 5 minutes.
 
@@ -39,6 +62,8 @@ public class DataStore extends AppCompatActivity
     static int SELF_TEAM_NUMBER = 3543;
     static String FIRST_NAME = "Unknown";
     static String LAST_NAME = "Unknown";
+
+    static boolean USE_DIRECT_SAVE = false; // don't use direct save by default
 
     public DataStore()
     {
@@ -154,6 +179,36 @@ public class DataStore extends AppCompatActivity
         else
         {
             LAST_NAME = "Unknown";
+        }
+    }
+    public static void parseDirectSave() throws IOException
+    {
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+        String saiodfjsajofojfdfjisafbj;
+        if (!readDirectory.exists())
+        {
+            readDirectory.mkdir();
+        }
+        File log = new File(readDirectory, "settings.coda");
+        if (log.exists())
+        {
+            BufferedReader br = new BufferedReader(new FileReader(log));
+            br.readLine();
+            br.readLine();
+            br.readLine();
+            saiodfjsajofojfdfjisafbj = br.readLine();
+            if (saiodfjsajofojfdfjisafbj.matches("y"))
+            {
+                USE_DIRECT_SAVE = true;
+            }
+            else
+            {
+                USE_DIRECT_SAVE = false;
+            }
+        }
+        else
+        {
+            USE_DIRECT_SAVE = false;
         }
     }
     public static void parseAutoSaveBoolean() throws IOException

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v22\\values-v22.xml",
+            "outputFile": "/home/citrus/Documents/ftc2018/TrcScoutingApp/app/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-v22/values-v22.xml",
             "map": [
                 {
-                    "source": "C:\\home\\citrus\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\ebcb727a0549a13e9abd0d4e8840af27\\res\\values-v22\\values-v22.xml",
+                    "source": "/home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/res/values-v22/values-v22.xml",
                     "from": {
                         "startLines": "2,3,4,9",
                         "startColumns": "4,4,4,4",
@@ -17,10 +17,10 @@
             ]
         },
         {
-            "outputFile": "C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\C:\\Users\\Asriel Dreemurr\\Documents\\Robertics\\TrcScoutingApp\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v22\\values-v22.xml",
+            "outputFile": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v22\\values-v22.xml",
             "map": [
                 {
-                    "source": "C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\C:\\Users\\Asriel Dreemurr\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c0a796b7d1d8984aaa735bafb77ed5c7\\res\\values-v22\\values-v22.xml",
+                    "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\home\\citrus\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\ebcb727a0549a13e9abd0d4e8840af27\\res\\values-v22\\values-v22.xml",
                     "from": {
                         "startLines": "2,3,4,9",
                         "startColumns": "4,4,4,4",
@@ -33,10 +33,10 @@
             ]
         },
         {
-            "outputFile": "C:\\Users\\Asriel Dreemurr\\Documents\\Robertics\\TrcScoutingApp\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v22\\values-v22.xml",
+            "outputFile": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v22\\values-v22.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Asriel Dreemurr\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c0a796b7d1d8984aaa735bafb77ed5c7\\res\\values-v22\\values-v22.xml",
+                    "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\C:\\home\\citrus\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\ebcb727a0549a13e9abd0d4e8840af27\\res\\values-v22\\values-v22.xml",
                     "from": {
                         "startLines": "2,3,4,9",
                         "startColumns": "4,4,4,4",
@@ -49,10 +49,26 @@
             ]
         },
         {
-            "outputFile": "C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v22\\values-v22.xml",
+            "outputFile": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\Users\\Asriel Dreemurr\\Documents\\Robertics\\TrcScoutingApp\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v22\\values-v22.xml",
             "map": [
                 {
-                    "source": "C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\C:\\home\\citrus\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\ebcb727a0549a13e9abd0d4e8840af27\\res\\values-v22\\values-v22.xml",
+                    "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\Users\\Asriel Dreemurr\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c0a796b7d1d8984aaa735bafb77ed5c7\\res\\values-v22\\values-v22.xml",
+                    "from": {
+                        "startLines": "2,3,4,9",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,130,217,553",
+                        "endLines": "2,3,8,13",
+                        "endColumns": "74,86,12,12",
+                        "endOffsets": "125,212,548,896"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\C:\\Users\\Asriel Dreemurr\\Documents\\Robertics\\TrcScoutingApp\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v22\\values-v22.xml",
+            "map": [
+                {
+                    "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\C:\\Users\\Asriel Dreemurr\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c0a796b7d1d8984aaa735bafb77ed5c7\\res\\values-v22\\values-v22.xml",
                     "from": {
                         "startLines": "2,3,4,9",
                         "startColumns": "4,4,4,4",

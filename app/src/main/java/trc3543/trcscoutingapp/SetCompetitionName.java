@@ -1,5 +1,6 @@
 package trc3543.trcscoutingapp;
 
+import android.os.Environment;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,14 +9,17 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @SuppressWarnings("all")
 public class SetCompetitionName extends AppCompatActivity
 {
     /**
      *
-     *  Copyright (c) 2017 Titan Robotics Club, _c0da_ (Victor Du)
+     *  Copyright (c) 2018 Titan Robotics Club, _c0da_ (Victor Du)
      *
      *	Permission is hereby granted, free of charge, to any person obtaining a copy
      *	of this software and associated documentation files (the "Software"), to deal
@@ -120,6 +124,7 @@ public class SetCompetitionName extends AppCompatActivity
             DataStore.parseTeamNum();
             DataStore.parseFirstName();
             DataStore.parseLastName();
+            DataStore.parseDirectSave();
         }
         catch (IOException e)
         {
@@ -486,6 +491,43 @@ public class SetCompetitionName extends AppCompatActivity
         }
         AddCompetitions.addToList(listMsg);
         DataStore.CsvFormattedContests.add(CSVFormat);
+
+        // if using direct save, write the generated results directly to CSV file.
+        if (DataStore.USE_DIRECT_SAVE)
+        {
+            String filename = DataStore.FIRST_NAME+"_"+DataStore.LAST_NAME+"_results.csv";
+            File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+            // File writeDirectory = new File("/sdcard/TrcScoutingApp/");
+            if (!writeDirectory.exists())
+            {
+                writeDirectory.mkdir();
+            }
+            File log = new File(writeDirectory, filename);
+            if(!log.exists())
+            {
+                try
+                {
+                    log.createNewFile();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            PrintWriter madoka = null;
+            try
+            {
+                madoka = new PrintWriter(new FileWriter(log, true));
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+            madoka.println(CSVFormat);
+            madoka.flush();
+            madoka.close();
+        }
+
         if (!USE_DEBUG)
         {  finish();  }
     }
