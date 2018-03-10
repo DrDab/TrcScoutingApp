@@ -41,7 +41,7 @@
 
         <Spinner
             android:id="@+id/CompType"
-            android:layout_width="358dp"
+            android:layout_width="315dp"
             android:layout_height="28dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
@@ -99,7 +99,7 @@
 
         <Spinner
             android:id="@+id/SpectatingSpinner"
-            android:layout_width="358dp"
+            android:layout_width="315dp"
             android:layout_height="28dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
@@ -162,7 +162,7 @@
             android:layout_marginTop="264dp"
             android:text="Starting Position from Driver's PoV"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.03"
+            app:layout_constraintHorizontal_bias="0.176"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -237,7 +237,7 @@
 
         <Spinner
             android:id="@+id/startingPositionForm "
-            android:layout_width="358dp"
+            android:layout_width="315dp"
             android:layout_height="28dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"

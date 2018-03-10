@@ -17,10 +17,10 @@
             ]
         },
         {
-            "outputFile": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\C:\\Users\\Asriel Dreemurr\\Documents\\Robertics\\TrcScoutingApp\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-hdpi-v4\\values-hdpi-v4.xml",
+            "outputFile": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\Users\\Asriel Dreemurr\\Documents\\Robertics\\TrcScoutingApp\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-hdpi-v4\\values-hdpi-v4.xml",
             "map": [
                 {
-                    "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\C:\\Users\\Asriel Dreemurr\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c0a796b7d1d8984aaa735bafb77ed5c7\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
+                    "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\Users\\Asriel Dreemurr\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c0a796b7d1d8984aaa735bafb77ed5c7\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -33,10 +33,10 @@
             ]
         },
         {
-            "outputFile": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\Users\\Asriel Dreemurr\\Documents\\Robertics\\TrcScoutingApp\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-hdpi-v4\\values-hdpi-v4.xml",
+            "outputFile": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\C:\\Users\\Asriel Dreemurr\\Documents\\Robertics\\TrcScoutingApp\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-hdpi-v4\\values-hdpi-v4.xml",
             "map": [
                 {
-                    "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\Users\\Asriel Dreemurr\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c0a796b7d1d8984aaa735bafb77ed5c7\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
+                    "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\C:\\Users\\Asriel Dreemurr\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c0a796b7d1d8984aaa735bafb77ed5c7\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

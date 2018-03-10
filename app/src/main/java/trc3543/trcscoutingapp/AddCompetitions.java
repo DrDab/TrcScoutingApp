@@ -1,15 +1,20 @@
 package trc3543.trcscoutingapp;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -58,6 +63,11 @@ public class AddCompetitions extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_competitions);
+
+        // verifyStoragePermissions(this);
+
+        Log.d("FileIO","External Storage Directory: " + Environment.getExternalStorageDirectory().toString());
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         contestList = (ListView) findViewById(R.id.listView);
@@ -115,12 +125,14 @@ public class AddCompetitions extends AppCompatActivity
             File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
             if (!writeDirectory.exists())
             {
+                Log.d("FileIO", "Creating write directory: " + writeDirectory.toString());
                 writeDirectory.mkdir();
             }
             File log = new File(writeDirectory, "settings.coda");
             if(!log.exists())
             {
                 try {
+                    Log.d("FileIO", "Creating settings file: " + log.toString());
                     log.createNewFile();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -142,6 +154,7 @@ public class AddCompetitions extends AppCompatActivity
             {
                 try
                 {
+                    Log.d("FileIO", "Creating settings file: " + log.toString());
                     log.createNewFile();
                 }
                 catch (IOException e)
@@ -350,6 +363,27 @@ public class AddCompetitions extends AppCompatActivity
         {
             // TODO Auto-generated catch block
             e.printStackTrace();
+        }
+    }
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+    public static void verifyStoragePermissions(Activity activity)
+    {
+        // Check if we have write permission
+        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        Log.d("FileIO", "Checking File I/O Permissions...");
+        if (permission != PackageManager.PERMISSION_GRANTED)
+        {
+            // We don't have permission so prompt the user
+            Log.d("FileIO", "File permissions insufficient, requesting privileges...");
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE
+            );
         }
     }
 

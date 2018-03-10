@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\Users\\Asriel Dreemurr\\Documents\\Robertics\\TrcScoutingApp\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-land\\values-land.xml",
+            "outputFile": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-land\\values-land.xml",
             "map": [
                 {
-                    "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\Users\\Asriel Dreemurr\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c0a796b7d1d8984aaa735bafb77ed5c7\\res\\values-land\\values-land.xml",
+                    "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\C:\\home\\citrus\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\ebcb727a0549a13e9abd0d4e8840af27\\res\\values-land\\values-land.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\Users\\Asriel Dreemurr\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\97458aa92f20c4deeaeac4d9f5df5431\\res\\values-land\\values-land.xml",
+                    "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\C:\\home\\citrus\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\370bebc2b66da1d84bdb0fd9d28489fa\\res\\values-land\\values-land.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -35,10 +35,10 @@
             ]
         },
         {
-            "outputFile": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\C:\\Users\\Asriel Dreemurr\\Documents\\Robertics\\TrcScoutingApp\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-land\\values-land.xml",
+            "outputFile": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\Users\\Asriel Dreemurr\\Documents\\Robertics\\TrcScoutingApp\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-land\\values-land.xml",
             "map": [
                 {
-                    "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\C:\\Users\\Asriel Dreemurr\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\97458aa92f20c4deeaeac4d9f5df5431\\res\\values-land\\values-land.xml",
+                    "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\Users\\Asriel Dreemurr\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\97458aa92f20c4deeaeac4d9f5df5431\\res\\values-land\\values-land.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -57,7 +57,7 @@
                     }
                 },
                 {
-                    "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\C:\\Users\\Asriel Dreemurr\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c0a796b7d1d8984aaa735bafb77ed5c7\\res\\values-land\\values-land.xml",
+                    "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\Users\\Asriel Dreemurr\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c0a796b7d1d8984aaa735bafb77ed5c7\\res\\values-land\\values-land.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
@@ -103,10 +103,10 @@
             ]
         },
         {
-            "outputFile": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-land\\values-land.xml",
+            "outputFile": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\C:\\Users\\Asriel Dreemurr\\Documents\\Robertics\\TrcScoutingApp\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-land\\values-land.xml",
             "map": [
                 {
-                    "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\home\\citrus\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\ebcb727a0549a13e9abd0d4e8840af27\\res\\values-land\\values-land.xml",
+                    "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\C:\\Users\\Asriel Dreemurr\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c0a796b7d1d8984aaa735bafb77ed5c7\\res\\values-land\\values-land.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
@@ -116,7 +116,7 @@
                     }
                 },
                 {
-                    "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\home\\citrus\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\370bebc2b66da1d84bdb0fd9d28489fa\\res\\values-land\\values-land.xml",
+                    "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\C:\\Users\\Asriel Dreemurr\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\97458aa92f20c4deeaeac4d9f5df5431\\res\\values-land\\values-land.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -137,20 +137,10 @@
             ]
         },
         {
-            "outputFile": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-land\\values-land.xml",
+            "outputFile": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-land\\values-land.xml",
             "map": [
                 {
-                    "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\C:\\home\\citrus\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\ebcb727a0549a13e9abd0d4e8840af27\\res\\values-land\\values-land.xml",
-                    "from": {
-                        "startLines": "2,3,4,5",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,125,189,260",
-                        "endColumns": "69,63,70,67",
-                        "endOffsets": "120,184,255,323"
-                    }
-                },
-                {
-                    "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\home\\citrus\\Documents\\ftc2018\\TrcScoutingApp\\C:\\home\\citrus\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\370bebc2b66da1d84bdb0fd9d28489fa\\res\\values-land\\values-land.xml",
+                    "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\home\\citrus\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\370bebc2b66da1d84bdb0fd9d28489fa\\res\\values-land\\values-land.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -166,6 +156,16 @@
                         "endLines": "9",
                         "endColumns": "12",
                         "endOffsets": "505"
+                    }
+                },
+                {
+                    "source": "/home/citrus/Documents/ftc2018/TrcScoutingApp/C:\\home\\citrus\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\ebcb727a0549a13e9abd0d4e8840af27\\res\\values-land\\values-land.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,125,189,260",
+                        "endColumns": "69,63,70,67",
+                        "endOffsets": "120,184,255,323"
                     }
                 }
             ]
