@@ -2006,12 +2006,12 @@
         <item>Semi-Final</item>
         <item>Final</item>
     </string-array><string-array name="spectating_types">
-        <item>Red Alliance 1</item>
-        <item>Red Alliance 2</item>
-        <item>Red Alliance 3</item>
-        <item>Blue Alliance 1</item>
-        <item>Blue Alliance 2</item>
-        <item>Blue Alliance 3</item>
+        <item>Red Alliance 1 (Right)</item>
+        <item>Red Alliance 2 (Center)</item>
+        <item>Red Alliance 3 (Left)</item>
+        <item>Blue Alliance 1 (Right)</item>
+        <item>Blue Alliance 2 (Center)</item>
+        <item>Blue Alliance 3 (Left)</item>
     </string-array><string-array name="save_times">
         <item>2 minutes</item>
         <item>5 minutes</item>

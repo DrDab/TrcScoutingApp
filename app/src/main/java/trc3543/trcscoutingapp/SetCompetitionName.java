@@ -105,7 +105,6 @@ public class SetCompetitionName extends AppCompatActivity
     static String pinning;
     static String zonecontact;
     static String other;
-    static int penaltyPoints;
 
     // Was the match won?
     static boolean matchWon = false;
@@ -130,7 +129,6 @@ public class SetCompetitionName extends AppCompatActivity
         {
             // TODO Auto-generated catch block
         }
-
     }
 
     public void confirmTypes(View view)
@@ -363,73 +361,16 @@ public class SetCompetitionName extends AppCompatActivity
             Spinner robotBreakdownSpinner = (Spinner) findViewById(R.id.robotBreakdownSpinner);
             robotBreakdownStandard = robotBreakdownSpinner.getSelectedItem().toString();
             // Penalties stats.
-            CheckBox herdingSpinner = (CheckBox) findViewById(R.id.penaltyHerdingSpinner);
-            if (herdingSpinner.isChecked())
-            {
-                herding = "Yes";
-            }
-            else
-            {
-                herding = "No";
-            }
-
-            CheckBox scaleContactSpinner = (CheckBox) findViewById(R.id.penaltyScaleContact);
-            if (scaleContactSpinner.isChecked())
-            {
-                scalecontact = "Yes";
-            }
-            else
-            {
-                scalecontact = "No";
-            }
-
-            CheckBox pinningSpinner = (CheckBox) findViewById(R.id.penaltyPinning);
-            if (pinningSpinner.isChecked())
-            {
-                pinning = "Yes";
-            }
-            else
-            {
-                pinning = "No";
-            }
-
-            CheckBox zoneContactSpinner = (CheckBox) findViewById(R.id.penaltyZoneContact);
-            if (zoneContactSpinner.isChecked())
-            {
-                zonecontact = "Yes";
-            }
-            else
-            {
-                zonecontact = "No";
-            }
-
-            CheckBox otherFidgetSpinner = (CheckBox) findViewById(R.id.penaltyOther);
-            if (otherFidgetSpinner.isChecked())
-            {
-                other = "Yes";
-            }
-            else
-            {
-                other = "No";
-            }
-
-            try
-            {
-                EditText editText = (EditText) findViewById(R.id.penaltyPoints);
-                penaltyPoints = Integer.parseInt(editText.getText().toString());
-            }
-            catch(NumberFormatException e)
-            {
-                Snackbar.make(view, "Issue with penalty points input.", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                breakCond = true;
-            }
-            catch(NullPointerException e)
-            {
-                Snackbar.make(view, "Penalty points cannot be empty.", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                breakCond = true;
-            }
+            Spinner herdingSpinner = (Spinner) findViewById(R.id.herdingSpinner);
+            herding = herdingSpinner.getSelectedItem().toString();
+            Spinner scaleContacctSpinner = (Spinner) findViewById(R.id.scaleContactSpinner);
+            scalecontact = scaleContacctSpinner.getSelectedItem().toString();
+            Spinner pinningSpinner = (Spinner) findViewById(R.id.pinningSpinner);
+            pinning = pinningSpinner.getSelectedItem().toString();
+            Spinner zoneContactSpinner = (Spinner) findViewById(R.id.zoneContactSpinner);
+            zonecontact = zoneContactSpinner.getSelectedItem().toString();
+            Spinner otherPenaltySpinner = (Spinner) findViewById(R.id.otherPenaltySpinner);
+            other = zoneContactSpinner.getSelectedItem().toString();
         }
         if (!breakCond)
         {
@@ -484,7 +425,7 @@ public class SetCompetitionName extends AppCompatActivity
             match_won_yes_or_no = "No";
         }
         String listMsg = "Match # " + MatchNumber + " Type: " + chocolat_gelato + " R: " + red_savarin + " S: " + spectatingTeamNumber;
-        String CSVFormat = red_savarin+","+DataStore.getDateAsString() +","+MatchNumber +","+chocolat_gelato+","+spectatingTeamNumber+","+spectatingTeamRawName+","+startingPosition+","+crossedAutoLine+","+cubesPlacedOnScale+","+cubesAttemptedOnScale+","+cubesPlacedOnSwitch+","+cubesAttemptedOnSwitch+","+cubesPlacedFarSwitch+","+cubesAttemptedFarSwitch+","+cubesPlacedNearSwitch+","+cubesAttemptedNearSwitch+","+cubesPlacedScale+","+cubesAttemptedScale+","+cubesPlacedExchange+","+cubesAttemptedExchange+","+cubePickupPortal+","+cubePickupGround+","+endgameClimbAttempt+","+endgameSuccessfulClimb+","+endgameParkedOnPlatform+","+robotBreakdownStandard+","+herding+","+scalecontact+","+pinning+","+zonecontact+","+other+","+penaltyPoints+",\""+autonotes+"\",\""+telenotes+"\"";
+        String CSVFormat = red_savarin+","+DataStore.getDateAsString() +","+MatchNumber +","+chocolat_gelato+","+spectatingTeamNumber+","+spectatingTeamRawName+","+startingPosition+","+crossedAutoLine+","+cubesPlacedOnScale+","+cubesAttemptedOnScale+","+cubesPlacedOnSwitch+","+cubesAttemptedOnSwitch+","+cubesPlacedFarSwitch+","+cubesAttemptedFarSwitch+","+cubesPlacedNearSwitch+","+cubesAttemptedNearSwitch+","+cubesPlacedScale+","+cubesAttemptedScale+","+cubesPlacedExchange+","+cubesAttemptedExchange+","+cubePickupPortal+","+cubePickupGround+","+endgameClimbAttempt+","+endgameSuccessfulClimb+","+endgameParkedOnPlatform+","+robotBreakdownStandard+","+herding+","+scalecontact+","+pinning+","+zonecontact+","+other+","+",\""+autonotes+"\",\""+telenotes+"\"";
         if (USE_DEBUG)
         {
             Snackbar.make(view, CSVFormat, Snackbar.LENGTH_LONG).setAction("Action", null).show();
