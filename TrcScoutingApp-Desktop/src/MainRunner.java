@@ -202,9 +202,9 @@ public class MainRunner
 		l_spec.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		l_spec.setBounds(340, 132, 120, 20);
 		
-		String[] spectypes = {"Red Alliance 1", "Red Alliance 2", "Red Alliance 3", "Blue Alliance 1", "Blue Alliance 2", "Blue Alliance 3"};
+		String[] spectypes = {"Red Alliance 1 (Right)", "Red Alliance 2 (Center)", "Red Alliance 3 (Left)", "Blue Alliance 1 (Right)", "Blue Alliance 2 (Center)", "Blue Alliance 3 (Left)"};
 	    JComboBox<String> f_spec = new JComboBox<String>(spectypes);
-	    f_spec.setBounds(330, 154, 150, 20);
+	    f_spec.setBounds(330, 154, 200, 20);
 	    
 		JLabel l_spec_team_num = new JLabel();
 		l_spec_team_num.setText("Team Number");
@@ -221,24 +221,19 @@ public class MainRunner
 		l_starting_position.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		l_starting_position.setBounds(350, 170, 150, 30);
 		
-		String[] start_pos_types = {"Left Up", "Left Middle", "Left Down", "Right Up", "Right Middle", "Right Down"};
+		String[] start_pos_types = {"Left", "Middle", "Right"};
 	    JComboBox<String> f_starting_position = new JComboBox<String>(start_pos_types);
 	    f_starting_position.setBounds(330, 200, 150, 20);
-		
-	    JLabel drivers_pov_label = new JLabel();
-	    drivers_pov_label.setText("Driver's Point of View");
-	    drivers_pov_label.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-	    drivers_pov_label.setBounds(100, 250, 200, 20);
 	    
 		JLabel autonomous_label = new JLabel();
 		autonomous_label.setText("Autonomous Phase");
 		autonomous_label.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		autonomous_label.setBounds(100, 400, 200, 20);
+		autonomous_label.setBounds(100, 250, 200, 20);
 		
 		JLabel teleop_label = new JLabel();
 		teleop_label.setText("Teleoperated Phase");
 		teleop_label.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		teleop_label.setBounds(100, 500, 200, 20);
+		teleop_label.setBounds(100, 400, 200, 20);
 		
 		/**
 		 * ==================================================================
@@ -251,38 +246,10 @@ public class MainRunner
 		// Driver's PoV
 		String[] left_or_right = {"Left", "Right"};
 		
-		JLabel l_ownSwitchControl = new JLabel();
-		l_ownSwitchControl.setText("Side of Own Switch Control");
-		l_ownSwitchControl.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		l_ownSwitchControl.setBounds(340, 248, 200, 20);
-		
-	    JComboBox<String> ownSwitchControl = new JComboBox<String>(left_or_right);
-	    ownSwitchControl.setBounds(330, 270, 150, 20);
-	    
-	    JLabel l_scaleControl = new JLabel();
-	    l_scaleControl.setText("Side of Scale Control");
-	    l_scaleControl.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-	    l_scaleControl.setBounds(340, 290, 160, 20);
-		
-	    JComboBox<String> scaleControl = new JComboBox<String>(left_or_right);
-	    scaleControl.setBounds(330, 312, 150, 20);
-	    
-	    JLabel l_opponentSwitchControl = new JLabel();
-	    l_opponentSwitchControl.setText("Side of Opponent Switch Control");
-	    l_opponentSwitchControl.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-	    l_opponentSwitchControl.setBounds(340, 332, 240, 20);
-		
-	    JComboBox<String> opponentSwitchControl = new JComboBox<String>(left_or_right);
-	    opponentSwitchControl.setBounds(330, 354, 150, 20);
 		
 		
 		// Add the initialized objectives below.
-		inputPanel.add(l_ownSwitchControl);
-		inputPanel.add(ownSwitchControl);
-		inputPanel.add(l_scaleControl);
-		inputPanel.add(scaleControl);
-		inputPanel.add(l_opponentSwitchControl);
-		inputPanel.add(opponentSwitchControl);
+		
 		
 		//=============== [ END EDITABLE OBJECTIVE OPTIONS HERE ] ===============//
 
@@ -299,7 +266,6 @@ public class MainRunner
 		inputPanel.add(f_spec);
 		inputPanel.add(l_spec_team_num);
 		inputPanel.add(f_spec_team_num);
-		inputPanel.add(drivers_pov_label);
 		inputPanel.add(autonomous_label);
 		inputPanel.add(teleop_label);
 		// inputPanel.add(l_redalliance2);
