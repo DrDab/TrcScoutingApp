@@ -55,6 +55,8 @@ public class AddCompetitions extends AppCompatActivity
      *	SOFTWARE.
      */
 
+    public static final boolean MAKE_CHANGES_READ_ONLY = false;
+
     static ArrayAdapter<String> adapter;
     static ListView contestList;
 
@@ -87,9 +89,16 @@ public class AddCompetitions extends AppCompatActivity
                 alertDialog.setTitle("Game Information");
                 if (DataStore.CsvFormattedContests.size() >= 1)
                 {
-                    String s = DataStore.CsvFormattedContests.get(position);
-                    alertDialog.setMessage(s);
-                    alertDialog.show();
+                    if (MAKE_CHANGES_READ_ONLY)
+                    {
+                        String s = DataStore.CsvFormattedContests.get(position);
+                        alertDialog.setMessage(s);
+                        alertDialog.show();
+                    }
+                    else
+                    {
+                        openCompNamePrompt(true, position);
+                    }
                 }
                 else
                 {
@@ -108,7 +117,7 @@ public class AddCompetitions extends AppCompatActivity
                 // place a message
                 Snackbar.make(view, "Enter competition information please", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                openCompNamePrompt();
+                openCompNamePrompt(false, -1);
 
             }
         });
@@ -329,15 +338,31 @@ public class AddCompetitions extends AppCompatActivity
         adapter.notifyDataSetChanged();
     }
 
+    public static void resetListItem(String s, int pos)
+    {
+        DataStore.contests.set(pos, s);
+        adapter.notifyDataSetChanged();
+    }
+
     public static void removeFromList(String s)
     {
         DataStore.contests.remove(s);
         adapter.notifyDataSetChanged();
     }
 
-    public void openCompNamePrompt()
+    public void openCompNamePrompt(boolean modifyingExisting, int option)
     {
-        Intent intent = new Intent(this, SetCompetitionName.class);
+        Intent intent = null;
+        if (!modifyingExisting)
+        {
+            intent = new Intent(this, SetCompetitionName.class);
+            intent.putExtra("EditOption", -1 + "");
+        }
+        else
+        {
+            intent = new Intent(this, SetCompetitionName.class);
+            intent.putExtra("EditOption", option + "");
+        }
         startActivity(intent);
     }
     public void sendEmailWithCSV(String filename0, String target)

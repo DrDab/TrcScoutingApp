@@ -1,10 +1,13 @@
 package trc3543.trcscoutingapp;
 
+import android.content.Intent;
 import android.os.Environment;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -41,6 +44,8 @@ public class SetCompetitionName extends AppCompatActivity
      */
 
     public static final boolean USE_DEBUG = false;
+
+    static int editingoption = -1;
 
     static int MatchNumber;
     static String competitionName;
@@ -129,6 +134,187 @@ public class SetCompetitionName extends AppCompatActivity
         {
             // TODO Auto-generated catch block
         }
+
+        try
+        {
+            Intent myIntent = getIntent(); // gets the previously created intent
+            String editoptionstr = myIntent.getStringExtra("EditOption"); // will return option to edit on the fly
+            Log.d("SetCompetitionName", "editoptionsstr=\"" + editoptionstr + "\"");
+            editingoption = Integer.parseInt(editoptionstr);
+            Log.d("SetCompetitionName", "Got edit option: " + editingoption);
+        }
+        catch (Exception e)
+        {
+            Log.d("SetCompetitionName","You shouldn't see this message");
+            editingoption = -1;
+        }
+
+        // populate the boxes if already filled.
+        if (editingoption != -1)
+        {
+            String read = DataStore.CsvFormattedContests.get(editingoption);
+            Log.d("SetCompetitionName", editingoption + " " + read);
+            String[] OwOWhatsThis = read.split(",");
+
+            // populate the match number.
+            EditText mnum = (EditText) findViewById(R.id.matchNum);
+            mnum.setText(OwOWhatsThis[2]);
+            Log.d("SetCompetitionName", "Match Number Set: " + OwOWhatsThis[2]);
+
+            // populate the team number.
+            EditText tnum = (EditText) findViewById(R.id.teamNum);
+            tnum.setText(OwOWhatsThis[4]);
+            Log.d("SetCompetitionName", "Team Number Set: " + OwOWhatsThis[4]);
+
+            // populate the match type.
+            Spinner mtype =(Spinner) findViewById(R.id.CompType);
+            mtype.setSelection(((ArrayAdapter)mtype.getAdapter()).getPosition(OwOWhatsThis[3]));
+            Log.d("SetCompetitionName", "Match Type Set: " + OwOWhatsThis[3]);
+
+            // populate the spectating team.
+            Spinner specteam =(Spinner) findViewById(R.id.SpectatingSpinner);
+            specteam.setSelection(((ArrayAdapter)specteam.getAdapter()).getPosition(OwOWhatsThis[5]));
+            Log.d("SetCompetitionName", "Spectating Team: " + OwOWhatsThis[5]);
+
+            // populate the starting position.
+            Spinner spos =(Spinner) findViewById(R.id.startingPositionForm);
+            spos.setSelection(((ArrayAdapter)spos.getAdapter()).getPosition(OwOWhatsThis[6]));
+            Log.d("SetCompetitionName", "Starting Position Set: " + OwOWhatsThis[6]);
+
+            // =====================[ BEGIN AUTONOMOUS PHASE ]===================== //
+
+            // populate whether we crossed auto line.
+            Spinner crautoline =(Spinner) findViewById(R.id.crossedTheAutoLine);
+            crautoline.setSelection(((ArrayAdapter)crautoline.getAdapter()).getPosition(OwOWhatsThis[7]));
+            Log.d("SetCompetitionName", "Crossed The Auto Line Set: " + OwOWhatsThis[7]);
+
+            // populate cubes placed/attempted on scale. (Oh boy, I'm really tired and really don't want to do this.......)
+            Spinner cubesplacedscale =(Spinner) findViewById(R.id.cubesPlacedOnScaleAuto);
+            cubesplacedscale.setSelection(((ArrayAdapter)cubesplacedscale.getAdapter()).getPosition(OwOWhatsThis[8]));
+            Log.d("SetCompetitionName", "Cubes Placed Scale Set: " + OwOWhatsThis[8]);
+
+            Spinner cubesattemptedscale =(Spinner) findViewById(R.id.cubesAttemptedOnScaleAuto);
+            cubesattemptedscale.setSelection(((ArrayAdapter)cubesattemptedscale.getAdapter()).getPosition(OwOWhatsThis[9]));
+            Log.d("SetCompetitionName", "Cubes Attempted Scale Set: " + OwOWhatsThis[9]);
+
+            // populate cubes placed/attempted on switch. (durrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr........ must... stay... awake...)
+            Spinner cubesplacedswitch =(Spinner) findViewById(R.id.cubesPlacedOnSwitchAuto);
+            cubesplacedswitch.setSelection(((ArrayAdapter)cubesplacedswitch.getAdapter()).getPosition(OwOWhatsThis[10]));
+            Log.d("SetCompetitionName", "Cubes Placed Switch Set: " + OwOWhatsThis[10]);
+
+            Spinner cubesattemptedswitch =(Spinner) findViewById(R.id.cubesAttemptedOnSwitchAuto);
+            cubesattemptedswitch.setSelection(((ArrayAdapter)cubesattemptedswitch.getAdapter()).getPosition(OwOWhatsThis[11]));
+            Log.d("SetCompetitionName", "Cubes Attempted Switch Set: " + OwOWhatsThis[11]);
+
+            // populate autonomous notes. (easy, phew)
+            EditText aunotes = (EditText) findViewById(R.id.autoNotes);
+            String rawautonotes = OwOWhatsThis[32];
+            rawautonotes = rawautonotes.replaceAll("^\"|\"$", ""); // remove quotation marks
+            aunotes.setText(rawautonotes);
+            Log.d("SetCompetitionName", "Autonomous Notes Set: \"" + rawautonotes + "\"");
+
+            // =====================[ BEGIN TELEOPERATED PHASE ]===================== //
+
+            // populate cubes placed/attempted on far switch.
+            Spinner cubesplacedfarswitch =(Spinner) findViewById(R.id.cubesPlacedFarSwitchTeleOp);
+            cubesplacedfarswitch.setSelection(((ArrayAdapter)cubesplacedfarswitch.getAdapter()).getPosition(OwOWhatsThis[12]));
+            Log.d("SetCompetitionName", "Cubes Placed Far Switch Set: " + OwOWhatsThis[12]);
+
+            Spinner cubesattemptedfarswitch =(Spinner) findViewById(R.id.cubesAttemptedFarSwitchTeleOp);
+            cubesattemptedfarswitch.setSelection(((ArrayAdapter)cubesattemptedfarswitch.getAdapter()).getPosition(OwOWhatsThis[13]));
+            Log.d("SetCompetitionName", "Cubes Attempted Far Switch Set: " + OwOWhatsThis[13]);
+
+            // populate cubes placed/attempted on near switch.
+            Spinner cubesplacednearswitch =(Spinner) findViewById(R.id.cubesPlacedNearSwitchTeleOp);
+            cubesplacednearswitch.setSelection(((ArrayAdapter)cubesplacednearswitch.getAdapter()).getPosition(OwOWhatsThis[14]));
+            Log.d("SetCompetitionName", "Cubes Placed Near Switch Set: " + OwOWhatsThis[14]);
+
+            Spinner cubesattemptednearswitch =(Spinner) findViewById(R.id.cubesAttemptedNearSwitchTeleOp);
+            cubesattemptednearswitch.setSelection(((ArrayAdapter)cubesattemptednearswitch.getAdapter()).getPosition(OwOWhatsThis[15]));
+            Log.d("SetCompetitionName", "Cubes Attempted Near Switch Set: " + OwOWhatsThis[15]);
+
+            // populate cubes placed/attempted on scale. (two bottles of mtn dew is really keeping me awake right now)
+            Spinner cubesplacedscaleteleop =(Spinner) findViewById(R.id.cubesPlacedScaleTeleOp);
+            cubesplacedscaleteleop.setSelection(((ArrayAdapter)cubesplacedscaleteleop.getAdapter()).getPosition(OwOWhatsThis[16]));
+            Log.d("SetCompetitionName", "Cubes Placed Scale Set (TO): " + OwOWhatsThis[16]);
+
+            Spinner cubesattemptedscaleteleop =(Spinner) findViewById(R.id.cubesAttemptedScaleTeleOp);
+            cubesattemptedscaleteleop.setSelection(((ArrayAdapter)cubesattemptedscaleteleop.getAdapter()).getPosition(OwOWhatsThis[17]));
+            Log.d("SetCompetitionName", "Cubes Attempted Scale Set (TO): " + OwOWhatsThis[17]);
+
+            // populate cubes placed/attempted on exchange. did you know that hayao miyazaki said that anime is a mistake
+            Spinner cubesplacedexchangeteleop =(Spinner) findViewById(R.id.cubesPlacedExchangeTeleOp);
+            cubesplacedexchangeteleop.setSelection(((ArrayAdapter)cubesplacedexchangeteleop.getAdapter()).getPosition(OwOWhatsThis[18]));
+            Log.d("SetCompetitionName", "Cubes Placed Exchange Set (TO): " + OwOWhatsThis[18]);
+
+            Spinner cubesattemptedexchangeteleop =(Spinner) findViewById(R.id.cubesAttemptedExchangeTeleOp);
+            cubesattemptedexchangeteleop.setSelection(((ArrayAdapter)cubesattemptedexchangeteleop.getAdapter()).getPosition(OwOWhatsThis[19]));
+            Log.d("SetCompetitionName", "Cubes Attempted Exchange Set (TO): " + OwOWhatsThis[19]);
+
+            // populate cube pickup locations.
+            CheckBox portal = (CheckBox) findViewById(R.id.portalChecker);
+            portal.setChecked(OwOWhatsThis[20].matches("Yes"));
+            Log.d("SetCompetitionName", "Portal pickup Set: " + OwOWhatsThis[20]);
+
+            CheckBox grond = (CheckBox) findViewById(R.id.groundChecker);
+            grond.setChecked(OwOWhatsThis[21].matches("Yes"));
+            Log.d("SetCompetitionName", "Ground pickup Set: " + OwOWhatsThis[21]);
+
+            // =====================[ BEGIN ENDGAME ]===================== //
+
+            // populate endgame things. joji should go keep producing FF videos
+            CheckBox climbat = (CheckBox) findViewById(R.id.climbAttemptChecker);
+            climbat.setChecked(OwOWhatsThis[22].matches("Yes"));
+            Log.d("SetCompetitionName", "Climb Attempt Set: " + OwOWhatsThis[22]);
+
+            CheckBox succlimb = (CheckBox) findViewById(R.id.climbSuccessChecker);
+            succlimb.setChecked(OwOWhatsThis[23].matches("Yes"));
+            Log.d("SetCompetitionName", "Climb Success Set: " + OwOWhatsThis[23]);
+
+            CheckBox platformpark = (CheckBox) findViewById(R.id.parkOnPlatformChecker);
+            platformpark.setChecked(OwOWhatsThis[24].matches("Yes"));
+            Log.d("SetCompetitionName", "Parking On Platform Set: " + OwOWhatsThis[24]);
+
+            // =====================[ BEGIN PENALTIES ]===================== //
+
+            // populate robot breakdown.
+            Spinner robotbreakdownstatus =(Spinner) findViewById(R.id.robotBreakdownSpinner);
+            robotbreakdownstatus.setSelection(((ArrayAdapter)robotbreakdownstatus.getAdapter()).getPosition(OwOWhatsThis[25]));
+            Log.d("SetCompetitionName", "Robot Breakdown Status Set: " + OwOWhatsThis[25]);
+
+            // populate penalty counters.
+            Spinner hurd =(Spinner) findViewById(R.id.herdingSpinner);
+            hurd.setSelection(((ArrayAdapter)hurd.getAdapter()).getPosition(OwOWhatsThis[26]));
+            Log.d("SetCompetitionName", "Herding Set: " + OwOWhatsThis[26]);
+
+            Spinner scale =(Spinner) findViewById(R.id.scaleContactSpinner);
+            scale.setSelection(((ArrayAdapter)scale.getAdapter()).getPosition(OwOWhatsThis[27]));
+            Log.d("SetCompetitionName", "Scale Contact Set: " + OwOWhatsThis[27]);
+
+            Spinner pinning =(Spinner) findViewById(R.id.pinningSpinner);
+            pinning.setSelection(((ArrayAdapter)pinning.getAdapter()).getPosition(OwOWhatsThis[28]));
+            Log.d("SetCompetitionName", "Pinning Set: " + OwOWhatsThis[28]);
+
+            Spinner zone =(Spinner) findViewById(R.id.zoneContactSpinner);
+            zone.setSelection(((ArrayAdapter)zone.getAdapter()).getPosition(OwOWhatsThis[29]));
+            Log.d("SetCompetitionName", "Zone Contact Set: " + OwOWhatsThis[29]);
+
+            Spinner other =(Spinner) findViewById(R.id.otherPenaltySpinner);
+            other.setSelection(((ArrayAdapter)other.getAdapter()).getPosition(OwOWhatsThis[30]));
+            Log.d("SetCompetitionName", "Other Penalties Set: " + OwOWhatsThis[30]);
+
+            // populate teleop notes.
+            EditText tonotes = (EditText) findViewById(R.id.teleopnotes);
+            String rawtonotes = OwOWhatsThis[33];
+            rawtonotes = rawtonotes.replaceAll("^\"|\"$", ""); // remove quotation marks
+            tonotes.setText(rawtonotes);
+            Log.d("SetCompetitionName", "TeleOp Notes Set: \"" + rawtonotes + "\"");
+
+            // populate if match was won.
+            CheckBox won = (CheckBox) findViewById(R.id.matchWon);
+            won.setChecked(OwOWhatsThis[34].matches("Yes"));
+            Log.d("SetCompetitionName", "Match Won: " + OwOWhatsThis[34]);
+        }
     }
 
     public void confirmTypes(View view)
@@ -137,6 +323,7 @@ public class SetCompetitionName extends AppCompatActivity
         // read the match number.
         try
         {
+            Log.d("SetCompetitionName","Parsing Match Number.");
             EditText editText = (EditText) findViewById(R.id.matchNum);
             MatchNumber = Integer.parseInt(editText.getText().toString());
         }
@@ -155,6 +342,7 @@ public class SetCompetitionName extends AppCompatActivity
         if (!breakCond)
         {
             // read the competition type.
+            Log.d("SetCompetitionName","Parsing Competition Type");
             Spinner mySpinner =(Spinner) findViewById(R.id.CompType);
             competitionTypeRawName = mySpinner.getSelectedItem().toString();
             if (competitionTypeRawName.matches(""))
@@ -188,6 +376,7 @@ public class SetCompetitionName extends AppCompatActivity
         if (!breakCond)
         {
             // read the alliance teams.
+            Log.d("SetCompetitionName","Parsing Alliance Number.");
             try
             {
                 EditText editText = (EditText) findViewById(R.id.teamNum);
@@ -209,6 +398,7 @@ public class SetCompetitionName extends AppCompatActivity
         if (!breakCond)
         {
             // read the team you are spectating.
+            Log.d("SetCompetitionName","Parsing spectating team.");
             Spinner mySpinner = (Spinner) findViewById(R.id.SpectatingSpinner);
             spectatingTeamRawName = mySpinner.getSelectedItem().toString();
             if (spectatingTeamRawName.matches(""))
@@ -217,27 +407,27 @@ public class SetCompetitionName extends AppCompatActivity
                         .setAction("Action", null).show();
                 breakCond = true;
             }
-            else if (spectatingTeamRawName.matches("Red Alliance 1"))
+            else if (spectatingTeamRawName.contains("Red Alliance 1 (Right)"))
             {
                 spectatingTeamResolvedNumber = spectatingTeamNumber;
             }
-            else if (spectatingTeamRawName.matches("Red Alliance 2"))
+            else if (spectatingTeamRawName.contains("Red Alliance 2 (Center)"))
             {
                 spectatingTeamResolvedNumber = spectatingTeamNumber;
             }
-            else if (spectatingTeamRawName.matches("Red Alliance 3"))
+            else if (spectatingTeamRawName.contains("Red Alliance 3 (Left)"))
             {
                 spectatingTeamResolvedNumber = spectatingTeamNumber;
             }
-            else if (spectatingTeamRawName.matches("Blue Alliance 1"))
+            else if (spectatingTeamRawName.contains("Blue Alliance 1 (Right)"))
             {
                 spectatingTeamResolvedNumber = spectatingTeamNumber;
             }
-            else if (spectatingTeamRawName.matches("Blue Alliance 2"))
+            else if (spectatingTeamRawName.contains("Blue Alliance 2 (Center)"))
             {
                 spectatingTeamResolvedNumber = spectatingTeamNumber;
             }
-            else if (spectatingTeamRawName.matches("Blue Alliance 3"))
+            else if (spectatingTeamRawName.contains("Blue Alliance 3 (Left)"))
             {
                 spectatingTeamResolvedNumber = spectatingTeamNumber;
             }
@@ -250,6 +440,7 @@ public class SetCompetitionName extends AppCompatActivity
         if (!breakCond)
         {
             // read the starting position.
+            Log.d("SetCompetitionName","Parsing starting position.");
             Spinner mySpinner = (Spinner) findViewById(R.id.startingPositionForm);
             startingPosition = mySpinner.getSelectedItem().toString();
             if (startingPosition.matches(""))
@@ -262,6 +453,7 @@ public class SetCompetitionName extends AppCompatActivity
         if (!breakCond)
         {
             // read the Autonomous info.
+            Log.d("SetCompetitionName","Reading Autonomous Information.");
             Spinner autoLineSpinner = (Spinner) findViewById(R.id.crossedTheAutoLine);
             crossedAutoLine = autoLineSpinner.getSelectedItem().toString();
 
@@ -280,6 +472,7 @@ public class SetCompetitionName extends AppCompatActivity
         if (!breakCond)
         {
             // read the TeleOp info.
+            Log.d("SetCompetitionName","Reading TeleOp Information.");
             Spinner cubesPlacedFarSwitchSpinner = (Spinner) findViewById(R.id.cubesPlacedFarSwitchTeleOp);
             cubesPlacedFarSwitch = Integer.parseInt(cubesPlacedFarSwitchSpinner.getSelectedItem().toString());
 
@@ -301,7 +494,7 @@ public class SetCompetitionName extends AppCompatActivity
             Spinner cubesPlacedExchangeSpinner = (Spinner) findViewById(R.id.cubesPlacedExchangeTeleOp);
             cubesPlacedExchange = Integer.parseInt(cubesPlacedExchangeSpinner.getSelectedItem().toString());
 
-            Spinner cubesAttemptedExchangeSpinner = (Spinner) findViewById(R.id.cubesAttemptedScaleTeleOp);
+            Spinner cubesAttemptedExchangeSpinner = (Spinner) findViewById(R.id.cubesAttemptedExchangeTeleOp);
             cubesAttemptedExchange = Integer.parseInt(cubesAttemptedExchangeSpinner.getSelectedItem().toString());
 
             CheckBox portalCheckBox = (CheckBox) findViewById(R.id.portalChecker);
@@ -358,9 +551,11 @@ public class SetCompetitionName extends AppCompatActivity
         if (!breakCond)
         {
             // Robert breakdown stats.
+            Log.d("SetCompetitionName","Parsing Robot Breakdown stats.");
             Spinner robotBreakdownSpinner = (Spinner) findViewById(R.id.robotBreakdownSpinner);
             robotBreakdownStandard = robotBreakdownSpinner.getSelectedItem().toString();
             // Penalties stats.
+            Log.d("SetCompetitionName","Parsing Penalties.");
             Spinner herdingSpinner = (Spinner) findViewById(R.id.herdingSpinner);
             herding = herdingSpinner.getSelectedItem().toString();
             Spinner scaleContacctSpinner = (Spinner) findViewById(R.id.scaleContactSpinner);
@@ -370,10 +565,11 @@ public class SetCompetitionName extends AppCompatActivity
             Spinner zoneContactSpinner = (Spinner) findViewById(R.id.zoneContactSpinner);
             zonecontact = zoneContactSpinner.getSelectedItem().toString();
             Spinner otherPenaltySpinner = (Spinner) findViewById(R.id.otherPenaltySpinner);
-            other = zoneContactSpinner.getSelectedItem().toString();
+            other = otherPenaltySpinner.getSelectedItem().toString();
         }
         if (!breakCond)
         {
+            Log.d("SetCompetitionName","Reading comments.");
             EditText editText = (EditText) findViewById(R.id.autoNotes);
             autonotes = editText.getText().toString();
             EditText editText2 = (EditText) findViewById(R.id.teleopnotes);
@@ -381,12 +577,14 @@ public class SetCompetitionName extends AppCompatActivity
         }
         if (!breakCond)
         {
+            Log.d("SetCompetitionName","Checking if match won.");
             CheckBox matchWonCheckBox = (CheckBox) findViewById(R.id.matchWon);
             matchWon = matchWonCheckBox.isChecked();
         }
         if (!breakCond)
         {
            // All values are confirmed, move to next screen.
+            Log.d("SetCompetitionName","Esketit!");
             moveToNextScreen(view);
         }
     }
@@ -425,13 +623,24 @@ public class SetCompetitionName extends AppCompatActivity
             match_won_yes_or_no = "No";
         }
         String listMsg = "Match # " + MatchNumber + " Type: " + chocolat_gelato + " R: " + red_savarin + " S: " + spectatingTeamNumber;
-        String CSVFormat = red_savarin+","+DataStore.getDateAsString() +","+MatchNumber +","+chocolat_gelato+","+spectatingTeamNumber+","+spectatingTeamRawName+","+startingPosition+","+crossedAutoLine+","+cubesPlacedOnScale+","+cubesAttemptedOnScale+","+cubesPlacedOnSwitch+","+cubesAttemptedOnSwitch+","+cubesPlacedFarSwitch+","+cubesAttemptedFarSwitch+","+cubesPlacedNearSwitch+","+cubesAttemptedNearSwitch+","+cubesPlacedScale+","+cubesAttemptedScale+","+cubesPlacedExchange+","+cubesAttemptedExchange+","+cubePickupPortal+","+cubePickupGround+","+endgameClimbAttempt+","+endgameSuccessfulClimb+","+endgameParkedOnPlatform+","+robotBreakdownStandard+","+herding+","+scalecontact+","+pinning+","+zonecontact+","+other+","+",\""+autonotes+"\",\""+telenotes+"\"";
+        String CSVFormat = red_savarin+","+DataStore.getDateAsString() +","+MatchNumber +","+chocolat_gelato+","+spectatingTeamNumber+","+spectatingTeamRawName+","+startingPosition+","+crossedAutoLine+","+cubesPlacedOnScale+","+cubesAttemptedOnScale+","+cubesPlacedOnSwitch+","+cubesAttemptedOnSwitch+","+cubesPlacedFarSwitch+","+cubesAttemptedFarSwitch+","+cubesPlacedNearSwitch+","+cubesAttemptedNearSwitch+","+cubesPlacedScale+","+cubesAttemptedScale+","+cubesPlacedExchange+","+cubesAttemptedExchange+","+cubePickupPortal+","+cubePickupGround+","+endgameClimbAttempt+","+endgameSuccessfulClimb+","+endgameParkedOnPlatform+","+robotBreakdownStandard+","+herding+","+scalecontact+","+pinning+","+zonecontact+","+other+","+"\""+autonotes+"\",\""+telenotes+"\","+match_won_yes_or_no;
         if (USE_DEBUG)
         {
             Snackbar.make(view, CSVFormat, Snackbar.LENGTH_LONG).setAction("Action", null).show();
         }
-        AddCompetitions.addToList(listMsg);
-        DataStore.CsvFormattedContests.add(CSVFormat);
+
+        if (editingoption == -1)
+        {
+            Log.d("SetCompetitionName","Adding new entry to list.");
+            AddCompetitions.addToList(listMsg);
+            DataStore.CsvFormattedContests.add(CSVFormat);
+        }
+        else
+        {
+            Log.d("SetCompetitionName","Resetting list entry: " + editingoption);
+            AddCompetitions.resetListItem(listMsg, editingoption);
+            DataStore.CsvFormattedContests.set(editingoption, CSVFormat);
+        }
 
         // if using direct save, write the generated results directly to CSV file.
         if (DataStore.USE_DIRECT_SAVE)
