@@ -70,6 +70,16 @@ public class AddCompetitions extends AppCompatActivity
 
         Log.d("FileIO","External Storage Directory: " + Environment.getExternalStorageDirectory().toString());
 
+        // let's check if we have file permissions before running.
+        if (!verifyStoragePermissions(this))
+        {
+            AlertDialog alertDialog1 = new AlertDialog.Builder(AddCompetitions.this).create();
+            alertDialog1.setTitle("Warning! (DON'T CLOSE)");
+            alertDialog1.setMessage("Please go into Settings > Apps > \"TRC Scouting App\" > Permissions and check Storage.");
+            alertDialog1.show();
+            return;
+        }
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         contestList = (ListView) findViewById(R.id.listView);
@@ -395,7 +405,7 @@ public class AddCompetitions extends AppCompatActivity
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
-    public static void verifyStoragePermissions(Activity activity)
+    public static boolean verifyStoragePermissions(Activity activity)
     {
         // Check if we have write permission
         int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -404,12 +414,10 @@ public class AddCompetitions extends AppCompatActivity
         {
             // We don't have permission so prompt the user
             Log.d("FileIO", "File permissions insufficient, requesting privileges...");
-            ActivityCompat.requestPermissions(
-                    activity,
-                    PERMISSIONS_STORAGE,
-                    REQUEST_EXTERNAL_STORAGE
-            );
+            return false;
+
         }
+        return true;
     }
 
 }
