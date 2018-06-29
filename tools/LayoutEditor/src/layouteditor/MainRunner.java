@@ -21,10 +21,10 @@ public class MainRunner
 	{
 		// TODO Auto-generated method stub
 		DataStore.elementList.add(new ElementHandler(1337, "TestTextBox", CheckBox, Boolean_, "borbTest", "testVar", "test option"));
-		System.out.println(generateCodeSegment(DataStore.elementList));
+		System.out.println(generateSetCompetitionNameClass(DataStore.elementList));
 	}
 
-	public static String generateCodeSegment(ArrayList<ElementHandler> elementList)
+	public static String generateSetCompetitionNameClass(ArrayList<ElementHandler> elementList)
 	{
 		String wholeString = "";
 		String begin = "// THIS CODE WAS GENERATED AUTOMATICALLY BY Victor's SmartBuilder script. DO NOT MODIFY.\n\npackage trc3543.trcscoutingapp;\n" + 
@@ -232,6 +232,11 @@ public class MainRunner
 		
 		
 		return wholeString;
+	}
+	
+	public static String generateAddCompetitionsClass()
+	{
+		return "";
 	}
 	
 }
