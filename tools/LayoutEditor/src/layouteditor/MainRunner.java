@@ -159,7 +159,7 @@ public class MainRunner
 			else
 			{
 				kawai += "            EditText " + tmp.getHandlerName() +" = (EditText) findViewById(R.id." + tmp.getFormName() + ");\n";
-				kawai += "            " + tmp.getHandlerName() + ".setText(OwOWhatsThis[" + tmp.getCSVPos() + "]);\n";
+				kawai += "            " + tmp.getHandlerName() + ".setText(OwOWhatsThis[" + tmp.getCSVPos() + "].replaceAll(\"^\\\"|\\\"$\", \"\"));\n";
 			}
 			wholeString += kawai;
 		}
@@ -177,11 +177,15 @@ public class MainRunner
 			kawai += tmp.getDescription() + ".\n        if(!breakCond)\n        {\n";
 			if (tmp.getFormType() == CheckBox)
 			{
-			
+				// TODO: Need done
+				kawai +=
+						"";
 			}
 			else if (tmp.getFormType() == Spinner)
 			{
-				
+				// TODO: Need done
+				kawai +=
+						"";
 			}
 			else
 			{
@@ -193,6 +197,7 @@ public class MainRunner
 						((tmp.getDataType() == Integer_) ? tmp.getReturnVariableName() + " = Integer.parseInt(editText.getText().toString());\n" : "") +
 						((tmp.getDataType() == Double_) ? tmp.getReturnVariableName() + " = Double.parseDouble(editText.getText().toString());\n" : "") +
 						((tmp.getDataType() == Boolean_) ? tmp.getReturnVariableName() + " = editText.getText().toString().toLowerCase.contains(\"yes\");\n" : "") +
+						((tmp.getDataType() == String_) ? tmp.getReturnVariableName() + " = editText.getText().toString();\n" : "") +
 						"            }\n" + 
 						"            catch(NumberFormatException e)\n" + 
 						"            {\n" + 
@@ -207,9 +212,11 @@ public class MainRunner
 						"                breakCond = true;\n" + 
 						"            }\n";
 			}
-			kawai += "\n\n        }";
+			kawai += "        }";
 			wholeString += kawai;
 		}
+		
+		wholeString += "\n    }\n";
 		
 		
 		return wholeString;
