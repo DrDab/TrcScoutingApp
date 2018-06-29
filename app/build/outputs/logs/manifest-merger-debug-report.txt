@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:2:1-37:12
-INJECTED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:2:1-37:12
-INJECTED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:2:1-37:12
-INJECTED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:2:1-37:12
+ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:2:1-37:12
+INJECTED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:2:1-37:12
+INJECTED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:2:1-37:12
+INJECTED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:2:1-37:12
 MERGED from [com.android.support:design:26.1.0] /home/citrus/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/370bebc2b66da1d84bdb0fd9d28489fa/AndroidManifest.xml:17:1-31:12
 MERGED from [com.android.support:appcompat-v7:26.1.0] /home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/AndroidManifest.xml:17:1-31:12
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /home/citrus/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.0.2.aar/cc4a0ef41abb71bc25542c47a0a49625/AndroidManifest.xml:2:1-11:12
@@ -18,45 +18,45 @@ MERGED from [com.android.support:support-core-utils:26.1.0] /home/citrus/.gradle
 MERGED from [com.android.support:support-core-ui:26.1.0] /home/citrus/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.1.0.aar/e85a02155e97a1a6afca9291f37b2063/AndroidManifest.xml:17:1-31:12
 MERGED from [com.android.support:support-compat:26.1.0] /home/citrus/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/fd3481f02310f8b4fcb0a6b0c2928149/AndroidManifest.xml:17:1-31:12
 MERGED from [android.arch.lifecycle:runtime:1.0.0] /home/citrus/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/b12940712b6d6bfc9ca3ccfdab736cfd/AndroidManifest.xml:17:1-30:12
-INJECTED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:2:1-37:12
-INJECTED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:2:1-37:12
-INJECTED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:2:1-37:12
+INJECTED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:2:1-37:12
+INJECTED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:2:1-37:12
+INJECTED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:2:1-37:12
 	package
-		ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:3:5-37
-		INJECTED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml
-		INJECTED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml
+		ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:3:5-37
+		INJECTED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml
+		INJECTED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml
 	android:versionName
-		INJECTED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml
-		ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:2:1-37:12
-		INJECTED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml
+		INJECTED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml
+		ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:2:1-37:12
+		INJECTED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml
 	android:versionCode
-		INJECTED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml
-		ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:2:1-37:12
-		INJECTED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml
+		INJECTED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml
+		ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:2:1-37:12
+		INJECTED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml
 	xmlns:android
-		ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:2:11-69
+		ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:2:11-69
 uses-permission#android.permission.GET_ACCOUNTS
-ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:6:5-71
+ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:6:5-71
 	android:name
-		ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:6:22-68
+		ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:6:22-68
 uses-permission#android.permission.READ_PROFILE
-ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:7:5-71
+ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:7:5-71
 	android:name
-		ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:7:22-68
+		ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:7:22-68
 uses-permission#android.permission.READ_CONTACTS
-ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:8:5-72
+ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:8:5-72
 	android:name
-		ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:8:22-69
+		ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:8:22-69
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
-ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:9:5-80
+ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:9:5-80
 	android:name
-		ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:9:22-77
+		ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:9:22-77
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:10:5-81
+ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:10:5-81
 	android:name
-		ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:10:22-78
+		ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:10:22-78
 application
-ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:12:5-35:19
+ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:12:5-35:19
 MERGED from [com.android.support:design:26.1.0] /home/citrus/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/370bebc2b66da1d84bdb0fd9d28489fa/AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support:design:26.1.0] /home/citrus/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/370bebc2b66da1d84bdb0fd9d28489fa/AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support:appcompat-v7:26.1.0] /home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/AndroidManifest.xml:25:5-29:19
@@ -86,57 +86,57 @@ MERGED from [com.android.support:support-compat:26.1.0] /home/citrus/.gradle/cac
 MERGED from [android.arch.lifecycle:runtime:1.0.0] /home/citrus/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/b12940712b6d6bfc9ca3ccfdab736cfd/AndroidManifest.xml:24:5-28:19
 MERGED from [android.arch.lifecycle:runtime:1.0.0] /home/citrus/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/b12940712b6d6bfc9ca3ccfdab736cfd/AndroidManifest.xml:24:5-28:19
 	android:supportsRtl
-		ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:17:9-35
+		ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:17:9-35
 	android:label
-		ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:15:9-41
+		ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:15:9-41
 	android:roundIcon
-		ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:16:9-54
+		ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:16:9-54
 	android:icon
-		ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:14:9-49
+		ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:14:9-49
 	android:allowBackup
-		ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:13:9-35
+		ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:13:9-35
 	android:theme
-		ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:18:9-40
+		ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:18:9-40
 activity#trc3543.trcscoutingapp.AddCompetitions
-ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:19:9-28:20
+ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:19:9-28:20
 	android:label
-		ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:21:13-45
+		ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:21:13-45
 	android:theme
-		ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:22:13-56
+		ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:22:13-56
 	android:name
-		ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:20:13-44
+		ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:20:13-44
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:23:13-27:29
+ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:23:13-27:29
 action#android.intent.action.MAIN
-ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:24:17-69
+ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:24:17-69
 	android:name
-		ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:24:25-66
+		ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:24:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:26:17-77
+ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:26:17-77
 	android:name
-		ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:26:27-74
+		ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:26:27-74
 activity#trc3543.trcscoutingapp.SetCompetitionName
-ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:29:9-31:75
+ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:29:9-31:75
 	android:label
-		ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:31:13-72
+		ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:31:13-72
 	android:name
-		ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:30:13-47
+		ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:30:13-47
 activity#trc3543.trcscoutingapp.About
-ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:32:9-43
+ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:32:9-43
 	android:name
-		ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:32:19-40
+		ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:32:19-40
 activity#trc3543.trcscoutingapp.Settings
-ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:33:9-46
+ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:33:9-46
 	android:name
-		ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:33:19-43
+		ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:33:19-43
 activity#trc3543.trcscoutingapp.AutoSaveSettings
-ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:34:9-63
+ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:34:9-63
 	android:name
-		ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml:34:19-51
+		ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml:34:19-51
 uses-sdk
-INJECTED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml
-INJECTED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml
+INJECTED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml
+INJECTED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml
 MERGED from [com.android.support:design:26.1.0] /home/citrus/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/370bebc2b66da1d84bdb0fd9d28489fa/AndroidManifest.xml:21:5-23:62
 MERGED from [com.android.support:design:26.1.0] /home/citrus/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/370bebc2b66da1d84bdb0fd9d28489fa/AndroidManifest.xml:21:5-23:62
 MERGED from [com.android.support:appcompat-v7:26.1.0] /home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/AndroidManifest.xml:21:5-23:78
@@ -165,18 +165,18 @@ MERGED from [com.android.support:support-compat:26.1.0] /home/citrus/.gradle/cac
 MERGED from [com.android.support:support-compat:26.1.0] /home/citrus/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/fd3481f02310f8b4fcb0a6b0c2928149/AndroidManifest.xml:21:5-23:58
 MERGED from [android.arch.lifecycle:runtime:1.0.0] /home/citrus/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/b12940712b6d6bfc9ca3ccfdab736cfd/AndroidManifest.xml:20:5-22:41
 MERGED from [android.arch.lifecycle:runtime:1.0.0] /home/citrus/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/b12940712b6d6bfc9ca3ccfdab736cfd/AndroidManifest.xml:20:5-22:41
-INJECTED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml
-INJECTED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml
+INJECTED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml
+INJECTED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml
 	tools:overrideLibrary
 		ADDED from [com.android.support:design:26.1.0] /home/citrus/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/370bebc2b66da1d84bdb0fd9d28489fa/AndroidManifest.xml:23:9-59
 	android:targetSdkVersion
-		INJECTED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml
-		ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml
-		INJECTED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml
+		INJECTED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml
+		ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml
+		INJECTED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml
-		ADDED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml
-		INJECTED from /home/citrus/Documents/ftc2018/TrcScoutingApp/app/src/main/AndroidManifest.xml
+		INJECTED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml
+		ADDED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml
+		INJECTED from /home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/src/main/AndroidManifest.xml
 meta-data#android.support.VERSION
 ADDED from [com.android.support:design:26.1.0] /home/citrus/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/370bebc2b66da1d84bdb0fd9d28489fa/AndroidManifest.xml:26:9-28:38
 MERGED from [com.android.support:appcompat-v7:26.1.0] /home/citrus/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/ebcb727a0549a13e9abd0d4e8840af27/AndroidManifest.xml:26:9-28:38
