@@ -13,6 +13,10 @@ public class MainRunner
 	public static int Boolean_ = 3;
 	public static int String_ = 4;
 	
+	// EditText available options (ok): Integer, Double, Boolean, String
+	// Spinner available options (ok): String
+	// CheckBox available options (ok): Boolean
+	
 	public static void main(String[] args) 
 	{
 		// TODO Auto-generated method stub
@@ -181,18 +185,18 @@ public class MainRunner
 						"            CheckBox " + tmp.getHandlerName() + " = (CheckBox) findViewById(R.id." + tmp.getFormName() +");\n" + 
 						"            if ("+ tmp.getHandlerName() +".isChecked())\n" + 
 						"            {\n" + 
-						"                " + tmp.getReturnVariableName() + " = \"*\";\n" + 
+						"                " + tmp.getReturnVariableName() + " = true;\n" + 
 						"            }\n" + 
 						"            else\n" + 
 						"            {\n" + 
-						"                " + tmp.getReturnVariableName() + " = \"\";\n" + 
+						"                " + tmp.getReturnVariableName() + " = false;\n" + 
 						"            }\n";
 			}
 			else if (tmp.getFormType() == Spinner)
 			{
-				// TODO: Need done
 				kawai +=
-						"";
+						"            Spinner " + tmp.getHandlerName() + " = (Spinner) findViewById(R.id." + tmp.getFormName() + ");\n" + 
+						"            " + tmp.getReturnVariableName() + " = " + tmp.getHandlerName() + ".getSelectedItem().toString();\n";
 			}
 			else
 			{
@@ -223,7 +227,13 @@ public class MainRunner
 			wholeString += kawai;
 		}
 		
-		wholeString += "\n    }\n";
+		wholeString += "\n        if (!breakCond)\n" + 
+				"        {\n" + 
+				"           // All values are confirmed, move to next screen.\n" + 
+				"            Log.d(\"SetCompetitionName\",\"Esketit!\");\n" + 
+				"            moveToNextScreen(view);\n" + 
+				"        }\n" + 
+				"    }\n";
 		
 		
 		return wholeString;
