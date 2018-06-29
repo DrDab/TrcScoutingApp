@@ -228,9 +228,35 @@ public class MainRunner
 				"        }\n" + 
 				"    }\n";
 		
-		// FOURTH: Generate moveToNextScreen method code.
+		// TODO: FOURTH: Generate moveToNextScreen method code.
+		wholeString += "    public void moveToNextScreen(View view)\n" + 
+				"    {\n";
+		for(int i = 0; i < elementList.size(); i++)
+		{
+			String legalizeAwoo = "";
+			ElementHandler tmp = elementList.get(i);
+			if(tmp.getDataType() == Integer_)
+			{
+
+			}
+			else if (tmp.getDataType() == Double_)
+			{
+
+			}
+			else if (tmp.getDataType() == Boolean_)
+			{
+				
+			}
+			else
+			{
+				
+			}
+			wholeString += legalizeAwoo;
+		}
 		
+		wholeString += "    }\n    public void cancel(View view) { finish(); }\n";
 		
+		wholeString += "}\n";
 		return wholeString;
 	}
 	
