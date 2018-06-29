@@ -104,7 +104,7 @@ public class MainRunner
 		wholeString += "\n    // END AUTO-GENERATED VARIABLES\n";
 		
 		
-		// SECOND: Add onCreate code.
+		// SECOND: Generate onCreate method code.
 		wholeString +=
 				"    \n    @Override\n" + 
 				"    protected void onCreate(Bundle savedInstanceState)\n" + 
@@ -170,7 +170,7 @@ public class MainRunner
 		wholeString += "        }\n" + 
 				"    }\n\n";
 		
-		// THIRD: Add confirmTypes code.
+		// THIRD: Generate confirmTypes method code.
 		wholeString += "    public void confirmTypes(View view)\n" + 
 				"    {\n" + 
 				"        boolean breakCond = false;\n";
@@ -227,6 +227,8 @@ public class MainRunner
 				"            moveToNextScreen(view);\n" + 
 				"        }\n" + 
 				"    }\n";
+		
+		// FOURTH: Generate moveToNextScreen method code.
 		
 		
 		return wholeString;
