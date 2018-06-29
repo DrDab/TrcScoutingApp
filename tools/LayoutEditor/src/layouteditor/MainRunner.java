@@ -234,7 +234,8 @@ public class MainRunner
 		return wholeString;
 	}
 	
-	public static String generateAddCompetitionsClass()
+	// This class needs to be procedurally generated since it contains the header for the CSV.
+	public static String generateDataStoreClass()
 	{
 		return "";
 	}
