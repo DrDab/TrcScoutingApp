@@ -20,7 +20,7 @@ public class MainRunner
 	public static void main(String[] args) 
 	{
 		// TODO Auto-generated method stub
-		DataStore.elementList.add(new ElementHandler(1337, "TestTextBox", EditText, Integer_, "borbTest", "testVar", "test option"));
+		DataStore.elementList.add(new ElementHandler(1337, "TestTextBox", CheckBox, Boolean_, "borbTest", "testVar", "test option"));
 		System.out.println(generateCodeSegment(DataStore.elementList));
 	}
 
@@ -182,15 +182,8 @@ public class MainRunner
 			if (tmp.getFormType() == CheckBox)
 			{
 				kawai +=
-						"            CheckBox " + tmp.getHandlerName() + " = (CheckBox) findViewById(R.id." + tmp.getFormName() +");\n" + 
-						"            if ("+ tmp.getHandlerName() +".isChecked())\n" + 
-						"            {\n" + 
-						"                " + tmp.getReturnVariableName() + " = true;\n" + 
-						"            }\n" + 
-						"            else\n" + 
-						"            {\n" + 
-						"                " + tmp.getReturnVariableName() + " = false;\n" + 
-						"            }\n";
+						"            CheckBox " + tmp.getHandlerName() + " = (CheckBox) findViewById(R.id." + tmp.getFormName() +");\n" +
+						"            " + tmp.getReturnVariableName() + " = " + tmp.getHandlerName() + ".isChecked();\n";
 			}
 			else if (tmp.getFormType() == Spinner)
 			{
