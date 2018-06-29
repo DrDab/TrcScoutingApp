@@ -16,14 +16,14 @@ public class MainRunner
 	public static void main(String[] args) 
 	{
 		// TODO Auto-generated method stub
-		DataStore.elementList.add(new ElementHandler(1337, "Test", EditText, Integer_, "borbTest", "testVar", "test option"));
+		DataStore.elementList.add(new ElementHandler(1337, "TestTextBox", EditText, Integer_, "borbTest", "testVar", "test option"));
 		System.out.println(generateCodeSegment(DataStore.elementList));
 	}
 
 	public static String generateCodeSegment(ArrayList<ElementHandler> elementList)
 	{
 		String wholeString = "";
-		String begin = "package trc3543.trcscoutingapp;\n" + 
+		String begin = "// THIS CODE WAS GENERATED AUTOMATICALLY BY Victor's SmartBuilder script. DO NOT MODIFY.\n\npackage trc3543.trcscoutingapp;\n" + 
 				"\n" + 
 				"import android.content.Intent;\n" + 
 				"import android.os.Environment;\n" + 
@@ -77,15 +77,15 @@ public class MainRunner
 		{
 			ElementHandler tmp = elementList.get(i);
 			String declareString = "    static ";
-			if(tmp.getFormType() == Integer_)
+			if(tmp.getDataType() == Integer_)
 			{
 				declareString += "int ";
 			}
-			else if (tmp.getFormType() == Double_)
+			else if (tmp.getDataType() == Double_)
 			{
 				declareString += "double ";
 			}
-			else if (tmp.getFormType() == Boolean_)
+			else if (tmp.getDataType() == Boolean_)
 			{
 				declareString += "boolean ";
 			}
@@ -97,7 +97,7 @@ public class MainRunner
 			declareString += "\n";
 			wholeString += declareString;
 		}
-		wholeString += "\n     // END AUTO-GENERATED VARIABLES\n";
+		wholeString += "\n    // END AUTO-GENERATED VARIABLES\n";
 		
 		
 		// SECOND: Add onCreate code.
@@ -164,9 +164,52 @@ public class MainRunner
 			wholeString += kawai;
 		}
 		wholeString += "        }\n" + 
-				"    }\n";
+				"    }\n\n";
 		
 		// THIRD: Add confirmTypes code.
+		wholeString += "    public void confirmTypes(View view)\n" + 
+				"    {\n" + 
+				"        boolean breakCond = false;\n";
+		for(int i = 0; i < elementList.size(); i++)
+		{
+			String kawai = "        // read the ";
+			ElementHandler tmp = elementList.get(i);
+			kawai += tmp.getDescription() + ".\n        if(!breakCond)\n        {\n";
+			if (tmp.getFormType() == CheckBox)
+			{
+			
+			}
+			else if (tmp.getFormType() == Spinner)
+			{
+				
+			}
+			else
+			{
+				kawai += 
+						"            Log.d(\"SetCompetitionName\",\"Parsing "+ tmp.getDescription()  +"\");\n" + 
+						"            try\n" + 
+						"            {\n" + 
+						"                EditText editText = (EditText) findViewById(R.id." + tmp.getFormName() +");\n                " + 
+						((tmp.getDataType() == Integer_) ? tmp.getReturnVariableName() + " = Integer.parseInt(editText.getText().toString());\n" : "") +
+						((tmp.getDataType() == Double_) ? tmp.getReturnVariableName() + " = Double.parseDouble(editText.getText().toString());\n" : "") +
+						((tmp.getDataType() == Boolean_) ? tmp.getReturnVariableName() + " = editText.getText().toString().toLowerCase.contains(\"yes\");\n" : "") +
+						"            }\n" + 
+						"            catch(NumberFormatException e)\n" + 
+						"            {\n" + 
+						"                Snackbar.make(view, \"Issue with number formatting\", Snackbar.LENGTH_LONG)\n" + 
+						"                        .setAction(\"Action\", null).show();\n" + 
+						"                breakCond = true;\n" + 
+						"            }\n" + 
+						"            catch(NullPointerException e)\n" + 
+						"            {\n" + 
+						"                Snackbar.make(view, \"Text box cannot be empty.\", Snackbar.LENGTH_LONG)\n" + 
+						"                        .setAction(\"Action\", null).show();\n" + 
+						"                breakCond = true;\n" + 
+						"            }\n";
+			}
+			kawai += "\n\n        }";
+			wholeString += kawai;
+		}
 		
 		
 		return wholeString;
