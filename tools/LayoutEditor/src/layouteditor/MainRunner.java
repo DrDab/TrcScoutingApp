@@ -177,9 +177,16 @@ public class MainRunner
 			kawai += tmp.getDescription() + ".\n        if(!breakCond)\n        {\n";
 			if (tmp.getFormType() == CheckBox)
 			{
-				// TODO: Need done
 				kawai +=
-						"";
+						"            CheckBox " + tmp.getHandlerName() + " = (CheckBox) findViewById(R.id." + tmp.getFormName() +");\n" + 
+						"            if ("+ tmp.getHandlerName() +".isChecked())\n" + 
+						"            {\n" + 
+						"                " + tmp.getReturnVariableName() + " = \"*\";\n" + 
+						"            }\n" + 
+						"            else\n" + 
+						"            {\n" + 
+						"                " + tmp.getReturnVariableName() + " = \"\";\n" + 
+						"            }\n";
 			}
 			else if (tmp.getFormType() == Spinner)
 			{
