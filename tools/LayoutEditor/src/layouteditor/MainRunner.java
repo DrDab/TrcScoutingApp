@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 public class MainRunner 
 {
@@ -26,6 +27,7 @@ public class MainRunner
 	public static DefaultListModel<ElementHandler> l1;
 	public static JList<ElementHandler> list;
 	public static JButton add_entry;
+	public static JScrollPane listPane;
 	
 	public static void main(String[] args) 
 	{
@@ -35,10 +37,14 @@ public class MainRunner
 		optionpanel = new JPanel();
 		optionpanel.setLayout(null);
 		l1 = new DefaultListModel<>();  
-        // l1.addElement("Item1");  
+		add_entry = new JButton("+");
+		add_entry.setBounds(100, 45, 20, 20);
         list = new JList<ElementHandler>(l1);  
-        list.setBounds(100, 100, 250, 100);  
-        optionpanel.add(list);
+        //list.setBounds(100, 100, 250, 100);  
+        listPane = new JScrollPane(list);
+        listPane.setBounds(100, 100, 250, 100);
+        optionpanel.add(listPane);
+        optionpanel.add(add_entry);
 		home_frame.add(optionpanel);
 		home_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		home_frame.setSize(1200, 800);
@@ -48,6 +54,7 @@ public class MainRunner
 		DataStore.addElementToList(new ElementHandler(1337, "TestTextBox", CheckBox, Boolean_, "borbTest", "testVar", "test option"));
 		DataStore.addElementToList(new ElementHandler(1338, "TestTextBox2", CheckBox, Boolean_, "borbTest2", "testVar2", "test option2"));
 		DataStore.addElementToList(new ElementHandler(1339, "TestTextBox3", CheckBox, Boolean_, "borbTest3", "testVar3", "test option3"));
+		
 		DataStore.setPrevCfg(new PreviewConfig("T1", DataStore.getElementFromList(0), "T2", DataStore.getElementFromList(1), "T3", DataStore.getElementFromList(2)));;
 		System.out.println(DataStore.generateSetCompetitionNameClass());
 	}
