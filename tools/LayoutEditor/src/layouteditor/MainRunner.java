@@ -22,7 +22,7 @@ public class MainRunner
 		DataStore.elementList.add(new ElementHandler(1338, "TestTextBox2", CheckBox, Boolean_, "borbTest2", "testVar2", "test option2"));
 		DataStore.elementList.add(new ElementHandler(1339, "TestTextBox3", CheckBox, Boolean_, "borbTest3", "testVar3", "test option3"));
 		DataStore.prevCfg = new PreviewConfig("T1", DataStore.elementList.get(0), "T2", DataStore.elementList.get(1), "T3", DataStore.elementList.get(2));
-		System.out.println(DataStore.generateSetCompetitionNameClass(DataStore.elementList));
+		System.out.println(DataStore.generateDataStoreClass());
 	}
 
 
