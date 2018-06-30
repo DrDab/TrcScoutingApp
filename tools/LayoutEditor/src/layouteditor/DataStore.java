@@ -1,11 +1,13 @@
 package layouteditor;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DataStore
 {
 	private static ArrayList<ElementHandler> elementList = new ArrayList<ElementHandler>();
 	private static PreviewConfig prevCfg = null;
+	private static HashMap<ElementHandler, Integer> kemono = new HashMap<ElementHandler, Integer>();
 	
 	public static final int EditText = 1;
 	public static final int Spinner = 2;
@@ -24,7 +26,24 @@ public class DataStore
 	public static void addElementToList(ElementHandler e)
 	{
 		elementList.add(e);
+		kemono.put(e, elementList.size() - 1);
 		MainRunner.l1.addElement(e);
+	}
+	
+	public static void removeElementFromList(ElementHandler e)
+	{
+		int rmidx = kemono.get(e);
+		elementList.remove(rmidx);
+		kemono.remove(e);
+		MainRunner.l1.removeElementAt(rmidx);
+	}
+	
+	public static void removeElementFromList(int idx)
+	{
+		MainRunner.l1.removeElementAt(idx);
+		ElementHandler eh = elementList.get(idx);
+		kemono.remove(eh);
+		elementList.remove(idx);
 	}
 	
 	public static void setPrevCfg(PreviewConfig pc)

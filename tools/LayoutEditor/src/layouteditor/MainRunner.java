@@ -1,5 +1,7 @@
 package layouteditor;
 
+import java.awt.Font;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -27,6 +29,7 @@ public class MainRunner
 	public static DefaultListModel<ElementHandler> l1;
 	public static JList<ElementHandler> list;
 	public static JButton add_entry;
+	public static JButton del_entry;
 	public static JScrollPane listPane;
 	
 	public static void main(String[] args) 
@@ -38,13 +41,20 @@ public class MainRunner
 		optionpanel.setLayout(null);
 		l1 = new DefaultListModel<>();  
 		add_entry = new JButton("+");
-		add_entry.setBounds(100, 45, 20, 20);
+		add_entry.setFont(new Font("Verdana", Font.BOLD, 18));
+		add_entry.setText("+");
+		add_entry.setBounds(100, 45, 50, 50);
+		del_entry = new JButton("-");
+		del_entry.setFont(new Font("Verdana", Font.BOLD, 20));
+		del_entry.setText("-");
+		del_entry.setBounds(150, 45, 50, 50);	
         list = new JList<ElementHandler>(l1);  
         //list.setBounds(100, 100, 250, 100);  
         listPane = new JScrollPane(list);
         listPane.setBounds(100, 100, 250, 100);
         optionpanel.add(listPane);
         optionpanel.add(add_entry);
+        optionpanel.add(del_entry);
 		home_frame.add(optionpanel);
 		home_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		home_frame.setSize(1200, 800);
