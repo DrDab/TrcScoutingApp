@@ -81,7 +81,7 @@ public class ElementHandler implements Comparable<ElementHandler>
 	@Override
 	public String toString()
 	{
-		return formType + "";
+		return CSVPosition + "";
 	}
 
 	@Override
