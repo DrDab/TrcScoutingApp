@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class DataStore
 {
-	public static ArrayList<ElementHandler> elementList = new ArrayList<ElementHandler>();
-	public static PreviewConfig prevCfg = null;
+	private static ArrayList<ElementHandler> elementList = new ArrayList<ElementHandler>();
+	private static PreviewConfig prevCfg = null;
 	
 	public static final int EditText = 1;
 	public static final int Spinner = 2;
@@ -15,6 +15,27 @@ public class DataStore
 	public static int Double_ = 2;
 	public static int Boolean_ = 3;
 	public static int String_ = 4;
+	
+	public static ElementHandler getElementFromList(int idx)
+	{
+		return elementList.get(idx);
+	}
+	
+	public static void addElementToList(ElementHandler e)
+	{
+		elementList.add(e);
+		MainRunner.l1.addElement(e);
+	}
+	
+	public static void setPrevCfg(PreviewConfig pc)
+	{
+		prevCfg = pc;
+	}
+	
+	public static PreviewConfig getPrevCfg()
+	{
+		return prevCfg;
+	}
 	
 	public static String generateSetCompetitionNameClass()
 	{
