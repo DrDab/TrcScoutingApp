@@ -49,7 +49,7 @@ public class SetCompetitionName extends AppCompatActivity
 
     static int MatchNumber;
     static String competitionName;
-    
+
     /**
      * Competition Type
      * 1 = Practice
@@ -60,7 +60,7 @@ public class SetCompetitionName extends AppCompatActivity
      * @author Victor Du
      */
     static int competitionType;
-    
+
     static String competitionTypeRawName;
 
     static String spectatingTeamRawName;
@@ -117,7 +117,7 @@ public class SetCompetitionName extends AppCompatActivity
     // Auxiliary Notes.
     static String autonotes;
     static String telenotes;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -583,7 +583,7 @@ public class SetCompetitionName extends AppCompatActivity
         }
         if (!breakCond)
         {
-           // All values are confirmed, move to next screen.
+            // All values are confirmed, move to next screen.
             Log.d("SetCompetitionName","Esketit!");
             moveToNextScreen(view);
         }

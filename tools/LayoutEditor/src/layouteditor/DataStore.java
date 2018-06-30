@@ -145,7 +145,7 @@ public class DataStore
 			if (tmp.getFormType() == CheckBox)
 			{
 				kawai += "            CheckBox " + tmp.getHandlerName() +" = (CheckBox) findViewById(R.id." + tmp.getFormName() + ");\n";
-				kawai += "            " + tmp.getHandlerName() + ".setChecked(OwOWhatsThis[" + tmp.getCSVPos() + "].matches(\"*\");\n";
+				kawai += "            " + tmp.getHandlerName() + ".setChecked(OwOWhatsThis[" + tmp.getCSVPos() + "].matches(\"\\\\*\"));\n";
 			}
 			else if (tmp.getFormType() == Spinner)
 			{
@@ -223,7 +223,7 @@ public class DataStore
 		// TODO: FOURTH: Generate moveToNextScreen method code.
 		wholeString += "    public void moveToNextScreen(View view)\n" + 
 						"    {\n" +
-						"        String listMsg = \"" + DataStore.prevCfg + "\";\n"+
+						"        String listMsg = \"" + DataStore.prevCfg + ";\n"+
 						"        String CSVFormat = ";
 		for(int i = 0; i < elementList.size(); i++)
 		{
