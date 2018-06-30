@@ -1,6 +1,8 @@
 package layouteditor;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -47,7 +49,20 @@ public class MainRunner
 		del_entry = new JButton("-");
 		del_entry.setFont(new Font("Verdana", Font.BOLD, 20));
 		del_entry.setText("-");
-		del_entry.setBounds(150, 45, 50, 50);	
+		del_entry.setBounds(150, 45, 50, 50);
+		del_entry.addActionListener(new ActionListener()
+		  {
+			   public void actionPerformed(ActionEvent ae)
+			   {
+			        // get the highlighted entry in the list and remove it
+				   int idx = list.getSelectedIndex();
+				   if (idx != -1)
+				   {
+					   DataStore.removeElementFromList(idx);
+				   }
+			   }
+		});
+
         list = new JList<ElementHandler>(l1);  
         //list.setBounds(100, 100, 250, 100);  
         listPane = new JScrollPane(list);
