@@ -234,31 +234,93 @@ public class MainRunner
 		// TODO: FOURTH: Generate moveToNextScreen method code.
 		wholeString += "    public void moveToNextScreen(View view)\n" + 
 						"    {\n" +
-						"        String listMsg = \"" + DataStore.prevCfg + "\";\n";
+						"        String listMsg = \"" + DataStore.prevCfg + "\";\n"+
+						"        String CSVFormat = ";
 		for(int i = 0; i < elementList.size(); i++)
 		{
 			String legalizeAwoo = "";
 			ElementHandler tmp = elementList.get(i);
 			if(tmp.getDataType() == Integer_)
 			{
-
+				legalizeAwoo += tmp.getReturnVariableName();
 			}
 			else if (tmp.getDataType() == Double_)
 			{
-
+				legalizeAwoo += tmp.getReturnVariableName();
 			}
 			else if (tmp.getDataType() == Boolean_)
 			{
-				
+				legalizeAwoo += "(" + tmp.getReturnVariableName() + " ? \"*\" : \" \")";
 			}
 			else
 			{
-				
+				legalizeAwoo += "\"" + tmp.getReturnVariableName() + "\"";
 			}
+			if (elementList.size() - 1 == i)
+			{
+				legalizeAwoo += ";\n";
+			}
+			else
+			{
+				legalizeAwoo += "+\",\"+";
+			}
+			
 			wholeString += legalizeAwoo;
 		}
 		
-		wholeString += "    }\n    public void cancel(View view) { finish(); }\n";
+		wholeString += "        if (USE_DEBUG)\n" + 
+				"        {\n" + 
+				"            Snackbar.make(view, CSVFormat, Snackbar.LENGTH_LONG).setAction(\"Action\", null).show();\n" + 
+				"        }\n" + 
+				"\n" + 
+				"        if (editingoption == -1)\n" + 
+				"        {\n" + 
+				"            Log.d(\"SetCompetitionName\",\"Adding new entry to list.\");\n" + 
+				"            AddCompetitions.addToList(listMsg);\n" + 
+				"            DataStore.CsvFormattedContests.add(CSVFormat);\n" + 
+				"        }\n" + 
+				"        else\n" + 
+				"        {\n" + 
+				"            Log.d(\"SetCompetitionName\",\"Resetting list entry: \" + editingoption);\n" + 
+				"            AddCompetitions.resetListItem(listMsg, editingoption);\n" + 
+				"            DataStore.CsvFormattedContests.set(editingoption, CSVFormat);\n" + 
+				"        }\n" + 
+				"\n" + 
+				"        // if using direct save, write the generated results directly to CSV file.\n" + 
+				"        if (DataStore.USE_DIRECT_SAVE)\n" + 
+				"        {\n" + 
+				"            String filename = DataStore.FIRST_NAME+\"_\"+DataStore.LAST_NAME+\"_results.csv\";\n" + 
+				"            File writeDirectory = new File(Environment.getExternalStorageDirectory(), \"TrcScoutingApp\");\n" + 
+				"            if (!writeDirectory.exists())\n" + 
+				"            {\n" + 
+				"                writeDirectory.mkdir();\n" + 
+				"            }\n" + 
+				"            File log = new File(writeDirectory, filename);\n" + 
+				"            if(!log.exists())\n" + 
+				"            {\n" + 
+				"                try\n" + 
+				"                {\n" + 
+				"                    log.createNewFile();\n" + 
+				"                }\n" + 
+				"                catch (IOException e)\n" + 
+				"                {\n" + 
+				"                    e.printStackTrace();\n" + 
+				"                }\n" + 
+				"            }\n" + 
+				"            PrintWriter madoka = null;\n" + 
+				"            try\n" + 
+				"            {\n" + 
+				"                madoka = new PrintWriter(new FileWriter(log, true));\n" + 
+				"            }\n" + 
+				"            catch (IOException e)\n" + 
+				"            {\n" + 
+				"                e.printStackTrace();\n" + 
+				"            }\n" + 
+				"            madoka.println(CSVFormat);\n" + 
+				"            madoka.flush();\n" + 
+				"            madoka.close();\n" + 
+				"        }\n" + 
+				"\n    }\n    public void cancel(View view) { finish(); }\n";
 		
 		wholeString += "}\n";
 		return wholeString;
