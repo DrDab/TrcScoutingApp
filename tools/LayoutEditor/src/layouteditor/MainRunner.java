@@ -319,7 +319,9 @@ public class MainRunner
 				"            madoka.println(CSVFormat);\n" + 
 				"            madoka.flush();\n" + 
 				"            madoka.close();\n" + 
-				"        }\n" + 
+				"        }\n        if (!USE_DEBUG)\n" + 
+				"        {  finish();  }" + 
+				"" + 
 				"\n    }\n    public void cancel(View view) { finish(); }\n";
 		
 		wholeString += "}\n";
