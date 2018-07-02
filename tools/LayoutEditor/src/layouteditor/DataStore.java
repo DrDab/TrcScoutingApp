@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
+import javax.swing.JComboBox;
+
 public class DataStore
 {
 	private static ArrayList<ElementHandler> elementList = new ArrayList<ElementHandler>();
@@ -14,10 +16,13 @@ public class DataStore
 	public static final int Spinner = 2;
 	public static final int CheckBox = 3;
 	
-	public static int Integer_ = 1;
-	public static int Double_ = 2;
-	public static int Boolean_ = 3;
-	public static int String_ = 4;
+	public static final int Integer_ = 1;
+	public static final int Double_ = 2;
+	public static final int Boolean_ = 3;
+	public static final int String_ = 4;
+	
+	public static String[] DataTypes;
+	public static JComboBox<String> f_dtype;
 	
 	public static ElementHandler getElementFromList(int idx)
 	{
