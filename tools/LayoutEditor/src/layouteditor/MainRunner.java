@@ -23,10 +23,10 @@ public class MainRunner
 	public static final int Spinner = 2;
 	public static final int CheckBox = 3;
 	
-	public static int Integer_ = 1;
-	public static int Double_ = 2;
-	public static int Boolean_ = 3;
-	public static int String_ = 4;
+	public static final int Integer_ = 1;
+	public static final int Double_ = 2;
+	public static final int Boolean_ = 3;
+	public static final int String_ = 4;
 	
 	public static JFrame home_frame;
 	public static JPanel optionpanel;
@@ -35,6 +35,22 @@ public class MainRunner
 	public static JButton add_entry;
 	public static JButton del_entry;
 	public static JScrollPane listPane;
+	
+	public static JLabel previewText;
+	
+	public static JLabel colonOne;
+	public static JLabel colonTwo;
+	public static JLabel colonThree;
+	
+	public static JTextField seg1;
+	public static JTextField seg2;
+	public static JTextField seg3;
+	public static JTextField seg4;
+	public static JTextField seg5;
+	public static JTextField seg6;
+	
+	public static JTextField dataStoreBox;
+	public static JTextField setCompetitionNameBox;
 	
 	public static void main(String[] args) 
 	{
@@ -51,7 +67,7 @@ public class MainRunner
 		del_entry = new JButton("-");
 		del_entry.setFont(new Font("Verdana", Font.BOLD, 20));
 		del_entry.setText("-");
-		del_entry.setBounds(150, 45, 50, 50);
+		del_entry.setBounds(160, 45, 50, 50);
 		del_entry.addActionListener(new ActionListener()
 		  {
 			   public void actionPerformed(ActionEvent ae)
@@ -72,6 +88,54 @@ public class MainRunner
 			   }
 		});
 
+		previewText = new JLabel();
+		previewText.setText("Preview Text:");
+		previewText.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		previewText.setBounds(100, 210, 100, 20);
+		optionpanel.add(previewText);
+		
+		seg1 = new JTextField();
+		seg1.setBounds(100, 230, 60, 30);  
+		optionpanel.add(seg1);
+		
+		colonOne = new JLabel();
+		colonOne.setText(":");
+		colonOne.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		colonOne.setBounds(170, 230, 30, 30);
+		optionpanel.add(colonOne);
+		
+		seg2 = new JTextField();
+		seg2.setBounds(185, 230, 60, 30);  
+		optionpanel.add(seg2);
+		
+		seg3 = new JTextField();
+		seg3.setBounds(250, 230, 60, 30);  
+		optionpanel.add(seg3);
+		
+		colonTwo = new JLabel();
+		colonTwo.setText(":");
+		colonTwo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		colonTwo.setBounds(320, 230, 30, 30);
+		optionpanel.add(colonTwo);
+		
+		seg4 = new JTextField();
+		seg4.setBounds(335, 230, 60, 30);  
+		optionpanel.add(seg4);
+		
+		seg5 = new JTextField();
+		seg5.setBounds(400, 230, 60, 30);  
+		optionpanel.add(seg5);
+		
+		colonThree = new JLabel();
+		colonThree.setText(":");
+		colonThree.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		colonThree.setBounds(470, 230, 30, 30);
+		optionpanel.add(colonThree);
+		
+		seg6 = new JTextField();
+		seg6.setBounds(485, 230, 60, 30);  
+		optionpanel.add(seg6);
+		
         list = new JList<ElementHandler>(l1);  
         //list.setBounds(100, 100, 250, 100);  
         listPane = new JScrollPane(list);
@@ -84,13 +148,8 @@ public class MainRunner
 		home_frame.setSize(1200, 800);
 		home_frame.setVisible(true);
 		
-		
-		DataStore.addElementToList(new ElementHandler(1337, "TestTextBox", CheckBox, Boolean_, "borbTest", "testVar", "test option"));
-		DataStore.addElementToList(new ElementHandler(1338, "TestTextBox2", CheckBox, Boolean_, "borbTest2", "testVar2", "test option2"));
-		DataStore.addElementToList(new ElementHandler(1339, "TestTextBox3", CheckBox, Boolean_, "borbTest3", "testVar3", "test option3"));
-		
-		DataStore.setPrevCfg(new PreviewConfig("T1", DataStore.getElementFromList(0), "T2", DataStore.getElementFromList(1), "T3", DataStore.getElementFromList(2)));;
-		System.out.println(DataStore.generateSetCompetitionNameClass());
+		// DataStore.setPrevCfg(new PreviewConfig("T1", DataStore.getElementFromList(0), "T2", DataStore.getElementFromList(1), "T3", DataStore.getElementFromList(2)));;
+		// System.out.println(DataStore.generateSetCompetitionNameClass());
 	}
 
 	public static void openFormAdderForm()
@@ -99,10 +158,12 @@ public class MainRunner
 		// 1 Spinner available options (ok): String
 		// 2 CheckBox available options (ok): Boolean
 		
+		// TODO: Add description form
+		
 		JFrame inputFrame = new JFrame("Add Form");
 		inputFrame.setResizable(false);
 		inputFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		inputFrame.setSize(500, 250);
+		inputFrame.setSize(500, 350);
 		JPanel inputPanel = new JPanel();
 		inputPanel.setLayout(null);
 		
@@ -195,11 +256,65 @@ public class MainRunner
 		DataTypeText.setBounds(10, 170, 80, 20);
 		inputPanel.add(DataTypeText);
 		
+		JTextField descriptionForm = new JTextField();  
+		descriptionForm.setBounds(18, 220, 150, 30);  
+		inputPanel.add(descriptionForm);
+		
+		JLabel descriptionText = new JLabel();
+		descriptionText.setText("Description:");
+		descriptionText.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		descriptionText.setBounds(20, 200, 120, 20);
+		inputPanel.add(descriptionText);
+		
 		JButton confirm_Data = new JButton("OK");
 		confirm_Data.setFont(new Font("Verdana", Font.BOLD, 18));
 		confirm_Data.setText("OK");
 		confirm_Data.setBounds(400, 60, 80, 80);
 		inputPanel.add(confirm_Data);
+		
+		confirm_Data.addActionListener(new ActionListener()
+		  {
+			   public void actionPerformed(ActionEvent ae)
+			   {
+				   int csvpos = Integer.parseInt(CSVPosForm.getText().toString());
+				   String formname = formName.getText().toString();
+				   String formtypestr = f_mtype.getSelectedItem().toString();
+				   int formtype = -1;
+				   if (formtypestr.matches("EditText"))
+				   {
+					   formtype = EditText;
+				   }
+				   else if (formtypestr.matches("Spinner"))
+				   {
+					   formtype = Spinner;
+				   }
+				   else
+				   {
+					   formtype = CheckBox;
+				   }
+				   String datatypestr = DataStore.f_dtype.getSelectedItem().toString();
+				   int datatype = -1;
+				   if (datatypestr.matches("Integer"))
+				   {
+					   datatype = Integer_;
+				   }
+				   else if (datatypestr.matches("Double"))
+				   {
+					   datatype = Double_;
+				   }
+				   else if (datatypestr.matches("Boolean"))
+				   {
+					   datatype = Boolean_;
+				   }
+				   else
+				   {
+					   datatype = String_;
+				   }
+				   String description = descriptionForm.getText().toString();
+				   DataStore.addElementToList(new ElementHandler(csvpos, formname, formtype, datatype, parseVarName.getText().toString(), formname, description));
+			       inputFrame.dispose();
+			   }
+		});
 		
 		inputFrame.add(inputPanel);
 		inputFrame.setVisible(true);
