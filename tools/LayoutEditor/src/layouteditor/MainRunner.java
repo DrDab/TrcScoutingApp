@@ -8,8 +8,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoundedRangeModel;
-import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -18,7 +16,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -359,7 +356,7 @@ public class MainRunner
 		inputPanel.add(confirm_Data);
 		
 		confirm_Data.addActionListener(new ActionListener()
-		  {
+		{
 			   public void actionPerformed(ActionEvent ae)
 			   {
 				   int csvpos = Integer.parseInt(CSVPosForm.getText().toString());
@@ -397,7 +394,7 @@ public class MainRunner
 					   datatype = String_;
 				   }
 				   String description = descriptionForm.getText().toString();
-				   DataStore.addElementToList(new ElementHandler(csvpos, formname, formtype, datatype, parseVarName.getText().toString(), formname, description));
+				   DataStore.addElementToList(new ElementHandler(csvpos, formname, formtype, datatype, formname, parseVarName.getText().toString(), description));
 			       inputFrame.dispose();
 			   }
 		});
