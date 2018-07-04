@@ -76,6 +76,10 @@ public class DataStore
 	
 	public static String generateSetCompetitionNameClass()
 	{
+		if (elementList.size() == 0)
+		{
+			throw new NullPointerException("There's nothing in the elements of H A R M O N Y");
+		}
 		ArrayList<ElementHandler> kitsune = elementList;
 		Collections.sort(kitsune);
 		String wholeString = "";
@@ -380,6 +384,10 @@ public class DataStore
 	// This class needs to be procedurally generated since it contains the header for the CSV.
 	public static String generateDataStoreClass()
 	{
+		if (elementList.size() == 0)
+		{
+			throw new NullPointerException("There's nothing in the elements of H A R M O N Y");
+		}
 		String columnLabels = "";
 		
 		ArrayList<ElementHandler> kitsune = elementList;
