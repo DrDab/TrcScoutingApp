@@ -26,6 +26,8 @@ import javax.swing.ScrollPaneConstants;
 
 public class MainRunner 
 {
+	public static final String VERSION_ID = "0.1a";
+	
 	public static final int EditText = 1;
 	public static final int Spinner = 2;
 	public static final int CheckBox = 3;
@@ -201,6 +203,12 @@ public class MainRunner
 		dsBox.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 		dsBox.setBounds(600, 280, 200, 20);
 		optionpanel.add(dsBox);
+		
+		JLabel versionLabel = new JLabel();
+		versionLabel.setText("TRC Scouting App Layout Editor version " + VERSION_ID + " by Victor Du");
+		versionLabel.setFont(new Font("Segoe UI", Font.PLAIN, 10));
+		versionLabel.setBounds(460, 750, 300, 20);
+		optionpanel.add(versionLabel);
 		
 		setCompetitionNameBox.setText("Wake up, Neo...\n\nThe Matrix has you...\n\nFollow the white rabbit.\n\nKnock knock, Neo.");
 		dataStoreBox.setText("' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' \n" + 
