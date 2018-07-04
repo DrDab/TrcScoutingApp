@@ -218,11 +218,11 @@ public class MainRunner
 				"		    |_/\\____/ \\_____/\n" + 
 				"	                     \n" + 
 				"	                     \n"
-				+ "After being introduced to the FIRST Robotics Competition by\nBellarmine Prep (Team 360) during the 2000 season, Larry Barello\nsought to enter the 2001 Competition closer to home at his daughter’s\nschool, the Bellevue International School (IS). At the end of Ryan\nMcElroy’s Junior year at IS, Larry came with team 360 and made a\npresentation with the robot he had helped build the previous year.\nInterested students signed up, and Ryan happened to sign up first.\nThat summer, Larry contacted Ryan about getting the club started. \n" + 
+				+ "After being introduced to the FIRST Robotics Competition by\nBellarmine Prep (Team 360) during the 2000 season, Larry Barello\nsought to enter the 2001 Competition closer to home at his\ndaughter’s school, the Bellevue International School (IS). At the\nend of Ryan McElroy’s Junior year at IS, Larry came with team 360\nand made a presentation with the robot he had helped build the\nprevious year. Interested students signed up, and Ryan happened to\nsign up first. That summer, Larry contacted Ryan about getting the\nclub started. \n" + 
 				"\n" + 
 				"Ryan wrote a constitution for the new club and guided it\nthrough the ASB approval process, and thus the TRC was born.\n" + 
 				"\n" + 
-				"Due to the nature of IS as a college prep alternative public school,\nthere were and are no engineering related classes. There were and\nare no woodworking class, metal class, auto class, or computer class.\nFor this reason, the Titan Robotics Club became immediately popular\nwith students who longed for these unavailable opportunities." + 
+				"Due to the nature of IS as a college prep alternative public school,\nthere were and are no engineering related classes. There were and\nare no woodworking class, metal class, auto class, or computer\nclass. For this reason, the Titan Robotics Club became immediately\npopular with students who longed for these unavailable\nopportunities." + 
 				"");
 		dataStoreBox.setText("' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' \n" + 
 				"' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' # ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' \n" + 
