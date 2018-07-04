@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
+import javax.swing.BoundedRangeModel;
+import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -14,8 +16,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 
 public class MainRunner 
 {
@@ -49,8 +54,10 @@ public class MainRunner
 	public static JTextField seg5;
 	public static JTextField seg6;
 	
-	public static JTextField dataStoreBox;
-	public static JTextField setCompetitionNameBox;
+	public static JTextArea dataStoreBox;
+	public static JTextArea setCompetitionNameBox;
+	
+	public static JButton generateDataButton;
 	
 	public static void main(String[] args) 
 	{
@@ -135,6 +142,48 @@ public class MainRunner
 		seg6 = new JTextField();
 		seg6.setBounds(485, 230, 60, 30);  
 		optionpanel.add(seg6);
+		
+		dataStoreBox = new JTextArea();
+		dataStoreBox.setBounds(600, 300, 500, 400);
+		dataStoreBox.setFont(new Font("Consolas", Font.PLAIN, 12));
+		JScrollPane dsbPane = new JScrollPane(dataStoreBox);
+		dsbPane.setBounds(600, 300, 500, 400);
+		dsbPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		optionpanel.add(dsbPane);
+		
+		setCompetitionNameBox = new JTextArea();
+		setCompetitionNameBox.setBounds(300, 300, 500, 400);
+		setCompetitionNameBox.setFont(new Font("Consolas", Font.PLAIN, 12));
+		JScrollPane scnPane = new JScrollPane(setCompetitionNameBox);
+		scnPane.setBounds(100, 300, 500, 400);
+		scnPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		optionpanel.add(scnPane);
+		
+		generateDataButton = new JButton("+");
+		generateDataButton.setFont(new Font("Verdana", Font.BOLD, 18));
+		generateDataButton.setText("GENERATE");
+		generateDataButton.setBounds(800, 100, 200, 100);
+		generateDataButton.addActionListener(new ActionListener()
+		  {
+			   public void actionPerformed(ActionEvent ae)
+			   {
+				   setCompetitionNameBox.setText("");
+				   dataStoreBox.setText("");
+			       DataStore.setPrevCfg(new PreviewConfig(seg1.getText().toString(), DataStore.getElementFromList(Integer.parseInt(seg2.getText().toString())), seg3.getText().toString(), DataStore.getElementFromList(Integer.parseInt(seg4.getText().toString())), seg5.getText().toString(), DataStore.getElementFromList(Integer.parseInt(seg6.getText().toString()))));
+			       dataStoreBox.setText(DataStore.generateDataStoreClass());
+			       setCompetitionNameBox.setText(DataStore.generateSetCompetitionNameClass());
+			   }
+			   
+		});
+		optionpanel.add(generateDataButton);
+				
+
+		
+	//	JScrollBar scrollBar = new JScrollBar(JScrollBar.VERTICAL);
+	//	BoundedRangeModel brm = dataStoreBox
+	//	scrollBar.setModel(brm);
+	   // panel.add(textField);
+	   // panel.add(scrollBar)
 		
         list = new JList<ElementHandler>(l1);  
         //list.setBounds(100, 100, 250, 100);  
