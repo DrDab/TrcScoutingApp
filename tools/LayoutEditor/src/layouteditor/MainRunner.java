@@ -1,5 +1,6 @@
 package layouteditor;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -66,6 +67,7 @@ public class MainRunner
 		home_frame.setResizable(false);
 		optionpanel = new JPanel();
 		optionpanel.setLayout(null);
+		optionpanel.setBackground(Color.CYAN);
 		l1 = new DefaultListModel<>();  
 		add_entry = new JButton("+");
 		add_entry.setFont(new Font("Verdana", Font.BOLD, 18));
@@ -75,6 +77,10 @@ public class MainRunner
 		del_entry.setFont(new Font("Verdana", Font.BOLD, 20));
 		del_entry.setText("-");
 		del_entry.setBounds(160, 45, 50, 50);
+		add_entry.setForeground(Color.GREEN);
+		add_entry.setBackground(Color.DARK_GRAY);
+		del_entry.setForeground(Color.RED);
+		del_entry.setBackground(Color.DARK_GRAY);
 		del_entry.addActionListener(new ActionListener()
 		  {
 			   public void actionPerformed(ActionEvent ae)
@@ -103,6 +109,9 @@ public class MainRunner
 		
 		seg1 = new JTextField();
 		seg1.setBounds(100, 230, 60, 30);  
+		seg1.setBackground(Color.DARK_GRAY);
+		seg1.setForeground(Color.CYAN);
+		seg1.setCaretColor(Color.CYAN);
 		optionpanel.add(seg1);
 		
 		colonOne = new JLabel();
@@ -113,10 +122,16 @@ public class MainRunner
 		
 		seg2 = new JTextField();
 		seg2.setBounds(185, 230, 60, 30);  
+		seg2.setBackground(Color.DARK_GRAY);
+		seg2.setForeground(Color.CYAN);
+		seg2.setCaretColor(Color.CYAN);
 		optionpanel.add(seg2);
 		
 		seg3 = new JTextField();
-		seg3.setBounds(250, 230, 60, 30);  
+		seg3.setBounds(250, 230, 60, 30); 
+		seg3.setBackground(Color.DARK_GRAY);
+		seg3.setForeground(Color.CYAN);
+		seg3.setCaretColor(Color.CYAN);
 		optionpanel.add(seg3);
 		
 		colonTwo = new JLabel();
@@ -127,10 +142,16 @@ public class MainRunner
 		
 		seg4 = new JTextField();
 		seg4.setBounds(335, 230, 60, 30);  
+		seg4.setBackground(Color.DARK_GRAY);
+		seg4.setForeground(Color.CYAN);
+		seg4.setCaretColor(Color.CYAN);
 		optionpanel.add(seg4);
 		
 		seg5 = new JTextField();
 		seg5.setBounds(400, 230, 60, 30);  
+		seg5.setBackground(Color.DARK_GRAY);
+		seg5.setForeground(Color.CYAN);
+		seg5.setCaretColor(Color.CYAN);
 		optionpanel.add(seg5);
 		
 		colonThree = new JLabel();
@@ -141,10 +162,16 @@ public class MainRunner
 		
 		seg6 = new JTextField();
 		seg6.setBounds(485, 230, 60, 30);  
+		seg6.setBackground(Color.DARK_GRAY);
+		seg6.setForeground(Color.CYAN);
+		seg6.setCaretColor(Color.CYAN);
 		optionpanel.add(seg6);
 		
 		dataStoreBox = new JTextArea();
 		dataStoreBox.setBounds(600, 300, 500, 400);
+		dataStoreBox.setBackground(Color.DARK_GRAY);
+		dataStoreBox.setForeground(Color.CYAN);
+		dataStoreBox.setCaretColor(Color.CYAN);
 		dataStoreBox.setFont(new Font("Consolas", Font.PLAIN, 12));
 		JScrollPane dsbPane = new JScrollPane(dataStoreBox);
 		dsbPane.setBounds(600, 300, 500, 400);
@@ -153,6 +180,9 @@ public class MainRunner
 		
 		setCompetitionNameBox = new JTextArea();
 		setCompetitionNameBox.setBounds(300, 300, 500, 400);
+		setCompetitionNameBox.setBackground(Color.DARK_GRAY);
+		setCompetitionNameBox.setForeground(Color.CYAN);
+		setCompetitionNameBox.setCaretColor(Color.CYAN);
 		setCompetitionNameBox.setFont(new Font("Consolas", Font.PLAIN, 12));
 		JScrollPane scnPane = new JScrollPane(setCompetitionNameBox);
 		scnPane.setBounds(100, 300, 500, 400);
@@ -162,6 +192,8 @@ public class MainRunner
 		generateDataButton = new JButton("+");
 		generateDataButton.setFont(new Font("Verdana", Font.BOLD, 18));
 		generateDataButton.setText("GENERATE");
+		generateDataButton.setForeground(Color.CYAN);
+		generateDataButton.setBackground(Color.DARK_GRAY);
 		generateDataButton.setBounds(800, 100, 200, 100);
 		generateDataButton.addActionListener(new ActionListener()
 		  {
@@ -178,6 +210,8 @@ public class MainRunner
 		optionpanel.add(generateDataButton);
 				
         list = new JList<ElementHandler>(l1);  
+        list.setBackground(Color.DARK_GRAY);
+        list.setForeground(Color.CYAN);
         listPane = new JScrollPane(list);
         listPane.setBounds(100, 100, 250, 100);
         optionpanel.add(listPane);
@@ -197,6 +231,7 @@ public class MainRunner
 		inputFrame.setSize(500, 350);
 		JPanel inputPanel = new JPanel();
 		inputPanel.setLayout(null);
+		inputPanel.setBackground(Color.CYAN);
 		
 		JTextField formName = new JTextField();  
 		formName.setBounds(100, 25, 200, 30);  
