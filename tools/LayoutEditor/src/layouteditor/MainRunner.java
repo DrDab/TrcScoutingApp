@@ -65,7 +65,6 @@ public class MainRunner
 	
 	public static void main(String[] args) 
 	{
-		// TODO Auto-generated method stub
 		home_frame = new JFrame("TRC Scouting App Layout Editor");
 		home_frame.setResizable(false);
 		optionpanel = new JPanel();
@@ -210,7 +209,21 @@ public class MainRunner
 		versionLabel.setBounds(460, 750, 300, 20);
 		optionpanel.add(versionLabel);
 		
-		setCompetitionNameBox.setText("Wake up, Neo...\n\nThe Matrix has you...\n\nFollow the white rabbit.\n\nKnock knock, Neo.");
+		setCompetitionNameBox.setText("\n" + 
+				"		   ___  _____  _____ \n" + 
+				"		  /   ||  _  |/ __  \\ Titan\n" + 
+				"		 / /| || |_| |`' / /' Robotics\n" + 
+				"		/ /_| |\\____ |  / /   Club\n " + 
+				"		\\___  |.___/ /./ /___\n" + 
+				"		    |_/\\____/ \\_____/\n" + 
+				"	                     \n" + 
+				"	                     \n"
+				+ "After being introduced to the FIRST Robotics Competition by\nBellarmine Prep (Team 360) during the 2000 season, Larry Barello\nsought to enter the 2001 Competition closer to home at his daughter’s\nschool, the Bellevue International School (IS). At the end of Ryan\nMcElroy’s Junior year at IS, Larry came with team 360 and made a\npresentation with the robot he had helped build the previous year.\nInterested students signed up, and Ryan happened to sign up first.\nThat summer, Larry contacted Ryan about getting the club started. \n" + 
+				"\n" + 
+				"Ryan wrote a constitution for the new club and guided it\nthrough the ASB approval process, and thus the TRC was born.\n" + 
+				"\n" + 
+				"Due to the nature of IS as a college prep alternative public school,\nthere were and are no engineering related classes. There were and\nare no woodworking class, metal class, auto class, or computer class.\nFor this reason, the Titan Robotics Club became immediately popular\nwith students who longed for these unavailable opportunities." + 
+				"");
 		dataStoreBox.setText("' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' \n" + 
 				"' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' # ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' \n" + 
 				"' ' ' ' ' ' ' ' ' ' ' ' + ' ' # ' ' # # # ' ' ' ' ' ' ' ' ' ' ' ' ' \n" + 
@@ -265,9 +278,45 @@ public class MainRunner
 				       dataStoreBox.setText(DataStore.generateDataStoreClass());
 				       setCompetitionNameBox.setText(DataStore.generateSetCompetitionNameClass());
 				   }
-				   catch (Exception e)
+				   catch (ArrayIndexOutOfBoundsException arg0)
 				   {
-					   e.printStackTrace();
+					   arg0.printStackTrace();
+					   JFrame kawaii = new JFrame("Error");
+					   kawaii.setResizable(false);
+					   kawaii.getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.WHITE));
+					   JPanel inputPanel = new JPanel();
+					   inputPanel.setLayout(null);
+					   inputPanel.setBackground(Color.DARK_GRAY);
+					   JLabel kawaiichan = new JLabel();
+					   JButton button99 = new JButton("OK");
+					   button99.setBounds(375, 100, 50, 50);
+					   button99.setFont(new Font("Segoe UI", Font.BOLD, 20));
+					   button99.setMargin(new Insets(0, 0, 0, 0));
+					   button99.setBackground(Color.DARK_GRAY);
+					   button99.setForeground(Color.CYAN);
+					   kawaii.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+					   kawaiichan.setText("All fields must be filled in correctly before generating the classes.");
+					   kawaiichan.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+					   kawaiichan.setForeground(Color.CYAN);
+					   kawaiichan.setBounds(150, 40, 800, 50);
+					   inputPanel.add(button99);
+					   inputPanel.add(kawaiichan);
+					   kawaii.add(inputPanel);
+					   kawaii.setSize(800, 200);
+					   Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+					   kawaii.setLocation(dim.width/2-kawaii.getSize().width/2, dim.height/2-kawaii.getSize().height/2);
+					   kawaii.setVisible(true);
+					   button99.addActionListener(new ActionListener()
+					   {
+						   public void actionPerformed(ActionEvent ae)
+						   {
+							   kawaii.dispose();
+						   }
+					   });
+				   }
+				   catch (Exception arg0)
+				   {
+					   arg0.printStackTrace();
 					   JFrame kawaii = new JFrame("Error");
 					   kawaii.setResizable(false);
 					   kawaii.getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.WHITE));
