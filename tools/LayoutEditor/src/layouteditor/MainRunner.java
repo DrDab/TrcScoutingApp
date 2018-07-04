@@ -177,16 +177,7 @@ public class MainRunner
 		});
 		optionpanel.add(generateDataButton);
 				
-
-		
-	//	JScrollBar scrollBar = new JScrollBar(JScrollBar.VERTICAL);
-	//	BoundedRangeModel brm = dataStoreBox
-	//	scrollBar.setModel(brm);
-	   // panel.add(textField);
-	   // panel.add(scrollBar)
-		
         list = new JList<ElementHandler>(l1);  
-        //list.setBounds(100, 100, 250, 100);  
         listPane = new JScrollPane(list);
         listPane.setBounds(100, 100, 250, 100);
         optionpanel.add(listPane);
@@ -196,19 +187,10 @@ public class MainRunner
 		home_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		home_frame.setSize(1200, 800);
 		home_frame.setVisible(true);
-		
-		// DataStore.setPrevCfg(new PreviewConfig("T1", DataStore.getElementFromList(0), "T2", DataStore.getElementFromList(1), "T3", DataStore.getElementFromList(2)));;
-		// System.out.println(DataStore.generateSetCompetitionNameClass());
 	}
 
 	public static void openFormAdderForm()
 	{	
-		// 0 EditText available options (ok): Integer, Double, Boolean, String
-		// 1 Spinner available options (ok): String
-		// 2 CheckBox available options (ok): Boolean
-		
-		// TODO: Add description form
-		
 		JFrame inputFrame = new JFrame("Add Form");
 		inputFrame.setResizable(false);
 		inputFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

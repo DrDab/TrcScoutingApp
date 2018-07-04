@@ -442,10 +442,6 @@ public class DataStore
 				"    static int AUTOSAVE_SECONDS = 300;  // by default, save changes every 5 minutes.\n" + 
 				"\n" + 
 				"    static ArrayList<String> contests = new ArrayList<String>();\n" + 
-				"    /**\n" + 
-				"     * The ArrayList \"CsvFormattedContests\" should be in the format:\n" + 
-				"     * \"Team Contained Status, Date, Match #, Competition Name, Competition Type, Spectating Team Number, Spectating Team Type, Conditions\"\n" + 
-				"     */\n" + 
 				"    static ArrayList<String> CsvFormattedContests = new ArrayList<String>();\n" + 
 				"\n" + 
 				"    static int SELF_TEAM_NUMBER = 3543;\n" + 
@@ -479,8 +475,7 @@ public class DataStore
 				"                log.createNewFile();\n" + 
 				"            }\n" + 
 				"            PrintWriter madoka = new PrintWriter(new FileWriter(log, true));\n" + 
-				"            madoka.println(\"Log by: \" + FIRST_NAME + \" \" + LAST_NAME + \", written on \" + getDateAsString());                    // auto                                                                                                                                        // teleop                                                                                                                                                                                                                                                                                                       // endgame                                                                       // penalties\n" + 
-				"            madoka.println(\"" + columnLabels +"\");\n" +
+				"            madoka.println(\"Log by: \" + FIRST_NAME + \" \" + LAST_NAME + \", written on \" + getDateAsString());" +				"            madoka.println(\"" + columnLabels +"\");\n" +
 				"            for(String sk : CsvFormattedContests)\n" + 
 				"            {\n" + 
 				"                madoka.println(sk);\n" + 
