@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoundedRangeModel;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
@@ -229,11 +230,15 @@ public class MainRunner
 		inputFrame.setResizable(false);
 		inputFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		inputFrame.setSize(500, 350);
+		inputFrame.getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
 		JPanel inputPanel = new JPanel();
 		inputPanel.setLayout(null);
 		inputPanel.setBackground(Color.CYAN);
 		
 		JTextField formName = new JTextField();  
+		formName.setBackground(Color.DARK_GRAY);
+		formName.setForeground(Color.CYAN);
+		formName.setCaretColor(Color.CYAN);
 		formName.setBounds(100, 25, 200, 30);  
 		inputPanel.add(formName);
 		
@@ -249,9 +254,13 @@ public class MainRunner
 		inputPanel.add(DataStore.f_dtype);
 		DefaultComboBoxModel<String> model2 = new DefaultComboBoxModel<String>(DataStore.DataTypes);
 		DataStore.f_dtype.setModel(model2);
+		DataStore.f_dtype.setBackground(Color.DARK_GRAY);
+		DataStore.f_dtype.setForeground(Color.CYAN);
 		
 		String[] types = {"EditText", "Spinner", "CheckBox"};
 	    JComboBox<String> f_mtype = new JComboBox<String>(types);
+	    f_mtype.setBackground(Color.DARK_GRAY);
+		f_mtype.setForeground(Color.CYAN);
 	    f_mtype.setBounds(100, 60, 120, 20);
 	    f_mtype.addItemListener (new ItemListener () 
 	    {
@@ -296,7 +305,10 @@ public class MainRunner
 		fTypesText.setBounds(15, 60, 80, 20);
 		inputPanel.add(fTypesText);
 	    
-		JTextField parseVarName = new JTextField();  
+		JTextField parseVarName = new JTextField();
+		parseVarName.setBackground(Color.DARK_GRAY);
+		parseVarName.setForeground(Color.CYAN);
+		parseVarName.setCaretColor(Color.CYAN);
 		parseVarName.setBounds(135, 90, 200, 30);  
 		inputPanel.add(parseVarName);
 		
@@ -306,7 +318,10 @@ public class MainRunner
 		parseVarText.setBounds(10, 95, 120, 20);
 		inputPanel.add(parseVarText);
 		
-		JTextField CSVPosForm = new JTextField();  
+		JTextField CSVPosForm = new JTextField(); 
+		CSVPosForm.setBackground(Color.DARK_GRAY);
+		CSVPosForm.setForeground(Color.CYAN);
+		CSVPosForm.setCaretColor(Color.CYAN);
 		CSVPosForm.setBounds(80, 130, 80, 30);  
 		inputPanel.add(CSVPosForm);
 		
@@ -323,6 +338,9 @@ public class MainRunner
 		inputPanel.add(DataTypeText);
 		
 		JTextField descriptionForm = new JTextField();  
+		descriptionForm.setBackground(Color.DARK_GRAY);
+		descriptionForm.setForeground(Color.CYAN);
+		descriptionForm.setCaretColor(Color.CYAN);
 		descriptionForm.setBounds(18, 220, 150, 30);  
 		inputPanel.add(descriptionForm);
 		
@@ -335,6 +353,8 @@ public class MainRunner
 		JButton confirm_Data = new JButton("OK");
 		confirm_Data.setFont(new Font("Verdana", Font.BOLD, 18));
 		confirm_Data.setText("OK");
+		confirm_Data.setBackground(Color.DARK_GRAY);
+		confirm_Data.setForeground(Color.CYAN);
 		confirm_Data.setBounds(400, 60, 80, 80);
 		inputPanel.add(confirm_Data);
 		
