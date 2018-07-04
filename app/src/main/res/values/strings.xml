@@ -26,17 +26,74 @@
     </string-array>
 
     <string-array name="spectating_types">
-        <item>Red Alliance 1</item>
-        <item>Red Alliance 2</item>
-        <item>Blue Alliance 1</item>
-        <item>Blue Alliance 2</item>
+        <item>Red Alliance 1 (Right)</item>
+        <item>Red Alliance 2 (Center)</item>
+        <item>Red Alliance 3 (Left)</item>
+        <item>Blue Alliance 1 (Right)</item>
+        <item>Blue Alliance 2 (Center)</item>
+        <item>Blue Alliance 3 (Left)</item>
     </string-array>
+
 
     <string-array name="save_times">
         <item>2 minutes</item>
         <item>5 minutes</item>
         <item>10 minutes</item>
         <item>20 minutes</item>
+    </string-array>
+
+    <string-array name="left_or_right">
+        <item>Left</item>
+        <item>Right</item>
+    </string-array>
+
+    <string-array name="yes_or_no">
+        <item>No</item>
+        <item>Yes</item>
+    </string-array>
+
+    <string-array name="flexible_yes_or_no">
+        <item>Didn't Attempt</item>
+        <item>Attempted and failed</item>
+        <item>Yes</item>
+    </string-array>
+
+    <string-array name="starting_positions">
+        <item>Left</item>
+        <item>Middle</item>
+        <item>Right</item>
+    </string-array>
+
+    <string-array name="speeds">
+        <item>A lot slower than us</item>
+        <item>Slower than us</item>
+        <item>Faster than us</item>
+        <item>A lot faster than us</item>
+    </string-array>
+
+    <string-array name="robot_breakdown">
+        <item>Not Disabled</item>
+        <item>Partially Disabled</item>
+        <item>Disabled</item>
+    </string-array>
+
+    <string-array name="cubes_count">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
     </string-array>
 
     <string name="title_activity_settings">Settings</string>

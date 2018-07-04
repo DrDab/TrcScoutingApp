@@ -1,15 +1,20 @@
 package trc3543.trcscoutingapp;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,7 +23,10 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 
 @SuppressWarnings("all")
@@ -26,7 +34,7 @@ public class AddCompetitions extends AppCompatActivity
 {
     /**
      *
-     *  Copyright (c) 2017 Titan Robotics Club, _c0da_ (Victor Du)
+     *  Copyright (c) 2018 Titan Robotics Club, _c0da_ (Victor Du)
      *
      *	Permission is hereby granted, free of charge, to any person obtaining a copy
      *	of this software and associated documentation files (the "Software"), to deal
@@ -47,6 +55,8 @@ public class AddCompetitions extends AppCompatActivity
      *	SOFTWARE.
      */
 
+    public static final boolean MAKE_CHANGES_READ_ONLY = false;
+
     static ArrayAdapter<String> adapter;
     static ListView contestList;
 
@@ -55,6 +65,21 @@ public class AddCompetitions extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_competitions);
+
+        // verifyStoragePermissions(this);
+
+        Log.d("FileIO","External Storage Directory: " + Environment.getExternalStorageDirectory().toString());
+
+        // let's check if we have file permissions before running.
+        if (!verifyStoragePermissions(this))
+        {
+            AlertDialog alertDialog1 = new AlertDialog.Builder(AddCompetitions.this).create();
+            alertDialog1.setTitle("Warning! (DON'T CLOSE)");
+            alertDialog1.setMessage("Please go into Settings > Apps > \"TRC Scouting App\" > Permissions and check Storage.");
+            alertDialog1.show();
+            return;
+        }
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         contestList = (ListView) findViewById(R.id.listView);
@@ -74,9 +99,16 @@ public class AddCompetitions extends AppCompatActivity
                 alertDialog.setTitle("Game Information");
                 if (DataStore.CsvFormattedContests.size() >= 1)
                 {
-                    String s = DataStore.CsvFormattedContests.get(position);
-                    alertDialog.setMessage(s);
-                    alertDialog.show();
+                    if (MAKE_CHANGES_READ_ONLY)
+                    {
+                        String s = DataStore.CsvFormattedContests.get(position);
+                        alertDialog.setMessage(s);
+                        alertDialog.show();
+                    }
+                    else
+                    {
+                        openCompNamePrompt(true, position);
+                    }
                 }
                 else
                 {
@@ -95,7 +127,7 @@ public class AddCompetitions extends AppCompatActivity
                 // place a message
                 Snackbar.make(view, "Enter competition information please", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                openCompNamePrompt();
+                openCompNamePrompt(false, -1);
 
             }
         });
@@ -104,17 +136,22 @@ public class AddCompetitions extends AppCompatActivity
         {
             addToList("No Entries Yet");
         }
+
+        // check if user information is saved. if not, open the settings window.
+        boolean openSettingsCondition = false;
         if (!DataStore.existsSave())
         {
             File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
             if (!writeDirectory.exists())
             {
+                Log.d("FileIO", "Creating write directory: " + writeDirectory.toString());
                 writeDirectory.mkdir();
             }
             File log = new File(writeDirectory, "settings.coda");
             if(!log.exists())
             {
                 try {
+                    Log.d("FileIO", "Creating settings file: " + log.toString());
                     log.createNewFile();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -123,11 +160,65 @@ public class AddCompetitions extends AppCompatActivity
             Intent intent = new Intent(this, Settings.class);
             startActivity(intent);
         }
+        else
+        {
+            // if file exists, check that all data is entered.
+            File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+            if (!writeDirectory.exists())
+            {
+                writeDirectory.mkdir();
+            }
+            File log = new File(writeDirectory, "settings.coda");
+            if(!log.exists())
+            {
+                try
+                {
+                    Log.d("FileIO", "Creating settings file: " + log.toString());
+                    log.createNewFile();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            BufferedReader br = null;
+            try
+            {
+                br = new BufferedReader(new FileReader(log));
+            }
+            catch (FileNotFoundException e)
+            {
+                openSettingsCondition = true;
+            }
+            try
+            {
+                for(int i = 0; i < 6; i++)
+                {
+                    if (br.readLine() == null)
+                    {
+                        openSettingsCondition = true;
+                    }
+                }
+            }
+            catch (IOException e)
+            {
+                openSettingsCondition = true;
+            }
+        }
+        // if all user data is not entered, open a settings screen. (This is if older versions are upgraded)
+        if (openSettingsCondition)
+        {
+            Intent intent = new Intent(this, Settings.class);
+            startActivity(intent);
+        }
+
         // start another thread to automatically save.
-        try {
+        try
+        {
             DataStore.parseAutoSaveBoolean();
             DataStore.parseAutoSaveTime();
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             e.printStackTrace();
         }
         Runnable autosaverunnable = new Runnable()
@@ -168,9 +259,9 @@ public class AddCompetitions extends AppCompatActivity
         }
         else if (id == R.id.action_makecsv)
         {
+            String filename = DataStore.FIRST_NAME+"_"+DataStore.LAST_NAME+"_results.csv";
             try
             {
-                String filename = DataStore.FIRST_NAME+"_"+DataStore.LAST_NAME+"_results.csv";
                 DataStore.writeContestsToCsv(filename);
             }
             catch (IOException e)
@@ -257,15 +348,31 @@ public class AddCompetitions extends AppCompatActivity
         adapter.notifyDataSetChanged();
     }
 
+    public static void resetListItem(String s, int pos)
+    {
+        DataStore.contests.set(pos, s);
+        adapter.notifyDataSetChanged();
+    }
+
     public static void removeFromList(String s)
     {
         DataStore.contests.remove(s);
         adapter.notifyDataSetChanged();
     }
 
-    public void openCompNamePrompt()
+    public void openCompNamePrompt(boolean modifyingExisting, int option)
     {
-        Intent intent = new Intent(this, SetCompetitionName.class);
+        Intent intent = null;
+        if (!modifyingExisting)
+        {
+            intent = new Intent(this, SetCompetitionName.class);
+            intent.putExtra("EditOption", -1 + "");
+        }
+        else
+        {
+            intent = new Intent(this, SetCompetitionName.class);
+            intent.putExtra("EditOption", option + "");
+        }
         startActivity(intent);
     }
     public void sendEmailWithCSV(String filename0, String target)
@@ -292,6 +399,25 @@ public class AddCompetitions extends AppCompatActivity
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+    public static boolean verifyStoragePermissions(Activity activity)
+    {
+        // Check if we have write permission
+        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        Log.d("FileIO", "Checking File I/O Permissions...");
+        if (permission != PackageManager.PERMISSION_GRANTED)
+        {
+            // We don't have permission so prompt the user
+            Log.d("FileIO", "File permissions insufficient, requesting privileges...");
+            return false;
+
+        }
+        return true;
     }
 
 }
