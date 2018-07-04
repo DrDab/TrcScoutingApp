@@ -169,7 +169,7 @@ public class MainRunner
 			   {
 				   setCompetitionNameBox.setText("");
 				   dataStoreBox.setText("");
-			       DataStore.setPrevCfg(new PreviewConfig(seg1.getText().toString(), DataStore.getElementFromList(Integer.parseInt(seg2.getText().toString())), seg3.getText().toString(), DataStore.getElementFromList(Integer.parseInt(seg4.getText().toString())), seg5.getText().toString(), DataStore.getElementFromList(Integer.parseInt(seg6.getText().toString()))));
+			       DataStore.setPrevCfg(new PreviewConfig(seg1.getText().toString(), DataStore.getElementFromList(DataStore.getElementIndexByCSVIndex(DataStore.getElementIndexByCSVIndex(Integer.parseInt(seg2.getText().toString())))), seg3.getText().toString(), DataStore.getElementFromList(DataStore.getElementIndexByCSVIndex(Integer.parseInt(seg4.getText().toString()))), seg5.getText().toString(), DataStore.getElementFromList(DataStore.getElementIndexByCSVIndex(Integer.parseInt(seg6.getText().toString())))));
 			       dataStoreBox.setText(DataStore.generateDataStoreClass());
 			       setCompetitionNameBox.setText(DataStore.generateSetCompetitionNameClass());
 			   }

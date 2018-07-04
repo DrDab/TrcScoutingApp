@@ -28,6 +28,18 @@ public class DataStore
 		return elementList.get(idx);
 	}
 	
+	public static int getElementIndexByCSVIndex(int csvidx)
+	{
+		for (int i = 0; i < elementList.size(); i++)
+		{
+			if (elementList.get(i).getCSVPos() == csvidx)
+			{
+				return i;
+			}
+		}
+		return -1;
+	}
+	
 	public static void addElementToList(ElementHandler e)
 	{
 		elementList.add(e);
