@@ -1,6 +1,7 @@
 package layouteditor;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 import javax.swing.JComboBox;
@@ -75,6 +76,8 @@ public class DataStore
 	
 	public static String generateSetCompetitionNameClass()
 	{
+		ArrayList<ElementHandler> kitsune = elementList;
+		Collections.sort(kitsune);
 		String wholeString = "";
 		String begin = "// THIS CODE WAS GENERATED AUTOMATICALLY BY Victor's SmartBuilder script. DO NOT MODIFY.\n\npackage trc3543.trcscoutingapp;\n" + 
 				"\n" + 
@@ -126,9 +129,9 @@ public class DataStore
 				"    static int editingoption = -1;\n\n\n    // BEGIN AUTO-GENERATED VARIABLES\n";
 		wholeString += begin;
 		// FIRST: Generate all static variables.
-		for(int i = 0; i < elementList.size(); i++)
+		for(int i = 0; i < kitsune.size(); i++)
 		{
-			ElementHandler tmp = elementList.get(i);
+			ElementHandler tmp = kitsune.get(i);
 			String declareString = "    static ";
 			if(tmp.getDataType() == Integer_)
 			{
@@ -194,10 +197,10 @@ public class DataStore
 				"            String[] OwOWhatsThis = read.split(\",\");\n" + 
 				"\n";
 		
-		for(int i = 0; i < elementList.size(); i++)
+		for(int i = 0; i < kitsune.size(); i++)
 		{
 			String kawai = "            // populate the ";
-			ElementHandler tmp = elementList.get(i);
+			ElementHandler tmp = kitsune.get(i);
 			kawai += tmp.getDescription() + ".\n";
 			if (tmp.getFormType() == CheckBox)
 			{
@@ -223,10 +226,10 @@ public class DataStore
 		wholeString += "    public void confirmTypes(View view)\n" + 
 				"    {\n" + 
 				"        boolean breakCond = false;\n";
-		for(int i = 0; i < elementList.size(); i++)
+		for(int i = 0; i < kitsune.size(); i++)
 		{
 			String kawai = "        // read the ";
-			ElementHandler tmp = elementList.get(i);
+			ElementHandler tmp = kitsune.get(i);
 			kawai += tmp.getDescription() + ".\n        if(!breakCond)\n        {\n";
 			if (tmp.getFormType() == CheckBox)
 			{
@@ -282,10 +285,10 @@ public class DataStore
 						"    {\n" +
 						"        String listMsg = \"" + DataStore.prevCfg + ";\n"+
 						"        String CSVFormat = ";
-		for(int i = 0; i < elementList.size(); i++)
+		for(int i = 0; i < kitsune.size(); i++)
 		{
 			String legalizeAwoo = "";
-			ElementHandler tmp = elementList.get(i);
+			ElementHandler tmp = kitsune.get(i);
 			if(tmp.getDataType() == Integer_)
 			{
 				legalizeAwoo += tmp.getReturnVariableName();
@@ -379,9 +382,12 @@ public class DataStore
 	{
 		String columnLabels = "";
 		
-		for(int i = 0; i < elementList.size(); i++)
+		ArrayList<ElementHandler> kitsune = elementList;
+		Collections.sort(kitsune);
+		
+		for(int i = 0; i < kitsune.size(); i++)
 		{
-			columnLabels += elementList.get(i).getDescription() + ",";
+			columnLabels += kitsune.get(i).getDescription() + ",";
 		}
 		
 		String retStr = "package trc3543.trcscoutingapp;\n" + 

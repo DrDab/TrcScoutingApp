@@ -87,7 +87,7 @@ public class ElementHandler implements Comparable<ElementHandler>
 	@Override
 	public int compareTo(ElementHandler o) 
 	{
-		return toString().compareTo(o.toString());
+		return ((Integer)CSVPosition).compareTo((Integer)o.getCSVPos());
 	}
 	
 	
