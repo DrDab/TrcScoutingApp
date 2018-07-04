@@ -199,7 +199,7 @@ public class MainRunner
 		optionpanel.add(scnText);
 		
 		JLabel dsBox = new JLabel();
-		dsBox.setText("SetCompetitionName.java");
+		dsBox.setText("DataStore.java");
 		dsBox.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 		dsBox.setBounds(600, 280, 200, 20);
 		optionpanel.add(dsBox);
