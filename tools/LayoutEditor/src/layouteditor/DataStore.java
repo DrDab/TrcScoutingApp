@@ -64,6 +64,11 @@ public class DataStore
 		elementList.remove(idx);
 	}
 	
+	public static int getListSize()
+	{
+		return elementList.size();
+	}
+	
 	public static void setPrevCfg(PreviewConfig pc)
 	{
 		prevCfg = pc;

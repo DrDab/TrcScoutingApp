@@ -272,11 +272,49 @@ public class MainRunner
 			   {
 				   try
 				   {
-					   setCompetitionNameBox.setText("");
-					   dataStoreBox.setText("");
-				       DataStore.setPrevCfg(new PreviewConfig(seg1.getText().toString(), DataStore.getElementFromList(DataStore.getElementIndexByCSVIndex(DataStore.getElementIndexByCSVIndex(Integer.parseInt(seg2.getText().toString())))), seg3.getText().toString(), DataStore.getElementFromList(DataStore.getElementIndexByCSVIndex(Integer.parseInt(seg4.getText().toString()))), seg5.getText().toString(), DataStore.getElementFromList(DataStore.getElementIndexByCSVIndex(Integer.parseInt(seg6.getText().toString())))));
-				       dataStoreBox.setText(DataStore.generateDataStoreClass());
-				       setCompetitionNameBox.setText(DataStore.generateSetCompetitionNameClass());
+					   if (DataStore.getListSize() == 0)
+					   {
+						   JFrame kawaii = new JFrame("Error");
+						   kawaii.setResizable(false);
+						   kawaii.getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.WHITE));
+						   JPanel inputPanel = new JPanel();
+						   inputPanel.setLayout(null);
+						   inputPanel.setBackground(Color.DARK_GRAY);
+						   JLabel kawaiichan = new JLabel();
+						   JButton button99 = new JButton("OK");
+						   button99.setBounds(375, 100, 50, 50);
+						   button99.setFont(new Font("Segoe UI", Font.BOLD, 20));
+						   button99.setMargin(new Insets(0, 0, 0, 0));
+						   button99.setBackground(Color.DARK_GRAY);
+						   button99.setForeground(Color.CYAN);
+						   kawaii.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						   kawaiichan.setText("Please add at least one form before generating code.");
+						   kawaiichan.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+						   kawaiichan.setForeground(Color.CYAN);
+						   kawaiichan.setBounds(150, 40, 800, 50);
+						   inputPanel.add(button99);
+						   inputPanel.add(kawaiichan);
+						   kawaii.add(inputPanel);
+						   kawaii.setSize(800, 200);
+						   Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+						   kawaii.setLocation(dim.width/2-kawaii.getSize().width/2, dim.height/2-kawaii.getSize().height/2);
+						   kawaii.setVisible(true);
+						   button99.addActionListener(new ActionListener()
+						   {
+							   public void actionPerformed(ActionEvent ae)
+							   {
+								   kawaii.dispose();
+							   }
+						   });
+					   }
+					   else
+					   {
+						   setCompetitionNameBox.setText("");
+						   dataStoreBox.setText("");
+					       DataStore.setPrevCfg(new PreviewConfig(seg1.getText().toString(), DataStore.getElementFromList(DataStore.getElementIndexByCSVIndex(DataStore.getElementIndexByCSVIndex(Integer.parseInt(seg2.getText().toString())))), seg3.getText().toString(), DataStore.getElementFromList(DataStore.getElementIndexByCSVIndex(Integer.parseInt(seg4.getText().toString()))), seg5.getText().toString(), DataStore.getElementFromList(DataStore.getElementIndexByCSVIndex(Integer.parseInt(seg6.getText().toString())))));
+					       dataStoreBox.setText(DataStore.generateDataStoreClass());
+					       setCompetitionNameBox.setText(DataStore.generateSetCompetitionNameClass());   
+					   }
 				   }
 				   catch (ArrayIndexOutOfBoundsException arg0)
 				   {
