@@ -81,7 +81,7 @@ public class ElementHandler implements Comparable<ElementHandler>
 	@Override
 	public String toString()
 	{
-		return "[" + CSVPosition + "] - " + description;
+		return "[" + CSVPosition + "] - (R.id." + formName + ") V: " + returnVariableName + " D:\"" + description + "\"";
 	}
 
 	@Override

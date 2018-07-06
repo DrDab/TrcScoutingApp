@@ -1,11 +1,15 @@
 package layouteditor;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.Random;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
@@ -23,6 +27,8 @@ import javax.swing.ScrollPaneConstants;
 
 public class MainRunner 
 {
+	public static final String VERSION_ID = "0.2a_anth_con";
+	
 	public static final int EditText = 1;
 	public static final int Spinner = 2;
 	public static final int CheckBox = 3;
@@ -60,7 +66,6 @@ public class MainRunner
 	
 	public static void main(String[] args) 
 	{
-		// TODO Auto-generated method stub
 		home_frame = new JFrame("TRC Scouting App Layout Editor");
 		home_frame.setResizable(false);
 		optionpanel = new JPanel();
@@ -68,11 +73,11 @@ public class MainRunner
 		optionpanel.setBackground(Color.CYAN);
 		l1 = new DefaultListModel<>();  
 		add_entry = new JButton("+");
-		add_entry.setFont(new Font("Verdana", Font.BOLD, 18));
+		add_entry.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		add_entry.setText("+");
 		add_entry.setBounds(100, 45, 50, 50);
 		del_entry = new JButton("-");
-		del_entry.setFont(new Font("Verdana", Font.BOLD, 20));
+		del_entry.setFont(new Font("Segoe UI", Font.BOLD, 20));
 		del_entry.setText("-");
 		del_entry.setBounds(160, 45, 50, 50);
 		add_entry.setForeground(Color.GREEN);
@@ -187,8 +192,77 @@ public class MainRunner
 		scnPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		optionpanel.add(scnPane);
 		
+		JLabel scnText = new JLabel();
+		scnText.setText("SetCompetitionName.java");
+		scnText.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		scnText.setBounds(100, 280, 200, 20);
+		optionpanel.add(scnText);
+		
+		JLabel dsBox = new JLabel();
+		dsBox.setText("DataStore.java");
+		dsBox.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		dsBox.setBounds(600, 280, 200, 20);
+		optionpanel.add(dsBox);
+		
+		JLabel versionLabel = new JLabel();
+		versionLabel.setText("TRC Scouting App Layout Editor version " + VERSION_ID + " by Victor Du");
+		versionLabel.setFont(new Font("Segoe UI", Font.PLAIN, 10));
+		versionLabel.setBounds(460, 750, 400, 20);
+		optionpanel.add(versionLabel);
+		
+		setCompetitionNameBox.setText("\n" + 
+				"		   ___  _____  _____ \n" + 
+				"		  /   ||  _  |/ __  \\ Titan\n" + 
+				"		 / /| || |_| |`' / /' Robotics\n" + 
+				"		/ /_| |\\____ |  / /   Club\n " + 
+				"		\\___  |.___/ /./ /___\n" + 
+				"		    |_/\\____/ \\_____/\n" + 
+				"	                     \n" + 
+				"	                     \n"
+				+ "After being introduced to the FIRST Robotics Competition by\nBellarmine Prep (Team 360) during the 2000 season, Larry Barello\nsought to enter the 2001 Competition closer to home at his\ndaughter’s school, the Bellevue International School (IS). At the\nend of Ryan McElroy’s Junior year at IS, Larry came with team 360\nand made a presentation with the robot he had helped build the\nprevious year. Interested students signed up, and Ryan happened to\nsign up first. That summer, Larry contacted Ryan about getting the\nclub started. \n" + 
+				"\n" + 
+				"Ryan wrote a constitution for the new club and guided it\nthrough the ASB approval process, and thus the TRC was born.\n" + 
+				"\n" + 
+				"Due to the nature of IS as a college prep alternative public school,\nthere were and are no engineering related classes. There were and\nare no woodworking class, metal class, auto class, or computer\nclass. For this reason, the Titan Robotics Club became immediately\npopular with students who longed for these unavailable\nopportunities." + 
+				"");
+		dataStoreBox.setText("' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' \n" + 
+				"' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' # ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' \n" + 
+				"' ' ' ' ' ' ' ' ' ' ' ' + ' ' # ' ' # # # ' ' ' ' ' ' ' ' ' ' ' ' ' \n" + 
+				"' ' ' ' ' ' ' ' ' ' # # # # ' # ' + # # # ' ' ' ' ' ' ' ' ' ' ' ' ' \n" + 
+				"' ' ' ' ' ' ' ' ' ' # # # # # # + # # # # + ' ' ' ' ' ' ' ' ' ' ' ' \n" + 
+				"' ' ' ' ' ' ' ' ' ' # # # # # ' + # # # # # # + ' # # ' ' ' ' ' ' ' \n" + 
+				"' ' ' ' ' ' ' ' ' # # # # + ' ' ; ' ' ' + # # # # # # # ' ' ' ' ' ' \n" + 
+				"' ' ' ' ' # # # # # # ' ' ' ' ' ' ' ' # ' ' ' # # # # # ' ' ' ' ' ' \n" + 
+				"' ' ' ' # # # # # # ' ' ' ' ' ' ' ' ' ' # ' ' ' # # # + ' ' ' ' ' ' \n" + 
+				"' ' ' ' + # # # + ' ' ' ' + ' ' ' ' # ' # ' ' ' ' # # # ' ' ' ' ' ' \n" + 
+				"' ' ' ' ' # # # ' ' ' ' ' # ' ' ' ' # ' # ' ' ' ' ' # # # ' ' ' ' ' \n" + 
+				"' ' ' ' ' # # ' ' ' ' ' ' # ' ' ' + # + # ' ' ' ' ' ' # # # # # ' ' \n" + 
+				"' ' ' ' # # + ' ' ' ' ' + + ' ' ' # ' # # ' ' ' ' ' ' + # # # # ' ' \n" + 
+				"' ' # # # # ' ' + + + + + # + + + + + + + + + + + + + ' # # # # ' ' \n" + 
+				"' + # # # # ' ' + # # # ; ' ' + + # # # ' ' ' # # # ' ' # # # ' ' ' \n" + 
+				"' # # # # + ' ' ' ' # + ' + # # # # + ' ' # # # ' ' ' ' + # # ' ' ' \n" + 
+				"' # # # # ' ' ' ' ' ' ' + + + + # + + + + + ' ' ' ' ' ' ' # # ' ' ' \n" + 
+				"' ' ' # # ' ' ' ' ' ' ' ' ' + ' ' ' ' + ' ' ' ' ' ' ' ' ' # # ' ' ' \n" + 
+				"' ' ' # # ' ' ' ' ' ' ' ' ' # ' ' ' + # ' ' ' ' ' ' ' ' ' # # # ' ' \n" + 
+				"' ' ' # # ' ' ' ' ' ' ' ' # # ' ' ' + # # ' ' ' ' ' ' ' ' # # # # ' \n" + 
+				"' ' ' # # + ' ' ' ' ' ' ' # ' + ' ' + ' # ' ' ' ' ' ' ' # # # # # ' \n" + 
+				"' ' # # # # ' ' ' ' ' ' # # + + ' ' + + # # ' ' ' ' ' ' # # # # ' ' \n" + 
+				"' ' # # # # ' ' ' ' ' + # ; # # ' ' # # ' # + ' ' ' ' ' # # ; ' ' ' \n" + 
+				"' ' # # # # # ' ' ' ' # # ' ' + ' ' + ' ' + # ' ' ' ' # # + ' ' ' ' \n" + 
+				"' ' ' + ' # # + ' ' # # ' ' ' ' ' ' + ' ' ' # # ' ' ' # # ' ' ' ' ' \n" + 
+				"' ' ' ' ' ' # # ' ' # + ' ' ' ' ' ' + ' ' ' ' # ' ' # # # ' ' ' ' ' \n" + 
+				"' ' ' ' ' ' # # # + # ' ' ' ' + ' ' + ' ' ' ' # + # # # # # ' ' ' ' \n" + 
+				"' ' ' ' ' ' # # # # + ' ' ' ' + + + + ' ' ' ' + # # # # # + ' ' ' ' \n" + 
+				"' ' ' ' ' ' # # # # # # ' ' ' # # # # ' ' + # # # + ' # # ' ' ' ' ' \n" + 
+				"' ' ' ' ' ' + # # # # # # # # # + + # # # # # # ' ' ' ' ' ' ' ' ' ' \n" + 
+				"' ' ' ' ' ' ' ' + ' ' + # # # # # # # # # # # # ' ' ' ' ' ' ' ' ' ' \n" + 
+				"' ' ' ' ' ' ' ' ' ' ' ' ' # # # # + + ' # # # # ' ' ' ' ' ' ' ' ' ' \n" + 
+				"' ' ' ' ' ' ' ' ' ' ' ' ' # # # ' ' ' ' ' # + ' ' ' ' ' ' ' ' ' ' ' \n" + 
+				"' ' ' ' ' ' ' ' ' ' ' ' ' ' ' + ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' \n" + 
+				"");
+		
 		generateDataButton = new JButton("+");
-		generateDataButton.setFont(new Font("Verdana", Font.BOLD, 18));
+		generateDataButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		generateDataButton.setText("GENERATE");
 		generateDataButton.setForeground(Color.CYAN);
 		generateDataButton.setBackground(Color.DARK_GRAY);
@@ -197,14 +271,126 @@ public class MainRunner
 		  {
 			   public void actionPerformed(ActionEvent ae)
 			   {
-				   setCompetitionNameBox.setText("");
-				   dataStoreBox.setText("");
-			       DataStore.setPrevCfg(new PreviewConfig(seg1.getText().toString(), DataStore.getElementFromList(DataStore.getElementIndexByCSVIndex(DataStore.getElementIndexByCSVIndex(Integer.parseInt(seg2.getText().toString())))), seg3.getText().toString(), DataStore.getElementFromList(DataStore.getElementIndexByCSVIndex(Integer.parseInt(seg4.getText().toString()))), seg5.getText().toString(), DataStore.getElementFromList(DataStore.getElementIndexByCSVIndex(Integer.parseInt(seg6.getText().toString())))));
-			       dataStoreBox.setText(DataStore.generateDataStoreClass());
-			       setCompetitionNameBox.setText(DataStore.generateSetCompetitionNameClass());
-			   }
-			   
-		});
+				   try
+				   {
+					   if (DataStore.getListSize() == 0)
+					   {
+						   JFrame kawaii = new JFrame("Error");
+						   kawaii.setResizable(false);
+						   kawaii.getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.WHITE));
+						   JPanel inputPanel = new JPanel();
+						   inputPanel.setLayout(null);
+						   inputPanel.setBackground(Color.DARK_GRAY);
+						   JLabel kawaiichan = new JLabel();
+						   JButton button99 = new JButton("OK");
+						   button99.setBounds(375, 100, 50, 50);
+						   button99.setFont(new Font("Segoe UI", Font.BOLD, 20));
+						   button99.setMargin(new Insets(0, 0, 0, 0));
+						   button99.setBackground(Color.DARK_GRAY);
+						   button99.setForeground(Color.CYAN);
+						   kawaii.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						   kawaiichan.setText("Please add at least one form before generating code.");
+						   kawaiichan.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+						   kawaiichan.setForeground(Color.CYAN);
+						   kawaiichan.setBounds(150, 40, 800, 50);
+						   inputPanel.add(button99);
+						   inputPanel.add(kawaiichan);
+						   kawaii.add(inputPanel);
+						   kawaii.setSize(800, 200);
+						   Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+						   kawaii.setLocation(dim.width/2-kawaii.getSize().width/2, dim.height/2-kawaii.getSize().height/2);
+						   kawaii.setVisible(true);
+						   button99.addActionListener(new ActionListener()
+						   {
+							   public void actionPerformed(ActionEvent ae)
+							   {
+								   kawaii.dispose();
+							   }
+						   });
+					   }
+					   else
+					   {
+						   setCompetitionNameBox.setText("");
+						   dataStoreBox.setText("");
+					       DataStore.setPrevCfg(new PreviewConfig(seg1.getText().toString(), DataStore.getElementFromList(DataStore.getElementIndexByCSVIndex(DataStore.getElementIndexByCSVIndex(Integer.parseInt(seg2.getText().toString())))), seg3.getText().toString(), DataStore.getElementFromList(DataStore.getElementIndexByCSVIndex(Integer.parseInt(seg4.getText().toString()))), seg5.getText().toString(), DataStore.getElementFromList(DataStore.getElementIndexByCSVIndex(Integer.parseInt(seg6.getText().toString())))));
+					       dataStoreBox.setText(DataStore.generateDataStoreClass());
+					       setCompetitionNameBox.setText(DataStore.generateSetCompetitionNameClass());   
+					   }
+				   }
+				   catch (ArrayIndexOutOfBoundsException arg0)
+				   {
+					   arg0.printStackTrace();
+					   JFrame kawaii = new JFrame("Error");
+					   kawaii.setResizable(false);
+					   kawaii.getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.WHITE));
+					   JPanel inputPanel = new JPanel();
+					   inputPanel.setLayout(null);
+					   inputPanel.setBackground(Color.DARK_GRAY);
+					   JLabel kawaiichan = new JLabel();
+					   JButton button99 = new JButton("OK");
+					   button99.setBounds(375, 100, 50, 50);
+					   button99.setFont(new Font("Segoe UI", Font.BOLD, 20));
+					   button99.setMargin(new Insets(0, 0, 0, 0));
+					   button99.setBackground(Color.DARK_GRAY);
+					   button99.setForeground(Color.CYAN);
+					   kawaii.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+					   kawaiichan.setText("All fields must be filled in correctly before generating the classes.");
+					   kawaiichan.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+					   kawaiichan.setForeground(Color.CYAN);
+					   kawaiichan.setBounds(150, 40, 800, 50);
+					   inputPanel.add(button99);
+					   inputPanel.add(kawaiichan);
+					   kawaii.add(inputPanel);
+					   kawaii.setSize(800, 200);
+					   Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+					   kawaii.setLocation(dim.width/2-kawaii.getSize().width/2, dim.height/2-kawaii.getSize().height/2);
+					   kawaii.setVisible(true);
+					   button99.addActionListener(new ActionListener()
+					   {
+						   public void actionPerformed(ActionEvent ae)
+						   {
+							   kawaii.dispose();
+						   }
+					   });
+				   }
+				   catch (Exception arg0)
+				   {
+					   arg0.printStackTrace();
+					   JFrame kawaii = new JFrame("Error");
+					   kawaii.setResizable(false);
+					   kawaii.getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.WHITE));
+					   JPanel inputPanel = new JPanel();
+					   inputPanel.setLayout(null);
+					   inputPanel.setBackground(Color.DARK_GRAY);
+					   JLabel kawaiichan = new JLabel();
+					   JButton button99 = new JButton("OK");
+					   button99.setBounds(375, 100, 50, 50);
+					   button99.setFont(new Font("Segoe UI", Font.BOLD, 20));
+					   button99.setMargin(new Insets(0, 0, 0, 0));
+					   button99.setBackground(Color.DARK_GRAY);
+					   button99.setForeground(Color.CYAN);
+					   kawaii.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+					   kawaiichan.setText("All fields must be filled in before generating the classes.");
+					   kawaiichan.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+					   kawaiichan.setForeground(Color.CYAN);
+					   kawaiichan.setBounds(150, 40, 800, 50);
+					   inputPanel.add(button99);
+					   inputPanel.add(kawaiichan);
+					   kawaii.add(inputPanel);
+					   kawaii.setSize(800, 200);
+					   Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+					   kawaii.setLocation(dim.width/2-kawaii.getSize().width/2, dim.height/2-kawaii.getSize().height/2);
+					   kawaii.setVisible(true);
+					   button99.addActionListener(new ActionListener()
+					   {
+						   public void actionPerformed(ActionEvent ae)
+						   {
+							   kawaii.dispose();
+						   }
+					   });
+				   }
+			   }   
+		  });
 		optionpanel.add(generateDataButton);
 				
         list = new JList<ElementHandler>(l1);  
@@ -218,6 +404,8 @@ public class MainRunner
 		home_frame.add(optionpanel);
 		home_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		home_frame.setSize(1200, 800);
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		home_frame.setLocation(dim.width/2-home_frame.getSize().width/2, dim.height/2-home_frame.getSize().height/2);
 		home_frame.setVisible(true);
 	}
 
@@ -302,11 +490,16 @@ public class MainRunner
 		fTypesText.setBounds(15, 60, 80, 20);
 		inputPanel.add(fTypesText);
 	    
+		int time = (int)(System.currentTimeMillis() / 1000.0);
+		int endRes = new Random(time).nextInt(1337) + 1; 
+		String parseVarDefaultText = ("varDef" + DataStore.getListSize() + "_$OwOTfKa" + endRes + "TI" + time + "O");
+		
 		JTextField parseVarName = new JTextField();
 		parseVarName.setBackground(Color.DARK_GRAY);
 		parseVarName.setForeground(Color.CYAN);
 		parseVarName.setCaretColor(Color.CYAN);
 		parseVarName.setBounds(135, 90, 200, 30);  
+		parseVarName.setText(parseVarDefaultText);
 		inputPanel.add(parseVarName);
 		
 		JLabel parseVarText = new JLabel();
@@ -320,6 +513,7 @@ public class MainRunner
 		CSVPosForm.setForeground(Color.CYAN);
 		CSVPosForm.setCaretColor(Color.CYAN);
 		CSVPosForm.setBounds(80, 130, 80, 30);  
+		CSVPosForm.setText(DataStore.getListSize() + "");
 		inputPanel.add(CSVPosForm);
 		
 		JLabel CSVPosText = new JLabel();
@@ -348,7 +542,7 @@ public class MainRunner
 		inputPanel.add(descriptionText);
 		
 		JButton confirm_Data = new JButton("OK");
-		confirm_Data.setFont(new Font("Verdana", Font.BOLD, 18));
+		confirm_Data.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		confirm_Data.setText("OK");
 		confirm_Data.setBackground(Color.DARK_GRAY);
 		confirm_Data.setForeground(Color.CYAN);
@@ -399,6 +593,8 @@ public class MainRunner
 			   }
 		});
 		
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		inputFrame.setLocation(dim.width/2-inputFrame.getSize().width/2, dim.height/2-inputFrame.getSize().height/2);
 		inputFrame.add(inputPanel);
 		inputFrame.setVisible(true);
 

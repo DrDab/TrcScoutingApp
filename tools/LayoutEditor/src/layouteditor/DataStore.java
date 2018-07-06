@@ -64,6 +64,11 @@ public class DataStore
 		elementList.remove(idx);
 	}
 	
+	public static int getListSize()
+	{
+		return elementList.size();
+	}
+	
 	public static void setPrevCfg(PreviewConfig pc)
 	{
 		prevCfg = pc;
@@ -76,6 +81,10 @@ public class DataStore
 	
 	public static String generateSetCompetitionNameClass()
 	{
+		if (elementList.size() == 0)
+		{
+			throw new NullPointerException("There's nothing in the elements of H A R M O N Y");
+		}
 		ArrayList<ElementHandler> kitsune = elementList;
 		Collections.sort(kitsune);
 		String wholeString = "";
@@ -303,7 +312,7 @@ public class DataStore
 			}
 			else
 			{
-				legalizeAwoo += "\"" + tmp.getReturnVariableName() + "\"";
+				legalizeAwoo += "\"\\\"\"+" + tmp.getReturnVariableName() + "+\"\\\"\"";
 			}
 			if (elementList.size() - 1 == i)
 			{
@@ -380,6 +389,10 @@ public class DataStore
 	// This class needs to be procedurally generated since it contains the header for the CSV.
 	public static String generateDataStoreClass()
 	{
+		if (elementList.size() == 0)
+		{
+			throw new NullPointerException("There's nothing in the elements of H A R M O N Y");
+		}
 		String columnLabels = "";
 		
 		ArrayList<ElementHandler> kitsune = elementList;

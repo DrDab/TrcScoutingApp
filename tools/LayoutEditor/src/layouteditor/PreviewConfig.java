@@ -23,7 +23,7 @@ public class PreviewConfig
 	@Override
 	public String toString()
 	{
-		return e1_descr + ":\"+" + e1.getReturnVariableName() + "+\"" + e2_descr + ":\"+" + e2.getReturnVariableName() + "+\"" + e3_descr + ":\"+" + e3.getReturnVariableName();
+		return e1_descr + ":\"+" + e1.getReturnVariableName() + "+\" " + e2_descr + ":\" +" + e2.getReturnVariableName() + "+\" " + e3_descr + ":\" +" + e3.getReturnVariableName();
 	}
 	
 	
