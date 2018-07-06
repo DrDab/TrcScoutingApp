@@ -312,7 +312,7 @@ public class DataStore
 			}
 			else
 			{
-				legalizeAwoo += "\"" + tmp.getReturnVariableName() + "\"";
+				legalizeAwoo += "\"\\\"\"+" + tmp.getReturnVariableName() + "+\"\\\"\"";
 			}
 			if (elementList.size() - 1 == i)
 			{
