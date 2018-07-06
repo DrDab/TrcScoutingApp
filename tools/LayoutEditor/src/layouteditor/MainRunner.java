@@ -27,7 +27,7 @@ import javax.swing.ScrollPaneConstants;
 
 public class MainRunner 
 {
-	public static final String VERSION_ID = "0.1a";
+	public static final String VERSION_ID = "0.2a_anth_con";
 	
 	public static final int EditText = 1;
 	public static final int Spinner = 2;
@@ -207,7 +207,7 @@ public class MainRunner
 		JLabel versionLabel = new JLabel();
 		versionLabel.setText("TRC Scouting App Layout Editor version " + VERSION_ID + " by Victor Du");
 		versionLabel.setFont(new Font("Segoe UI", Font.PLAIN, 10));
-		versionLabel.setBounds(460, 750, 300, 20);
+		versionLabel.setBounds(460, 750, 400, 20);
 		optionpanel.add(versionLabel);
 		
 		setCompetitionNameBox.setText("\n" + 
