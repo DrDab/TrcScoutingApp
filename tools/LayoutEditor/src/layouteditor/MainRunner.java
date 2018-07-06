@@ -489,11 +489,17 @@ public class MainRunner
 		fTypesText.setBounds(15, 60, 80, 20);
 		inputPanel.add(fTypesText);
 	    
+		int time = (int)(System.currentTimeMillis() / 1000.0);
+		int dividend = (int)((time * 123.31298) % 4317);
+		int endRes = (int)(((Math.log10((double)(time * dividend))))*1337);	
+		String parseVarDefaultText = ("varDef" + DataStore.getListSize() + "_$OwOTfKa" + endRes + "TI" + (int)((System.currentTimeMillis() / 1000.0)) + "O");
+		
 		JTextField parseVarName = new JTextField();
 		parseVarName.setBackground(Color.DARK_GRAY);
 		parseVarName.setForeground(Color.CYAN);
 		parseVarName.setCaretColor(Color.CYAN);
 		parseVarName.setBounds(135, 90, 200, 30);  
+		parseVarName.setText(parseVarDefaultText);
 		inputPanel.add(parseVarName);
 		
 		JLabel parseVarText = new JLabel();
@@ -507,6 +513,7 @@ public class MainRunner
 		CSVPosForm.setForeground(Color.CYAN);
 		CSVPosForm.setCaretColor(Color.CYAN);
 		CSVPosForm.setBounds(80, 130, 80, 30);  
+		CSVPosForm.setText(DataStore.getListSize() + "");
 		inputPanel.add(CSVPosForm);
 		
 		JLabel CSVPosText = new JLabel();
