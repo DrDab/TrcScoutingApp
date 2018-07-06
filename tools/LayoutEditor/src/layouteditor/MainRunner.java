@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.Random;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
@@ -490,9 +491,8 @@ public class MainRunner
 		inputPanel.add(fTypesText);
 	    
 		int time = (int)(System.currentTimeMillis() / 1000.0);
-		int dividend = (int)((time * 123.31298) % 4317);
-		int endRes = (int)(((Math.log10((double)(time * dividend))))*1337);	
-		String parseVarDefaultText = ("varDef" + DataStore.getListSize() + "_$OwOTfKa" + endRes + "TI" + (int)((System.currentTimeMillis() / 1000.0)) + "O");
+		int endRes = new Random(time).nextInt(1337) + 1; 
+		String parseVarDefaultText = ("varDef" + DataStore.getListSize() + "_$OwOTfKa" + endRes + "TI" + time + "O");
 		
 		JTextField parseVarName = new JTextField();
 		parseVarName.setBackground(Color.DARK_GRAY);
