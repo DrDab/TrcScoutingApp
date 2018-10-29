@@ -270,27 +270,19 @@ public class SetCompetitionName extends AppCompatActivity
                         .setAction("Action", null).show();
                 breakCond = true;
             }
-            else if (spectatingTeamRawName.contains("Red Alliance 1 (Right)"))
+            else if (spectatingTeamRawName.contains("Red Alliance 1"))
             {
                 spectatingTeamResolvedNumber = spectatingTeamNumber;
             }
-            else if (spectatingTeamRawName.contains("Red Alliance 2 (Center)"))
+            else if (spectatingTeamRawName.contains("Red Alliance 2 "))
             {
                 spectatingTeamResolvedNumber = spectatingTeamNumber;
             }
-            else if (spectatingTeamRawName.contains("Red Alliance 3 (Left)"))
+            else if (spectatingTeamRawName.contains("Blue Alliance 1"))
             {
                 spectatingTeamResolvedNumber = spectatingTeamNumber;
             }
-            else if (spectatingTeamRawName.contains("Blue Alliance 1 (Right)"))
-            {
-                spectatingTeamResolvedNumber = spectatingTeamNumber;
-            }
-            else if (spectatingTeamRawName.contains("Blue Alliance 2 (Center)"))
-            {
-                spectatingTeamResolvedNumber = spectatingTeamNumber;
-            }
-            else if (spectatingTeamRawName.contains("Blue Alliance 3 (Left)"))
+            else if (spectatingTeamRawName.contains("Blue Alliance 2"))
             {
                 spectatingTeamResolvedNumber = spectatingTeamNumber;
             }

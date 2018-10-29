@@ -51,6 +51,9 @@ public class Settings extends AppCompatActivity
         setContentView(R.layout.activity_settings);
         setTitle("Settings");
         setTitleColor(Color.parseColor("#ff669900"));
+
+
+
         // AddCompetitions.verifyStoragePermissions(this);
     }
 

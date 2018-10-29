@@ -1,4 +1,20 @@
 <resources>
+    <!-- BEGIN GAME SPECIFIC STUFF -->
+
+    <string-array name="starting_positions">
+        <item>Crater</item>
+        <item>Depot</item>
+    </string-array>
+
+    <!--
+    <string-array name="starting_hanging_positions">
+        <item>Hanging</item>
+        <item>Ground</item>
+    </string-array>
+    -->
+
+    <!-- END GAME SPECIFIC STUFF -->
+
     <string name="app_name">TRC Scouting App</string>
     <string name="action_settings">Settings</string>
     <string name="action_about">About...</string>
@@ -26,12 +42,10 @@
     </string-array>
 
     <string-array name="spectating_types">
-        <item>Red Alliance 1 (Right)</item>
-        <item>Red Alliance 2 (Center)</item>
-        <item>Red Alliance 3 (Left)</item>
-        <item>Blue Alliance 1 (Right)</item>
-        <item>Blue Alliance 2 (Center)</item>
-        <item>Blue Alliance 3 (Left)</item>
+        <item>Red Alliance 1</item>
+        <item>Red Alliance 2</item>
+        <item>Blue Alliance 1</item>
+        <item>Blue Alliance 2</item>
     </string-array>
 
 
@@ -58,7 +72,7 @@
         <item>Yes</item>
     </string-array>
 
-    <string-array name="starting_positions">
+    <string-array name="three_positions">
         <item>Left</item>
         <item>Middle</item>
         <item>Right</item>
