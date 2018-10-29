@@ -167,73 +167,17 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="112dp"
-            android:text="Crossed the Auto Line"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/SpectatingSpinner" />
-
-        <Spinner
-            android:id="@+id/crossedTheAutoLine"
-            android:layout_width="315dp"
-            android:layout_height="35dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
-            android:entries="@array/yes_or_no"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.509"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView11" />
-
-        <TextView
-            android:id="@+id/textView14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="20dp"
-            android:text="Cubes Placed/Attempted on Scale"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/crossedTheAutoLine" />
-
-        <TextView
-            android:id="@+id/textView13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:text="Cubes Placed/Attempted on Switch"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cubesPlacedOnScaleAuto" />
-
-        <TextView
             android:id="@+id/textView15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="80dp"
             android:text="Autonomous Notes"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+            tools:layout_editor_absoluteY="665dp" />
 
         <Spinner
             android:id="@+id/startingPositionForm "
@@ -248,92 +192,18 @@
             app:layout_constraintTop_toBottomOf="@+id/describText3" />
 
         <TextView
-            android:id="@+id/textView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Cubes Placed/Attempted Far Switch"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-        <TextView
-            android:id="@+id/textView16"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="60dp"
-            android:text="Cubes Placed/Attempted Near Switch"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.507"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView12" />
-
-        <TextView
-            android:id="@+id/textView17"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="68dp"
-            android:text="Cubes Placed/Attempted Scale"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.504"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
-        <TextView
-            android:id="@+id/textView18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="68dp"
-            android:text="Cubes Placed/Attempted Exchange"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView17" />
-
-        <TextView
-            android:id="@+id/textView19"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="68dp"
-            android:text="Cube Pickup Location"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView18" />
-
-        <TextView
             android:id="@+id/textView20"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="68dp"
             android:text="Endgame"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView19" />
+            tools:layout_editor_absoluteY="1380dp" />
 
         <EditText
             android:id="@+id/teleopnotes"
@@ -362,46 +232,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/teleopnotes" />
 
-        <Spinner
-            android:id="@+id/cubesPlacedOnScaleAuto"
-            android:layout_width="80dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="72dp"
-            android:layout_marginTop="20dp"
-            android:entries="@array/cubes_count"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView14" />
-
-        <Spinner
-            android:id="@+id/cubesAttemptedOnScaleAuto"
-            android:layout_width="80dp"
-            android:layout_height="35dp"
-            android:layout_marginEnd="84dp"
-            android:layout_marginTop="20dp"
-            android:entries="@array/cubes_count"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView14" />
-
-        <Spinner
-            android:id="@+id/cubesPlacedOnSwitchAuto"
-            android:layout_width="80dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="72dp"
-            android:layout_marginTop="20dp"
-            android:entries="@array/cubes_count"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView13" />
-
-        <Spinner
-            android:id="@+id/cubesAttemptedOnSwitchAuto"
-            android:layout_width="80dp"
-            android:layout_height="35dp"
-            android:layout_marginEnd="84dp"
-            android:layout_marginTop="20dp"
-            android:entries="@array/cubes_count"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView13" />
-
         <EditText
             android:id="@+id/autoNotes"
             android:layout_width="316dp"
@@ -415,182 +245,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView15" />
 
-        <Spinner
-            android:id="@+id/cubesPlacedFarSwitchTeleOp"
-            android:layout_width="80dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="72dp"
-            android:layout_marginTop="16dp"
-            android:entries="@array/cubes_count"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView12" />
-
-        <Spinner
-            android:id="@+id/cubesAttemptedFarSwitchTeleOp"
-            android:layout_width="80dp"
-            android:layout_height="35dp"
-            android:layout_marginEnd="84dp"
-            android:layout_marginTop="16dp"
-            android:entries="@array/cubes_count"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView12" />
-
-        <Spinner
-            android:id="@+id/cubesPlacedNearSwitchTeleOp"
-            android:layout_width="80dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="72dp"
-            android:layout_marginTop="16dp"
-            android:entries="@array/cubes_count"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
-        <Spinner
-            android:id="@+id/cubesAttemptedNearSwitchTeleOp"
-            android:layout_width="80dp"
-            android:layout_height="35dp"
-            android:layout_marginEnd="84dp"
-            android:layout_marginTop="16dp"
-            android:entries="@array/cubes_count"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
-        <Spinner
-            android:id="@+id/cubesPlacedScaleTeleOp"
-            android:layout_width="80dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="84dp"
-            android:layout_marginTop="16dp"
-            android:entries="@array/cubes_count"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView17" />
-
-        <Spinner
-            android:id="@+id/cubesAttemptedScaleTeleOp"
-            android:layout_width="80dp"
-            android:layout_height="35dp"
-            android:layout_marginEnd="92dp"
-            android:layout_marginTop="16dp"
-            android:entries="@array/cubes_count"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView17" />
-
-        <Spinner
-            android:id="@+id/cubesPlacedExchangeTeleOp"
-            android:layout_width="80dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="84dp"
-            android:layout_marginTop="20dp"
-            android:entries="@array/cubes_count"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView18" />
-
-        <Spinner
-            android:id="@+id/cubesAttemptedExchangeTeleOp"
-            android:layout_width="80dp"
-            android:layout_height="35dp"
-            android:layout_marginEnd="84dp"
-            android:layout_marginTop="20dp"
-            android:entries="@array/cubes_count"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView18" />
-
-        <CheckBox
-            android:id="@+id/portalChecker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="52dp"
-            android:layout_marginTop="16dp"
-            android:text="Portal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView19" />
-
-        <CheckBox
-            android:id="@+id/groundChecker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="52dp"
-            android:layout_marginTop="16dp"
-            android:text="Ground"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView19" />
-
-        <CheckBox
-            android:id="@+id/climbAttemptChecker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Climb Attempt"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView20" />
-
-        <CheckBox
-            android:id="@+id/climbSuccessChecker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Successful Climb"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/climbAttemptChecker" />
-
-        <CheckBox
-            android:id="@+id/parkOnPlatformChecker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:text="Parked on Platform"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/climbSuccessChecker" />
-
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:text="Robot Breakdown"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/parkOnPlatformChecker" />
-
-        <Spinner
-            android:id="@+id/robotBreakdownSpinner"
-            android:layout_width="315dp"
-            android:layout_height="35dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:entries="@array/robot_breakdown"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView7" />
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Penalties"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/robotBreakdownSpinner" />
 
         <TextView
             android:id="@+id/textView9"
@@ -606,136 +260,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
-            android:id="@+id/textView22"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:text="Herding"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.501"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
-        <Spinner
-            android:id="@+id/herdingSpinner"
-            android:layout_width="80dp"
-            android:layout_height="35dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:entries="@array/cubes_count"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView22" />
-
-        <TextView
-            android:id="@+id/textView23"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Scale Contact"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/herdingSpinner" />
-
-        <Spinner
-            android:id="@+id/scaleContactSpinner"
-            android:layout_width="80dp"
-            android:layout_height="35dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:entries="@array/cubes_count"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView23" />
-
-        <TextView
-            android:id="@+id/textView24"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Pinning"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scaleContactSpinner" />
-
-        <Spinner
-            android:id="@+id/pinningSpinner"
-            android:layout_width="80dp"
-            android:layout_height="35dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:entries="@array/cubes_count"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView24" />
-
-        <TextView
-            android:id="@+id/textView25"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Zone Contact"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pinningSpinner" />
-
-        <Spinner
-            android:id="@+id/zoneContactSpinner"
-            android:layout_width="80dp"
-            android:layout_height="35dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:entries="@array/cubes_count"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView25" />
-
-        <TextView
-            android:id="@+id/textView26"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:text="Other"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/zoneContactSpinner"
-            tools:layout_editor_absoluteY="1920dp" />
-
-        <Spinner
-            android:id="@+id/otherPenaltySpinner"
-            android:layout_width="80dp"
-            android:layout_height="35dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:entries="@array/cubes_count"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView26" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
