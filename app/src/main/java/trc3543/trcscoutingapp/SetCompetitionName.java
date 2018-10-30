@@ -72,12 +72,17 @@ public class SetCompetitionName extends AppCompatActivity
     static String startingPosition;
 
     // Autonomous Phase.
-
+    static boolean loweredRobot = false;
+    static boolean mineralDisplaced = false;
+    static boolean mineralDisplacedCorrect = false;
+    static boolean markerDeployed = false;
 
     // Teleoperated Phase.
-
+    static int depotScore = 0;
+    static int landerScore = 0;
 
     // Endgame
+    static String endingLocation = "";
 
     // Was the match won?
     static boolean matchWon = false;
@@ -321,6 +326,29 @@ public class SetCompetitionName extends AppCompatActivity
         }
         if (!breakCond)
         {
+            // read autonomous stuff.
+            CheckBox robotLoweredCB = (CheckBox) findViewById(R.id.loweredRobotCheckBox);
+            CheckBox mineralDisplacedCB = (CheckBox) findViewById(R.id.mineralDisplacedCheckBox);
+            CheckBox correctMineralCB = (CheckBox) findViewById(R.id.correctMineralCheckBox);
+            CheckBox markerCB = (CheckBox) findViewById(R.id.markerCheckBox);
+            loweredRobot = robotLoweredCB.isChecked();
+            mineralDisplaced = mineralDisplacedCB.isChecked();
+            mineralDisplacedCorrect = correctMineralCB.isChecked();
+            markerDeployed = markerCB.isChecked();
+        }
+        if (!breakCond)
+        {
+            // read teleop stuff.
+            Spinner depotSpinner = (Spinner) findViewById(R.id.depotSpinner);
+            Spinner landerSpinner = (Spinner) findViewById(R.id.landerSpinner);
+            depotScore = Integer.parseInt(depotSpinner.getSelectedItem().toString());
+            landerScore = Integer.parseInt(landerSpinner.getSelectedItem().toString());
+            // read endgame stuff.
+            Spinner endLocationSpinner = (Spinner) findViewById(R.id.endingLocation);
+            endingLocation = endLocationSpinner.getSelectedItem().toString();
+        }
+        if (!breakCond)
+        {
             // All values are confirmed, move to next screen.
             Log.d("SetCompetitionName","Esketit!");
             moveToNextScreen(view);
@@ -361,8 +389,7 @@ public class SetCompetitionName extends AppCompatActivity
             match_won_yes_or_no = "No";
         }
         String listMsg = "Match # " + MatchNumber + " Type: " + chocolat_gelato + " R: " + red_savarin + " S: " + spectatingTeamNumber;
-        String CSVFormat = red_savarin + "," + DataStore.getDateAsString() + "," + MatchNumber + "," + chocolat_gelato + "," + spectatingTeamNumber + "," + spectatingTeamRawName + "," + startingPosition;
-        // String CSVFormat = red_savarin+","+DataStore.getDateAsString() +","+MatchNumber +","+chocolat_gelato+","+spectatingTeamNumber+","+spectatingTeamRawName+","+startingPosition+","+crossedAutoLine+","+cubesPlacedOnScale+","+cubesAttemptedOnScale+","+cubesPlacedOnSwitch+","+cubesAttemptedOnSwitch+","+cubesPlacedFarSwitch+","+cubesAttemptedFarSwitch+","+cubesPlacedNearSwitch+","+cubesAttemptedNearSwitch+","+cubesPlacedScale+","+cubesAttemptedScale+","+cubesPlacedExchange+","+cubesAttemptedExchange+","+cubePickupPortal+","+cubePickupGround+","+endgameClimbAttempt+","+endgameSuccessfulClimb+","+endgameParkedOnPlatform+","+robotBreakdownStandard+","+herding+","+scalecontact+","+pinning+","+zonecontact+","+other+","+"\""+autonotes+"\",\""+telenotes+"\","+match_won_yes_or_no+",";
+        String CSVFormat = red_savarin + "," + DataStore.getDateAsString() + "," + MatchNumber + "," + chocolat_gelato + "," + spectatingTeamNumber + "," + spectatingTeamRawName + "," + startingPosition+","+loweredRobot+","+mineralDisplaced+","+mineralDisplacedCorrect+","+markerDeployed+","+depotScore+","+landerScore+","+endingLocation+","+match_won_yes_or_no+",\""+autonotes+"\",\""+telenotes+"\"";
         if (USE_DEBUG)
         {
             Snackbar.make(view, CSVFormat, Snackbar.LENGTH_LONG).setAction("Action", null).show();
