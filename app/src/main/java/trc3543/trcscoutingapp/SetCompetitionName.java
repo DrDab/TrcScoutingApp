@@ -154,11 +154,11 @@ public class SetCompetitionName extends AppCompatActivity
 
 
             // populate autonomous notes.
-            EditText aunotes = (EditText) findViewById(R.id.autoNotes);
+            /*EditText aunotes = (EditText) findViewById(R.id.autoNotes);
             String rawautonotes = OwOWhatsThis[31];
             rawautonotes = rawautonotes.replaceAll("^\"|\"$", ""); // remove quotation marks
             aunotes.setText(rawautonotes);
-            Log.d("SetCompetitionName", "Autonomous Notes Set: \"" + rawautonotes + "\"");
+            Log.d("SetCompetitionName", "Autonomous Notes Set: \"" + rawautonotes + "\"");*/
 
             // =====================[ BEGIN TELEOPERATED PHASE ]===================== //
 
@@ -167,16 +167,16 @@ public class SetCompetitionName extends AppCompatActivity
             // =====================[ BEGIN ENDGAME ]===================== //
 
             // populate teleop notes.
-            EditText tonotes = (EditText) findViewById(R.id.teleopnotes);
+            /*EditText tonotes = (EditText) findViewById(R.id.teleopnotes);
             String rawtonotes = OwOWhatsThis[32];
             rawtonotes = rawtonotes.replaceAll("^\"|\"$", ""); // remove quotation marks
             tonotes.setText(rawtonotes);
-            Log.d("SetCompetitionName", "TeleOp Notes Set: \"" + rawtonotes + "\"");
+            Log.d("SetCompetitionName", "TeleOp Notes Set: \"" + rawtonotes + "\"");*/
 
             // populate if match was won.
-            CheckBox won = (CheckBox) findViewById(R.id.matchWon);
+            /*CheckBox won = (CheckBox) findViewById(R.id.matchWon);
             won.setChecked(OwOWhatsThis[33].matches("Yes"));
-            Log.d("SetCompetitionName", "Match Won: " + OwOWhatsThis[33]);
+            Log.d("SetCompetitionName", "Match Won: " + OwOWhatsThis[33]);*/
         }
     }
 

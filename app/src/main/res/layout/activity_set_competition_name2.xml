@@ -56,8 +56,8 @@
             android:id="@+id/ConfirmButton"
             android:layout_width="91dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="72dp"
-            android:layout_marginTop="2360dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="1524dp"
             android:contentDescription="Confirm Selection."
             android:onClick="confirmTypes"
             android:text="Confirm"
@@ -80,11 +80,11 @@
             android:layout_height="51dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="2360dp"
+            android:layout_marginTop="1524dp"
             android:onClick="cancel"
             android:text="Cancel"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.35"
+            app:layout_constraintHorizontal_bias="0.46"
             app:layout_constraintStart_toEndOf="@+id/ConfirmButton"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -133,10 +133,10 @@
             android:text="Teleoperated Phase"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.168"
+            app:layout_constraintHorizontal_bias="0.111"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5"
-            app:layout_constraintVertical_bias="0.221" />
+            app:layout_constraintVertical_bias="0.476" />
 
         <EditText
             android:id="@+id/teamNum"
@@ -172,7 +172,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="500dp"
+            android:layout_marginTop="552dp"
             android:text="Autonomous Notes"
             android:textColor="@android:color/black"
             android:textSize="18sp"
@@ -198,10 +198,11 @@
             android:layout_height="0dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="188dp"
-            android:text="Endgame"
+            android:layout_marginTop="196dp"
+            android:text="[ ENDGAME ]"
             android:textColor="@android:color/black"
             android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -210,7 +211,7 @@
             android:id="@+id/teleopnotes"
             android:layout_width="316dp"
             android:layout_height="147dp"
-            android:layout_marginBottom="1156dp"
+            android:layout_marginBottom="160dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:ems="10"
@@ -254,7 +255,7 @@
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="20dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:text="TeleOp Notes"
@@ -308,6 +309,100 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/matchNum" />
 
+        <CheckBox
+            android:id="@+id/markerCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Marker Deployed"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView15"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/correctMineralCheckBox"
+            app:layout_constraintVertical_bias="0.131" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:text="Depot Score"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+        <Spinner
+            android:id="@+id/depotSpinner"
+            android:layout_width="80dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:entries="@array/cubes_count"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:text="Lander Score"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/depotSpinner" />
+
+        <Spinner
+            android:id="@+id/landerSpinner"
+            android:layout_width="80dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:entries="@array/cubes_count"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:text="Ending Location"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+        <Spinner
+            android:id="@+id/endingLocation"
+            android:layout_width="315dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:entries="@array/ending_positions"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
