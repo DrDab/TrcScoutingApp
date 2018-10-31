@@ -135,6 +135,16 @@ public class AddCompetitions extends AppCompatActivity
                                     removeFromList(i);
                                     DataStore.CsvFormattedContests.remove(i);
                                     adapter.notifyDataSetChanged();
+                                    String filename = DataStore.firstName +"_"+DataStore.lastName +"_results.csv";
+                                    try
+                                    {
+                                        DataStore.writeContestsToCsv(filename);
+                                    }
+                                    catch (IOException e)
+                                    {
+                                        // TODO Auto-generated catch block
+                                        e.printStackTrace();
+                                    }
                                 }
                             })
                             .setNegativeButton("NO", new DialogInterface.OnClickListener()
@@ -345,6 +355,16 @@ public class AddCompetitions extends AppCompatActivity
                            DataStore.CsvFormattedContests.clear();
                            DataStore.contests.clear();
                            adapter.notifyDataSetChanged();
+                           String filename = DataStore.firstName +"_"+DataStore.lastName +"_results.csv";
+                           try
+                           {
+                               DataStore.writeContestsToCsv(filename);
+                           }
+                           catch (IOException e)
+                           {
+                               // TODO Auto-generated catch block
+                               e.printStackTrace();
+                           }
                         }
                     })
                     .setNegativeButton("NO", new DialogInterface.OnClickListener()

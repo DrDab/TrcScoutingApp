@@ -157,6 +157,11 @@ public class SetCompetitionName extends AppCompatActivity
 
             // =====================[ BEGIN AUTONOMOUS PHASE ]===================== //
 
+            Log.d("OwO7", OwOWhatsThis[7]);
+            Log.d("OwO8", OwOWhatsThis[8]);
+            Log.d("OwO9", OwOWhatsThis[9]);
+            Log.d("OwO10", OwOWhatsThis[10]);
+
             CheckBox loweredRobot = (CheckBox) findViewById(R.id.loweredRobotCheckBox);
             loweredRobot.setChecked(OwOWhatsThis[7].contains("true"));
 
@@ -164,7 +169,7 @@ public class SetCompetitionName extends AppCompatActivity
             displacedMineral.setChecked(OwOWhatsThis[8].contains("true"));
 
             CheckBox displacedCorrectly = (CheckBox) findViewById(R.id.correctMineralCheckBox);
-            displacedMineral.setChecked(OwOWhatsThis[9].contains("true"));
+            displacedCorrectly.setChecked(OwOWhatsThis[9].contains("true"));
 
             CheckBox markerDeployed = (CheckBox) findViewById(R.id.markerCheckBox);
             markerDeployed.setChecked(OwOWhatsThis[10].contains("true"));
