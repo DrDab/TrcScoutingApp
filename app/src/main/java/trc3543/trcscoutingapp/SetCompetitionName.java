@@ -374,7 +374,7 @@ public class SetCompetitionName extends AppCompatActivity
     public void moveToNextScreen(View view)
     {
         String red_savarin = "";
-        if (spectatingTeamNumber == DataStore.SELF_TEAM_NUMBER)
+        if (spectatingTeamNumber == DataStore.selfTeamNumber)
         {
             red_savarin = "*";
         }
@@ -427,37 +427,15 @@ public class SetCompetitionName extends AppCompatActivity
         // if using direct save, write the generated results directly to CSV file.
         if (DataStore.USE_DIRECT_SAVE)
         {
-            String filename = DataStore.FIRST_NAME+"_"+DataStore.LAST_NAME+"_results.csv";
-            File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
-            // File writeDirectory = new File("/sdcard/TrcScoutingApp/");
-            if (!writeDirectory.exists())
-            {
-                writeDirectory.mkdir();
-            }
-            File log = new File(writeDirectory, filename);
-            if(!log.exists())
-            {
-                try
-                {
-                    log.createNewFile();
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-            PrintWriter madoka = null;
+            String filename = DataStore.firstName +"_"+DataStore.lastName +"_results.csv";
             try
             {
-                madoka = new PrintWriter(new FileWriter(log, true));
+                DataStore.writeContestsToCsv(filename);
             }
             catch (IOException e)
             {
                 e.printStackTrace();
             }
-            madoka.println(CSVFormat);
-            madoka.flush();
-            madoka.close();
         }
 
         if (!USE_DEBUG)

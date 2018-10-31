@@ -118,6 +118,37 @@ public class AddCompetitions extends AppCompatActivity
 
             }
         });
+        contestList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+        {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int i, long l)
+            {
+                if (!DataStore.contests.contains("No Entries Yet"))
+                {
+                    new AlertDialog.Builder(AddCompetitions.this)
+                            .setTitle("Are you sure?")
+                            .setMessage("Are you sure you want to delete this element?")
+                            .setPositiveButton("YES", new DialogInterface.OnClickListener()
+                            {
+                                public void onClick(DialogInterface dialog, int whichButton)
+                                {
+                                    removeFromList(i);
+                                    DataStore.CsvFormattedContests.remove(i);
+                                    adapter.notifyDataSetChanged();
+                                }
+                            })
+                            .setNegativeButton("NO", new DialogInterface.OnClickListener()
+                            {
+                                public void onClick(DialogInterface dialog, int whichButton)
+                                {
+                                }
+                            })
+                            .show();
+                }
+                return true;
+            }
+        });
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener()
         {
@@ -259,7 +290,7 @@ public class AddCompetitions extends AppCompatActivity
         }
         else if (id == R.id.action_makecsv)
         {
-            String filename = DataStore.FIRST_NAME+"_"+DataStore.LAST_NAME+"_results.csv";
+            String filename = DataStore.firstName +"_"+DataStore.lastName +"_results.csv";
             try
             {
                 DataStore.writeContestsToCsv(filename);
@@ -275,7 +306,7 @@ public class AddCompetitions extends AppCompatActivity
             // mail the CSV
             try
             {
-                final String filename = DataStore.FIRST_NAME+"_"+DataStore.LAST_NAME+"_results.csv";
+                final String filename = DataStore.firstName +"_"+DataStore.lastName +"_results.csv";
                 final String[] recipient = {""};
                 final EditText txtUrl = new EditText(this);
                 new AlertDialog.Builder(this)
@@ -307,15 +338,19 @@ public class AddCompetitions extends AppCompatActivity
             new AlertDialog.Builder(this)
                     .setTitle("Are you sure?")
                     .setMessage("Are you sure you want to clear the contest history?")
-                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
+                    .setPositiveButton("YES", new DialogInterface.OnClickListener()
+                    {
+                        public void onClick(DialogInterface dialog, int whichButton)
+                        {
                            DataStore.CsvFormattedContests.clear();
                            DataStore.contests.clear();
                            adapter.notifyDataSetChanged();
                         }
                     })
-                    .setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
+                    .setNegativeButton("NO", new DialogInterface.OnClickListener()
+                    {
+                        public void onClick(DialogInterface dialog, int whichButton)
+                        {
                         }
                     })
                     .show();
@@ -357,6 +392,12 @@ public class AddCompetitions extends AppCompatActivity
     public static void removeFromList(String s)
     {
         DataStore.contests.remove(s);
+        adapter.notifyDataSetChanged();
+    }
+
+    public static void removeFromList(int index)
+    {
+        DataStore.contests.remove(index);
         adapter.notifyDataSetChanged();
     }
 

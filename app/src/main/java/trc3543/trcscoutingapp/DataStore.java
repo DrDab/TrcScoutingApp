@@ -40,16 +40,16 @@ public class DataStore extends AppCompatActivity
      *	SOFTWARE.
      */
 
-    static boolean USE_AUTOSAVE = true; // by default, autosave is enabled.
-    static int AUTOSAVE_SECONDS = 300;  // by default, save changes every 5 minutes.
+    static boolean useAutosave = true; // by default, autosave is enabled.
+    static int autosaveSeconds = 300;  // by default, save changes every 5 minutes.
 
     static ArrayList<String> contests = new ArrayList<String>();
 
     static ArrayList<String> CsvFormattedContests = new ArrayList<String>();
 
-    static int SELF_TEAM_NUMBER = 3543;
-    static String FIRST_NAME = "Unknown";
-    static String LAST_NAME = "Unknown";
+    static int selfTeamNumber = 3543;
+    static String firstName = "Unknown";
+    static String lastName = "Unknown";
 
     static boolean USE_DIRECT_SAVE = false; // don't use direct save by default
 
@@ -78,7 +78,7 @@ public class DataStore extends AppCompatActivity
                 log.createNewFile();
             }
             PrintWriter madoka = new PrintWriter(new FileWriter(log, true));
-            madoka.println("Log by: " + FIRST_NAME + " " + LAST_NAME + ", written on " + getDateAsString());
+            madoka.println("Log by: " + firstName + " " + lastName + ", written on " + getDateAsString());
             madoka.println("Contains Your Team, Date, Match #, Competition Type, Team Number, Spectating Team, Starting Position, AT-Robot Lowered, AT-Mineral Displaced, AT-Mineral Correct, AT-Marker Deployed, TO-Depot Score, TO-Lander Score, EG-Ending Location, Match Won, Autonomous Notes, TeleOp Notes");
             for(String sk : CsvFormattedContests)
             {
@@ -113,16 +113,16 @@ public class DataStore extends AppCompatActivity
             {
                 BufferedReader br = new BufferedReader(new FileReader(log));
                 saiodfjsajofojfdfjisafbj = Integer.parseInt(br.readLine());
-                SELF_TEAM_NUMBER = saiodfjsajofojfdfjisafbj;
+                selfTeamNumber = saiodfjsajofojfdfjisafbj;
             }
             catch (NumberFormatException e)
             {
-                SELF_TEAM_NUMBER = 3543; // can't read team num, return to default value.
+                selfTeamNumber = 3543; // can't read team num, return to default value.
             }
         }
         else
         {
-            SELF_TEAM_NUMBER = 3543; // return by default
+            selfTeamNumber = 3543; // return by default
         }
     }
     public static void parseFirstName() throws IOException
@@ -139,11 +139,11 @@ public class DataStore extends AppCompatActivity
                 BufferedReader br = new BufferedReader(new FileReader(log));
                 br.readLine();
                 saiodfjsajofojfdfjisafbj = br.readLine();
-                FIRST_NAME = saiodfjsajofojfdfjisafbj;
+                firstName = saiodfjsajofojfdfjisafbj;
         }
         else
         {
-                FIRST_NAME = "Unknown";
+                firstName = "Unknown";
         }
     }
     public static void parseLastName() throws IOException
@@ -161,11 +161,11 @@ public class DataStore extends AppCompatActivity
             br.readLine();
             br.readLine();
             saiodfjsajofojfdfjisafbj = br.readLine();
-            LAST_NAME = saiodfjsajofojfdfjisafbj;
+            lastName = saiodfjsajofojfdfjisafbj;
         }
         else
         {
-            LAST_NAME = "Unknown";
+            lastName = "Unknown";
         }
     }
     public static void parseDirectSave() throws IOException
@@ -213,16 +213,16 @@ public class DataStore extends AppCompatActivity
             saiodfjsajofojfdfjisafbj = br.readLine();
             if (saiodfjsajofojfdfjisafbj.contains("y"))
             {
-                USE_AUTOSAVE = true;
+                useAutosave = true;
             }
             else
             {
-                USE_AUTOSAVE = false;
+                useAutosave = false;
             }
         }
         else
         {
-            USE_AUTOSAVE = true;
+            useAutosave = true;
         }
     }
     public static void parseAutoSaveTime() throws IOException
@@ -241,17 +241,17 @@ public class DataStore extends AppCompatActivity
             saiodfjsajofojfdfjisafbj = br.readLine();
             try
             {
-                AUTOSAVE_SECONDS = Integer.parseInt(saiodfjsajofojfdfjisafbj);
+                autosaveSeconds = Integer.parseInt(saiodfjsajofojfdfjisafbj);
             }
             catch (NumberFormatException e)
             {
-                AUTOSAVE_SECONDS = 300;
+                autosaveSeconds = 300;
                 e.printStackTrace();
             }
         }
         else
         {
-            AUTOSAVE_SECONDS = 300;
+            autosaveSeconds = 300;
         }
     }
     public static boolean existsSave()

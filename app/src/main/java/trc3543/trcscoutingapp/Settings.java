@@ -52,7 +52,15 @@ public class Settings extends AppCompatActivity
         setTitle("Settings");
         setTitleColor(Color.parseColor("#ff669900"));
 
+        EditText teamNumForm = (EditText) findViewById(R.id.teamNumForm);
+        EditText firstNameForm = (EditText) findViewById(R.id.firstNameForm);
+        EditText lastNameForm = (EditText) findViewById(R.id.lastNameForm);
+        CheckBox saveDirectlyCheckBox = (CheckBox) findViewById(R.id.saveDirectlyCheckBox);
 
+        teamNumForm.setText(DataStore.selfTeamNumber + "");
+        firstNameForm.setText(DataStore.firstName);
+        lastNameForm.setText(DataStore.lastName);
+        saveDirectlyCheckBox.setChecked(DataStore.USE_DIRECT_SAVE);
 
         // AddCompetitions.verifyStoragePermissions(this);
     }
