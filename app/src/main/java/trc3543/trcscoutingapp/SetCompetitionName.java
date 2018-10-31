@@ -96,6 +96,7 @@ public class SetCompetitionName extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_competition_name2);
+        setTitle("Add Match");
         try
         {
             DataStore.parseTeamNum();
@@ -156,32 +157,47 @@ public class SetCompetitionName extends AppCompatActivity
 
             // =====================[ BEGIN AUTONOMOUS PHASE ]===================== //
 
+            CheckBox loweredRobot = (CheckBox) findViewById(R.id.loweredRobotCheckBox);
+            loweredRobot.setChecked(OwOWhatsThis[7].contains("true"));
 
+            CheckBox displacedMineral = (CheckBox) findViewById(R.id.mineralDisplacedCheckBox);
+            displacedMineral.setChecked(OwOWhatsThis[8].contains("true"));
+
+            CheckBox displacedCorrectly = (CheckBox) findViewById(R.id.correctMineralCheckBox);
+            displacedMineral.setChecked(OwOWhatsThis[9].contains("true"));
+
+            CheckBox markerDeployed = (CheckBox) findViewById(R.id.markerCheckBox);
+            markerDeployed.setChecked(OwOWhatsThis[10].contains("true"));
 
             // populate autonomous notes.
-            /*EditText aunotes = (EditText) findViewById(R.id.autoNotes);
-            String rawautonotes = OwOWhatsThis[31];
+            EditText aunotes = (EditText) findViewById(R.id.autoNotes);
+            String rawautonotes = OwOWhatsThis[15];
             rawautonotes = rawautonotes.replaceAll("^\"|\"$", ""); // remove quotation marks
             aunotes.setText(rawautonotes);
-            Log.d("SetCompetitionName", "Autonomous Notes Set: \"" + rawautonotes + "\"");*/
+            Log.d("SetCompetitionName", "Autonomous Notes Set: \"" + rawautonotes + "\"");
 
             // =====================[ BEGIN TELEOPERATED PHASE ]===================== //
 
+            Spinner depotScore =(Spinner) findViewById(R.id.depotSpinner);
+            depotScore.setSelection(((ArrayAdapter)depotScore.getAdapter()).getPosition(OwOWhatsThis[11]));
 
+            Spinner landerScore =(Spinner) findViewById(R.id.landerSpinner);
+            landerScore.setSelection(((ArrayAdapter)landerScore.getAdapter()).getPosition(OwOWhatsThis[12]));
 
             // =====================[ BEGIN ENDGAME ]===================== //
 
-            // populate teleop notes.
-            /*EditText tonotes = (EditText) findViewById(R.id.teleopnotes);
-            String rawtonotes = OwOWhatsThis[32];
-            rawtonotes = rawtonotes.replaceAll("^\"|\"$", ""); // remove quotation marks
-            tonotes.setText(rawtonotes);
-            Log.d("SetCompetitionName", "TeleOp Notes Set: \"" + rawtonotes + "\"");*/
+            Spinner endingLocation =(Spinner) findViewById(R.id.endingLocation);
+            endingLocation.setSelection(((ArrayAdapter)endingLocation.getAdapter()).getPosition(OwOWhatsThis[13]));
 
             // populate if match was won.
-            /*CheckBox won = (CheckBox) findViewById(R.id.matchWon);
-            won.setChecked(OwOWhatsThis[33].matches("Yes"));
-            Log.d("SetCompetitionName", "Match Won: " + OwOWhatsThis[33]);*/
+            CheckBox matchWon = (CheckBox) findViewById(R.id.matchWon);
+            matchWon.setChecked(OwOWhatsThis[14].contains("Yes"));
+
+            // populate teleop notes.
+            EditText tonotes = (EditText) findViewById(R.id.teleopnotes);
+            String rawtonotes = OwOWhatsThis[16];
+            rawtonotes = rawtonotes.replaceAll("^\"|\"$", ""); // remove quotation marks
+            tonotes.setText(rawtonotes);
         }
     }
 
@@ -369,11 +385,11 @@ public class SetCompetitionName extends AppCompatActivity
         }
         else if (competitionType == 2)
         {
-            chocolat_gelato = "Qualif.";
+            chocolat_gelato = "Qualification";
         }
         else if (competitionType == 3)
         {
-            chocolat_gelato = "SemFinal";
+            chocolat_gelato = "Semi-Final";
         }
         else
         {
