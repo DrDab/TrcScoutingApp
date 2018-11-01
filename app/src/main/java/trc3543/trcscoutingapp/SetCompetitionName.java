@@ -300,7 +300,7 @@ public class SetCompetitionName extends AppCompatActivity
             {
                 spectatingTeamResolvedNumber = spectatingTeamNumber;
             }
-            else if (spectatingTeamRawName.contains("Red Alliance 2 "))
+            else if (spectatingTeamRawName.contains("Red Alliance 2"))
             {
                 spectatingTeamResolvedNumber = spectatingTeamNumber;
             }
