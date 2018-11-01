@@ -57,10 +57,20 @@ public class Settings extends AppCompatActivity
         EditText lastNameForm = (EditText) findViewById(R.id.lastNameForm);
         CheckBox saveDirectlyCheckBox = (CheckBox) findViewById(R.id.saveDirectlyCheckBox);
 
-        teamNumForm.setText(DataStore.selfTeamNumber + "");
-        firstNameForm.setText(DataStore.firstName);
-        lastNameForm.setText(DataStore.lastName);
-        saveDirectlyCheckBox.setChecked(DataStore.USE_DIRECT_SAVE);
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+        String saiodfjsajofojfdfjisafbj;
+        if (!readDirectory.exists())
+        {
+            readDirectory.mkdir();
+        }
+        File log = new File(readDirectory, "settings.coda");
+        if (log.exists())
+        {
+            teamNumForm.setText(DataStore.selfTeamNumber + "");
+            firstNameForm.setText(DataStore.firstName);
+            lastNameForm.setText(DataStore.lastName);
+            saveDirectlyCheckBox.setChecked(DataStore.USE_DIRECT_SAVE);
+        }
 
         // AddCompetitions.verifyStoragePermissions(this);
     }
