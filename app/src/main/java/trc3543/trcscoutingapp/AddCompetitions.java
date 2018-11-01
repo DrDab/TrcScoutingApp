@@ -270,16 +270,21 @@ public class AddCompetitions extends AppCompatActivity
             startActivity(intent);
         }
 
-        // start another thread to automatically save.
         try
         {
             DataStore.parseAutoSaveBoolean();
             DataStore.parseAutoSaveTime();
+            DataStore.parseTeamNum();
+            DataStore.parseFirstName();
+            DataStore.parseLastName();
+            DataStore.parseDirectSave();
         }
         catch (IOException e)
         {
             e.printStackTrace();
         }
+
+        // start another thread to automatically save.
         Runnable autosaverunnable = new Runnable()
         {
             @Override
