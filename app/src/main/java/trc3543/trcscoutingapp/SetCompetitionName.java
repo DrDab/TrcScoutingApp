@@ -429,6 +429,15 @@ public class SetCompetitionName extends AppCompatActivity
             DataStore.CsvFormattedContests.set(editingoption, CSVFormat);
         }
 
+        try
+        {
+            DataStore.writeArraylistsToJSON();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
         // if using direct save, write the generated results directly to CSV file.
         if (DataStore.USE_DIRECT_SAVE)
         {

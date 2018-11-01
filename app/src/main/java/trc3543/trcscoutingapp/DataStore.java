@@ -3,6 +3,10 @@ package trc3543.trcscoutingapp;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -40,6 +44,8 @@ public class DataStore extends AppCompatActivity
      *	SOFTWARE.
      */
 
+    static final String CSV_HEADER = "Contains Your Team, Date, Match #, Competition Type, Team Number, Spectating Team, Starting Position, AT-Robot Lowered, AT-Mineral Displaced, AT-Mineral Correct, AT-Marker Deployed, TO-Depot Score, TO-Lander Score, EG-Ending Location, Match Won, Autonomous Notes, TeleOp Notes";
+
     static boolean useAutosave = true; // by default, autosave is enabled.
     static int autosaveSeconds = 300;  // by default, save changes every 5 minutes.
 
@@ -58,6 +64,106 @@ public class DataStore extends AppCompatActivity
         // TODO nothing
     }
 
+    public static boolean writeArraylistsToJSON() throws IOException
+    {
+        File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+        if (!writeDirectory.exists())
+        {
+            writeDirectory.mkdir();
+        }
+        if (CsvFormattedContests.size() == 0)
+        {
+            return false;
+        }
+        else
+        {
+            File cache = new File(writeDirectory, "cache.json");
+            if(!cache.exists())
+            {
+                cache.createNewFile();
+            }
+            else
+            {
+                cache.delete();
+                cache = new File(writeDirectory, "cache.json");
+                cache.createNewFile();
+            }
+            PrintWriter madoka = new PrintWriter(new FileWriter(cache, true));
+            JSONObject jsonObject = new JSONObject();
+            JSONArray displayContestsArray = new JSONArray();
+            JSONArray csvContestsArray = new JSONArray();
+
+            for(int i = 0; i < contests.size(); i++)
+            {
+                displayContestsArray.put(contests.get(i));
+            }
+
+            for(int i = 0; i < CsvFormattedContests.size(); i++)
+            {
+                csvContestsArray.put(CsvFormattedContests.get(i));
+            }
+
+            try
+            {
+                jsonObject.put("disp", (Object)displayContestsArray);
+                jsonObject.put("csv", (Object)csvContestsArray);
+            }
+            catch (JSONException e)
+            {
+                e.printStackTrace();
+            }
+
+            madoka.println(jsonObject.toString());
+            madoka.flush();
+            madoka.close();
+            return true;
+        }
+    }
+
+    public static void readArraylistsFromJSON() throws IOException
+    {
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+        int saiodfjsajofojfdfjisafbj;
+        if (!readDirectory.exists())
+        {
+            readDirectory.mkdir();
+        }
+        File cache = new File(readDirectory, "cache.json");
+        if (cache.exists())
+        {
+            BufferedReader br = new BufferedReader(new FileReader(cache));
+            String jsonData = "";
+            String in = null;
+            while ((in = br.readLine()) != null)
+            {
+                jsonData += in;
+            }
+            br.close();
+            try
+            {
+                contests.clear();
+                CsvFormattedContests.clear();
+
+                JSONObject jsonObject = new JSONObject(jsonData);
+                JSONArray displayContestsArray = jsonObject.getJSONArray("disp");
+                JSONArray csvContestsArray = jsonObject.getJSONArray("csv");
+
+                for(int i = 0; i < displayContestsArray.length(); i++)
+                {
+                    contests.add(displayContestsArray.getString(i));
+                }
+
+                for(int i = 0; i < csvContestsArray.length(); i++)
+                {
+                    CsvFormattedContests.add(csvContestsArray.getString(i));
+                }
+            }
+            catch (JSONException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
 
     public static boolean writeContestsToCsv(String filename) throws IOException
     {
@@ -79,7 +185,7 @@ public class DataStore extends AppCompatActivity
             }
             PrintWriter madoka = new PrintWriter(new FileWriter(log, true));
             madoka.println("Log by: " + firstName + " " + lastName + ", written on " + getDateAsString());
-            madoka.println("Contains Your Team, Date, Match #, Competition Type, Team Number, Spectating Team, Starting Position, AT-Robot Lowered, AT-Mineral Displaced, AT-Mineral Correct, AT-Marker Deployed, TO-Depot Score, TO-Lander Score, EG-Ending Location, Match Won, Autonomous Notes, TeleOp Notes");
+            madoka.println(CSV_HEADER);
             for(String sk : CsvFormattedContests)
             {
                 madoka.println(sk);
@@ -125,6 +231,7 @@ public class DataStore extends AppCompatActivity
             selfTeamNumber = 3543; // return by default
         }
     }
+
     public static void parseFirstName() throws IOException
     {
         File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");

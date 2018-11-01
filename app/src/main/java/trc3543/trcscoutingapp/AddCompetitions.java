@@ -80,6 +80,15 @@ public class AddCompetitions extends AppCompatActivity
             return;
         }
 
+        try
+        {
+            DataStore.readArraylistsFromJSON();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         contestList = (ListView) findViewById(R.id.listView);
@@ -134,6 +143,14 @@ public class AddCompetitions extends AppCompatActivity
                                 {
                                     removeFromList(i);
                                     DataStore.CsvFormattedContests.remove(i);
+                                    try
+                                    {
+                                        DataStore.writeArraylistsToJSON();
+                                    }
+                                    catch (IOException e)
+                                    {
+                                        e.printStackTrace();
+                                    }
                                     adapter.notifyDataSetChanged();
                                     String filename = DataStore.firstName +"_"+DataStore.lastName +"_results.csv";
                                     try
@@ -258,7 +275,8 @@ public class AddCompetitions extends AppCompatActivity
         {
             DataStore.parseAutoSaveBoolean();
             DataStore.parseAutoSaveTime();
-        } catch (IOException e)
+        }
+        catch (IOException e)
         {
             e.printStackTrace();
         }
@@ -352,19 +370,31 @@ public class AddCompetitions extends AppCompatActivity
                     {
                         public void onClick(DialogInterface dialog, int whichButton)
                         {
-                           DataStore.CsvFormattedContests.clear();
-                           DataStore.contests.clear();
-                           adapter.notifyDataSetChanged();
-                           String filename = DataStore.firstName +"_"+DataStore.lastName +"_results.csv";
-                           try
-                           {
-                               DataStore.writeContestsToCsv(filename);
-                           }
-                           catch (IOException e)
-                           {
-                               // TODO Auto-generated catch block
-                               e.printStackTrace();
-                           }
+                            if(!DataStore.contests.contains("No Entries Yet"))
+                            {
+                                DataStore.CsvFormattedContests.clear();
+                                DataStore.contests.clear();
+                                try
+                                {
+                                    DataStore.writeArraylistsToJSON();
+                                }
+                                catch (IOException e)
+                                {
+                                    e.printStackTrace();
+                                }
+                                addToList("No Entries Yet");
+                                adapter.notifyDataSetChanged();
+                                String filename = DataStore.firstName +"_"+DataStore.lastName +"_results.csv";
+                                try
+                                {
+                                    DataStore.writeContestsToCsv(filename);
+                                }
+                                catch (IOException e)
+                                {
+                                    // TODO Auto-generated catch block
+                                    e.printStackTrace();
+                                }
+                            }
                         }
                     })
                     .setNegativeButton("NO", new DialogInterface.OnClickListener()
@@ -412,12 +442,20 @@ public class AddCompetitions extends AppCompatActivity
     public static void removeFromList(String s)
     {
         DataStore.contests.remove(s);
+        if (DataStore.contests.size() == 0)
+        {
+            addToList("No Entries Yet");
+        }
         adapter.notifyDataSetChanged();
     }
 
     public static void removeFromList(int index)
     {
         DataStore.contests.remove(index);
+        if (DataStore.contests.size() == 0)
+        {
+            addToList("No Entries Yet");
+        }
         adapter.notifyDataSetChanged();
     }
 
