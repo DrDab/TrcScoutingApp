@@ -205,6 +205,7 @@ public class AddCompetitions extends AppCompatActivity
                 Log.d("FileIO", "Creating write directory: " + writeDirectory.toString());
                 writeDirectory.mkdir();
             }
+            /*
             File log = new File(writeDirectory, "settings.coda");
             if(!log.exists())
             {
@@ -215,6 +216,7 @@ public class AddCompetitions extends AppCompatActivity
                     e.printStackTrace();
                 }
             }
+            */
             Intent intent = new Intent(this, Settings.class);
             startActivity(intent);
         }
