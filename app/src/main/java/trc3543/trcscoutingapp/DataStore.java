@@ -71,53 +71,47 @@ public class DataStore extends AppCompatActivity
         {
             writeDirectory.mkdir();
         }
-        if (CsvFormattedContests.size() == 0)
+        File cache = new File(writeDirectory, "cache.json");
+        if(!cache.exists())
         {
-            return false;
+            cache.createNewFile();
         }
         else
         {
-            File cache = new File(writeDirectory, "cache.json");
-            if(!cache.exists())
-            {
-                cache.createNewFile();
-            }
-            else
-            {
-                cache.delete();
-                cache = new File(writeDirectory, "cache.json");
-                cache.createNewFile();
-            }
-            PrintWriter madoka = new PrintWriter(new FileWriter(cache, true));
-            JSONObject jsonObject = new JSONObject();
-            JSONArray displayContestsArray = new JSONArray();
-            JSONArray csvContestsArray = new JSONArray();
-
-            for(int i = 0; i < contests.size(); i++)
-            {
-                displayContestsArray.put(contests.get(i));
-            }
-
-            for(int i = 0; i < CsvFormattedContests.size(); i++)
-            {
-                csvContestsArray.put(CsvFormattedContests.get(i));
-            }
-
-            try
-            {
-                jsonObject.put("disp", (Object)displayContestsArray);
-                jsonObject.put("csv", (Object)csvContestsArray);
-            }
-            catch (JSONException e)
-            {
-                e.printStackTrace();
-            }
-
-            madoka.println(jsonObject.toString());
-            madoka.flush();
-            madoka.close();
-            return true;
+            cache.delete();
+            cache = new File(writeDirectory, "cache.json");
+            cache.createNewFile();
         }
+        PrintWriter madoka = new PrintWriter(new FileWriter(cache, true));
+        JSONObject jsonObject = new JSONObject();
+        JSONArray displayContestsArray = new JSONArray();
+        JSONArray csvContestsArray = new JSONArray();
+
+        for(int i = 0; i < contests.size(); i++)
+        {
+            displayContestsArray.put(contests.get(i));
+        }
+
+        for(int i = 0; i < CsvFormattedContests.size(); i++)
+        {
+            csvContestsArray.put(CsvFormattedContests.get(i));
+        }
+
+        try
+        {
+            jsonObject.put("disp", (Object)displayContestsArray);
+            jsonObject.put("csv", (Object)csvContestsArray);
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+
+        madoka.println(jsonObject.toString());
+        madoka.flush();
+        madoka.close();
+        return true;
     }
 
     public static void readArraylistsFromJSON() throws IOException
