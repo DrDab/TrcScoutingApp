@@ -44,7 +44,7 @@ public class DataStore extends AppCompatActivity
      *	SOFTWARE.
      */
 
-    static final String CSV_HEADER = "Contains Your Team, Date, Match #, Competition Type, Team Number, Spectating Team, Starting Position, AT-Robot Lowered, AT-Mineral Displaced, AT-Mineral Correct, AT-Marker Deployed, TO-Depot Score, TO-Lander Score, EG-Ending Location, Match Won, Autonomous Notes, TeleOp Notes";
+    static final String CSV_HEADER = "Contains Your Team, Date, Match #, Competition Type, Team Number, Spectating Team, Starting Position, AT-Robot Lowered, AT-Mineral Displaced, AT-Mineral Correct, AT-Marker Deployed, AT-Parked In Crater, TO-Depot Score, TO-Lander Score, EG-Ending Location, Match Won, Autonomous Notes, TeleOp Notes";
 
     static boolean useAutosave = true; // by default, autosave is enabled.
     static int autosaveSeconds = 300;  // by default, save changes every 5 minutes.

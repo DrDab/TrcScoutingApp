@@ -2,14 +2,16 @@
     <!-- BEGIN GAME SPECIFIC STUFF -->
 
     <string-array name="starting_positions">
-        <item>Crater</item>
-        <item>Depot</item>
+        <item>Ground</item>
+        <item>Hanging</item>
     </string-array>
 
+    <!-- Parked, not parked for autonomous ending -->
+
     <string-array name="ending_positions">
-        <item>None</item>
-        <item>Crater</item>
-        <item>Climb</item>
+        <item>Other</item>
+        <item>Crater Partial</item>
+        <item>Crater Complete</item>
     </string-array>
 
     <!--

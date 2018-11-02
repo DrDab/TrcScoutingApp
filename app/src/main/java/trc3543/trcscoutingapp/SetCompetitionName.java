@@ -1,7 +1,6 @@
 package trc3543.trcscoutingapp;
 
 import android.content.Intent;
-import android.os.Environment;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,10 +11,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @SuppressWarnings("all")
 public class SetCompetitionName extends AppCompatActivity
@@ -76,6 +72,7 @@ public class SetCompetitionName extends AppCompatActivity
     static boolean mineralDisplaced = false;
     static boolean mineralDisplacedCorrect = false;
     static boolean markerDeployed = false;
+    static boolean parkedInCrater = false;
 
     // Teleoperated Phase.
     static int depotScore = 0;
@@ -157,11 +154,6 @@ public class SetCompetitionName extends AppCompatActivity
 
             // =====================[ BEGIN AUTONOMOUS PHASE ]===================== //
 
-            Log.d("OwO7", OwOWhatsThis[7]);
-            Log.d("OwO8", OwOWhatsThis[8]);
-            Log.d("OwO9", OwOWhatsThis[9]);
-            Log.d("OwO10", OwOWhatsThis[10]);
-
             CheckBox loweredRobot = (CheckBox) findViewById(R.id.loweredRobotCheckBox);
             loweredRobot.setChecked(OwOWhatsThis[7].contains("true"));
 
@@ -174,9 +166,12 @@ public class SetCompetitionName extends AppCompatActivity
             CheckBox markerDeployed = (CheckBox) findViewById(R.id.markerCheckBox);
             markerDeployed.setChecked(OwOWhatsThis[10].contains("true"));
 
+            CheckBox parkedInCraterAuto = (CheckBox) findViewById(R.id.craterParkCheckBox);
+            parkedInCraterAuto.setChecked(OwOWhatsThis[11].contains("true"));
+
             // populate autonomous notes.
             EditText aunotes = (EditText) findViewById(R.id.autoNotes);
-            String rawautonotes = OwOWhatsThis[15];
+            String rawautonotes = OwOWhatsThis[16];
             rawautonotes = rawautonotes.replaceAll("^\"|\"$", ""); // remove quotation marks
             aunotes.setText(rawautonotes);
             Log.d("SetCompetitionName", "Autonomous Notes Set: \"" + rawautonotes + "\"");
@@ -184,23 +179,23 @@ public class SetCompetitionName extends AppCompatActivity
             // =====================[ BEGIN TELEOPERATED PHASE ]===================== //
 
             Spinner depotScore =(Spinner) findViewById(R.id.depotSpinner);
-            depotScore.setSelection(((ArrayAdapter)depotScore.getAdapter()).getPosition(OwOWhatsThis[11]));
+            depotScore.setSelection(((ArrayAdapter)depotScore.getAdapter()).getPosition(OwOWhatsThis[12]));
 
             Spinner landerScore =(Spinner) findViewById(R.id.landerSpinner);
-            landerScore.setSelection(((ArrayAdapter)landerScore.getAdapter()).getPosition(OwOWhatsThis[12]));
+            landerScore.setSelection(((ArrayAdapter)landerScore.getAdapter()).getPosition(OwOWhatsThis[13]));
 
             // =====================[ BEGIN ENDGAME ]===================== //
 
             Spinner endingLocation =(Spinner) findViewById(R.id.endingLocation);
-            endingLocation.setSelection(((ArrayAdapter)endingLocation.getAdapter()).getPosition(OwOWhatsThis[13]));
+            endingLocation.setSelection(((ArrayAdapter)endingLocation.getAdapter()).getPosition(OwOWhatsThis[14]));
 
             // populate if match was won.
             CheckBox matchWon = (CheckBox) findViewById(R.id.matchWon);
-            matchWon.setChecked(OwOWhatsThis[14].contains("Yes"));
+            matchWon.setChecked(OwOWhatsThis[15].contains("Yes"));
 
             // populate teleop notes.
             EditText tonotes = (EditText) findViewById(R.id.teleopnotes);
-            String rawtonotes = OwOWhatsThis[16];
+            String rawtonotes = OwOWhatsThis[17];
             rawtonotes = rawtonotes.replaceAll("^\"|\"$", ""); // remove quotation marks
             tonotes.setText(rawtonotes);
         }
@@ -352,10 +347,12 @@ public class SetCompetitionName extends AppCompatActivity
             CheckBox mineralDisplacedCB = (CheckBox) findViewById(R.id.mineralDisplacedCheckBox);
             CheckBox correctMineralCB = (CheckBox) findViewById(R.id.correctMineralCheckBox);
             CheckBox markerCB = (CheckBox) findViewById(R.id.markerCheckBox);
+            CheckBox parkingCB = (CheckBox) findViewById(R.id.craterParkCheckBox);
             loweredRobot = robotLoweredCB.isChecked();
             mineralDisplaced = mineralDisplacedCB.isChecked();
             mineralDisplacedCorrect = correctMineralCB.isChecked();
             markerDeployed = markerCB.isChecked();
+            parkedInCrater = parkingCB.isChecked();
         }
         if (!breakCond)
         {
@@ -410,7 +407,7 @@ public class SetCompetitionName extends AppCompatActivity
             match_won_yes_or_no = "No";
         }
         String listMsg = "Match # " + MatchNumber + " Type: " + chocolat_gelato + " R: " + red_savarin + " S: " + spectatingTeamNumber;
-        String CSVFormat = red_savarin + "," + DataStore.getDateAsString() + "," + MatchNumber + "," + chocolat_gelato + "," + spectatingTeamNumber + "," + spectatingTeamRawName + "," + startingPosition+","+loweredRobot+","+mineralDisplaced+","+mineralDisplacedCorrect+","+markerDeployed+","+depotScore+","+landerScore+","+endingLocation+","+match_won_yes_or_no+",\""+autonotes+"\",\""+telenotes+"\"";
+        String CSVFormat = red_savarin + "," + DataStore.getDateAsString() + "," + MatchNumber + "," + chocolat_gelato + "," + spectatingTeamNumber + "," + spectatingTeamRawName + "," + startingPosition+","+loweredRobot+","+mineralDisplaced+","+mineralDisplacedCorrect+","+markerDeployed+","+parkedInCrater+","+depotScore+","+landerScore+","+endingLocation+","+match_won_yes_or_no+",\""+autonotes+"\",\""+telenotes+"\"";
         if (USE_DEBUG)
         {
             Snackbar.make(view, CSVFormat, Snackbar.LENGTH_LONG).setAction("Action", null).show();
