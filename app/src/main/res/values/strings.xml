@@ -10,6 +10,7 @@
 
     <string-array name="ending_positions">
         <item>Other</item>
+        <item>Hanging</item>
         <item>Crater Partial</item>
         <item>Crater Complete</item>
     </string-array>
