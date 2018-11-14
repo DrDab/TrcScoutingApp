@@ -4,7 +4,9 @@ import android.graphics.Color;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 
@@ -50,6 +52,13 @@ public class AutoSaveSettings extends AppCompatActivity
         setContentView(R.layout.activity_auto_save_settings);
         setTitle("AutoSave Config");
         setTitleColor(Color.parseColor("#ff669900"));
+
+        int minutes = DataStore.autosaveSeconds / 60;
+
+        CheckBox cb1 = (CheckBox) findViewById(R.id.toggle_autosave);
+        Spinner mySpinner = (Spinner) findViewById(R.id.timerchoice);
+        cb1.setChecked(DataStore.useAutosave);
+        mySpinner.setSelection(((ArrayAdapter)mySpinner.getAdapter()).getPosition(minutes + " minutes"));
     }
 
     public void parseSettings(View view)

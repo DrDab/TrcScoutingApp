@@ -1,4 +1,29 @@
 <resources>
+    <!-- BEGIN GAME SPECIFIC STUFF -->
+
+    <string-array name="starting_positions">
+        <item>Ground</item>
+        <item>Hanging</item>
+    </string-array>
+
+    <!-- Parked, not parked for autonomous ending -->
+
+    <string-array name="ending_positions">
+        <item>Other</item>
+        <item>Hanging</item>
+        <item>Crater Partial</item>
+        <item>Crater Complete</item>
+    </string-array>
+
+    <!--
+    <string-array name="starting_hanging_positions">
+        <item>Hanging</item>
+        <item>Ground</item>
+    </string-array>
+    -->
+
+    <!-- END GAME SPECIFIC STUFF -->
+
     <string name="app_name">TRC Scouting App</string>
     <string name="action_settings">Settings</string>
     <string name="action_about">About...</string>
@@ -26,12 +51,10 @@
     </string-array>
 
     <string-array name="spectating_types">
-        <item>Red Alliance 1 (Right)</item>
-        <item>Red Alliance 2 (Center)</item>
-        <item>Red Alliance 3 (Left)</item>
-        <item>Blue Alliance 1 (Right)</item>
-        <item>Blue Alliance 2 (Center)</item>
-        <item>Blue Alliance 3 (Left)</item>
+        <item>Red Alliance 1</item>
+        <item>Red Alliance 2</item>
+        <item>Blue Alliance 1</item>
+        <item>Blue Alliance 2</item>
     </string-array>
 
 
@@ -58,7 +81,7 @@
         <item>Yes</item>
     </string-array>
 
-    <string-array name="starting_positions">
+    <string-array name="three_positions">
         <item>Left</item>
         <item>Middle</item>
         <item>Right</item>
@@ -94,6 +117,16 @@
         <item>13</item>
         <item>14</item>
         <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
     </string-array>
 
     <string name="title_activity_settings">Settings</string>
