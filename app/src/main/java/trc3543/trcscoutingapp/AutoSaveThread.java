@@ -41,13 +41,13 @@ public class AutoSaveThread
         for(;;)
         {
             double time = System.currentTimeMillis() / 1000.0;
-            if (time % DataStore.AUTOSAVE_SECONDS != 0)
+            if (time % DataStore.autosaveSeconds != 0)
             {
                 done = false;
             }
-            if (time % DataStore.AUTOSAVE_SECONDS == 0 && !done && DataStore.USE_AUTOSAVE) {
+            if (time % DataStore.autosaveSeconds == 0 && !done && DataStore.useAutosave) {
                 Log.d("AutoSave", "Auto saving at time=" + time);
-                String filename = DataStore.FIRST_NAME + "_" + DataStore.LAST_NAME + "_results.csv";
+                String filename = DataStore.firstName + "_" + DataStore.lastName + "_results.csv";
                 try {
                     DataStore.writeContestsToCsv(filename);
                 } catch (IOException e) {

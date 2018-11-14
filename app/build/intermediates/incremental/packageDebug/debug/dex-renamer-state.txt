@@ -1,4 +1,0 @@
-#Thu Jun 28 21:20:30 PDT 2018
-base.0=/home/citrus/Documents/ftc2018/github/TrcScoutingApp/app/build/intermediates/transforms/dexMerger/debug/0
-path.0=classes.dex
-renamed.0=classes.dex

@@ -80,6 +80,15 @@ public class AddCompetitions extends AppCompatActivity
             return;
         }
 
+        try
+        {
+            DataStore.readArraylistsFromJSON();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         contestList = (ListView) findViewById(R.id.listView);
@@ -118,6 +127,55 @@ public class AddCompetitions extends AppCompatActivity
 
             }
         });
+        contestList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+        {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int i, long l)
+            {
+                if (!DataStore.contests.contains("No Entries Yet"))
+                {
+                    new AlertDialog.Builder(AddCompetitions.this)
+                            .setTitle("Are you sure?")
+                            .setMessage("Are you sure you want to delete this element?")
+                            .setPositiveButton("YES", new DialogInterface.OnClickListener()
+                            {
+                                public void onClick(DialogInterface dialog, int whichButton)
+                                {
+                                    removeFromList(i);
+                                    DataStore.CsvFormattedContests.remove(i);
+                                    try
+                                    {
+                                        DataStore.writeArraylistsToJSON();
+                                    }
+                                    catch (IOException e)
+                                    {
+                                        e.printStackTrace();
+                                    }
+                                    adapter.notifyDataSetChanged();
+                                    String filename = DataStore.firstName +"_"+DataStore.lastName +"_results.csv";
+                                    try
+                                    {
+                                        DataStore.writeContestsToCsv(filename);
+                                    }
+                                    catch (IOException e)
+                                    {
+                                        // TODO Auto-generated catch block
+                                        e.printStackTrace();
+                                    }
+                                }
+                            })
+                            .setNegativeButton("NO", new DialogInterface.OnClickListener()
+                            {
+                                public void onClick(DialogInterface dialog, int whichButton)
+                                {
+                                }
+                            })
+                            .show();
+                }
+                return true;
+            }
+        });
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener()
         {
@@ -147,6 +205,7 @@ public class AddCompetitions extends AppCompatActivity
                 Log.d("FileIO", "Creating write directory: " + writeDirectory.toString());
                 writeDirectory.mkdir();
             }
+            /*
             File log = new File(writeDirectory, "settings.coda");
             if(!log.exists())
             {
@@ -157,6 +216,7 @@ public class AddCompetitions extends AppCompatActivity
                     e.printStackTrace();
                 }
             }
+            */
             Intent intent = new Intent(this, Settings.class);
             startActivity(intent);
         }
@@ -211,16 +271,25 @@ public class AddCompetitions extends AppCompatActivity
             Intent intent = new Intent(this, Settings.class);
             startActivity(intent);
         }
+        else
+        {
+            try
+            {
+                DataStore.parseAutoSaveBoolean();
+                DataStore.parseAutoSaveTime();
+                DataStore.parseTeamNum();
+                DataStore.parseFirstName();
+                DataStore.parseLastName();
+                DataStore.parseDirectSave();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+
 
         // start another thread to automatically save.
-        try
-        {
-            DataStore.parseAutoSaveBoolean();
-            DataStore.parseAutoSaveTime();
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-        }
         Runnable autosaverunnable = new Runnable()
         {
             @Override
@@ -259,7 +328,7 @@ public class AddCompetitions extends AppCompatActivity
         }
         else if (id == R.id.action_makecsv)
         {
-            String filename = DataStore.FIRST_NAME+"_"+DataStore.LAST_NAME+"_results.csv";
+            String filename = DataStore.firstName +"_"+DataStore.lastName +"_results.csv";
             try
             {
                 DataStore.writeContestsToCsv(filename);
@@ -275,7 +344,7 @@ public class AddCompetitions extends AppCompatActivity
             // mail the CSV
             try
             {
-                final String filename = DataStore.FIRST_NAME+"_"+DataStore.LAST_NAME+"_results.csv";
+                final String filename = DataStore.firstName +"_"+DataStore.lastName +"_results.csv";
                 final String[] recipient = {""};
                 final EditText txtUrl = new EditText(this);
                 new AlertDialog.Builder(this)
@@ -307,15 +376,38 @@ public class AddCompetitions extends AppCompatActivity
             new AlertDialog.Builder(this)
                     .setTitle("Are you sure?")
                     .setMessage("Are you sure you want to clear the contest history?")
-                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                           DataStore.CsvFormattedContests.clear();
-                           DataStore.contests.clear();
-                           adapter.notifyDataSetChanged();
+                    .setPositiveButton("YES", new DialogInterface.OnClickListener()
+                    {
+                        public void onClick(DialogInterface dialog, int whichButton)
+                        {
+                            DataStore.CsvFormattedContests.clear();
+                            DataStore.contests.clear();
+                            try
+                            {
+                                DataStore.writeArraylistsToJSON();
+                            }
+                            catch (IOException e)
+                            {
+                                e.printStackTrace();
+                            }
+                            addToList("No Entries Yet");
+                            adapter.notifyDataSetChanged();
+                            String filename = DataStore.firstName +"_"+DataStore.lastName +"_results.csv";
+                            try
+                            {
+                                DataStore.writeContestsToCsv(filename);
+                            }
+                            catch (IOException e)
+                            {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            }
                         }
                     })
-                    .setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
+                    .setNegativeButton("NO", new DialogInterface.OnClickListener()
+                    {
+                        public void onClick(DialogInterface dialog, int whichButton)
+                        {
                         }
                     })
                     .show();
@@ -344,6 +436,7 @@ public class AddCompetitions extends AppCompatActivity
         {
             removeFromList("No Entries Yet");
         }
+
         DataStore.contests.add(s);
         adapter.notifyDataSetChanged();
     }
@@ -357,6 +450,20 @@ public class AddCompetitions extends AppCompatActivity
     public static void removeFromList(String s)
     {
         DataStore.contests.remove(s);
+        if (DataStore.contests.size() == 0 && !s.equals("No Entries Yet"))
+        {
+            addToList("No Entries Yet");
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+    public static void removeFromList(int index)
+    {
+        DataStore.contests.remove(index);
+        if (DataStore.contests.size() == 0)
+        {
+            addToList("No Entries Yet");
+        }
         adapter.notifyDataSetChanged();
     }
 

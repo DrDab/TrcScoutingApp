@@ -51,6 +51,27 @@ public class Settings extends AppCompatActivity
         setContentView(R.layout.activity_settings);
         setTitle("Settings");
         setTitleColor(Color.parseColor("#ff669900"));
+
+        EditText teamNumForm = (EditText) findViewById(R.id.teamNumForm);
+        EditText firstNameForm = (EditText) findViewById(R.id.firstNameForm);
+        EditText lastNameForm = (EditText) findViewById(R.id.lastNameForm);
+        CheckBox saveDirectlyCheckBox = (CheckBox) findViewById(R.id.saveDirectlyCheckBox);
+
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+        String saiodfjsajofojfdfjisafbj;
+        if (!readDirectory.exists())
+        {
+            readDirectory.mkdir();
+        }
+        File log = new File(readDirectory, "settings.coda");
+        if (log.exists())
+        {
+            teamNumForm.setText(DataStore.selfTeamNumber + "");
+            firstNameForm.setText(DataStore.firstName);
+            lastNameForm.setText(DataStore.lastName);
+            saveDirectlyCheckBox.setChecked(DataStore.USE_DIRECT_SAVE);
+        }
+
         // AddCompetitions.verifyStoragePermissions(this);
     }
 

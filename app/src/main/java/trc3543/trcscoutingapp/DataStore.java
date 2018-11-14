@@ -1,10 +1,11 @@
 package trc3543.trcscoutingapp;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Environment;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,12 +17,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
-import static android.support.v4.content.ContextCompat.startActivity;
-
-/**
- * Created by citrus on 12/26/17.
- */
 
 @SuppressWarnings("All")
 public class DataStore extends AppCompatActivity
@@ -49,19 +44,18 @@ public class DataStore extends AppCompatActivity
      *	SOFTWARE.
      */
 
-    static boolean USE_AUTOSAVE = true; // by default, autosave is enabled.
-    static int AUTOSAVE_SECONDS = 300;  // by default, save changes every 5 minutes.
+    static final String CSV_HEADER = "Contains Your Team, Date, Match #, Competition Type, Team Number, Spectating Team, Starting Position, AT-Robot Lowered, AT-Mineral Displaced, AT-Mineral Correct, AT-Marker Deployed, AT-Parked In Crater, TO-Depot Score, TO-Lander Score, EG-Ending Location, Match Won, Autonomous Notes, TeleOp Notes";
+
+    static boolean useAutosave = true; // by default, autosave is enabled.
+    static int autosaveSeconds = 300;  // by default, save changes every 5 minutes.
 
     static ArrayList<String> contests = new ArrayList<String>();
-    /**
-     * The ArrayList "CsvFormattedContests" should be in the format:
-     * "Team Contained Status, Date, Match #, Competition Name, Competition Type, Spectating Team Number, Spectating Team Type, Conditions"
-     */
+
     static ArrayList<String> CsvFormattedContests = new ArrayList<String>();
 
-    static int SELF_TEAM_NUMBER = 3543;
-    static String FIRST_NAME = "Unknown";
-    static String LAST_NAME = "Unknown";
+    static int selfTeamNumber = 3543;
+    static String firstName = "Unknown";
+    static String lastName = "Unknown";
 
     static boolean USE_DIRECT_SAVE = false; // don't use direct save by default
 
@@ -70,11 +64,104 @@ public class DataStore extends AppCompatActivity
         // TODO nothing
     }
 
+    public static boolean writeArraylistsToJSON() throws IOException
+    {
+        File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+        if (!writeDirectory.exists())
+        {
+            writeDirectory.mkdir();
+        }
+        File cache = new File(writeDirectory, "cache.json");
+        if(!cache.exists())
+        {
+            cache.createNewFile();
+        }
+        else
+        {
+            cache.delete();
+            cache = new File(writeDirectory, "cache.json");
+            cache.createNewFile();
+        }
+        PrintWriter madoka = new PrintWriter(new FileWriter(cache, true));
+        JSONObject jsonObject = new JSONObject();
+        JSONArray displayContestsArray = new JSONArray();
+        JSONArray csvContestsArray = new JSONArray();
+
+        for(int i = 0; i < contests.size(); i++)
+        {
+            displayContestsArray.put(contests.get(i));
+        }
+
+        for(int i = 0; i < CsvFormattedContests.size(); i++)
+        {
+            csvContestsArray.put(CsvFormattedContests.get(i));
+        }
+
+        try
+        {
+            jsonObject.put("disp", (Object)displayContestsArray);
+            jsonObject.put("csv", (Object)csvContestsArray);
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+
+        madoka.println(jsonObject.toString());
+        madoka.flush();
+        madoka.close();
+        return true;
+    }
+
+    public static void readArraylistsFromJSON() throws IOException
+    {
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+        int saiodfjsajofojfdfjisafbj;
+        if (!readDirectory.exists())
+        {
+            readDirectory.mkdir();
+        }
+        File cache = new File(readDirectory, "cache.json");
+        if (cache.exists())
+        {
+            BufferedReader br = new BufferedReader(new FileReader(cache));
+            String jsonData = "";
+            String in = null;
+            while ((in = br.readLine()) != null)
+            {
+                jsonData += in;
+            }
+            br.close();
+            try
+            {
+                contests.clear();
+                CsvFormattedContests.clear();
+
+                JSONObject jsonObject = new JSONObject(jsonData);
+                JSONArray displayContestsArray = jsonObject.getJSONArray("disp");
+                JSONArray csvContestsArray = jsonObject.getJSONArray("csv");
+
+                for(int i = 0; i < displayContestsArray.length(); i++)
+                {
+                    contests.add(displayContestsArray.getString(i));
+                }
+
+                for(int i = 0; i < csvContestsArray.length(); i++)
+                {
+                    CsvFormattedContests.add(csvContestsArray.getString(i));
+                }
+            }
+            catch (JSONException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
 
     public static boolean writeContestsToCsv(String filename) throws IOException
     {
         File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
-        // File writeDirectory = new File("/sdcard/TrcScoutingApp/");
         if (!writeDirectory.exists())
         {
             writeDirectory.mkdir();
@@ -91,8 +178,8 @@ public class DataStore extends AppCompatActivity
                 log.createNewFile();
             }
             PrintWriter madoka = new PrintWriter(new FileWriter(log, true));
-            madoka.println("Log by: " + FIRST_NAME + " " + LAST_NAME + ", written on " + getDateAsString());                    // auto                                                                                                                                        // teleop                                                                                                                                                                                                                                                                                                       // endgame                                                                       // penalties
-            madoka.println("Contains Your Team, Date, Match #, Competition Type, Team Number, Spectating Team, Starting Position, AT-Crossed Auto Line, AT-# Cubes Placed on Scale, AT-# Cubes Attempted on Scale, AT-# Cubes Placed on Switch, AT-# Cubes Attempted on Switch, TO-# Cubes Placed Far Switch, TO-# Cubes Attempted Far Switch, TO-# Cubes Placed Near Switch, TO-# Cubes Attempted Near Switch, TO-# Cubes Placed on Scale, TO-# Cubes Attempted on Scale, TO-# Cubes Placed in Exchange, TO-# Cubes Attempted in Exchange, TO-Cube Pickup at Portal, TO-Cube Pickup at Ground, EG-Climb Attempt, EG-Successful Climb, EG-Park on Platform, EG-Robot Breakdown, PN-Herding Pen., PN-Scale Contact Pen., PN-Pinning Pen., PN-Zone Contact Pen., PN-Other, Autonomous Notes, Teleoperated Notes, Match Won");
+            madoka.println("Log by: " + firstName + " " + lastName + ", written on " + getDateAsString());
+            madoka.println(CSV_HEADER);
             for(String sk : CsvFormattedContests)
             {
                 madoka.println(sk);
@@ -126,18 +213,19 @@ public class DataStore extends AppCompatActivity
             {
                 BufferedReader br = new BufferedReader(new FileReader(log));
                 saiodfjsajofojfdfjisafbj = Integer.parseInt(br.readLine());
-                SELF_TEAM_NUMBER = saiodfjsajofojfdfjisafbj;
+                selfTeamNumber = saiodfjsajofojfdfjisafbj;
             }
             catch (NumberFormatException e)
             {
-                SELF_TEAM_NUMBER = 3543; // can't read team num, return to default value.
+                selfTeamNumber = 3543; // can't read team num, return to default value.
             }
         }
         else
         {
-            SELF_TEAM_NUMBER = 3543; // return by default
+            selfTeamNumber = 3543; // return by default
         }
     }
+
     public static void parseFirstName() throws IOException
     {
         File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
@@ -152,11 +240,11 @@ public class DataStore extends AppCompatActivity
                 BufferedReader br = new BufferedReader(new FileReader(log));
                 br.readLine();
                 saiodfjsajofojfdfjisafbj = br.readLine();
-                FIRST_NAME = saiodfjsajofojfdfjisafbj;
+                firstName = saiodfjsajofojfdfjisafbj;
         }
         else
         {
-                FIRST_NAME = "Unknown";
+                firstName = "Unknown";
         }
     }
     public static void parseLastName() throws IOException
@@ -174,11 +262,11 @@ public class DataStore extends AppCompatActivity
             br.readLine();
             br.readLine();
             saiodfjsajofojfdfjisafbj = br.readLine();
-            LAST_NAME = saiodfjsajofojfdfjisafbj;
+            lastName = saiodfjsajofojfdfjisafbj;
         }
         else
         {
-            LAST_NAME = "Unknown";
+            lastName = "Unknown";
         }
     }
     public static void parseDirectSave() throws IOException
@@ -226,16 +314,16 @@ public class DataStore extends AppCompatActivity
             saiodfjsajofojfdfjisafbj = br.readLine();
             if (saiodfjsajofojfdfjisafbj.contains("y"))
             {
-                USE_AUTOSAVE = true;
+                useAutosave = true;
             }
             else
             {
-                USE_AUTOSAVE = false;
+                useAutosave = false;
             }
         }
         else
         {
-            USE_AUTOSAVE = true;
+            useAutosave = true;
         }
     }
     public static void parseAutoSaveTime() throws IOException
@@ -254,17 +342,17 @@ public class DataStore extends AppCompatActivity
             saiodfjsajofojfdfjisafbj = br.readLine();
             try
             {
-                AUTOSAVE_SECONDS = Integer.parseInt(saiodfjsajofojfdfjisafbj);
+                autosaveSeconds = Integer.parseInt(saiodfjsajofojfdfjisafbj);
             }
             catch (NumberFormatException e)
             {
-                AUTOSAVE_SECONDS = 300;
+                autosaveSeconds = 300;
                 e.printStackTrace();
             }
         }
         else
         {
-            AUTOSAVE_SECONDS = 300;
+            autosaveSeconds = 300;
         }
     }
     public static boolean existsSave()
