@@ -436,7 +436,7 @@ public class SetCompetitionName extends AppCompatActivity
         }
 
         // if using direct save, write the generated results directly to CSV file.
-        if (DataStore.USE_DIRECT_SAVE)
+        if (DataStore.useDirectSave)
         {
             String filename = DataStore.firstName +"_"+DataStore.lastName +"_results.csv";
             try

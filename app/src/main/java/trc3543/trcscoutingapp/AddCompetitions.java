@@ -60,6 +60,8 @@ public class AddCompetitions extends AppCompatActivity
     static ArrayAdapter<String> adapter;
     static ListView contestList;
 
+    private Runnable autosaverunnable = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -205,18 +207,6 @@ public class AddCompetitions extends AppCompatActivity
                 Log.d("FileIO", "Creating write directory: " + writeDirectory.toString());
                 writeDirectory.mkdir();
             }
-            /*
-            File log = new File(writeDirectory, "settings.coda");
-            if(!log.exists())
-            {
-                try {
-                    Log.d("FileIO", "Creating settings file: " + log.toString());
-                    log.createNewFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            */
             Intent intent = new Intent(this, Settings.class);
             startActivity(intent);
         }
@@ -290,16 +280,20 @@ public class AddCompetitions extends AppCompatActivity
 
 
         // start another thread to automatically save.
-        Runnable autosaverunnable = new Runnable()
+        if (!DataStore.autoSaveRunnableInit)
         {
-            @Override
-            public void run()
+            autosaverunnable = new Runnable()
             {
-                AutoSaveThread autosave = new AutoSaveThread();
-                autosave.run();
-            }
-        };
-        new Thread(autosaverunnable).start();
+                @Override
+                public void run()
+                {
+                    AutoSaveThread autosave = new AutoSaveThread();
+                    autosave.run();
+                }
+            };
+            new Thread(autosaverunnable).start();
+            DataStore.autoSaveRunnableInit = true;
+        }
     }
 
     @Override

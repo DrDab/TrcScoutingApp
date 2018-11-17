@@ -69,7 +69,7 @@ public class Settings extends AppCompatActivity
             teamNumForm.setText(DataStore.selfTeamNumber + "");
             firstNameForm.setText(DataStore.firstName);
             lastNameForm.setText(DataStore.lastName);
-            saveDirectlyCheckBox.setChecked(DataStore.USE_DIRECT_SAVE);
+            saveDirectlyCheckBox.setChecked(DataStore.useDirectSave);
         }
 
         // AddCompetitions.verifyStoragePermissions(this);

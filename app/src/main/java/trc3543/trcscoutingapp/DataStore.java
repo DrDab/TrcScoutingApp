@@ -57,7 +57,9 @@ public class DataStore extends AppCompatActivity
     static String firstName = "Unknown";
     static String lastName = "Unknown";
 
-    static boolean USE_DIRECT_SAVE = false; // don't use direct save by default
+    static boolean useDirectSave = false;
+
+    static boolean autoSaveRunnableInit = false;
 
     public DataStore()
     {
@@ -287,16 +289,16 @@ public class DataStore extends AppCompatActivity
             saiodfjsajofojfdfjisafbj = br.readLine();
             if (saiodfjsajofojfdfjisafbj.matches("y"))
             {
-                USE_DIRECT_SAVE = true;
+                useDirectSave = true;
             }
             else
             {
-                USE_DIRECT_SAVE = false;
+                useDirectSave = false;
             }
         }
         else
         {
-            USE_DIRECT_SAVE = false;
+            useDirectSave = false;
         }
     }
     public static void parseAutoSaveBoolean() throws IOException
