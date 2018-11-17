@@ -57,7 +57,7 @@ public class AddCompetitions extends AppCompatActivity
 
     public static final boolean MAKE_CHANGES_READ_ONLY = false;
 
-    static ArrayAdapter<String> adapter;
+    static ArrayAdapter<Match> adapter;
     static ListView contestList;
 
     private Runnable autosaverunnable = null;
@@ -95,9 +95,7 @@ public class AddCompetitions extends AppCompatActivity
         setSupportActionBar(toolbar);
         contestList = (ListView) findViewById(R.id.listView);
 
-        adapter = new ArrayAdapter < String >
-                (AddCompetitions.this, android.R.layout.simple_list_item_1,
-                        DataStore.contests);
+        adapter = new ArrayAdapter<Match>(AddCompetitions.this, android.R.layout.simple_list_item_1, DataStore.matchList);
 
         contestList.setAdapter(adapter);
         contestList.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -108,11 +106,16 @@ public class AddCompetitions extends AppCompatActivity
                 // position = position selected
                 AlertDialog alertDialog = new AlertDialog.Builder(AddCompetitions.this).create();
                 alertDialog.setTitle("Game Information");
-                if (DataStore.CsvFormattedContests.size() >= 1)
+                if (listEmpty())
+                {
+                    alertDialog.setMessage("No Games Yet");
+                    alertDialog.show();
+                }
+                else
                 {
                     if (MAKE_CHANGES_READ_ONLY)
                     {
-                        String s = DataStore.CsvFormattedContests.get(position);
+                        String s = DataStore.matchList.get(position).getCsvString();
                         alertDialog.setMessage(s);
                         alertDialog.show();
                     }
@@ -120,11 +123,6 @@ public class AddCompetitions extends AppCompatActivity
                     {
                         openCompNamePrompt(true, position);
                     }
-                }
-                else
-                {
-                    alertDialog.setMessage("No Games Yet");
-                    alertDialog.show();
                 }
 
             }
@@ -134,7 +132,7 @@ public class AddCompetitions extends AppCompatActivity
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int i, long l)
             {
-                if (!DataStore.contests.contains("No Entries Yet"))
+                if (!DataStore.matchList.contains("No Entries Yet"))
                 {
                     new AlertDialog.Builder(AddCompetitions.this)
                             .setTitle("Are you sure?")
@@ -144,7 +142,6 @@ public class AddCompetitions extends AppCompatActivity
                                 public void onClick(DialogInterface dialog, int whichButton)
                                 {
                                     removeFromList(i);
-                                    DataStore.CsvFormattedContests.remove(i);
                                     try
                                     {
                                         DataStore.writeArraylistsToJSON();
@@ -192,9 +189,9 @@ public class AddCompetitions extends AppCompatActivity
             }
         });
 
-        if (DataStore.contests.size() == 0)
+        if (DataStore.matchList.size() == 0)
         {
-            addToList("No Entries Yet");
+            addToList("No Entries Yet", null);
         }
 
         // check if user information is saved. if not, open the settings window.
@@ -374,8 +371,7 @@ public class AddCompetitions extends AppCompatActivity
                     {
                         public void onClick(DialogInterface dialog, int whichButton)
                         {
-                            DataStore.CsvFormattedContests.clear();
-                            DataStore.contests.clear();
+                            DataStore.matchList.clear();
                             try
                             {
                                 DataStore.writeArraylistsToJSON();
@@ -384,7 +380,7 @@ public class AddCompetitions extends AppCompatActivity
                             {
                                 e.printStackTrace();
                             }
-                            addToList("No Entries Yet");
+                            addToList("No Entries Yet", null);
                             adapter.notifyDataSetChanged();
                             String filename = DataStore.firstName +"_"+DataStore.lastName +"_results.csv";
                             try
@@ -424,41 +420,80 @@ public class AddCompetitions extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    public static void addToList(String s)
+    public static void addToList(String dispString, String csvString)
     {
-        if (DataStore.contests.contains("No Entries Yet"))
+        if (listHasPlaceHolder())
         {
-            removeFromList("No Entries Yet");
+            removeFromList("No Entries Yet", null);
         }
 
-        DataStore.contests.add(s);
+        DataStore.matchList.add(new Match(dispString, csvString));
         adapter.notifyDataSetChanged();
     }
 
-    public static void resetListItem(String s, int pos)
+    public static void resetListItem(String dispString, String csvString, int pos)
     {
-        DataStore.contests.set(pos, s);
+        Match match = DataStore.matchList.get(pos);
+        match.setCsvString(csvString);
+        match.setDispString(dispString);
         adapter.notifyDataSetChanged();
     }
 
-    public static void removeFromList(String s)
+    public static void removeFromList(String dispString, String csvString)
     {
-        DataStore.contests.remove(s);
-        if (DataStore.contests.size() == 0 && !s.equals("No Entries Yet"))
+        for(int i = 0; i < DataStore.matchList.size(); i++)
         {
-            addToList("No Entries Yet");
+            String csvStringCmp = DataStore.matchList.get(i).getCsvString();
+            String dispStringCmp = DataStore.matchList.get(i).getDispString();
+            if ((csvString == null ? true : csvStringCmp.equals(csvString)) && (dispString == null ? true : dispStringCmp.equals(dispString)))
+            {
+                DataStore.matchList.remove(i);
+                break;
+            }
+        }
+        if (DataStore.matchList.size() == 0 && !dispString.equals("No Entries Yet"))
+        {
+            addToList("No Entries Yet", null);
         }
         adapter.notifyDataSetChanged();
     }
 
     public static void removeFromList(int index)
     {
-        DataStore.contests.remove(index);
-        if (DataStore.contests.size() == 0)
+        DataStore.matchList.remove(index);
+        if (DataStore.matchList.size() == 0)
         {
-            addToList("No Entries Yet");
+            addToList("No Entries Yet", null);
         }
         adapter.notifyDataSetChanged();
+    }
+
+
+    public static boolean listHasPlaceHolder()
+    {
+        for(int i = 0; i < DataStore.matchList.size(); i++)
+        {
+            if (DataStore.matchList.get(i).getDispString().equals("No Entries Yet") || DataStore.matchList.get(i).getCsvString() == null)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean listEmpty()
+    {
+        if (DataStore.matchList.size() == 0)
+        {
+            return true;
+        }
+
+        if (DataStore.matchList.size() == 1)
+        {
+            return listHasPlaceHolder();
+        }
+
+        return false;
     }
 
     public void openCompNamePrompt(boolean modifyingExisting, int option)

@@ -49,9 +49,7 @@ public class DataStore extends AppCompatActivity
     static boolean useAutosave = true; // by default, autosave is enabled.
     static int autosaveSeconds = 300;  // by default, save changes every 5 minutes.
 
-    static ArrayList<String> contests = new ArrayList<String>();
-
-    static ArrayList<String> CsvFormattedContests = new ArrayList<String>();
+    static ArrayList<Match> matchList = new ArrayList<Match>();
 
     static int selfTeamNumber = 3543;
     static String firstName = "Unknown";
@@ -89,14 +87,10 @@ public class DataStore extends AppCompatActivity
         JSONArray displayContestsArray = new JSONArray();
         JSONArray csvContestsArray = new JSONArray();
 
-        for(int i = 0; i < contests.size(); i++)
+        for(int i = 0; i < matchList.size(); i++)
         {
-            displayContestsArray.put(contests.get(i));
-        }
-
-        for(int i = 0; i < CsvFormattedContests.size(); i++)
-        {
-            csvContestsArray.put(CsvFormattedContests.get(i));
+            displayContestsArray.put(matchList.get(i).getDispString());
+            csvContestsArray.put(matchList.get(i).getCsvString());
         }
 
         try
@@ -137,21 +131,15 @@ public class DataStore extends AppCompatActivity
             br.close();
             try
             {
-                contests.clear();
-                CsvFormattedContests.clear();
+                matchList.clear();
 
                 JSONObject jsonObject = new JSONObject(jsonData);
                 JSONArray displayContestsArray = jsonObject.getJSONArray("disp");
                 JSONArray csvContestsArray = jsonObject.getJSONArray("csv");
 
-                for(int i = 0; i < displayContestsArray.length(); i++)
-                {
-                    contests.add(displayContestsArray.getString(i));
-                }
-
                 for(int i = 0; i < csvContestsArray.length(); i++)
                 {
-                    CsvFormattedContests.add(csvContestsArray.getString(i));
+                    matchList.add(new Match(displayContestsArray.getString(i), csvContestsArray.getString(i)));
                 }
             }
             catch (JSONException e)
@@ -168,7 +156,7 @@ public class DataStore extends AppCompatActivity
         {
             writeDirectory.mkdir();
         }
-        if (CsvFormattedContests.size() == 0)
+        if (matchList.size() == 0)
         {
             return false;
         }
@@ -182,9 +170,9 @@ public class DataStore extends AppCompatActivity
             PrintWriter madoka = new PrintWriter(new FileWriter(log, true));
             madoka.println("Log by: " + firstName + " " + lastName + ", written on " + getDateAsString());
             madoka.println(CSV_HEADER);
-            for(String sk : CsvFormattedContests)
+            for(Match match : matchList)
             {
-                madoka.println(sk);
+                madoka.println(match.getCsvString());
             }
             madoka.println("End Of Log");
             madoka.flush();

@@ -123,7 +123,7 @@ public class SetCompetitionName extends AppCompatActivity
         // populate the boxes if already filled.
         if (editingoption != -1)
         {
-            String read = DataStore.CsvFormattedContests.get(editingoption);
+            String read = DataStore.matchList.get(editingoption).getCsvString();
             Log.d("SetCompetitionName", editingoption + " " + read);
             String[] OwOWhatsThis = read.split(",");
 
@@ -416,14 +416,12 @@ public class SetCompetitionName extends AppCompatActivity
         if (editingoption == -1)
         {
             Log.d("SetCompetitionName","Adding new entry to list.");
-            AddCompetitions.addToList(listMsg);
-            DataStore.CsvFormattedContests.add(CSVFormat);
+            AddCompetitions.addToList(listMsg, CSVFormat);
         }
         else
         {
             Log.d("SetCompetitionName","Resetting list entry: " + editingoption);
-            AddCompetitions.resetListItem(listMsg, editingoption);
-            DataStore.CsvFormattedContests.set(editingoption, CSVFormat);
+            AddCompetitions.resetListItem(listMsg, CSVFormat, editingoption);
         }
 
         try
