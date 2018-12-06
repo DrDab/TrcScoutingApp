@@ -4,6 +4,9 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import org.json.JSONArray;
 
@@ -35,7 +38,7 @@ public class DataHandler
 		System.out.printf("[%.3f] DataHandler init complete!\n", st.elapsedTime());
 	}
 	
-	public synchronized boolean setFile(String fileName)
+	public boolean setFile(String fileName)
 	{
 		System.out.printf("[%.3f] Setting DataHandler to file %s...\n", st.elapsedTime(), fileName);
 		try 
@@ -53,7 +56,7 @@ public class DataHandler
 		return false;
 	}
 	
-	public synchronized boolean appendHeader(String header)
+	public boolean appendHeader(String header)
 	{
 		if (header != null && pw != null)
 		{
@@ -73,7 +76,7 @@ public class DataHandler
 		return false;
 	}
 	
-	public synchronized boolean writeToCsvFile(JSONArray lines)
+	public boolean writeToCsvFile(JSONArray lines)
 	{
 		if (lines != null && pw != null)
 		{
@@ -95,5 +98,16 @@ public class DataHandler
 			}
 		}
 		return false;
+	}
+	
+	public static String getTimeStamp(String format)
+	{
+		SimpleDateFormat dateFormat = new SimpleDateFormat(format, Locale.US);
+		return dateFormat.format(new Date());
+	}
+
+	public static String getFileName(String username)
+	{
+		return username + "_" + getTimeStamp("yyyyMMdd@HHmmss") + ".csv";
 	}
 }

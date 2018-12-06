@@ -16,14 +16,12 @@ import org.json.JSONException;
 public class CollectorServer
 {
 	private Stopwatch st;
-	private DataHandler dh;
 	private LoginHandler lh;
 	private ServerSocket ssock;
 	
-	public CollectorServer(Stopwatch st, DataHandler dh, LoginHandler lh, int port) throws IOException
+	public CollectorServer(Stopwatch st, LoginHandler lh, int port) throws IOException
 	{
 		this.st = st;
-		this.dh = dh;
 		this.lh = lh;
 		System.out.printf("[%.3f] Collector Server initialized.\n", st.elapsedTime());
 		ssock = new ServerSocket(port);
@@ -44,7 +42,7 @@ public class CollectorServer
 				e.printStackTrace();
 			}
 			System.out.printf("[%.3f] Sensor COwOnnected UwU, IP: %s\n", st.elapsedTime(), sock.getRemoteSocketAddress().toString());
-	        new Thread(new CollectorServerThread(sock, st, dh, lh)).start();
+	        new Thread(new CollectorServerThread(sock, st, lh)).start();
 	    }
 	}
 	
@@ -53,17 +51,15 @@ class CollectorServerThread implements Runnable
 {
 	private Socket sock;
 	private Stopwatch st;
-	private DataHandler dh;
 	private LoginHandler lh;
 	private BufferedWriter bw;
 	
 	boolean isclosed = false;
 	
-	public CollectorServerThread(Socket sock, Stopwatch st, DataHandler dh, LoginHandler lh)
+	public CollectorServerThread(Socket sock, Stopwatch st, LoginHandler lh)
 	{
 		this.sock = sock;
 		this.st = st;
-		this.dh = dh;
 		this.lh = lh;
 	}
 
@@ -155,6 +151,8 @@ class CollectorServerThread implements Runnable
 								{
 									JSONArray jsonData = new JSONArray(receiveMessage);
 									System.out.printf("[%.3f] Began receiving JSON data from device %s, Username: %s, Password: %s\n", st.elapsedTime(), sock.getRemoteSocketAddress().toString(), username, password);
+									DataHandler dh = new DataHandler(st, DataHandler.getFileName(username));
+									dh.appendHeader(CollectorMain.CSV_HEADER);
 									if (dh.writeToCsvFile(jsonData))
 									{
 										System.out.printf("[%.3f] Downloading JSON data from %s successful, Username: %s, Password: %s\n", st.elapsedTime(), sock.getRemoteSocketAddress().toString(), username, password);
