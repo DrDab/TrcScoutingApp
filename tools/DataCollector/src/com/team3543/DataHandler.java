@@ -100,6 +100,14 @@ public class DataHandler
 		return false;
 	}
 	
+	public void close()
+	{
+		if (pw != null)
+		{
+			pw.close();
+		}
+	}
+	
 	public static String getTimeStamp(String format)
 	{
 		SimpleDateFormat dateFormat = new SimpleDateFormat(format, Locale.US);

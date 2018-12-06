@@ -164,6 +164,7 @@ class CollectorServerThread implements Runnable
 										bw.write("json_failure\r\n");
 									}
 									bw.flush();
+									dh.close();
 								}
 								catch (JSONException jse0)
 								{
