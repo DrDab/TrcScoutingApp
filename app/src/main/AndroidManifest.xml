@@ -31,7 +31,8 @@
             android:label="@string/title_activity_set_competition_name" />
         <activity android:name=".About" />
         <activity android:name=".Settings" />
-        <activity android:name=".AutoSaveSettings"></activity>
+        <activity android:name=".AutoSaveSettings" />
+        <activity android:name=".SendReport"></activity>
     </application>
 
 </manifest>

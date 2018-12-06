@@ -330,6 +330,12 @@ public class AddCompetitions extends AppCompatActivity
                 e.printStackTrace();
             }
         }
+        else if (id == R.id.action_transmitresults)
+        {
+            Intent intent = new Intent(this, SendReport.class);
+            startActivity(intent);
+            return true;
+        }
         else if (id == R.id.action_mailcsv)
         {
             // mail the CSV
