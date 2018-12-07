@@ -44,7 +44,7 @@ public class CollectorMain
 		LoginHandler loginHandler = new LoginHandler("logins.awoo");
 		try 
 		{
-			listener = new CollectorServer(stp, loginHandler, 3621);
+			listener = new CollectorServer(stp, loginHandler, port);
 			new Thread(new Runnable() 
 			{
 				public void run() 
