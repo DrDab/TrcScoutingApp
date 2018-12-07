@@ -174,7 +174,7 @@ class CollectorServerThread implements Runnable
 									JSONArray jsonData = new JSONArray(receiveMessage);
 									System.out.printf("[%.3f] Began receiving JSON data from device %s, Username: %s, Password: %s\n", st.elapsedTime(), sock.getRemoteSocketAddress().toString(), username, password);
 									DataHandler dh = new DataHandler(st, DataHandler.getFileName(username));
-									dh.appendHeader(CollectorMain.CSV_HEADER);
+									dh.appendHeader(CollectorMain.csvHeader);
 									if (dh.writeToCsvFile(jsonData))
 									{
 										System.out.printf("[%.3f] Downloading JSON data from %s successful, Username: %s, Password: %s\n", st.elapsedTime(), sock.getRemoteSocketAddress().toString(), username, password);

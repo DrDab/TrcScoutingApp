@@ -22,17 +22,24 @@
 
 package com.team3543;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
+
+import org.json.JSONObject;
 
 public class CollectorMain
 {
-	public static final String CSV_HEADER = "Contains Your Team, Date, Match #, Competition Type, Team Number, Spectating Team, Starting Position, AT-Robot Lowered, AT-Mineral Displaced, AT-Mineral Correct, AT-Marker Deployed, AT-Parked In Crater, TO-Depot Score, TO-Lander Score, EG-Ending Location, Match Won, Autonomous Notes, TeleOp Notes";
+	public static int port = 3621;
+	public static String csvHeader = "";
 	
 	private static Stopwatch stp;
 
 	public static void main(String[] args) 
 	{
+		System.out.println("TRC Scouting App - Data Collecter v1.0 (C) Victor Du 2018");
 		stp = new Stopwatch();
+		parseConfiguration("config.json");
 		CollectorServer listener;
 		LoginHandler loginHandler = new LoginHandler("logins.awoo");
 		try 
@@ -51,5 +58,32 @@ public class CollectorMain
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	private static boolean parseConfiguration(String fileName)
+	{
+		try
+		{
+			String accuminput = "";
+			BufferedReader br = new BufferedReader(new FileReader(fileName));
+			System.out.printf("[%.3f] Opened configuration file %s...\n", stp.elapsedTime(), fileName);
+			String input = null;
+			while ((input = br.readLine()) != null)
+			{
+				accuminput += (input + "\n");
+			}
+			br.close();
+			JSONObject confObj = new JSONObject(accuminput);
+			port = confObj.getInt("port");
+			csvHeader = confObj.getString("header");
+			System.out.printf("[%.3f] Successfully parsed settings from %s.\n", stp.elapsedTime(), fileName);
+			System.out.printf("[%.3f] Port set to: %d\n[%.3f] Excel Header:\"%s\"\n", stp.elapsedTime(), port, stp.elapsedTime(), csvHeader);
+			return true;
+		} 
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		return false;
 	}
 }
