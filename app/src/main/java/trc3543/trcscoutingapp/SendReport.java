@@ -10,6 +10,7 @@ import org.json.JSONArray;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -37,6 +38,14 @@ public class SendReport extends AppCompatActivity
         usernameBox = (EditText) findViewById(R.id.usernameForm);
         passwordBox = (EditText) findViewById(R.id.passwordForm);
         statusBox = (TextView) findViewById(R.id.uploaderStatusBox);
+
+        if (DataStore.serverIP != null && DataStore.username != null && DataStore.password != null)
+        {
+            ipBox.setText(DataStore.serverIP);
+            portBox.setText(DataStore.serverPort + "");
+            usernameBox.setText(DataStore.username);
+            passwordBox.setText(DataStore.password);
+        }
     }
 
     public void onSendClicked(View vue)
@@ -55,20 +64,46 @@ public class SendReport extends AppCompatActivity
             // after this, send the data.
             //
 
-            new Thread(new Runnable()
+            final Thread sendThread = new Thread(new Runnable()
             {
                 @Override
                 public void run()
                 {
                     try
                     {
-                        Socket sock = new Socket();
-                        sock.connect(new InetSocketAddress(ip, port), 10000);
+                        final Socket sock = new Socket();
+                        sock.connect(new InetSocketAddress(ip, port), 5000);
                         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(sock.getOutputStream()));
                         InputStream istream = sock.getInputStream();
                         BufferedReader receiveRead = new BufferedReader(new InputStreamReader(istream));
                         boolean isclosed = false;
                         String receiveMessage = null;
+
+                        new Thread(new Runnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                try
+                                {
+                                    Thread.sleep(5000);
+                                    if (!sock.isClosed())
+                                    {
+                                        sock.close();
+                                    }
+                                }
+                                catch (InterruptedException ie)
+                                {
+                                    ie.printStackTrace();
+                                }
+                                catch (IOException ioe)
+                                {
+                                    ioe.printStackTrace();
+                                }
+                            }
+                        }
+                        ).start();
+
                         for(;;)
                         {
                             runOnUiThread(new Runnable()
@@ -179,7 +214,9 @@ public class SendReport extends AppCompatActivity
                         });
                     }
                 }
-            }).start();
+            });
+
+            sendThread.start();
 
         }
         catch (Exception e)
@@ -205,8 +242,20 @@ public class SendReport extends AppCompatActivity
         }
     }
 
-    public void saveCredentials(String ip, int port, String username, String password)
+    public synchronized void saveCredentials(String ip, int port, String username, String password)
     {
-
+        DataStore.serverIP = ip;
+        DataStore.serverPort = port;
+        DataStore.username = username;
+        DataStore.password = password;
+        try
+        {
+            DataStore.writeServerLoginData();
+            statusBox.setText("*** Login saved. ***");
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 }

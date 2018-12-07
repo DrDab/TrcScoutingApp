@@ -182,8 +182,6 @@ public class AddCompetitions extends AppCompatActivity
             public void onClick(View view)
             {
                 // place a message
-                Snackbar.make(view, "Enter competition information please", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
                 openCompNamePrompt(false, -1);
 
             }
@@ -268,6 +266,7 @@ public class AddCompetitions extends AppCompatActivity
                 DataStore.parseFirstName();
                 DataStore.parseLastName();
                 DataStore.parseDirectSave();
+                DataStore.parseServerLoginData();
             }
             catch (IOException e)
             {
