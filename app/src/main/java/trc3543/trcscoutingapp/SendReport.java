@@ -38,7 +38,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.nio.Buffer;
 
 public class SendReport extends AppCompatActivity
 {
