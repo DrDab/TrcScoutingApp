@@ -57,8 +57,7 @@ public class Settings extends AppCompatActivity
         EditText lastNameForm = (EditText) findViewById(R.id.lastNameForm);
         CheckBox saveDirectlyCheckBox = (CheckBox) findViewById(R.id.saveDirectlyCheckBox);
 
-        File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
-        String saiodfjsajofojfdfjisafbj;
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), DataStore.DATA_FOLDER_NAME);
         if (!readDirectory.exists())
         {
             readDirectory.mkdir();
@@ -161,7 +160,7 @@ public class Settings extends AppCompatActivity
 
     public void writeSettingsToFile(String firstname, String lastname, int teamNum, boolean saveDirectly) throws IOException
     {
-        File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+        File writeDirectory = new File(Environment.getExternalStorageDirectory(), DataStore.DATA_FOLDER_NAME);
         if (!writeDirectory.exists())
         {
             writeDirectory.mkdir();

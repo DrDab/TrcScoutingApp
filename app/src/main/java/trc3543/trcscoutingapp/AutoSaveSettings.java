@@ -95,7 +95,7 @@ public class AutoSaveSettings extends AppCompatActivity
 
     public void writeSettingsToFile(boolean autoSave, int seconds) throws IOException
     {
-        File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+        File writeDirectory = new File(Environment.getExternalStorageDirectory(), DataStore.DATA_FOLDER_NAME);
         if (!writeDirectory.exists())
         {
             writeDirectory.mkdir();

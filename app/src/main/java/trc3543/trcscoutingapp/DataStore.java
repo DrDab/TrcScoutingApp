@@ -44,6 +44,8 @@ public class DataStore extends AppCompatActivity
      *	SOFTWARE.
      */
 
+    static final String DATA_FOLDER_NAME = "TrcScoutingApp";
+
     static final String CSV_HEADER = "Contains Your Team, Date, Match #, Competition Type, Team Number, Spectating Team, Starting Position, AT-Robot Lowered, AT-Mineral Displaced, AT-Mineral Correct, AT-Marker Deployed, AT-Parked In Crater, TO-Depot Score, TO-Lander Score, EG-Ending Location, Match Won, Autonomous Notes, TeleOp Notes";
 
     static boolean useAutosave = true; // by default, autosave is enabled.
@@ -58,6 +60,11 @@ public class DataStore extends AppCompatActivity
     static boolean useDirectSave = false;
 
     static boolean autoSaveRunnableInit = false;
+
+    static String serverIP = null;
+    static int serverPort = 3621;
+    static String username = null;
+    static String password = null;
 
     public DataStore()
     {
@@ -112,7 +119,7 @@ public class DataStore extends AppCompatActivity
 
     public static void readArraylistsFromJSON() throws IOException
     {
-        File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         int saiodfjsajofojfdfjisafbj;
         if (!readDirectory.exists())
         {
@@ -151,7 +158,7 @@ public class DataStore extends AppCompatActivity
 
     public static boolean writeContestsToCsv(String filename) throws IOException
     {
-        File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+        File writeDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         if (!writeDirectory.exists())
         {
             writeDirectory.mkdir();
@@ -190,7 +197,7 @@ public class DataStore extends AppCompatActivity
 
     public static void parseTeamNum() throws IOException
     {
-        File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         int saiodfjsajofojfdfjisafbj;
         if (!readDirectory.exists())
         {
@@ -218,7 +225,7 @@ public class DataStore extends AppCompatActivity
 
     public static void parseFirstName() throws IOException
     {
-        File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         String saiodfjsajofojfdfjisafbj;
         if (!readDirectory.exists())
         {
@@ -239,7 +246,7 @@ public class DataStore extends AppCompatActivity
     }
     public static void parseLastName() throws IOException
     {
-        File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         String saiodfjsajofojfdfjisafbj;
         if (!readDirectory.exists())
         {
@@ -261,7 +268,7 @@ public class DataStore extends AppCompatActivity
     }
     public static void parseDirectSave() throws IOException
     {
-        File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         String saiodfjsajofojfdfjisafbj;
         if (!readDirectory.exists())
         {
@@ -291,7 +298,7 @@ public class DataStore extends AppCompatActivity
     }
     public static void parseAutoSaveBoolean() throws IOException
     {
-        File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         String saiodfjsajofojfdfjisafbj;
         if (!readDirectory.exists())
         {
@@ -318,7 +325,7 @@ public class DataStore extends AppCompatActivity
     }
     public static void parseAutoSaveTime() throws IOException
     {
-        File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         String saiodfjsajofojfdfjisafbj;
         if (!readDirectory.exists())
         {
@@ -345,9 +352,54 @@ public class DataStore extends AppCompatActivity
             autosaveSeconds = 300;
         }
     }
+    public static void parseServerLoginData() throws IOException
+    {
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
+        String saiodfjsajofojfdfjisafbj;
+        if (!readDirectory.exists())
+        {
+            readDirectory.mkdir();
+        }
+        File log = new File(readDirectory, "uploader.coda");
+        if (log.exists())
+        {
+            try
+            {
+                BufferedReader br = new BufferedReader(new FileReader(log));
+                serverIP = br.readLine();
+                serverPort = Integer.parseInt(br.readLine());
+                username = br.readLine();
+                password = br.readLine();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+    public static void writeServerLoginData() throws IOException
+    {
+        File writeDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
+        if (!writeDirectory.exists())
+        {
+            writeDirectory.mkdir();
+        }
+        File log = new File(writeDirectory, "uploader.coda");
+        if(!log.exists())
+        {
+            log.createNewFile();
+        }
+        PrintWriter madoka = new PrintWriter(new FileWriter(log));
+        madoka.println(serverIP);
+        madoka.println(serverPort);
+        madoka.println(username);
+        madoka.println(password);
+        madoka.flush();
+        madoka.close();
+    }
     public static boolean existsSave()
     {
-        File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         File log = new File(readDirectory, "settings.coda");
         if (!log.exists())
         {

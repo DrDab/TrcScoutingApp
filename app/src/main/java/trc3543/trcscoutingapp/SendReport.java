@@ -13,6 +13,7 @@ import java.io.BufferedWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.Buffer;
 
@@ -61,8 +62,8 @@ public class SendReport extends AppCompatActivity
                 {
                     try
                     {
-                        Socket sock = new Socket(ip, port);
-                        sock.setSoTimeout(5000);
+                        Socket sock = new Socket();
+                        sock.connect(new InetSocketAddress(ip, port), 10000);
                         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(sock.getOutputStream()));
                         InputStream istream = sock.getInputStream();
                         BufferedReader receiveRead = new BufferedReader(new InputStreamReader(istream));
@@ -70,6 +71,15 @@ public class SendReport extends AppCompatActivity
                         String receiveMessage = null;
                         for(;;)
                         {
+                            runOnUiThread(new Runnable()
+                            {
+
+                                @Override
+                                public void run()
+                                {
+                                    statusBox.setText(String.format("Connecting to server %s:%d...", ip, port));
+                                }
+                            });
                             if (sock.isClosed())
                             {
                                 isclosed = true;
@@ -150,6 +160,9 @@ public class SendReport extends AppCompatActivity
                         }
                         if (isclosed)
                         {
+                            receiveRead.close();
+                            istream.close();
+                            bw.close();
                             sock.close();
                         }
                     }

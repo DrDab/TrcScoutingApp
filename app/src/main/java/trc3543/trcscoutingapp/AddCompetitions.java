@@ -198,7 +198,7 @@ public class AddCompetitions extends AppCompatActivity
         boolean openSettingsCondition = false;
         if (!DataStore.existsSave())
         {
-            File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+            File writeDirectory = new File(Environment.getExternalStorageDirectory(), DataStore.DATA_FOLDER_NAME);
             if (!writeDirectory.exists())
             {
                 Log.d("FileIO", "Creating write directory: " + writeDirectory.toString());
@@ -210,7 +210,7 @@ public class AddCompetitions extends AppCompatActivity
         else
         {
             // if file exists, check that all data is entered.
-            File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+            File writeDirectory = new File(Environment.getExternalStorageDirectory(), DataStore.DATA_FOLDER_NAME);
             if (!writeDirectory.exists())
             {
                 writeDirectory.mkdir();
@@ -521,7 +521,7 @@ public class AddCompetitions extends AppCompatActivity
     {
         try
         {
-            File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+            File writeDirectory = new File(Environment.getExternalStorageDirectory(), DataStore.DATA_FOLDER_NAME);
             if (!writeDirectory.exists())
             {
                 writeDirectory.mkdir();
