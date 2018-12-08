@@ -9,9 +9,6 @@
         android:id="@+id/action_transmitresults"
         android:title="Send to server..." />
     <item
-        android:id="@+id/action_mailcsv"
-        android:title="Email results..." />
-    <item
         android:id="@+id/action_about"
         android:icon="@android:drawable/ic_menu_info_details"
         android:orderInCategory="100"

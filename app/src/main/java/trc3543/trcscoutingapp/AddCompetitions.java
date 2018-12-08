@@ -324,36 +324,6 @@ public class AddCompetitions extends AppCompatActivity
             startActivity(intent);
             return true;
         }
-        else if (id == R.id.action_mailcsv)
-        {
-            // mail the CSV
-            try
-            {
-                final String filename = DataStore.firstName +"_"+DataStore.lastName +"_results.csv";
-                final String[] recipient = {""};
-                final EditText txtUrl = new EditText(this);
-                new AlertDialog.Builder(this)
-                        .setTitle("Mail results")
-                        .setMessage("Please enter the recipient's email.")
-                        .setView(txtUrl)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                                recipient[0] = txtUrl.getText().toString();
-                                sendEmailWithCSV(filename, recipient[0]);
-                            }
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                            }
-                        })
-                        .show();
-            }
-            catch (Exception arg0)
-            {
-                // TODO Auto-generated catch block
-                arg0.printStackTrace();
-            }
-        }
         else if (id == R.id.action_ac)
         {
             // clear the screen
@@ -513,31 +483,7 @@ public class AddCompetitions extends AppCompatActivity
         }
         startActivity(intent);
     }
-    public void sendEmailWithCSV(String filename0, String target)
-    {
-        try
-        {
-            File writeDirectory = new File(Environment.getExternalStorageDirectory(), DataStore.DATA_FOLDER_NAME);
-            if (!writeDirectory.exists())
-            {
-                writeDirectory.mkdir();
-            }
-            File filelocation = new File(writeDirectory, filename0);
-            Uri path = Uri.fromFile(filelocation);
-            Intent emailIntent = new Intent(Intent.ACTION_SEND);
-            emailIntent.setType("vnd.android.cursor.dir/email");
-            String to[] = {target};
-            emailIntent.putExtra(Intent.EXTRA_EMAIL, to);
-            emailIntent.putExtra(Intent.EXTRA_STREAM, path);
-            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Robotics Scouting Results");
-            startActivity(Intent.createChooser(emailIntent, "Send email..."));
-        }
-        catch (Exception e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
+
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
