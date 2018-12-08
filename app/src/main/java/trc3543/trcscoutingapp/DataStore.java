@@ -69,7 +69,7 @@ public class DataStore extends AppCompatActivity
         // TODO nothing
     }
 
-    public static boolean writeArraylistsToJSON() throws IOException
+    public static synchronized boolean writeArraylistsToJSON() throws IOException
     {
         File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
         if (!writeDirectory.exists())
@@ -115,7 +115,7 @@ public class DataStore extends AppCompatActivity
         return true;
     }
 
-    public static void readArraylistsFromJSON() throws IOException
+    public static synchronized void readArraylistsFromJSON() throws IOException
     {
         File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         int saiodfjsajofojfdfjisafbj;
@@ -154,7 +154,7 @@ public class DataStore extends AppCompatActivity
         }
     }
 
-    public static boolean writeContestsToCsv(String filename) throws IOException
+    public static synchronized boolean writeContestsToCsv(String filename) throws IOException
     {
         File writeDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         if (!writeDirectory.exists())
@@ -186,14 +186,14 @@ public class DataStore extends AppCompatActivity
         }
     }
 
-    public static String getDateAsString()
+    public static synchronized String getDateAsString()
     {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
         return dateFormat.format(date);
     }
 
-    public static void parseTeamNum() throws IOException
+    public static synchronized void parseTeamNum() throws IOException
     {
         File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         int saiodfjsajofojfdfjisafbj;
@@ -221,7 +221,7 @@ public class DataStore extends AppCompatActivity
         }
     }
 
-    public static void parseFirstName() throws IOException
+    public static synchronized void parseFirstName() throws IOException
     {
         File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         String saiodfjsajofojfdfjisafbj;
@@ -243,7 +243,7 @@ public class DataStore extends AppCompatActivity
         }
     }
 
-    public static void parseLastName() throws IOException
+    public static synchronized void parseLastName() throws IOException
     {
         File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         String saiodfjsajofojfdfjisafbj;
@@ -266,7 +266,7 @@ public class DataStore extends AppCompatActivity
         }
     }
 
-    public static void parseAutoSaveBoolean() throws IOException
+    public static synchronized void parseAutoSaveBoolean() throws IOException
     {
         File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         String saiodfjsajofojfdfjisafbj;
@@ -294,7 +294,7 @@ public class DataStore extends AppCompatActivity
         }
     }
 
-    public static void parseAutoSaveTime() throws IOException
+    public static synchronized void parseAutoSaveTime() throws IOException
     {
         File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         String saiodfjsajofojfdfjisafbj;
@@ -324,7 +324,7 @@ public class DataStore extends AppCompatActivity
         }
     }
 
-    public static void parseServerLoginData() throws IOException
+    public static synchronized void parseServerLoginData() throws IOException
     {
         File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         String saiodfjsajofojfdfjisafbj;
@@ -350,7 +350,7 @@ public class DataStore extends AppCompatActivity
         }
     }
 
-    public static void writeServerLoginData() throws IOException
+    public static synchronized void writeServerLoginData() throws IOException
     {
         File writeDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         if (!writeDirectory.exists())
@@ -371,7 +371,7 @@ public class DataStore extends AppCompatActivity
         madoka.close();
     }
 
-    public static boolean existsSave()
+    public static synchronized boolean existsSave()
     {
         File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         File log = new File(readDirectory, "settings.coda");
