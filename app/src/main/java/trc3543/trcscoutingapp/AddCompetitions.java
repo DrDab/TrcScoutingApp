@@ -404,7 +404,7 @@ public class AddCompetitions extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    public static void addToList(String dispString, String csvString)
+    public static synchronized void addToList(String dispString, String csvString)
     {
         if (listHasPlaceHolder())
         {
@@ -415,7 +415,7 @@ public class AddCompetitions extends AppCompatActivity
         adapter.notifyDataSetChanged();
     }
 
-    public static void resetListItem(String dispString, String csvString, int pos)
+    public static synchronized void resetListItem(String dispString, String csvString, int pos)
     {
         Match match = DataStore.matchList.get(pos);
         match.setCsvString(csvString);
@@ -423,7 +423,7 @@ public class AddCompetitions extends AppCompatActivity
         adapter.notifyDataSetChanged();
     }
 
-    public static void removeFromList(String dispString, String csvString)
+    public static synchronized void removeFromList(String dispString, String csvString)
     {
         for(int i = 0; i < DataStore.matchList.size(); i++)
         {
@@ -442,7 +442,7 @@ public class AddCompetitions extends AppCompatActivity
         adapter.notifyDataSetChanged();
     }
 
-    public static void removeFromList(int index)
+    public static synchronized void removeFromList(int index)
     {
         DataStore.matchList.remove(index);
         if (DataStore.matchList.size() == 0)
@@ -453,7 +453,7 @@ public class AddCompetitions extends AppCompatActivity
     }
 
 
-    public static boolean listHasPlaceHolder()
+    public static synchronized boolean listHasPlaceHolder()
     {
         for(int i = 0; i < DataStore.matchList.size(); i++)
         {
@@ -465,7 +465,7 @@ public class AddCompetitions extends AppCompatActivity
         return false;
     }
 
-    public static boolean listEmpty()
+    public static synchronized boolean listEmpty()
     {
         if (DataStore.matchList.size() == 0)
         {
