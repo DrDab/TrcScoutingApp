@@ -406,60 +406,75 @@ public class AddCompetitions extends AppCompatActivity
 
     public static synchronized void addToList(String dispString, String csvString)
     {
-        if (listHasPlaceHolder())
+        synchronized (DataStore.matchList)
         {
-            removeFromList("No Entries Yet", null);
-        }
+            if (listHasPlaceHolder())
+            {
+                removeFromList("No Entries Yet", null);
+            }
 
-        DataStore.matchList.add(new Match(dispString, csvString));
-        adapter.notifyDataSetChanged();
+            DataStore.matchList.add(new Match(dispString, csvString));
+            adapter.notifyDataSetChanged();
+        }
     }
 
     public static synchronized void resetListItem(String dispString, String csvString, int pos)
     {
-        Match match = DataStore.matchList.get(pos);
-        match.setCsvString(csvString);
-        match.setDispString(dispString);
-        adapter.notifyDataSetChanged();
+        synchronized (DataStore.matchList)
+        {
+            Match match = DataStore.matchList.get(pos);
+            match.setCsvString(csvString);
+            match.setDispString(dispString);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     public static synchronized void removeFromList(String dispString, String csvString)
     {
-        for(int i = 0; i < DataStore.matchList.size(); i++)
+        synchronized (DataStore.matchList)
         {
-            String csvStringCmp = DataStore.matchList.get(i).getCsvString();
-            String dispStringCmp = DataStore.matchList.get(i).getDispString();
-            if ((csvString == null ? true : csvStringCmp.equals(csvString)) && (dispString == null ? true : dispStringCmp.equals(dispString)))
+            for (int i = 0; i < DataStore.matchList.size(); i++)
             {
-                DataStore.matchList.remove(i);
-                break;
+                String csvStringCmp = DataStore.matchList.get(i).getCsvString();
+                String dispStringCmp = DataStore.matchList.get(i).getDispString();
+                if ((csvString == null ? true : csvStringCmp.equals(csvString)) && (dispString == null ? true : dispStringCmp.equals(dispString)))
+                {
+                    DataStore.matchList.remove(i);
+                    break;
+                }
             }
+            if (DataStore.matchList.size() == 0 && !dispString.equals("No Entries Yet"))
+            {
+                addToList("No Entries Yet", null);
+            }
+            adapter.notifyDataSetChanged();
         }
-        if (DataStore.matchList.size() == 0 && !dispString.equals("No Entries Yet"))
-        {
-            addToList("No Entries Yet", null);
-        }
-        adapter.notifyDataSetChanged();
     }
 
     public static synchronized void removeFromList(int index)
     {
-        DataStore.matchList.remove(index);
-        if (DataStore.matchList.size() == 0)
+        synchronized (DataStore.matchList)
         {
-            addToList("No Entries Yet", null);
+            DataStore.matchList.remove(index);
+            if (DataStore.matchList.size() == 0)
+            {
+                addToList("No Entries Yet", null);
+            }
+            adapter.notifyDataSetChanged();
         }
-        adapter.notifyDataSetChanged();
     }
 
 
     public static synchronized boolean listHasPlaceHolder()
     {
-        for(int i = 0; i < DataStore.matchList.size(); i++)
+        synchronized (DataStore.matchList)
         {
-            if (DataStore.matchList.get(i).getDispString().equals("No Entries Yet") || DataStore.matchList.get(i).getCsvString() == null)
+            for(int i = 0; i < DataStore.matchList.size(); i++)
             {
-                return true;
+                if (DataStore.matchList.get(i).getDispString().equals("No Entries Yet") || DataStore.matchList.get(i).getCsvString() == null)
+                {
+                    return true;
+                }
             }
         }
         return false;
@@ -467,14 +482,17 @@ public class AddCompetitions extends AppCompatActivity
 
     public static synchronized boolean listEmpty()
     {
-        if (DataStore.matchList.size() == 0)
+        synchronized (DataStore.matchList)
         {
-            return true;
-        }
+            if (DataStore.matchList.size() == 0)
+            {
+                return true;
+            }
 
-        if (DataStore.matchList.size() == 1)
-        {
-            return listHasPlaceHolder();
+            if (DataStore.matchList.size() == 1)
+            {
+                return listHasPlaceHolder();
+            }
         }
 
         return false;
