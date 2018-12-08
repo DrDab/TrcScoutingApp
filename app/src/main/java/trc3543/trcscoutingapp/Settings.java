@@ -54,7 +54,6 @@ public class Settings extends AppCompatActivity
         EditText teamNumForm = (EditText) findViewById(R.id.teamNumForm);
         EditText firstNameForm = (EditText) findViewById(R.id.firstNameForm);
         EditText lastNameForm = (EditText) findViewById(R.id.lastNameForm);
-        CheckBox saveDirectlyCheckBox = (CheckBox) findViewById(R.id.saveDirectlyCheckBox);
 
         File readDirectory = new File(Environment.getExternalStorageDirectory(), DataStore.DATA_FOLDER_NAME);
         if (!readDirectory.exists())
@@ -67,7 +66,6 @@ public class Settings extends AppCompatActivity
             teamNumForm.setText(DataStore.selfTeamNumber + "");
             firstNameForm.setText(DataStore.firstName);
             lastNameForm.setText(DataStore.lastName);
-            saveDirectlyCheckBox.setChecked(DataStore.useDirectSave);
         }
 
         // AddCompetitions.verifyStoragePermissions(this);
@@ -142,12 +140,10 @@ public class Settings extends AppCompatActivity
         if (!breakCond && !breakCond2 && !breakCond3)
         {
             // read whether to save directly to file upon confirming Game results
-            CheckBox cb1 = (CheckBox) findViewById(R.id.saveDirectlyCheckBox);
-            boolean saveDirectly = cb1.isChecked();
             // export the settings to a file.
             try
             {
-                writeSettingsToFile(first_name, last_name, teamNumber, saveDirectly);
+                writeSettingsToFile(first_name, last_name, teamNumber);
             }
             catch (IOException e)
             {
@@ -157,7 +153,7 @@ public class Settings extends AppCompatActivity
 
     }
 
-    public void writeSettingsToFile(String firstname, String lastname, int teamNum, boolean saveDirectly) throws IOException
+    public void writeSettingsToFile(String firstname, String lastname, int teamNum) throws IOException
     {
         File writeDirectory = new File(Environment.getExternalStorageDirectory(), DataStore.DATA_FOLDER_NAME);
         if (!writeDirectory.exists())
@@ -166,7 +162,6 @@ public class Settings extends AppCompatActivity
         }
         else
         {
-            String saveReading = saveDirectly ? "y" : "n";
             File log = new File(writeDirectory, "settings.coda");
             if(!log.exists())
             {
@@ -176,15 +171,12 @@ public class Settings extends AppCompatActivity
             waffleryebread.println(teamNum);
             waffleryebread.println(firstname);
             waffleryebread.println(lastname);
-            waffleryebread.println(saveReading);
-            waffleryebread.println("\n");
             waffleryebread.flush();
             waffleryebread.close();
         }
         DataStore.parseTeamNum();
         DataStore.parseFirstName();
         DataStore.parseLastName();
-        DataStore.parseDirectSave();
         finish();
     }
 }

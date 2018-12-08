@@ -46,10 +46,13 @@ public class AutoSaveThread
             }
             if (time % DataStore.autosaveSeconds == 0 && !done && DataStore.useAutosave) {
                 Log.d("AutoSave", "Auto saving at time=" + time);
-                String filename = DataStore.firstName + "_" + DataStore.lastName + "_results.csv";
-                try {
+                String filename = DataStore.getFileName(DataStore.firstName + "_" + DataStore.lastName);
+                try
+                {
                     DataStore.writeContestsToCsv(filename);
-                } catch (IOException e) {
+                }
+                catch (IOException e)
+                {
                     e.printStackTrace();
                 }
                 done = true;

@@ -39,6 +39,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 @SuppressWarnings("All")
 public class DataStore extends AppCompatActivity
@@ -55,8 +56,6 @@ public class DataStore extends AppCompatActivity
     static int selfTeamNumber = 3543;
     static String firstName = "Unknown";
     static String lastName = "Unknown";
-
-    static boolean useDirectSave = false;
 
     static boolean autoSaveRunnableInit = false;
 
@@ -243,6 +242,7 @@ public class DataStore extends AppCompatActivity
                 firstName = "Unknown";
         }
     }
+
     public static void parseLastName() throws IOException
     {
         File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
@@ -265,36 +265,7 @@ public class DataStore extends AppCompatActivity
             lastName = "Unknown";
         }
     }
-    public static void parseDirectSave() throws IOException
-    {
-        File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
-        String saiodfjsajofojfdfjisafbj;
-        if (!readDirectory.exists())
-        {
-            readDirectory.mkdir();
-        }
-        File log = new File(readDirectory, "settings.coda");
-        if (log.exists())
-        {
-            BufferedReader br = new BufferedReader(new FileReader(log));
-            br.readLine();
-            br.readLine();
-            br.readLine();
-            saiodfjsajofojfdfjisafbj = br.readLine();
-            if (saiodfjsajofojfdfjisafbj.matches("y"))
-            {
-                useDirectSave = true;
-            }
-            else
-            {
-                useDirectSave = false;
-            }
-        }
-        else
-        {
-            useDirectSave = false;
-        }
-    }
+
     public static void parseAutoSaveBoolean() throws IOException
     {
         File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
@@ -322,6 +293,7 @@ public class DataStore extends AppCompatActivity
             useAutosave = true;
         }
     }
+
     public static void parseAutoSaveTime() throws IOException
     {
         File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
@@ -351,6 +323,7 @@ public class DataStore extends AppCompatActivity
             autosaveSeconds = 300;
         }
     }
+
     public static void parseServerLoginData() throws IOException
     {
         File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
@@ -376,6 +349,7 @@ public class DataStore extends AppCompatActivity
             }
         }
     }
+
     public static void writeServerLoginData() throws IOException
     {
         File writeDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
@@ -396,6 +370,7 @@ public class DataStore extends AppCompatActivity
         madoka.flush();
         madoka.close();
     }
+
     public static boolean existsSave()
     {
         File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
@@ -406,4 +381,16 @@ public class DataStore extends AppCompatActivity
         }
         return true;
     }
+
+    public static String getTimeStamp(String format)
+    {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(format, Locale.US);
+        return dateFormat.format(new Date());
+    }
+
+    public static String getFileName(String username)
+    {
+        return username + "_" + getTimeStamp("yyyyMMdd@HHmmss") + ".csv";
+    }
+
 }

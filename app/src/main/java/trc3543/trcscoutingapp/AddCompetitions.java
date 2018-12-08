@@ -30,6 +30,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -150,16 +151,6 @@ public class AddCompetitions extends AppCompatActivity
                                         e.printStackTrace();
                                     }
                                     adapter.notifyDataSetChanged();
-                                    String filename = DataStore.firstName +"_"+DataStore.lastName +"_results.csv";
-                                    try
-                                    {
-                                        DataStore.writeContestsToCsv(filename);
-                                    }
-                                    catch (IOException e)
-                                    {
-                                        // TODO Auto-generated catch block
-                                        e.printStackTrace();
-                                    }
                                 }
                             })
                             .setNegativeButton("NO", new DialogInterface.OnClickListener()
@@ -264,7 +255,6 @@ public class AddCompetitions extends AppCompatActivity
                 DataStore.parseTeamNum();
                 DataStore.parseFirstName();
                 DataStore.parseLastName();
-                DataStore.parseDirectSave();
                 DataStore.parseServerLoginData();
             }
             catch (IOException e)
@@ -317,7 +307,7 @@ public class AddCompetitions extends AppCompatActivity
         }
         else if (id == R.id.action_makecsv)
         {
-            String filename = DataStore.firstName +"_"+DataStore.lastName +"_results.csv";
+            String filename = DataStore.getFileName(DataStore.firstName + "_" + DataStore.lastName);
             try
             {
                 DataStore.writeContestsToCsv(filename);
@@ -386,16 +376,6 @@ public class AddCompetitions extends AppCompatActivity
                             }
                             addToList("No Entries Yet", null);
                             adapter.notifyDataSetChanged();
-                            String filename = DataStore.firstName +"_"+DataStore.lastName +"_results.csv";
-                            try
-                            {
-                                DataStore.writeContestsToCsv(filename);
-                            }
-                            catch (IOException e)
-                            {
-                                // TODO Auto-generated catch block
-                                e.printStackTrace();
-                            }
                         }
                     })
                     .setNegativeButton("NO", new DialogInterface.OnClickListener()

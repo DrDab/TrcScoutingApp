@@ -102,7 +102,6 @@ public class SetCompetitionName extends AppCompatActivity
             DataStore.parseTeamNum();
             DataStore.parseFirstName();
             DataStore.parseLastName();
-            DataStore.parseDirectSave();
         }
         catch (IOException e)
         {
@@ -434,20 +433,6 @@ public class SetCompetitionName extends AppCompatActivity
         catch (IOException e)
         {
             e.printStackTrace();
-        }
-
-        // if using direct save, write the generated results directly to CSV file.
-        if (DataStore.useDirectSave)
-        {
-            String filename = DataStore.firstName +"_"+DataStore.lastName +"_results.csv";
-            try
-            {
-                DataStore.writeContestsToCsv(filename);
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
         }
 
         if (!USE_DEBUG)
