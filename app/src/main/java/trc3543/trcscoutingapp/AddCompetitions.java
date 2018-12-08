@@ -227,7 +227,7 @@ public class AddCompetitions extends AppCompatActivity
             }
             try
             {
-                for(int i = 0; i < 6; i++)
+                for(int i = 0; i < 3; i++)
                 {
                     if (br.readLine() == null)
                     {

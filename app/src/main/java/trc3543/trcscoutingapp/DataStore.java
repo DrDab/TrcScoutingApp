@@ -375,11 +375,7 @@ public class DataStore extends AppCompatActivity
     {
         File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         File log = new File(readDirectory, "settings.coda");
-        if (!log.exists())
-        {
-            return false;
-        }
-        return true;
+        return log.exists();
     }
 
     public static String getTimeStamp(String format)
