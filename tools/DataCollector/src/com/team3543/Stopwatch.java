@@ -20,21 +20,25 @@
  * SOFTWARE.
  */
 
-package trc3543.trcscoutingapp;
+package com.team3543;
 
-import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.TextView;
-
-public class About extends AppCompatActivity
+public class Stopwatch
 {
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about);
-        setTitle("About This App");
-        setTitleColor(Color.parseColor("#ff669900"));
-    }
-}
+	private final long start;
+	
+	public Stopwatch()
+	{
+		start = System.currentTimeMillis();
+	}
+	
+	public double elapsedTime() 
+	{
+		long now = System.currentTimeMillis();
+		return(now - start) / 1000.0;
+	}
+	
+	public double getTime()
+	{
+		return System.currentTimeMillis()/1000.0;
+	}
+} 

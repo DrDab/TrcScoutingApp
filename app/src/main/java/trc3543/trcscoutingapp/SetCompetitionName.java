@@ -1,11 +1,37 @@
+/*
+ * Copyright (c) 2018 Victor Du, Titan Robotics Club
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 package trc3543.trcscoutingapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -16,29 +42,6 @@ import java.io.IOException;
 @SuppressWarnings("all")
 public class SetCompetitionName extends AppCompatActivity
 {
-    /**
-     *
-     *  Copyright (c) 2018 Titan Robotics Club, _c0da_ (Victor Du)
-     *
-     *	Permission is hereby granted, free of charge, to any person obtaining a copy
-     *	of this software and associated documentation files (the "Software"), to deal
-     *	in the Software without restriction, including without limitation the rights
-     *	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     *	copies of the Software, and to permit persons to whom the Software is
-     *	furnished to do so, subject to the following conditions:
-     *
-     *	The above copyright notice and this permission notice shall be included in all
-     *	copies or substantial portions of the Software.
-     *
-     *	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     *	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     *	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     *	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     *	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-     *	SOFTWARE.
-     */
-
     public static final boolean USE_DEBUG = false;
 
     static int editingoption = -1;
@@ -99,7 +102,6 @@ public class SetCompetitionName extends AppCompatActivity
             DataStore.parseTeamNum();
             DataStore.parseFirstName();
             DataStore.parseLastName();
-            DataStore.parseDirectSave();
         }
         catch (IOException e)
         {
@@ -123,7 +125,7 @@ public class SetCompetitionName extends AppCompatActivity
         // populate the boxes if already filled.
         if (editingoption != -1)
         {
-            String read = DataStore.CsvFormattedContests.get(editingoption);
+            String read = DataStore.matchList.get(editingoption).getCsvString();
             Log.d("SetCompetitionName", editingoption + " " + read);
             String[] OwOWhatsThis = read.split(",");
 
@@ -416,14 +418,12 @@ public class SetCompetitionName extends AppCompatActivity
         if (editingoption == -1)
         {
             Log.d("SetCompetitionName","Adding new entry to list.");
-            AddCompetitions.addToList(listMsg);
-            DataStore.CsvFormattedContests.add(CSVFormat);
+            AddCompetitions.addToList(listMsg, CSVFormat);
         }
         else
         {
             Log.d("SetCompetitionName","Resetting list entry: " + editingoption);
-            AddCompetitions.resetListItem(listMsg, editingoption);
-            DataStore.CsvFormattedContests.set(editingoption, CSVFormat);
+            AddCompetitions.resetListItem(listMsg, CSVFormat, editingoption);
         }
 
         try
@@ -435,24 +435,37 @@ public class SetCompetitionName extends AppCompatActivity
             e.printStackTrace();
         }
 
-        // if using direct save, write the generated results directly to CSV file.
-        if (DataStore.USE_DIRECT_SAVE)
-        {
-            String filename = DataStore.firstName +"_"+DataStore.lastName +"_results.csv";
-            try
-            {
-                DataStore.writeContestsToCsv(filename);
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-        }
-
         if (!USE_DEBUG)
         {  finish();  }
     }
 
     public void cancel(View view) { finish(); }
+
+    /**
+     * This code snippet written by ZMan; may great honor be laid upon this act of chivalry:
+     *
+     * Answer: https://stackoverflow.com/questions/4828636/edittext-clear-focus-on-touch-outside
+     * User: https://stackoverflow.com/users/1591623/zman
+     */
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event)
+    {
+        if (event.getAction() == MotionEvent.ACTION_DOWN)
+        {
+            View v = getCurrentFocus();
+            if ( v instanceof EditText)
+            {
+                Rect outRect = new Rect();
+                v.getGlobalVisibleRect(outRect);
+                if (!outRect.contains((int)event.getRawX(), (int)event.getRawY()))
+                {
+                    v.clearFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+            }
+        }
+        return super.dispatchTouchEvent(event);
+    }
 
 }

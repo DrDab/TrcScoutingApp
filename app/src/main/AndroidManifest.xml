@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -31,7 +32,8 @@
             android:label="@string/title_activity_set_competition_name" />
         <activity android:name=".About" />
         <activity android:name=".Settings" />
-        <activity android:name=".AutoSaveSettings"></activity>
+        <activity android:name=".AutoSaveSettings" />
+        <activity android:name=".SendReport"></activity>
     </application>
 
 </manifest>

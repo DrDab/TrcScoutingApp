@@ -1,3 +1,25 @@
+/*
+ * Copyright (c) 2018 Victor Du, Titan Robotics Club
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 package trc3543.trcscoutingapp;
 
 import android.os.Environment;
@@ -17,54 +39,37 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 @SuppressWarnings("All")
 public class DataStore extends AppCompatActivity
 {
-    /**
-     *
-     *  Copyright (c) 2018 Titan Robotics Club, _c0da_ (Victor Du)
-     *
-     *	Permission is hereby granted, free of charge, to any person obtaining a copy
-     *	of this software and associated documentation files (the "Software"), to deal
-     *	in the Software without restriction, including without limitation the rights
-     *	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     *	copies of the Software, and to permit persons to whom the Software is
-     *	furnished to do so, subject to the following conditions:
-     *
-     *	The above copyright notice and this permission notice shall be included in all
-     *	copies or substantial portions of the Software.
-     *
-     *	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     *	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     *	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     *	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     *	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-     *	SOFTWARE.
-     */
+    static final String DATA_FOLDER_NAME = "TrcScoutingApp";
 
     static final String CSV_HEADER = "Contains Your Team, Date, Match #, Competition Type, Team Number, Spectating Team, Starting Position, AT-Robot Lowered, AT-Mineral Displaced, AT-Mineral Correct, AT-Marker Deployed, AT-Parked In Crater, TO-Depot Score, TO-Lander Score, EG-Ending Location, Match Won, Autonomous Notes, TeleOp Notes";
 
     static boolean useAutosave = true; // by default, autosave is enabled.
     static int autosaveSeconds = 300;  // by default, save changes every 5 minutes.
 
-    static ArrayList<String> contests = new ArrayList<String>();
-
-    static ArrayList<String> CsvFormattedContests = new ArrayList<String>();
+    static ArrayList<Match> matchList = new ArrayList<Match>();
 
     static int selfTeamNumber = 3543;
     static String firstName = "Unknown";
     static String lastName = "Unknown";
 
-    static boolean USE_DIRECT_SAVE = false; // don't use direct save by default
+    static boolean autoSaveRunnableInit = false;
+
+    static String serverIP = null;
+    static int serverPort = 3621;
+    static String username = null;
+    static String password = null;
 
     public DataStore()
     {
         // TODO nothing
     }
 
-    public static boolean writeArraylistsToJSON() throws IOException
+    public static synchronized boolean writeArraylistsToJSON() throws IOException
     {
         File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
         if (!writeDirectory.exists())
@@ -87,14 +92,10 @@ public class DataStore extends AppCompatActivity
         JSONArray displayContestsArray = new JSONArray();
         JSONArray csvContestsArray = new JSONArray();
 
-        for(int i = 0; i < contests.size(); i++)
+        for(int i = 0; i < matchList.size(); i++)
         {
-            displayContestsArray.put(contests.get(i));
-        }
-
-        for(int i = 0; i < CsvFormattedContests.size(); i++)
-        {
-            csvContestsArray.put(CsvFormattedContests.get(i));
+            displayContestsArray.put(matchList.get(i).getDispString());
+            csvContestsArray.put(matchList.get(i).getCsvString());
         }
 
         try
@@ -114,9 +115,9 @@ public class DataStore extends AppCompatActivity
         return true;
     }
 
-    public static void readArraylistsFromJSON() throws IOException
+    public static synchronized void readArraylistsFromJSON() throws IOException
     {
-        File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         int saiodfjsajofojfdfjisafbj;
         if (!readDirectory.exists())
         {
@@ -135,21 +136,15 @@ public class DataStore extends AppCompatActivity
             br.close();
             try
             {
-                contests.clear();
-                CsvFormattedContests.clear();
+                matchList.clear();
 
                 JSONObject jsonObject = new JSONObject(jsonData);
                 JSONArray displayContestsArray = jsonObject.getJSONArray("disp");
                 JSONArray csvContestsArray = jsonObject.getJSONArray("csv");
 
-                for(int i = 0; i < displayContestsArray.length(); i++)
-                {
-                    contests.add(displayContestsArray.getString(i));
-                }
-
                 for(int i = 0; i < csvContestsArray.length(); i++)
                 {
-                    CsvFormattedContests.add(csvContestsArray.getString(i));
+                    matchList.add(new Match(displayContestsArray.getString(i), csvContestsArray.getString(i)));
                 }
             }
             catch (JSONException e)
@@ -159,14 +154,14 @@ public class DataStore extends AppCompatActivity
         }
     }
 
-    public static boolean writeContestsToCsv(String filename) throws IOException
+    public static synchronized boolean writeContestsToCsv(String filename) throws IOException
     {
-        File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+        File writeDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         if (!writeDirectory.exists())
         {
             writeDirectory.mkdir();
         }
-        if (CsvFormattedContests.size() == 0)
+        if (matchList.size() == 0)
         {
             return false;
         }
@@ -180,9 +175,9 @@ public class DataStore extends AppCompatActivity
             PrintWriter madoka = new PrintWriter(new FileWriter(log, true));
             madoka.println("Log by: " + firstName + " " + lastName + ", written on " + getDateAsString());
             madoka.println(CSV_HEADER);
-            for(String sk : CsvFormattedContests)
+            for(Match match : matchList)
             {
-                madoka.println(sk);
+                madoka.println(match.getCsvString());
             }
             madoka.println("End Of Log");
             madoka.flush();
@@ -191,16 +186,16 @@ public class DataStore extends AppCompatActivity
         }
     }
 
-    public static String getDateAsString()
+    public static synchronized String getDateAsString()
     {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
         return dateFormat.format(date);
     }
 
-    public static void parseTeamNum() throws IOException
+    public static synchronized void parseTeamNum() throws IOException
     {
-        File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         int saiodfjsajofojfdfjisafbj;
         if (!readDirectory.exists())
         {
@@ -226,9 +221,9 @@ public class DataStore extends AppCompatActivity
         }
     }
 
-    public static void parseFirstName() throws IOException
+    public static synchronized void parseFirstName() throws IOException
     {
-        File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         String saiodfjsajofojfdfjisafbj;
         if (!readDirectory.exists())
         {
@@ -247,9 +242,10 @@ public class DataStore extends AppCompatActivity
                 firstName = "Unknown";
         }
     }
-    public static void parseLastName() throws IOException
+
+    public static synchronized void parseLastName() throws IOException
     {
-        File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         String saiodfjsajofojfdfjisafbj;
         if (!readDirectory.exists())
         {
@@ -269,39 +265,10 @@ public class DataStore extends AppCompatActivity
             lastName = "Unknown";
         }
     }
-    public static void parseDirectSave() throws IOException
+
+    public static synchronized void parseAutoSaveBoolean() throws IOException
     {
-        File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
-        String saiodfjsajofojfdfjisafbj;
-        if (!readDirectory.exists())
-        {
-            readDirectory.mkdir();
-        }
-        File log = new File(readDirectory, "settings.coda");
-        if (log.exists())
-        {
-            BufferedReader br = new BufferedReader(new FileReader(log));
-            br.readLine();
-            br.readLine();
-            br.readLine();
-            saiodfjsajofojfdfjisafbj = br.readLine();
-            if (saiodfjsajofojfdfjisafbj.matches("y"))
-            {
-                USE_DIRECT_SAVE = true;
-            }
-            else
-            {
-                USE_DIRECT_SAVE = false;
-            }
-        }
-        else
-        {
-            USE_DIRECT_SAVE = false;
-        }
-    }
-    public static void parseAutoSaveBoolean() throws IOException
-    {
-        File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         String saiodfjsajofojfdfjisafbj;
         if (!readDirectory.exists())
         {
@@ -326,9 +293,10 @@ public class DataStore extends AppCompatActivity
             useAutosave = true;
         }
     }
-    public static void parseAutoSaveTime() throws IOException
+
+    public static synchronized void parseAutoSaveTime() throws IOException
     {
-        File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         String saiodfjsajofojfdfjisafbj;
         if (!readDirectory.exists())
         {
@@ -355,14 +323,70 @@ public class DataStore extends AppCompatActivity
             autosaveSeconds = 300;
         }
     }
-    public static boolean existsSave()
+
+    public static synchronized void parseServerLoginData() throws IOException
     {
-        File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
-        File log = new File(readDirectory, "settings.coda");
-        if (!log.exists())
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
+        String saiodfjsajofojfdfjisafbj;
+        if (!readDirectory.exists())
         {
-            return false;
+            readDirectory.mkdir();
         }
-        return true;
+        File log = new File(readDirectory, "uploader.coda");
+        if (log.exists())
+        {
+            try
+            {
+                BufferedReader br = new BufferedReader(new FileReader(log));
+                serverIP = br.readLine();
+                serverPort = Integer.parseInt(br.readLine());
+                username = br.readLine();
+                password = br.readLine();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
     }
+
+    public static synchronized void writeServerLoginData() throws IOException
+    {
+        File writeDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
+        if (!writeDirectory.exists())
+        {
+            writeDirectory.mkdir();
+        }
+        File log = new File(writeDirectory, "uploader.coda");
+        if(!log.exists())
+        {
+            log.createNewFile();
+        }
+        PrintWriter madoka = new PrintWriter(new FileWriter(log));
+        madoka.println(serverIP);
+        madoka.println(serverPort);
+        madoka.println(username);
+        madoka.println(password);
+        madoka.flush();
+        madoka.close();
+    }
+
+    public static synchronized boolean existsSave()
+    {
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
+        File log = new File(readDirectory, "settings.coda");
+        return log.exists();
+    }
+
+    public static String getTimeStamp(String format)
+    {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(format, Locale.US);
+        return dateFormat.format(new Date());
+    }
+
+    public static String getFileName(String username)
+    {
+        return username + "_" + getTimeStamp("yyyyMMdd@HHmmss") + ".csv";
+    }
+
 }

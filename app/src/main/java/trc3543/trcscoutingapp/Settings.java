@@ -1,3 +1,25 @@
+/*
+ * Copyright (c) 2018 Victor Du, Titan Robotics Club
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 package trc3543.trcscoutingapp;
 
 import android.graphics.Color;
@@ -17,29 +39,6 @@ import java.io.PrintWriter;
 @SuppressWarnings("all")
 public class Settings extends AppCompatActivity
 {
-    /**
-     *
-     *  Copyright (c) 2018 Titan Robotics Club, _c0da_ (Victor Du)
-     *
-     *	Permission is hereby granted, free of charge, to any person obtaining a copy
-     *	of this software and associated documentation files (the "Software"), to deal
-     *	in the Software without restriction, including without limitation the rights
-     *	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     *	copies of the Software, and to permit persons to whom the Software is
-     *	furnished to do so, subject to the following conditions:
-     *
-     *	The above copyright notice and this permission notice shall be included in all
-     *	copies or substantial portions of the Software.
-     *
-     *	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     *	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     *	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     *	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     *	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-     *	SOFTWARE.
-     */
-
     static String first_name;
     static String last_name;
     static int teamNumber;
@@ -55,10 +54,8 @@ public class Settings extends AppCompatActivity
         EditText teamNumForm = (EditText) findViewById(R.id.teamNumForm);
         EditText firstNameForm = (EditText) findViewById(R.id.firstNameForm);
         EditText lastNameForm = (EditText) findViewById(R.id.lastNameForm);
-        CheckBox saveDirectlyCheckBox = (CheckBox) findViewById(R.id.saveDirectlyCheckBox);
 
-        File readDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
-        String saiodfjsajofojfdfjisafbj;
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), DataStore.DATA_FOLDER_NAME);
         if (!readDirectory.exists())
         {
             readDirectory.mkdir();
@@ -69,7 +66,6 @@ public class Settings extends AppCompatActivity
             teamNumForm.setText(DataStore.selfTeamNumber + "");
             firstNameForm.setText(DataStore.firstName);
             lastNameForm.setText(DataStore.lastName);
-            saveDirectlyCheckBox.setChecked(DataStore.USE_DIRECT_SAVE);
         }
 
         // AddCompetitions.verifyStoragePermissions(this);
@@ -144,12 +140,10 @@ public class Settings extends AppCompatActivity
         if (!breakCond && !breakCond2 && !breakCond3)
         {
             // read whether to save directly to file upon confirming Game results
-            CheckBox cb1 = (CheckBox) findViewById(R.id.saveDirectlyCheckBox);
-            boolean saveDirectly = cb1.isChecked();
             // export the settings to a file.
             try
             {
-                writeSettingsToFile(first_name, last_name, teamNumber, saveDirectly);
+                writeSettingsToFile(first_name, last_name, teamNumber);
             }
             catch (IOException e)
             {
@@ -159,16 +153,15 @@ public class Settings extends AppCompatActivity
 
     }
 
-    public void writeSettingsToFile(String firstname, String lastname, int teamNum, boolean saveDirectly) throws IOException
+    public void writeSettingsToFile(String firstname, String lastname, int teamNum) throws IOException
     {
-        File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+        File writeDirectory = new File(Environment.getExternalStorageDirectory(), DataStore.DATA_FOLDER_NAME);
         if (!writeDirectory.exists())
         {
             writeDirectory.mkdir();
         }
         else
         {
-            String saveReading = saveDirectly ? "y" : "n";
             File log = new File(writeDirectory, "settings.coda");
             if(!log.exists())
             {
@@ -178,15 +171,12 @@ public class Settings extends AppCompatActivity
             waffleryebread.println(teamNum);
             waffleryebread.println(firstname);
             waffleryebread.println(lastname);
-            waffleryebread.println(saveReading);
-            waffleryebread.println("\n");
             waffleryebread.flush();
             waffleryebread.close();
         }
         DataStore.parseTeamNum();
         DataStore.parseFirstName();
         DataStore.parseLastName();
-        DataStore.parseDirectSave();
         finish();
     }
 }

@@ -1,3 +1,25 @@
+/*
+ * Copyright (c) 2018 Victor Du, Titan Robotics Club
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 package trc3543.trcscoutingapp;
 
 import android.Manifest;
@@ -8,6 +30,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -32,33 +55,12 @@ import java.io.IOException;
 @SuppressWarnings("all")
 public class AddCompetitions extends AppCompatActivity
 {
-    /**
-     *
-     *  Copyright (c) 2018 Titan Robotics Club, _c0da_ (Victor Du)
-     *
-     *	Permission is hereby granted, free of charge, to any person obtaining a copy
-     *	of this software and associated documentation files (the "Software"), to deal
-     *	in the Software without restriction, including without limitation the rights
-     *	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     *	copies of the Software, and to permit persons to whom the Software is
-     *	furnished to do so, subject to the following conditions:
-     *
-     *	The above copyright notice and this permission notice shall be included in all
-     *	copies or substantial portions of the Software.
-     *
-     *	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     *	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     *	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     *	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     *	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-     *	SOFTWARE.
-     */
-
     public static final boolean MAKE_CHANGES_READ_ONLY = false;
 
-    static ArrayAdapter<String> adapter;
+    static ArrayAdapter<Match> adapter;
     static ListView contestList;
+
+    private Runnable autosaverunnable = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -93,9 +95,7 @@ public class AddCompetitions extends AppCompatActivity
         setSupportActionBar(toolbar);
         contestList = (ListView) findViewById(R.id.listView);
 
-        adapter = new ArrayAdapter < String >
-                (AddCompetitions.this, android.R.layout.simple_list_item_1,
-                        DataStore.contests);
+        adapter = new ArrayAdapter<Match>(AddCompetitions.this, android.R.layout.simple_list_item_1, DataStore.matchList);
 
         contestList.setAdapter(adapter);
         contestList.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -106,11 +106,16 @@ public class AddCompetitions extends AppCompatActivity
                 // position = position selected
                 AlertDialog alertDialog = new AlertDialog.Builder(AddCompetitions.this).create();
                 alertDialog.setTitle("Game Information");
-                if (DataStore.CsvFormattedContests.size() >= 1)
+                if (listEmpty())
+                {
+                    alertDialog.setMessage("No Games Yet");
+                    alertDialog.show();
+                }
+                else
                 {
                     if (MAKE_CHANGES_READ_ONLY)
                     {
-                        String s = DataStore.CsvFormattedContests.get(position);
+                        String s = DataStore.matchList.get(position).getCsvString();
                         alertDialog.setMessage(s);
                         alertDialog.show();
                     }
@@ -118,11 +123,6 @@ public class AddCompetitions extends AppCompatActivity
                     {
                         openCompNamePrompt(true, position);
                     }
-                }
-                else
-                {
-                    alertDialog.setMessage("No Games Yet");
-                    alertDialog.show();
                 }
 
             }
@@ -132,7 +132,7 @@ public class AddCompetitions extends AppCompatActivity
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int i, long l)
             {
-                if (!DataStore.contests.contains("No Entries Yet"))
+                if (!DataStore.matchList.contains("No Entries Yet"))
                 {
                     new AlertDialog.Builder(AddCompetitions.this)
                             .setTitle("Are you sure?")
@@ -142,7 +142,6 @@ public class AddCompetitions extends AppCompatActivity
                                 public void onClick(DialogInterface dialog, int whichButton)
                                 {
                                     removeFromList(i);
-                                    DataStore.CsvFormattedContests.remove(i);
                                     try
                                     {
                                         DataStore.writeArraylistsToJSON();
@@ -152,16 +151,6 @@ public class AddCompetitions extends AppCompatActivity
                                         e.printStackTrace();
                                     }
                                     adapter.notifyDataSetChanged();
-                                    String filename = DataStore.firstName +"_"+DataStore.lastName +"_results.csv";
-                                    try
-                                    {
-                                        DataStore.writeContestsToCsv(filename);
-                                    }
-                                    catch (IOException e)
-                                    {
-                                        // TODO Auto-generated catch block
-                                        e.printStackTrace();
-                                    }
                                 }
                             })
                             .setNegativeButton("NO", new DialogInterface.OnClickListener()
@@ -183,47 +172,33 @@ public class AddCompetitions extends AppCompatActivity
             public void onClick(View view)
             {
                 // place a message
-                Snackbar.make(view, "Enter competition information please", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
                 openCompNamePrompt(false, -1);
 
             }
         });
 
-        if (DataStore.contests.size() == 0)
+        if (DataStore.matchList.size() == 0)
         {
-            addToList("No Entries Yet");
+            addToList("No Entries Yet", null);
         }
 
         // check if user information is saved. if not, open the settings window.
         boolean openSettingsCondition = false;
         if (!DataStore.existsSave())
         {
-            File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+            File writeDirectory = new File(Environment.getExternalStorageDirectory(), DataStore.DATA_FOLDER_NAME);
             if (!writeDirectory.exists())
             {
                 Log.d("FileIO", "Creating write directory: " + writeDirectory.toString());
                 writeDirectory.mkdir();
             }
-            /*
-            File log = new File(writeDirectory, "settings.coda");
-            if(!log.exists())
-            {
-                try {
-                    Log.d("FileIO", "Creating settings file: " + log.toString());
-                    log.createNewFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            */
             Intent intent = new Intent(this, Settings.class);
             startActivity(intent);
         }
         else
         {
             // if file exists, check that all data is entered.
-            File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+            File writeDirectory = new File(Environment.getExternalStorageDirectory(), DataStore.DATA_FOLDER_NAME);
             if (!writeDirectory.exists())
             {
                 writeDirectory.mkdir();
@@ -252,7 +227,7 @@ public class AddCompetitions extends AppCompatActivity
             }
             try
             {
-                for(int i = 0; i < 6; i++)
+                for(int i = 0; i < 3; i++)
                 {
                     if (br.readLine() == null)
                     {
@@ -280,7 +255,7 @@ public class AddCompetitions extends AppCompatActivity
                 DataStore.parseTeamNum();
                 DataStore.parseFirstName();
                 DataStore.parseLastName();
-                DataStore.parseDirectSave();
+                DataStore.parseServerLoginData();
             }
             catch (IOException e)
             {
@@ -290,16 +265,20 @@ public class AddCompetitions extends AppCompatActivity
 
 
         // start another thread to automatically save.
-        Runnable autosaverunnable = new Runnable()
+        if (!DataStore.autoSaveRunnableInit)
         {
-            @Override
-            public void run()
+            autosaverunnable = new Runnable()
             {
-                AutoSaveThread autosave = new AutoSaveThread();
-                autosave.run();
-            }
-        };
-        new Thread(autosaverunnable).start();
+                @Override
+                public void run()
+                {
+                    AutoSaveThread autosave = new AutoSaveThread();
+                    autosave.run();
+                }
+            };
+            new Thread(autosaverunnable).start();
+            DataStore.autoSaveRunnableInit = true;
+        }
     }
 
     @Override
@@ -328,7 +307,7 @@ public class AddCompetitions extends AppCompatActivity
         }
         else if (id == R.id.action_makecsv)
         {
-            String filename = DataStore.firstName +"_"+DataStore.lastName +"_results.csv";
+            String filename = DataStore.getFileName(DataStore.firstName + "_" + DataStore.lastName);
             try
             {
                 DataStore.writeContestsToCsv(filename);
@@ -339,35 +318,11 @@ public class AddCompetitions extends AppCompatActivity
                 e.printStackTrace();
             }
         }
-        else if (id == R.id.action_mailcsv)
+        else if (id == R.id.action_transmitresults)
         {
-            // mail the CSV
-            try
-            {
-                final String filename = DataStore.firstName +"_"+DataStore.lastName +"_results.csv";
-                final String[] recipient = {""};
-                final EditText txtUrl = new EditText(this);
-                new AlertDialog.Builder(this)
-                        .setTitle("Mail results")
-                        .setMessage("Please enter the recipient's email.")
-                        .setView(txtUrl)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                                recipient[0] = txtUrl.getText().toString();
-                                sendEmailWithCSV(filename, recipient[0]);
-                            }
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                            }
-                        })
-                        .show();
-            }
-            catch (Exception arg0)
-            {
-                // TODO Auto-generated catch block
-                arg0.printStackTrace();
-            }
+            Intent intent = new Intent(this, SendReport.class);
+            startActivity(intent);
+            return true;
         }
         else if (id == R.id.action_ac)
         {
@@ -380,8 +335,7 @@ public class AddCompetitions extends AppCompatActivity
                     {
                         public void onClick(DialogInterface dialog, int whichButton)
                         {
-                            DataStore.CsvFormattedContests.clear();
-                            DataStore.contests.clear();
+                            DataStore.matchList.clear();
                             try
                             {
                                 DataStore.writeArraylistsToJSON();
@@ -390,18 +344,8 @@ public class AddCompetitions extends AppCompatActivity
                             {
                                 e.printStackTrace();
                             }
-                            addToList("No Entries Yet");
+                            addToList("No Entries Yet", null);
                             adapter.notifyDataSetChanged();
-                            String filename = DataStore.firstName +"_"+DataStore.lastName +"_results.csv";
-                            try
-                            {
-                                DataStore.writeContestsToCsv(filename);
-                            }
-                            catch (IOException e)
-                            {
-                                // TODO Auto-generated catch block
-                                e.printStackTrace();
-                            }
                         }
                     })
                     .setNegativeButton("NO", new DialogInterface.OnClickListener()
@@ -430,41 +374,98 @@ public class AddCompetitions extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    public static void addToList(String s)
+    public static synchronized void addToList(String dispString, String csvString)
     {
-        if (DataStore.contests.contains("No Entries Yet"))
+        synchronized (DataStore.matchList)
         {
-            removeFromList("No Entries Yet");
-        }
+            if (listHasPlaceHolder())
+            {
+                removeFromList("No Entries Yet", null);
+            }
 
-        DataStore.contests.add(s);
-        adapter.notifyDataSetChanged();
+            DataStore.matchList.add(new Match(dispString, csvString));
+            adapter.notifyDataSetChanged();
+        }
     }
 
-    public static void resetListItem(String s, int pos)
+    public static synchronized void resetListItem(String dispString, String csvString, int pos)
     {
-        DataStore.contests.set(pos, s);
-        adapter.notifyDataSetChanged();
+        synchronized (DataStore.matchList)
+        {
+            Match match = DataStore.matchList.get(pos);
+            match.setCsvString(csvString);
+            match.setDispString(dispString);
+            adapter.notifyDataSetChanged();
+        }
     }
 
-    public static void removeFromList(String s)
+    public static synchronized void removeFromList(String dispString, String csvString)
     {
-        DataStore.contests.remove(s);
-        if (DataStore.contests.size() == 0 && !s.equals("No Entries Yet"))
+        synchronized (DataStore.matchList)
         {
-            addToList("No Entries Yet");
+            for (int i = 0; i < DataStore.matchList.size(); i++)
+            {
+                String csvStringCmp = DataStore.matchList.get(i).getCsvString();
+                String dispStringCmp = DataStore.matchList.get(i).getDispString();
+                if ((csvString == null ? true : csvStringCmp.equals(csvString)) && (dispString == null ? true : dispStringCmp.equals(dispString)))
+                {
+                    DataStore.matchList.remove(i);
+                    break;
+                }
+            }
+            if (DataStore.matchList.size() == 0 && !dispString.equals("No Entries Yet"))
+            {
+                addToList("No Entries Yet", null);
+            }
+            adapter.notifyDataSetChanged();
         }
-        adapter.notifyDataSetChanged();
     }
 
-    public static void removeFromList(int index)
+    public static synchronized void removeFromList(int index)
     {
-        DataStore.contests.remove(index);
-        if (DataStore.contests.size() == 0)
+        synchronized (DataStore.matchList)
         {
-            addToList("No Entries Yet");
+            DataStore.matchList.remove(index);
+            if (DataStore.matchList.size() == 0)
+            {
+                addToList("No Entries Yet", null);
+            }
+            adapter.notifyDataSetChanged();
         }
-        adapter.notifyDataSetChanged();
+    }
+
+
+    public static synchronized boolean listHasPlaceHolder()
+    {
+        synchronized (DataStore.matchList)
+        {
+            for(int i = 0; i < DataStore.matchList.size(); i++)
+            {
+                if (DataStore.matchList.get(i).getDispString().equals("No Entries Yet") || DataStore.matchList.get(i).getCsvString() == null)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static synchronized boolean listEmpty()
+    {
+        synchronized (DataStore.matchList)
+        {
+            if (DataStore.matchList.size() == 0)
+            {
+                return true;
+            }
+
+            if (DataStore.matchList.size() == 1)
+            {
+                return listHasPlaceHolder();
+            }
+        }
+
+        return false;
     }
 
     public void openCompNamePrompt(boolean modifyingExisting, int option)
@@ -482,31 +483,7 @@ public class AddCompetitions extends AppCompatActivity
         }
         startActivity(intent);
     }
-    public void sendEmailWithCSV(String filename0, String target)
-    {
-        try
-        {
-            File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
-            if (!writeDirectory.exists())
-            {
-                writeDirectory.mkdir();
-            }
-            File filelocation = new File(writeDirectory, filename0);
-            Uri path = Uri.fromFile(filelocation);
-            Intent emailIntent = new Intent(Intent.ACTION_SEND);
-            emailIntent.setType("vnd.android.cursor.dir/email");
-            String to[] = {target};
-            emailIntent.putExtra(Intent.EXTRA_EMAIL, to);
-            emailIntent.putExtra(Intent.EXTRA_STREAM, path);
-            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Robotics Scouting Results");
-            startActivity(Intent.createChooser(emailIntent, "Send email..."));
-        }
-        catch (Exception e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
+
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,

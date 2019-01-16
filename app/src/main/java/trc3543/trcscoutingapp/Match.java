@@ -22,19 +22,39 @@
 
 package trc3543.trcscoutingapp;
 
-import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.TextView;
-
-public class About extends AppCompatActivity
+public class Match
 {
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
+    private String dispString;
+    private String csvString;
+
+    public Match(String dispString, String csvString)
     {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about);
-        setTitle("About This App");
-        setTitleColor(Color.parseColor("#ff669900"));
+        this.dispString = dispString;
+        this.csvString = csvString;
+    }
+
+    public String getDispString()
+    {
+        return dispString;
+    }
+
+    public String getCsvString()
+    {
+        return csvString;
+    }
+
+    public void setDispString(String dispString)
+    {
+        this.dispString = dispString;
+    }
+
+    public void setCsvString(String csvString)
+    {
+        this.csvString = csvString;
+    }
+
+    public String toString()
+    {
+        return dispString;
     }
 }
