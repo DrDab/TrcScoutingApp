@@ -24,15 +24,15 @@ package trc3543.trcscoutingapp;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
+import android.nfc.NfcAdapter;
+import android.nfc.NfcManager;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -43,7 +43,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 
 import java.io.BufferedReader;
@@ -68,16 +67,27 @@ public class AddCompetitions extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_competitions);
 
-        // verifyStoragePermissions(this);
+        // verifySystemPermissions(this);
 
         Log.d("FileIO","External Storage Directory: " + Environment.getExternalStorageDirectory().toString());
 
+        NfcManager nfcmanager = (NfcManager) getApplicationContext().getSystemService(Context.NFC_SERVICE);
+        NfcAdapter nfcadapter = nfcmanager.getDefaultAdapter();
+        DataStore.deviceSupportsNfc = nfcadapter != null && nfcadapter.isEnabled();
+
         // let's check if we have file permissions before running.
-        if (!verifyStoragePermissions(this))
+        if (!verifySystemPermissions(this))
         {
             AlertDialog alertDialog1 = new AlertDialog.Builder(AddCompetitions.this).create();
             alertDialog1.setTitle("Warning! (DON'T CLOSE)");
-            alertDialog1.setMessage("Please go into Settings > Apps > \"TRC Scouting App\" > Permissions and check Storage.");
+            if (DataStore.deviceSupportsNfc)
+            {
+                alertDialog1.setMessage("Please go into Settings > Apps > \"TRC Scouting App\" > Permissions and check Storage and NFC.");
+            }
+            else
+            {
+                alertDialog1.setMessage("Please go into Settings > Apps > \"TRC Scouting App\" > Permissions and check Storage.");
+            }
             alertDialog1.show();
             return;
         }
@@ -489,18 +499,33 @@ public class AddCompetitions extends AppCompatActivity
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
-    public static boolean verifyStoragePermissions(Activity activity)
+
+    public static boolean verifySystemPermissions(Activity activity)
     {
         // Check if we have write permission
-        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int externalStoragePermission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         Log.d("FileIO", "Checking File I/O Permissions...");
-        if (permission != PackageManager.PERMISSION_GRANTED)
+        if (externalStoragePermission != PackageManager.PERMISSION_GRANTED)
         {
             // We don't have permission so prompt the user
             Log.d("FileIO", "File permissions insufficient, requesting privileges...");
             return false;
-
         }
+
+        if (DataStore.deviceSupportsNfc)
+        {
+            Log.d("NfcPermission", "Device supports NFC!");
+            if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.NFC) != PackageManager.PERMISSION_GRANTED)
+            {
+                Log.d("NfcPermission", "NFC permissions insufficient, requesting privileges...");
+                return false;
+            }
+        }
+        else
+        {
+            Log.d("NfcPermission", "Device does not support NFC!");
+        }
+
         return true;
     }
 

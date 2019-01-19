@@ -59,6 +59,8 @@ public class DataStore extends AppCompatActivity
 
     static boolean autoSaveRunnableInit = false;
 
+    static boolean deviceSupportsNfc = false;
+
     static String serverIP = null;
     static int serverPort = 3621;
     static String username = null;
