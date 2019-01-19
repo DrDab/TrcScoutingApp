@@ -80,14 +80,7 @@ public class AddCompetitions extends AppCompatActivity
         {
             AlertDialog alertDialog1 = new AlertDialog.Builder(AddCompetitions.this).create();
             alertDialog1.setTitle("Warning! (DON'T CLOSE)");
-            if (DataStore.deviceSupportsNfc)
-            {
-                alertDialog1.setMessage("Please go into Settings > Apps > \"TRC Scouting App\" > Permissions and check Storage and NFC.");
-            }
-            else
-            {
-                alertDialog1.setMessage("Please go into Settings > Apps > \"TRC Scouting App\" > Permissions and check Storage.");
-            }
+            alertDialog1.setMessage("Please go into Settings > Apps > \"TRC Scouting App\" > Permissions and check Storage.");
             alertDialog1.show();
             return;
         }
