@@ -51,9 +51,9 @@ public class SetCompetitionName extends AppCompatActivity
 
     static String matchType;
 
-    static String spectatingTeamRawName;
+    static String spectatingTeamFieldPosition;
 
-    static int spectatingTeamNumber; // the team # for teh team you are spectating
+    static int spectatingTeamNumber;
 
     // Driver's PoV.
     static String startingPosition;
@@ -231,8 +231,8 @@ public class SetCompetitionName extends AppCompatActivity
             // read the team you are spectating.
             Log.d("SetCompetitionName","Parsing spectating team.");
             Spinner mySpinner = (Spinner) findViewById(R.id.SpectatingSpinner);
-            spectatingTeamRawName = mySpinner.getSelectedItem().toString();
-            if (spectatingTeamRawName.matches(""))
+            spectatingTeamFieldPosition = mySpinner.getSelectedItem().toString();
+            if (spectatingTeamFieldPosition.matches(""))
             {
                 Snackbar.make(view, "Spectating Team cannot be empty.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
@@ -307,7 +307,7 @@ public class SetCompetitionName extends AppCompatActivity
         }
 
         String listMsg = String.format("Match # %d (%s) Team: %d", MatchNumber, matchType, spectatingTeamNumber);
-        String CSVFormat = containsOwnTeam + "," + DataStore.getDateAsString() + "," + MatchNumber + "," + matchType + "," + spectatingTeamNumber + "," + spectatingTeamRawName + "," + startingPosition+","+endingLocation+","+match_won_yes_or_no+",\""+autonotes+"\",\""+telenotes+"\"";
+        String CSVFormat = containsOwnTeam + "," + DataStore.getDateAsString() + "," + MatchNumber + "," + matchType + "," + spectatingTeamNumber + "," + spectatingTeamFieldPosition + "," + startingPosition+","+endingLocation+","+match_won_yes_or_no+",\""+autonotes+"\",\""+telenotes+"\"";
 
         if (USE_DEBUG)
         {
