@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Victor Du, Titan Robotics Club
+ * Copyright (c) 2017-2019 Titan Robotics Club
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -49,37 +49,20 @@ public class SetCompetitionName extends AppCompatActivity
     static int MatchNumber;
     static String competitionName;
 
-    /**
-     * Competition Type
-     * 1 = Practice
-     * 2 = Qualification
-     * 3 = Semi-Final
-     * 4 = Final
-     *
-     * @author Victor Du
-     */
-    static int competitionType;
-
-    static String competitionTypeRawName;
+    static String matchType;
 
     static String spectatingTeamRawName;
-    static int spectatingTeamResolvedNumber;
 
-    static int spectatingTeamNumber;    // the team # for teh team you are spectating
+    static int spectatingTeamNumber; // the team # for teh team you are spectating
 
     // Driver's PoV.
     static String startingPosition;
 
     // Autonomous Phase.
-    static boolean loweredRobot = false;
-    static boolean mineralDisplaced = false;
-    static boolean mineralDisplacedCorrect = false;
-    static boolean markerDeployed = false;
-    static boolean parkedInCrater = false;
+
 
     // Teleoperated Phase.
-    static int depotScore = 0;
-    static int landerScore = 0;
+
 
     // Endgame
     static String endingLocation = "";
@@ -110,8 +93,8 @@ public class SetCompetitionName extends AppCompatActivity
 
         try
         {
-            Intent myIntent = getIntent(); // gets the previously created intent
-            String editoptionstr = myIntent.getStringExtra("EditOption"); // will return option to edit on the fly
+            Intent myIntent = getIntent();
+            String editoptionstr = myIntent.getStringExtra("EditOption");
             Log.d("SetCompetitionName", "editoptionsstr=\"" + editoptionstr + "\"");
             editingoption = Integer.parseInt(editoptionstr);
             Log.d("SetCompetitionName", "Got edit option: " + editingoption);
@@ -134,15 +117,15 @@ public class SetCompetitionName extends AppCompatActivity
             mnum.setText(OwOWhatsThis[2]);
             Log.d("SetCompetitionName", "Match Number Set: " + OwOWhatsThis[2]);
 
-            // populate the team number.
-            EditText tnum = (EditText) findViewById(R.id.teamNum);
-            tnum.setText(OwOWhatsThis[4]);
-            Log.d("SetCompetitionName", "Team Number Set: " + OwOWhatsThis[4]);
-
             // populate the match type.
             Spinner mtype =(Spinner) findViewById(R.id.CompType);
             mtype.setSelection(((ArrayAdapter)mtype.getAdapter()).getPosition(OwOWhatsThis[3]));
             Log.d("SetCompetitionName", "Match Type Set: " + OwOWhatsThis[3]);
+
+            // populate the team number.
+            EditText tnum = (EditText) findViewById(R.id.teamNum);
+            tnum.setText(OwOWhatsThis[4]);
+            Log.d("SetCompetitionName", "Team Number Set: " + OwOWhatsThis[4]);
 
             // populate the spectating team.
             Spinner specteam =(Spinner) findViewById(R.id.SpectatingSpinner);
@@ -156,50 +139,33 @@ public class SetCompetitionName extends AppCompatActivity
 
             // =====================[ BEGIN AUTONOMOUS PHASE ]===================== //
 
-            CheckBox loweredRobot = (CheckBox) findViewById(R.id.loweredRobotCheckBox);
-            loweredRobot.setChecked(OwOWhatsThis[7].contains("true"));
-
-            CheckBox displacedMineral = (CheckBox) findViewById(R.id.mineralDisplacedCheckBox);
-            displacedMineral.setChecked(OwOWhatsThis[8].contains("true"));
-
-            CheckBox displacedCorrectly = (CheckBox) findViewById(R.id.correctMineralCheckBox);
-            displacedCorrectly.setChecked(OwOWhatsThis[9].contains("true"));
-
-            CheckBox markerDeployed = (CheckBox) findViewById(R.id.markerCheckBox);
-            markerDeployed.setChecked(OwOWhatsThis[10].contains("true"));
-
-            CheckBox parkedInCraterAuto = (CheckBox) findViewById(R.id.craterParkCheckBox);
-            parkedInCraterAuto.setChecked(OwOWhatsThis[11].contains("true"));
-
             // populate autonomous notes.
             EditText aunotes = (EditText) findViewById(R.id.autoNotes);
-            String rawautonotes = OwOWhatsThis[16];
+            String rawautonotes = OwOWhatsThis[9];
             rawautonotes = rawautonotes.replaceAll("^\"|\"$", ""); // remove quotation marks
             aunotes.setText(rawautonotes);
             Log.d("SetCompetitionName", "Autonomous Notes Set: \"" + rawautonotes + "\"");
 
             // =====================[ BEGIN TELEOPERATED PHASE ]===================== //
 
-            Spinner depotScore =(Spinner) findViewById(R.id.depotSpinner);
-            depotScore.setSelection(((ArrayAdapter)depotScore.getAdapter()).getPosition(OwOWhatsThis[12]));
 
-            Spinner landerScore =(Spinner) findViewById(R.id.landerSpinner);
-            landerScore.setSelection(((ArrayAdapter)landerScore.getAdapter()).getPosition(OwOWhatsThis[13]));
 
             // =====================[ BEGIN ENDGAME ]===================== //
 
             Spinner endingLocation =(Spinner) findViewById(R.id.endingLocation);
-            endingLocation.setSelection(((ArrayAdapter)endingLocation.getAdapter()).getPosition(OwOWhatsThis[14]));
+            endingLocation.setSelection(((ArrayAdapter)endingLocation.getAdapter()).getPosition(OwOWhatsThis[7]));
 
             // populate if match was won.
             CheckBox matchWon = (CheckBox) findViewById(R.id.matchWon);
-            matchWon.setChecked(OwOWhatsThis[15].contains("Yes"));
+            matchWon.setChecked(OwOWhatsThis[8].contains("Yes"));
 
             // populate teleop notes.
             EditText tonotes = (EditText) findViewById(R.id.teleopnotes);
-            String rawtonotes = OwOWhatsThis[17];
+            String rawtonotes = OwOWhatsThis[10];
             rawtonotes = rawtonotes.replaceAll("^\"|\"$", ""); // remove quotation marks
             tonotes.setText(rawtonotes);
+
+            // =====================[ END ENDGAME + TELEOPERATED PHASE ]===================== //
         }
     }
 
@@ -230,32 +196,11 @@ public class SetCompetitionName extends AppCompatActivity
             // read the competition type.
             Log.d("SetCompetitionName","Parsing Competition Type");
             Spinner mySpinner =(Spinner) findViewById(R.id.CompType);
-            competitionTypeRawName = mySpinner.getSelectedItem().toString();
-            if (competitionTypeRawName.matches(""))
+            matchType = mySpinner.getSelectedItem().toString();
+            if (matchType.matches(""))
             {
-                Snackbar.make(view, "Competition Type cannot be empty.", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Match type cannot be empty.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                breakCond = true;
-            }
-            else if (competitionTypeRawName.matches("Practice"))
-            {
-                competitionType = 1;
-            }
-            else if (competitionTypeRawName.matches("Qualification"))
-            {
-                competitionType = 2;
-            }
-            else if (competitionTypeRawName.matches("Semi-Final"))
-            {
-                competitionType = 3;
-            }
-            else if (competitionTypeRawName.matches("Final"))
-            {
-                competitionType = 4;
-            }
-            else
-            {
-                // We have an impossible scenario, where no competition type is selected. [Practice should be selected by default] (Nom d'un chien! - Red Savarin)
                 breakCond = true;
             }
         }
@@ -293,27 +238,6 @@ public class SetCompetitionName extends AppCompatActivity
                         .setAction("Action", null).show();
                 breakCond = true;
             }
-            else if (spectatingTeamRawName.contains("Red Alliance 1"))
-            {
-                spectatingTeamResolvedNumber = spectatingTeamNumber;
-            }
-            else if (spectatingTeamRawName.contains("Red Alliance 2"))
-            {
-                spectatingTeamResolvedNumber = spectatingTeamNumber;
-            }
-            else if (spectatingTeamRawName.contains("Blue Alliance 1"))
-            {
-                spectatingTeamResolvedNumber = spectatingTeamNumber;
-            }
-            else if (spectatingTeamRawName.contains("Blue Alliance 2"))
-            {
-                spectatingTeamResolvedNumber = spectatingTeamNumber;
-            }
-            else
-            {
-                // We have an impossible scenario, where no spectating Team is selected. [Red Alliance 1 should be selected by default] (Nom d'un chien! - Red Savarin)
-                breakCond = true;
-            }
         }
         if (!breakCond)
         {
@@ -345,24 +269,13 @@ public class SetCompetitionName extends AppCompatActivity
         if (!breakCond)
         {
             // read autonomous stuff.
-            CheckBox robotLoweredCB = (CheckBox) findViewById(R.id.loweredRobotCheckBox);
-            CheckBox mineralDisplacedCB = (CheckBox) findViewById(R.id.mineralDisplacedCheckBox);
-            CheckBox correctMineralCB = (CheckBox) findViewById(R.id.correctMineralCheckBox);
-            CheckBox markerCB = (CheckBox) findViewById(R.id.markerCheckBox);
-            CheckBox parkingCB = (CheckBox) findViewById(R.id.craterParkCheckBox);
-            loweredRobot = robotLoweredCB.isChecked();
-            mineralDisplaced = mineralDisplacedCB.isChecked();
-            mineralDisplacedCorrect = correctMineralCB.isChecked();
-            markerDeployed = markerCB.isChecked();
-            parkedInCrater = parkingCB.isChecked();
+
         }
         if (!breakCond)
         {
             // read teleop stuff.
-            Spinner depotSpinner = (Spinner) findViewById(R.id.depotSpinner);
-            Spinner landerSpinner = (Spinner) findViewById(R.id.landerSpinner);
-            depotScore = Integer.parseInt(depotSpinner.getSelectedItem().toString());
-            landerScore = Integer.parseInt(landerSpinner.getSelectedItem().toString());
+
+
             // read endgame stuff.
             Spinner endLocationSpinner = (Spinner) findViewById(R.id.endingLocation);
             endingLocation = endLocationSpinner.getSelectedItem().toString();
@@ -377,28 +290,12 @@ public class SetCompetitionName extends AppCompatActivity
 
     public void moveToNextScreen(View view)
     {
-        String red_savarin = "";
+        String containsOwnTeam = "";
         if (spectatingTeamNumber == DataStore.selfTeamNumber)
         {
-            red_savarin = "*";
+            containsOwnTeam = "*";
         }
-        String chocolat_gelato;
-        if (competitionType == 1)
-        {
-            chocolat_gelato = "Practice";
-        }
-        else if (competitionType == 2)
-        {
-            chocolat_gelato = "Qualification";
-        }
-        else if (competitionType == 3)
-        {
-            chocolat_gelato = "Semi-Final";
-        }
-        else
-        {
-            chocolat_gelato = "Final";
-        }
+
         String match_won_yes_or_no = "";
         if (matchWon)
         {
@@ -408,8 +305,10 @@ public class SetCompetitionName extends AppCompatActivity
         {
             match_won_yes_or_no = "No";
         }
-        String listMsg = "Match # " + MatchNumber + " Type: " + chocolat_gelato + " R: " + red_savarin + " S: " + spectatingTeamNumber;
-        String CSVFormat = red_savarin + "," + DataStore.getDateAsString() + "," + MatchNumber + "," + chocolat_gelato + "," + spectatingTeamNumber + "," + spectatingTeamRawName + "," + startingPosition+","+loweredRobot+","+mineralDisplaced+","+mineralDisplacedCorrect+","+markerDeployed+","+parkedInCrater+","+depotScore+","+landerScore+","+endingLocation+","+match_won_yes_or_no+",\""+autonotes+"\",\""+telenotes+"\"";
+
+        String listMsg = String.format("Match # %d (%s) Team: %d", MatchNumber, matchType, spectatingTeamNumber);
+        String CSVFormat = containsOwnTeam + "," + DataStore.getDateAsString() + "," + MatchNumber + "," + matchType + "," + spectatingTeamNumber + "," + spectatingTeamRawName + "," + startingPosition+","+endingLocation+","+match_won_yes_or_no+",\""+autonotes+"\",\""+telenotes+"\"";
+
         if (USE_DEBUG)
         {
             Snackbar.make(view, CSVFormat, Snackbar.LENGTH_LONG).setAction("Action", null).show();
@@ -436,10 +335,15 @@ public class SetCompetitionName extends AppCompatActivity
         }
 
         if (!USE_DEBUG)
-        {  finish();  }
+        {
+            finish();
+        }
     }
 
-    public void cancel(View view) { finish(); }
+    public void cancel(View view)
+    {
+        finish();
+    }
 
     /**
      * This code snippet written by ZMan; may great honor be laid upon this act of chivalry:

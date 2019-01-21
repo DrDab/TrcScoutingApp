@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Victor Du, Titan Robotics Club
+ * Copyright (c) 2017-2019 Titan Robotics Club
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -46,7 +46,7 @@ public class DataStore extends AppCompatActivity
 {
     static final String DATA_FOLDER_NAME = "TrcScoutingApp";
 
-    static final String CSV_HEADER = "Contains Your Team, Date, Match #, Competition Type, Team Number, Spectating Team, Starting Position, AT-Robot Lowered, AT-Mineral Displaced, AT-Mineral Correct, AT-Marker Deployed, AT-Parked In Crater, TO-Depot Score, TO-Lander Score, EG-Ending Location, Match Won, Autonomous Notes, TeleOp Notes";
+    static final String CSV_HEADER = "Contains Your Team, Date, Match #, Match Type, Team Number, Spectating Team, Starting Position, EG-Ending Location, Match Won, Autonomous Notes, TeleOp Notes";
 
     static boolean useAutosave = true; // by default, autosave is enabled.
     static int autosaveSeconds = 300;  // by default, save changes every 5 minutes.

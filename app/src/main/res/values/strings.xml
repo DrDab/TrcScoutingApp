@@ -2,17 +2,16 @@
     <!-- BEGIN GAME SPECIFIC STUFF -->
 
     <string-array name="starting_positions">
-        <item>Ground</item>
-        <item>Hanging</item>
+        <item>Other</item>
+        <item>Sample Starting Position</item>
     </string-array>
 
     <!-- Parked, not parked for autonomous ending -->
 
     <string-array name="ending_positions">
         <item>Other</item>
-        <item>Hanging</item>
-        <item>Crater Partial</item>
-        <item>Crater Complete</item>
+        <item>End Position 1</item>
+        <item>End Position 2</item>
     </string-array>
 
     <!--
@@ -51,10 +50,12 @@
     </string-array>
 
     <string-array name="spectating_types">
-        <item>Red Alliance 1</item>
-        <item>Red Alliance 2</item>
-        <item>Blue Alliance 1</item>
-        <item>Blue Alliance 2</item>
+        <item>Red Far</item>
+        <item>Red Middle</item>
+        <item>Red Near</item>
+        <item>Blue Far</item>
+        <item>Blue Middle</item>
+        <item>Blue Near</item>
     </string-array>
 
 
@@ -100,7 +101,7 @@
         <item>Disabled</item>
     </string-array>
 
-    <string-array name="cubes_count">
+    <string-array name="general_count">
         <item>0</item>
         <item>1</item>
         <item>2</item>
