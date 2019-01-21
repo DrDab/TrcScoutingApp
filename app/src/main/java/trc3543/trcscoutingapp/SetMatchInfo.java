@@ -338,11 +338,6 @@ public class SetMatchInfo extends AppCompatActivity
         }
     }
 
-    public void cancel(View view)
-    {
-        finish();
-    }
-
     /**
      * This code snippet written by ZMan; may great honor be laid upon this act of chivalry:
      *
