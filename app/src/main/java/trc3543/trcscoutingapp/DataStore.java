@@ -47,11 +47,12 @@ public class DataStore extends AppCompatActivity
     // Season-specific info.
     public static final String DATA_FOLDER_NAME = "TrcScoutingApp";
     public static final String CSV_HEADER = "Contains Your Team, Date, Match #, Match Type, Team Number, Spectating Team, Starting Position, EG-Ending Location, Match Won, Autonomous Notes, TeleOp Notes";
+    public static final String VERSION_NUMBER = "1.3.3-frc-INDEV";
 
     // End season-specific info.
 
-    public static boolean useAutosave = true; // by default, autosave is enabled.
-    public static int autosaveSeconds = 300;  // by default, save changes every 5 minutes.
+    public static boolean useAutosave = true;
+    public static int autosaveSeconds = 300;
 
     public static ArrayList<Match> matchList = new ArrayList<Match>();
 

@@ -29,6 +29,8 @@ import android.widget.TextView;
 
 public class About extends AppCompatActivity
 {
+    private TextView versionIdText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -36,5 +38,8 @@ public class About extends AppCompatActivity
         setContentView(R.layout.activity_about);
         setTitle("About This App");
         setTitleColor(Color.parseColor("#ff669900"));
+
+        versionIdText = (TextView) findViewById(R.id.versionIdText);
+        versionIdText.setText("Version: " + DataStore.VERSION_NUMBER);
     }
 }
