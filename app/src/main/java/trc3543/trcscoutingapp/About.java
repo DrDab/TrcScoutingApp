@@ -27,9 +27,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import java.util.Date;
+
 public class About extends AppCompatActivity
 {
     private TextView versionIdText;
+    private TextView buildDateText;
+    private TextView nfcSupportedText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,5 +45,12 @@ public class About extends AppCompatActivity
 
         versionIdText = (TextView) findViewById(R.id.versionIdText);
         versionIdText.setText("Version: " + DataStore.VERSION_NUMBER);
+
+        buildDateText = (TextView) findViewById(R.id.buildDateText);
+        Date buildDate = new Date(BuildConfig.TIMESTAMP);
+        buildDateText.setText("Build Date: " + buildDate.getTime());
+
+        nfcSupportedText = (TextView) findViewById(R.id.nfcSupportedText);
+        nfcSupportedText.setText(DataStore.deviceSupportsNfc ? "NFC Supported" : "NFC Not Supported");
     }
 }
