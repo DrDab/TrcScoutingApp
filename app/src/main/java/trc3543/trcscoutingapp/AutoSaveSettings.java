@@ -71,15 +71,15 @@ public class AutoSaveSettings extends AppCompatActivity
         {
             seconds = 120;
         }
-        if (timerChoiceRawText.matches("5 minutes"))
+        else if (timerChoiceRawText.matches("5 minutes"))
         {
             seconds = 300;
         }
-        if (timerChoiceRawText.matches("10 minutes"))
+        else if (timerChoiceRawText.matches("10 minutes"))
         {
             seconds = 600;
         }
-        if (timerChoiceRawText.matches("20 minutes"))
+        else if (timerChoiceRawText.matches("20 minutes"))
         {
             seconds = 1200;
         }

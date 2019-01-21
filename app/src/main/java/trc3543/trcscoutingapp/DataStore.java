@@ -68,11 +68,6 @@ public class DataStore extends AppCompatActivity
     public static String username = null;
     public static String password = null;
 
-    public DataStore()
-    {
-        // TODO nothing
-    }
-
     public static synchronized boolean writeArraylistsToJSON() throws IOException
     {
         File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
