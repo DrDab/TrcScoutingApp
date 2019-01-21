@@ -46,7 +46,7 @@ public class SetCompetitionName extends AppCompatActivity
 
     static int editingoption = -1;
 
-    static int MatchNumber;
+    static int matchNumber;
     static String competitionName;
 
     static String matchType;
@@ -177,7 +177,7 @@ public class SetCompetitionName extends AppCompatActivity
         {
             Log.d("SetCompetitionName","Parsing Match Number.");
             EditText editText = (EditText) findViewById(R.id.matchNum);
-            MatchNumber = Integer.parseInt(editText.getText().toString());
+            matchNumber = Integer.parseInt(editText.getText().toString());
         }
         catch(NumberFormatException e)
         {
@@ -306,8 +306,8 @@ public class SetCompetitionName extends AppCompatActivity
             match_won_yes_or_no = "No";
         }
 
-        String listMsg = String.format("Match # %d (%s) Team: %d", MatchNumber, matchType, spectatingTeamNumber);
-        String CSVFormat = containsOwnTeam + "," + DataStore.getDateAsString() + "," + MatchNumber + "," + matchType + "," + spectatingTeamNumber + "," + spectatingTeamFieldPosition + "," + startingPosition+","+endingLocation+","+match_won_yes_or_no+",\""+autonotes+"\",\""+telenotes+"\"";
+        String listMsg = String.format("Match # %d (%s) Team: %d", matchNumber, matchType, spectatingTeamNumber);
+        String CSVFormat = containsOwnTeam + "," + DataStore.getDateAsString() + "," + matchNumber + "," + matchType + "," + spectatingTeamNumber + "," + spectatingTeamFieldPosition + "," + startingPosition+","+endingLocation+","+match_won_yes_or_no+",\""+autonotes+"\",\""+telenotes+"\"";
 
         if (USE_DEBUG)
         {
@@ -357,7 +357,7 @@ public class SetCompetitionName extends AppCompatActivity
         if (event.getAction() == MotionEvent.ACTION_DOWN)
         {
             View v = getCurrentFocus();
-            if ( v instanceof EditText)
+            if (v instanceof EditText)
             {
                 Rect outRect = new Rect();
                 v.getGlobalVisibleRect(outRect);
