@@ -35,7 +35,6 @@ public class AutoSaveThread
 
     public void run()
     {
-        // save the entries in RAM every x minutes.
         boolean done = false;
         for(;;)
         {
@@ -44,7 +43,8 @@ public class AutoSaveThread
             {
                 done = false;
             }
-            if (time % DataStore.autosaveSeconds == 0 && !done && DataStore.useAutosave) {
+            if (time % DataStore.autosaveSeconds == 0 && !done && DataStore.useAutosave)
+            {
                 Log.d("AutoSave", "Auto saving at time=" + time);
                 String filename = DataStore.getFileName(DataStore.firstName + "_" + DataStore.lastName);
                 try
