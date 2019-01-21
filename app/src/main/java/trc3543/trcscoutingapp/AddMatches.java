@@ -52,7 +52,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 @SuppressWarnings("all")
-public class AddCompetitions extends AppCompatActivity
+public class AddMatches extends AppCompatActivity
 {
     public static final boolean MAKE_CHANGES_READ_ONLY = false;
 
@@ -65,7 +65,7 @@ public class AddCompetitions extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_competitions);
+        setContentView(R.layout.activity_add_matches);
 
         // verifySystemPermissions(this);
 
@@ -78,7 +78,7 @@ public class AddCompetitions extends AppCompatActivity
         // let's check if we have file permissions before running.
         if (!verifySystemPermissions(this))
         {
-            AlertDialog alertDialog1 = new AlertDialog.Builder(AddCompetitions.this).create();
+            AlertDialog alertDialog1 = new AlertDialog.Builder(AddMatches.this).create();
             alertDialog1.setTitle("Warning! (DON'T CLOSE)");
             alertDialog1.setMessage("Please go into Settings > Apps > \"TRC Scouting App\" > Permissions and check Storage.");
             alertDialog1.show();
@@ -98,7 +98,7 @@ public class AddCompetitions extends AppCompatActivity
         setSupportActionBar(toolbar);
         contestList = (ListView) findViewById(R.id.listView);
 
-        adapter = new ArrayAdapter<Match>(AddCompetitions.this, android.R.layout.simple_list_item_1, DataStore.matchList);
+        adapter = new ArrayAdapter<Match>(AddMatches.this, android.R.layout.simple_list_item_1, DataStore.matchList);
 
         contestList.setAdapter(adapter);
         contestList.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -107,7 +107,7 @@ public class AddCompetitions extends AppCompatActivity
             public void onItemClick(AdapterView arg0, View arg1, int position, long arg3)
             {
                 // position = position selected
-                AlertDialog alertDialog = new AlertDialog.Builder(AddCompetitions.this).create();
+                AlertDialog alertDialog = new AlertDialog.Builder(AddMatches.this).create();
                 alertDialog.setTitle("Game Information");
                 if (listEmpty())
                 {
@@ -137,7 +137,7 @@ public class AddCompetitions extends AppCompatActivity
             {
                 if (!DataStore.matchList.contains("No Entries Yet"))
                 {
-                    new AlertDialog.Builder(AddCompetitions.this)
+                    new AlertDialog.Builder(AddMatches.this)
                             .setTitle("Are you sure?")
                             .setMessage("Are you sure you want to delete this element?")
                             .setPositiveButton("YES", new DialogInterface.OnClickListener()
@@ -476,12 +476,12 @@ public class AddCompetitions extends AppCompatActivity
         Intent intent = null;
         if (!modifyingExisting)
         {
-            intent = new Intent(this, SetCompetitionName.class);
+            intent = new Intent(this, SetMatchInfo.class);
             intent.putExtra("EditOption", -1 + "");
         }
         else
         {
-            intent = new Intent(this, SetCompetitionName.class);
+            intent = new Intent(this, SetMatchInfo.class);
             intent.putExtra("EditOption", option + "");
         }
         startActivity(intent);

@@ -40,7 +40,7 @@ import android.widget.Spinner;
 import java.io.IOException;
 
 @SuppressWarnings("all")
-public class SetCompetitionName extends AppCompatActivity
+public class SetMatchInfo extends AppCompatActivity
 {
     public static final boolean USE_DEBUG = false;
 
@@ -78,7 +78,7 @@ public class SetCompetitionName extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_set_competition_name2);
+        setContentView(R.layout.activity_set_match_info2);
         setTitle("Add Match");
         try
         {
@@ -95,13 +95,13 @@ public class SetCompetitionName extends AppCompatActivity
         {
             Intent myIntent = getIntent();
             String editoptionstr = myIntent.getStringExtra("EditOption");
-            Log.d("SetCompetitionName", "editoptionsstr=\"" + editoptionstr + "\"");
+            Log.d("SetMatchInfo", "editoptionsstr=\"" + editoptionstr + "\"");
             editingoption = Integer.parseInt(editoptionstr);
-            Log.d("SetCompetitionName", "Got edit option: " + editingoption);
+            Log.d("SetMatchInfo", "Got edit option: " + editingoption);
         }
         catch (Exception e)
         {
-            Log.d("SetCompetitionName","You shouldn't see this message");
+            Log.d("SetMatchInfo","You shouldn't see this message");
             editingoption = -1;
         }
 
@@ -109,33 +109,33 @@ public class SetCompetitionName extends AppCompatActivity
         if (editingoption != -1)
         {
             String read = DataStore.matchList.get(editingoption).getCsvString();
-            Log.d("SetCompetitionName", editingoption + " " + read);
+            Log.d("SetMatchInfo", editingoption + " " + read);
             String[] OwOWhatsThis = read.split(",");
 
             // populate the match number.
             EditText mnum = (EditText) findViewById(R.id.matchNum);
             mnum.setText(OwOWhatsThis[2]);
-            Log.d("SetCompetitionName", "Match Number Set: " + OwOWhatsThis[2]);
+            Log.d("SetMatchInfo", "Match Number Set: " + OwOWhatsThis[2]);
 
             // populate the match type.
             Spinner mtype =(Spinner) findViewById(R.id.CompType);
             mtype.setSelection(((ArrayAdapter)mtype.getAdapter()).getPosition(OwOWhatsThis[3]));
-            Log.d("SetCompetitionName", "Match Type Set: " + OwOWhatsThis[3]);
+            Log.d("SetMatchInfo", "Match Type Set: " + OwOWhatsThis[3]);
 
             // populate the team number.
             EditText tnum = (EditText) findViewById(R.id.teamNum);
             tnum.setText(OwOWhatsThis[4]);
-            Log.d("SetCompetitionName", "Team Number Set: " + OwOWhatsThis[4]);
+            Log.d("SetMatchInfo", "Team Number Set: " + OwOWhatsThis[4]);
 
             // populate the spectating team.
             Spinner specteam =(Spinner) findViewById(R.id.SpectatingSpinner);
             specteam.setSelection(((ArrayAdapter)specteam.getAdapter()).getPosition(OwOWhatsThis[5]));
-            Log.d("SetCompetitionName", "Spectating Team: " + OwOWhatsThis[5]);
+            Log.d("SetMatchInfo", "Spectating Team: " + OwOWhatsThis[5]);
 
             // populate the starting position.
             Spinner spos =(Spinner) findViewById(R.id.startingPositionForm);
             spos.setSelection(((ArrayAdapter)spos.getAdapter()).getPosition(OwOWhatsThis[6]));
-            Log.d("SetCompetitionName", "Starting Position Set: " + OwOWhatsThis[6]);
+            Log.d("SetMatchInfo", "Starting Position Set: " + OwOWhatsThis[6]);
 
             // =====================[ BEGIN AUTONOMOUS PHASE ]===================== //
 
@@ -144,7 +144,7 @@ public class SetCompetitionName extends AppCompatActivity
             String rawautonotes = OwOWhatsThis[9];
             rawautonotes = rawautonotes.replaceAll("^\"|\"$", ""); // remove quotation marks
             aunotes.setText(rawautonotes);
-            Log.d("SetCompetitionName", "Autonomous Notes Set: \"" + rawautonotes + "\"");
+            Log.d("SetMatchInfo", "Autonomous Notes Set: \"" + rawautonotes + "\"");
 
             // =====================[ BEGIN TELEOPERATED PHASE ]===================== //
 
@@ -175,7 +175,7 @@ public class SetCompetitionName extends AppCompatActivity
         // read the match number.
         try
         {
-            Log.d("SetCompetitionName","Parsing Match Number.");
+            Log.d("SetMatchInfo","Parsing Match Number.");
             EditText editText = (EditText) findViewById(R.id.matchNum);
             matchNumber = Integer.parseInt(editText.getText().toString());
         }
@@ -194,7 +194,7 @@ public class SetCompetitionName extends AppCompatActivity
         if (!breakCond)
         {
             // read the competition type.
-            Log.d("SetCompetitionName","Parsing Competition Type");
+            Log.d("SetMatchInfo","Parsing Competition Type");
             Spinner mySpinner =(Spinner) findViewById(R.id.CompType);
             matchType = mySpinner.getSelectedItem().toString();
             if (matchType.matches(""))
@@ -207,7 +207,7 @@ public class SetCompetitionName extends AppCompatActivity
         if (!breakCond)
         {
             // read the alliance teams.
-            Log.d("SetCompetitionName","Parsing Alliance Number.");
+            Log.d("SetMatchInfo","Parsing Alliance Number.");
             try
             {
                 EditText editText = (EditText) findViewById(R.id.teamNum);
@@ -229,7 +229,7 @@ public class SetCompetitionName extends AppCompatActivity
         if (!breakCond)
         {
             // read the team you are spectating.
-            Log.d("SetCompetitionName","Parsing spectating team.");
+            Log.d("SetMatchInfo","Parsing spectating team.");
             Spinner mySpinner = (Spinner) findViewById(R.id.SpectatingSpinner);
             spectatingTeamFieldPosition = mySpinner.getSelectedItem().toString();
             if (spectatingTeamFieldPosition.matches(""))
@@ -242,7 +242,7 @@ public class SetCompetitionName extends AppCompatActivity
         if (!breakCond)
         {
             // read the starting position.
-            Log.d("SetCompetitionName","Parsing starting position.");
+            Log.d("SetMatchInfo","Parsing starting position.");
             Spinner mySpinner = (Spinner) findViewById(R.id.startingPositionForm);
             startingPosition = mySpinner.getSelectedItem().toString();
             if (startingPosition.matches(""))
@@ -254,7 +254,7 @@ public class SetCompetitionName extends AppCompatActivity
         }
         if (!breakCond)
         {
-            Log.d("SetCompetitionName","Reading comments.");
+            Log.d("SetMatchInfo","Reading comments.");
             EditText editText = (EditText) findViewById(R.id.autoNotes);
             autonotes = editText.getText().toString();
             EditText editText2 = (EditText) findViewById(R.id.teleopnotes);
@@ -262,7 +262,7 @@ public class SetCompetitionName extends AppCompatActivity
         }
         if (!breakCond)
         {
-            Log.d("SetCompetitionName","Checking if match won.");
+            Log.d("SetMatchInfo","Checking if match won.");
             CheckBox matchWonCheckBox = (CheckBox) findViewById(R.id.matchWon);
             matchWon = matchWonCheckBox.isChecked();
         }
@@ -283,7 +283,7 @@ public class SetCompetitionName extends AppCompatActivity
         if (!breakCond)
         {
             // All values are confirmed, move to next screen.
-            Log.d("SetCompetitionName","Esketit!");
+            Log.d("SetMatchInfo","Esketit!");
             moveToNextScreen(view);
         }
     }
@@ -316,13 +316,13 @@ public class SetCompetitionName extends AppCompatActivity
 
         if (editingoption == -1)
         {
-            Log.d("SetCompetitionName","Adding new entry to list.");
-            AddCompetitions.addToList(listMsg, CSVFormat);
+            Log.d("SetMatchInfo","Adding new entry to list.");
+            AddMatches.addToList(listMsg, CSVFormat);
         }
         else
         {
-            Log.d("SetCompetitionName","Resetting list entry: " + editingoption);
-            AddCompetitions.resetListItem(listMsg, CSVFormat, editingoption);
+            Log.d("SetMatchInfo","Resetting list entry: " + editingoption);
+            AddMatches.resetListItem(listMsg, CSVFormat, editingoption);
         }
 
         try

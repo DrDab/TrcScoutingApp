@@ -68,7 +68,7 @@ public class Settings extends AppCompatActivity
             lastNameForm.setText(DataStore.lastName);
         }
 
-        // AddCompetitions.verifyStoragePermissions(this);
+        // AddMatches.verifyStoragePermissions(this);
     }
 
     public void parseSettings(View v)
