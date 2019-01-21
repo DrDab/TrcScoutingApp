@@ -119,7 +119,6 @@ public class AutoSaveSettings extends AppCompatActivity
             waffleryebread.flush();
             waffleryebread.close();
         }
-        DataStore.parseAutoSaveBoolean();
-        DataStore.parseAutoSaveTime();
+        DataStore.parseAutoSaveInfo();
     }
 }

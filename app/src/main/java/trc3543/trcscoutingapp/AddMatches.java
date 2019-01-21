@@ -253,11 +253,8 @@ public class AddMatches extends AppCompatActivity
         {
             try
             {
-                DataStore.parseAutoSaveBoolean();
-                DataStore.parseAutoSaveTime();
-                DataStore.parseTeamNum();
-                DataStore.parseFirstName();
-                DataStore.parseLastName();
+                DataStore.parseAutoSaveInfo();
+                DataStore.parseUserInfoGeneral();
                 DataStore.parseServerLoginData();
             }
             catch (IOException e)

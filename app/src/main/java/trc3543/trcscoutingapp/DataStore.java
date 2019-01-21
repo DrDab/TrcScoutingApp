@@ -44,27 +44,29 @@ import java.util.Locale;
 @SuppressWarnings("All")
 public class DataStore extends AppCompatActivity
 {
-    static final String DATA_FOLDER_NAME = "TrcScoutingApp";
+    // Season-specific info.
+    public static final String DATA_FOLDER_NAME = "TrcScoutingApp";
+    public static final String CSV_HEADER = "Contains Your Team, Date, Match #, Match Type, Team Number, Spectating Team, Starting Position, EG-Ending Location, Match Won, Autonomous Notes, TeleOp Notes";
 
-    static final String CSV_HEADER = "Contains Your Team, Date, Match #, Match Type, Team Number, Spectating Team, Starting Position, EG-Ending Location, Match Won, Autonomous Notes, TeleOp Notes";
+    // End season-specific info.
 
-    static boolean useAutosave = true; // by default, autosave is enabled.
-    static int autosaveSeconds = 300;  // by default, save changes every 5 minutes.
+    public static boolean useAutosave = true; // by default, autosave is enabled.
+    public static int autosaveSeconds = 300;  // by default, save changes every 5 minutes.
 
-    static ArrayList<Match> matchList = new ArrayList<Match>();
+    public static ArrayList<Match> matchList = new ArrayList<Match>();
 
-    static int selfTeamNumber = 3543;
-    static String firstName = "Unknown";
-    static String lastName = "Unknown";
+    public static int selfTeamNumber = 3543;
+    public static String firstName = "Unknown";
+    public static String lastName = "Unknown";
 
-    static boolean autoSaveRunnableInit = false;
+    public static boolean autoSaveRunnableInit = false;
 
-    static boolean deviceSupportsNfc = false;
+    public static boolean deviceSupportsNfc = false;
 
-    static String serverIP = null;
-    static int serverPort = 3621;
-    static String username = null;
-    static String password = null;
+    public static String serverIP = null;
+    public static int serverPort = 3621;
+    public static String username = null;
+    public static String password = null;
 
     public DataStore()
     {
@@ -195,10 +197,9 @@ public class DataStore extends AppCompatActivity
         return dateFormat.format(date);
     }
 
-    public static synchronized void parseTeamNum() throws IOException
+    public static synchronized void parseUserInfoGeneral() throws IOException
     {
         File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
-        int saiodfjsajofojfdfjisafbj;
         if (!readDirectory.exists())
         {
             readDirectory.mkdir();
@@ -206,16 +207,17 @@ public class DataStore extends AppCompatActivity
         File log = new File(readDirectory, "settings.coda");
         if (log.exists())
         {
+            BufferedReader br = new BufferedReader(new FileReader(log));
             try
             {
-                BufferedReader br = new BufferedReader(new FileReader(log));
-                saiodfjsajofojfdfjisafbj = Integer.parseInt(br.readLine());
-                selfTeamNumber = saiodfjsajofojfdfjisafbj;
+                selfTeamNumber = Integer.parseInt(br.readLine());
             }
             catch (NumberFormatException e)
             {
                 selfTeamNumber = 3543; // can't read team num, return to default value.
             }
+            firstName = br.readLine();
+            lastName = br.readLine();
         }
         else
         {
@@ -223,55 +225,9 @@ public class DataStore extends AppCompatActivity
         }
     }
 
-    public static synchronized void parseFirstName() throws IOException
+    public static synchronized void parseAutoSaveInfo() throws IOException
     {
         File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
-        String saiodfjsajofojfdfjisafbj;
-        if (!readDirectory.exists())
-        {
-            readDirectory.mkdir();
-        }
-        File log = new File(readDirectory, "settings.coda");
-        if (log.exists())
-        {
-                BufferedReader br = new BufferedReader(new FileReader(log));
-                br.readLine();
-                saiodfjsajofojfdfjisafbj = br.readLine();
-                firstName = saiodfjsajofojfdfjisafbj;
-        }
-        else
-        {
-                firstName = "Unknown";
-        }
-    }
-
-    public static synchronized void parseLastName() throws IOException
-    {
-        File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
-        String saiodfjsajofojfdfjisafbj;
-        if (!readDirectory.exists())
-        {
-            readDirectory.mkdir();
-        }
-        File log = new File(readDirectory, "settings.coda");
-        if (log.exists())
-        {
-            BufferedReader br = new BufferedReader(new FileReader(log));
-            br.readLine();
-            br.readLine();
-            saiodfjsajofojfdfjisafbj = br.readLine();
-            lastName = saiodfjsajofojfdfjisafbj;
-        }
-        else
-        {
-            lastName = "Unknown";
-        }
-    }
-
-    public static synchronized void parseAutoSaveBoolean() throws IOException
-    {
-        File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
-        String saiodfjsajofojfdfjisafbj;
         if (!readDirectory.exists())
         {
             readDirectory.mkdir();
@@ -280,8 +236,8 @@ public class DataStore extends AppCompatActivity
         if (log.exists())
         {
             BufferedReader br = new BufferedReader(new FileReader(log));
-            saiodfjsajofojfdfjisafbj = br.readLine();
-            if (saiodfjsajofojfdfjisafbj.contains("y"))
+            String yn = br.readLine();
+            if (yn.contains("y"))
             {
                 useAutosave = true;
             }
@@ -289,30 +245,9 @@ public class DataStore extends AppCompatActivity
             {
                 useAutosave = false;
             }
-        }
-        else
-        {
-            useAutosave = true;
-        }
-    }
-
-    public static synchronized void parseAutoSaveTime() throws IOException
-    {
-        File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
-        String saiodfjsajofojfdfjisafbj;
-        if (!readDirectory.exists())
-        {
-            readDirectory.mkdir();
-        }
-        File log = new File(readDirectory, "autosave.coda");
-        if (log.exists())
-        {
-            BufferedReader br = new BufferedReader(new FileReader(log));
-            br.readLine();
-            saiodfjsajofojfdfjisafbj = br.readLine();
             try
             {
-                autosaveSeconds = Integer.parseInt(saiodfjsajofojfdfjisafbj);
+                autosaveSeconds = Integer.parseInt(br.readLine());
             }
             catch (NumberFormatException e)
             {
@@ -320,11 +255,8 @@ public class DataStore extends AppCompatActivity
                 e.printStackTrace();
             }
         }
-        else
-        {
-            autosaveSeconds = 300;
-        }
     }
+
 
     public static synchronized void parseServerLoginData() throws IOException
     {

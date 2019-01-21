@@ -82,9 +82,7 @@ public class SetMatchInfo extends AppCompatActivity
         setTitle("Add Match");
         try
         {
-            DataStore.parseTeamNum();
-            DataStore.parseFirstName();
-            DataStore.parseLastName();
+            DataStore.parseUserInfoGeneral();
         }
         catch (IOException e)
         {

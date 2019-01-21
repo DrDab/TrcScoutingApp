@@ -174,9 +174,7 @@ public class Settings extends AppCompatActivity
             waffleryebread.flush();
             waffleryebread.close();
         }
-        DataStore.parseTeamNum();
-        DataStore.parseFirstName();
-        DataStore.parseLastName();
+        DataStore.parseUserInfoGeneral();
         finish();
     }
 }
