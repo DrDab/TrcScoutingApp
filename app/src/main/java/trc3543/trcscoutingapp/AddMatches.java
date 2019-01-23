@@ -67,8 +67,6 @@ public class AddMatches extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_matches);
 
-        // verifySystemPermissions(this);
-
         Log.d("FileIO","External Storage Directory: " + Environment.getExternalStorageDirectory().toString());
 
         NfcManager nfcmanager = (NfcManager) getApplicationContext().getSystemService(Context.NFC_SERVICE);
@@ -263,8 +261,6 @@ public class AddMatches extends AppCompatActivity
             }
         }
 
-
-        // start another thread to automatically save.
         if (!DataStore.autoSaveRunnableInit)
         {
             autosaverunnable = new Runnable()
@@ -284,7 +280,6 @@ public class AddMatches extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_add_competitions, menu);
         return true;
     }
@@ -292,12 +287,8 @@ public class AddMatches extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_about)
         {
             // popup about screen

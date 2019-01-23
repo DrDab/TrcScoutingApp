@@ -105,19 +105,19 @@ public class AutoSaveSettings extends AppCompatActivity
             {
                 log.createNewFile();
             }
-            PrintWriter waffleryebread = new PrintWriter(new FileWriter(log));
+            PrintWriter pw = new PrintWriter(new FileWriter(log));
             if (autoSave)
             {
-                waffleryebread.println("y");
+                pw.println("y");
             }
             else
             {
-                waffleryebread.println("n");
+                pw.println("n");
             }
-            waffleryebread.println(seconds);
-            waffleryebread.println("\n");
-            waffleryebread.flush();
-            waffleryebread.close();
+            pw.println(seconds);
+            pw.println("\n");
+            pw.flush();
+            pw.close();
         }
         DataStore.parseAutoSaveInfo();
     }

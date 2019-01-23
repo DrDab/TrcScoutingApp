@@ -44,13 +44,15 @@ import java.util.Locale;
 @SuppressWarnings("All")
 public class DataStore extends AppCompatActivity
 {
-    // Season-specific info.
+    // Begin season-specific info.
     public static final String DATA_FOLDER_NAME = "TrcScoutingApp";
     public static final String CSV_HEADER = "Contains Your Team, Date, Match #, Match Type, Team Number, Spectating Team, Starting Position, EG-Ending Location, Match Won, Autonomous Notes, TeleOp Notes";
     public static final String VERSION_NUMBER = "1.3.3-frc-INDEV";
-
     // End season-specific info.
 
+
+    // The following variables are not supposed to be changed.
+    // DO NOT CHANGE THESE VARIABLES.
     public static boolean useAutosave = true;
     public static int autosaveSeconds = 300;
 
@@ -87,7 +89,7 @@ public class DataStore extends AppCompatActivity
             cache = new File(writeDirectory, "cache.json");
             cache.createNewFile();
         }
-        PrintWriter madoka = new PrintWriter(new FileWriter(cache, true));
+        PrintWriter pw = new PrintWriter(new FileWriter(cache, true));
         JSONObject jsonObject = new JSONObject();
         JSONArray displayContestsArray = new JSONArray();
         JSONArray csvContestsArray = new JSONArray();
@@ -109,9 +111,9 @@ public class DataStore extends AppCompatActivity
             return false;
         }
 
-        madoka.println(jsonObject.toString());
-        madoka.flush();
-        madoka.close();
+        pw.println(jsonObject.toString());
+        pw.flush();
+        pw.close();
         return true;
     }
 
@@ -257,7 +259,6 @@ public class DataStore extends AppCompatActivity
     public static synchronized void parseServerLoginData() throws IOException
     {
         File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
-        String saiodfjsajofojfdfjisafbj;
         if (!readDirectory.exists())
         {
             readDirectory.mkdir();
@@ -292,13 +293,13 @@ public class DataStore extends AppCompatActivity
         {
             log.createNewFile();
         }
-        PrintWriter madoka = new PrintWriter(new FileWriter(log));
-        madoka.println(serverIP);
-        madoka.println(serverPort);
-        madoka.println(username);
-        madoka.println(password);
-        madoka.flush();
-        madoka.close();
+        PrintWriter pw = new PrintWriter(new FileWriter(log));
+        pw.println(serverIP);
+        pw.println(serverPort);
+        pw.println(username);
+        pw.println(password);
+        pw.flush();
+        pw.close();
     }
 
     public static synchronized boolean existsSave()
