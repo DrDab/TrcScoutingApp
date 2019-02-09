@@ -308,6 +308,16 @@ public class AddMatches extends AppCompatActivity
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
+            new AlertDialog.Builder(this)
+                    .setTitle("CSV Write Successful")
+                    .setMessage("Scouting data written to file \"" + filename + "\"")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener()
+                    {
+                        public void onClick(DialogInterface dialog, int whichButton)
+                        {
+                        }
+                    })
+                    .show();
         }
         else if (id == R.id.action_transmitresults)
         {
