@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import qrutils.QRCode;
 
 public class QrDataSender extends AppCompatActivity
@@ -15,7 +18,7 @@ public class QrDataSender extends AppCompatActivity
     // send the unique identifier of the phone, and then send the data, serialized in JSON format
     private ImageView qrDisplay;
     private TextView counter;
-    private int page = 0;
+    private static int page = 0;
 
     private static final int QR_VIEW_HEIGHT = 240;
     private static final int QR_VIEW_WIDTH = 240;
@@ -30,24 +33,83 @@ public class QrDataSender extends AppCompatActivity
         qrDisplay = (ImageView) findViewById(R.id.qrDisplayImageView);
         counter = (TextView) findViewById(R.id.qrPageCounter);
 
-        Bitmap bitmap = QRCode.encodeMessage("Hello world!", QR_VIEW_WIDTH, QR_VIEW_HEIGHT);
-        qrDisplay.setImageBitmap(bitmap);
+        Bitmap placeholder = QRCode.encodeMessage("Hello world!", QR_VIEW_WIDTH, QR_VIEW_HEIGHT);
+
+        updateCounter();
+
+        if (AddMatches.listEmpty())
+        {
+            qrDisplay.setImageResource(0);
+        }
+        else
+        {
+            qrDisplay.setImageBitmap(QRCode.encodeMessage(getJSONSerializedMessage(page), QR_VIEW_WIDTH, QR_VIEW_HEIGHT));
+        }
+    }
+
+    public void onPrevClicked(View vue)
+    {
+        if (page > 0)
+        {
+            page--;
+        }
+
+        if (AddMatches.listEmpty())
+        {
+            qrDisplay.setImageResource(0);
+        }
+        else
+        {
+            qrDisplay.setImageBitmap(QRCode.encodeMessage(getJSONSerializedMessage(page), QR_VIEW_WIDTH, QR_VIEW_HEIGHT));
+        }
+        updateCounter();
+    }
+
+    public void onNextClicked(View vue)
+    {
+        if (page < DataStore.matchList.size() - 1)
+        {
+            page++;
+        }
+
+        if (AddMatches.listEmpty())
+        {
+            qrDisplay.setImageResource(0);
+        }
+        else
+        {
+            qrDisplay.setImageBitmap(QRCode.encodeMessage(getJSONSerializedMessage(page), QR_VIEW_WIDTH, QR_VIEW_HEIGHT));
+        }
 
         updateCounter();
     }
 
-    private void onPrevClicked(View vue)
-    {
-
-    }
-
-    private void onNextClicked(View vue)
-    {
-
-    }
-
     private void updateCounter()
     {
-        counter.setText(String.format("%d of %d", page + 1, DataStore.matchList.size()));
+        if (AddMatches.listEmpty())
+        {
+            counter.setText("No data yet! ÒwÓ ");
+        }
+        else
+        {
+            counter.setText(String.format("%d of %d", page + 1, DataStore.matchList.size()));
+        }
+    }
+
+    private String getJSONSerializedMessage(int id)
+    {
+        Match match = DataStore.matchList.get(id);
+        try
+        {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("phoneId", 621621621);
+            jsonObject.put("csvline", match.getCsvString());
+            return jsonObject.toString();
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
