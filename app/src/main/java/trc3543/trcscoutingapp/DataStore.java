@@ -146,7 +146,7 @@ public class DataStore extends AppCompatActivity
                 JSONObject jsonObject = new JSONObject(jsonData);
                 JSONArray displayContestsArray = jsonObject.getJSONArray("disp");
                 JSONArray csvContestsArray = jsonObject.getJSONArray("csv");
-                JSONArray uuidArray = jsonObject.getJSONArray("json");
+                JSONArray uuidArray = jsonObject.getJSONArray("uuid");
 
                 for(int i = 0; i < csvContestsArray.length(); i++)
                 {
