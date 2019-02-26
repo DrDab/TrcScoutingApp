@@ -5,6 +5,11 @@
     <item
         android:id="@+id/action_makecsv"
         android:title="Export to CSV..." />
+
+    <item
+        android:id="@+id/action_qrsend"
+        android:title="QR Sender" />
+
     <item
         android:id="@+id/action_transmitresults"
         android:title="Send to server..." />

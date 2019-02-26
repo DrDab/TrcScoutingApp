@@ -372,6 +372,12 @@ public class AddMatches extends AppCompatActivity
             startActivity(intent);
             return true;
         }
+        else if (id == R.id.action_qrsend)
+        {
+            Intent intent = new Intent(this, QrDataSender.class);
+            startActivity(intent);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
