@@ -22,15 +22,19 @@
 
 package trc3543.trcscoutingapp;
 
+import java.util.UUID;
+
 public class Match
 {
     private String dispString;
     private String csvString;
+    private String uuid;
 
-    public Match(String dispString, String csvString)
+    public Match(String dispString, String csvString, String uuid)
     {
         this.dispString = dispString;
         this.csvString = csvString;
+        this.uuid = uuid;
     }
 
     public String getDispString()
@@ -41,6 +45,11 @@ public class Match
     public String getCsvString()
     {
         return csvString;
+    }
+
+    public String getUUID()
+    {
+        return uuid;
     }
 
     public void setDispString(String dispString)

@@ -102,8 +102,9 @@ public class QrDataSender extends AppCompatActivity
         try
         {
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("phoneId", 621621621);
+            jsonObject.put("phoneId", DataStore.firstName + "_" + DataStore.lastName + "_" + DataStore.selfTeamNumber);
             jsonObject.put("csvline", match.getCsvString());
+            jsonObject.put("uuid", match.getUUID());
             return jsonObject.toString();
         }
         catch (JSONException e)

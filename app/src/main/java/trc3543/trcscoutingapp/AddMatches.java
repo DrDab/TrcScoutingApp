@@ -50,6 +50,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.UUID;
 
 @SuppressWarnings("all")
 public class AddMatches extends AppCompatActivity
@@ -390,7 +391,7 @@ public class AddMatches extends AppCompatActivity
                 removeFromList("No Entries Yet", null);
             }
 
-            DataStore.matchList.add(new Match(dispString, csvString));
+            DataStore.matchList.add(new Match(dispString, csvString, UUID.randomUUID().toString()));
             adapter.notifyDataSetChanged();
         }
     }

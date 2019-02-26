@@ -93,17 +93,20 @@ public class DataStore extends AppCompatActivity
         JSONObject jsonObject = new JSONObject();
         JSONArray displayContestsArray = new JSONArray();
         JSONArray csvContestsArray = new JSONArray();
+        JSONArray uuidArray = new JSONArray();
 
         for(int i = 0; i < matchList.size(); i++)
         {
             displayContestsArray.put(matchList.get(i).getDispString());
             csvContestsArray.put(matchList.get(i).getCsvString());
+            uuidArray.put(matchList.get(i).getUUID());
         }
 
         try
         {
             jsonObject.put("disp", (Object)displayContestsArray);
             jsonObject.put("csv", (Object)csvContestsArray);
+            jsonObject.put("uuid", (Object)uuidArray);
         }
         catch (JSONException e)
         {
@@ -143,10 +146,11 @@ public class DataStore extends AppCompatActivity
                 JSONObject jsonObject = new JSONObject(jsonData);
                 JSONArray displayContestsArray = jsonObject.getJSONArray("disp");
                 JSONArray csvContestsArray = jsonObject.getJSONArray("csv");
+                JSONArray uuidArray = jsonObject.getJSONArray("json");
 
                 for(int i = 0; i < csvContestsArray.length(); i++)
                 {
-                    matchList.add(new Match(displayContestsArray.getString(i), csvContestsArray.getString(i)));
+                    matchList.add(new Match(displayContestsArray.getString(i), csvContestsArray.getString(i), uuidArray.getString(i)));
                 }
             }
             catch (JSONException e)
