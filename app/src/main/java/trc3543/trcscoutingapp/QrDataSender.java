@@ -35,9 +35,6 @@ public class QrDataSender extends AppCompatActivity
 
         Bitmap placeholder = QRCode.encodeMessage("Hello world!", QR_VIEW_WIDTH, QR_VIEW_HEIGHT);
 
-        updateCounter();
-
-
         if (page >= DataStore.matchList.size())
         {
             page = DataStore.matchList.size() - 1;
@@ -51,6 +48,8 @@ public class QrDataSender extends AppCompatActivity
         {
             qrDisplay.setImageBitmap(QRCode.encodeMessage(getJSONSerializedMessage(page), QR_VIEW_WIDTH, QR_VIEW_HEIGHT));
         }
+
+        updateCounter();
     }
 
     public void onPrevClicked(View vue)
