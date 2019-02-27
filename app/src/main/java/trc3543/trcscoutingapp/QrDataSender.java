@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +19,9 @@ public class QrDataSender extends AppCompatActivity
     // send the unique identifier of the phone, and then send the data, serialized in JSON format
     private ImageView qrDisplay;
     private TextView counter;
+    private Button prevButton;
+    private Button nextButton;
+
     private static int page = 0;
 
     private static final int QR_VIEW_HEIGHT = 240;
@@ -32,6 +36,8 @@ public class QrDataSender extends AppCompatActivity
 
         qrDisplay = (ImageView) findViewById(R.id.qrDisplayImageView);
         counter = (TextView) findViewById(R.id.qrPageCounter);
+        prevButton = (Button) findViewById(R.id.qrPrevButton);
+        nextButton = (Button) findViewById(R.id.qrNextButton);
 
         Bitmap placeholder = QRCode.encodeMessage("Hello world!", QR_VIEW_WIDTH, QR_VIEW_HEIGHT);
 
@@ -91,6 +97,24 @@ public class QrDataSender extends AppCompatActivity
 
     private void updateCounter()
     {
+        if (page >= DataStore.matchList.size() - 1)
+        {
+            nextButton.setEnabled(false);
+        }
+        else
+        {
+            nextButton.setEnabled(true);
+        }
+
+        if (page <= 0)
+        {
+            prevButton.setEnabled(false);
+        }
+        else
+        {
+            prevButton.setEnabled(true);
+        }
+
         if (AddMatches.listEmpty())
         {
             counter.setText("No data yet! ÒwÓ ");
