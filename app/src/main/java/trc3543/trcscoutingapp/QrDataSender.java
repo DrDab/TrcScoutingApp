@@ -37,6 +37,12 @@ public class QrDataSender extends AppCompatActivity
 
         updateCounter();
 
+
+        if (page >= DataStore.matchList.size())
+        {
+            page = DataStore.matchList.size() - 1;
+        }
+
         if (AddMatches.listEmpty())
         {
             qrDisplay.setImageResource(0);
