@@ -2,16 +2,18 @@
     <!-- BEGIN GAME SPECIFIC STUFF -->
 
     <string-array name="starting_positions">
-        <item>Other</item>
-        <item>Sample Starting Position</item>
+        <item>High</item>
+        <item>Middle</item>
+        <item>Low</item>
     </string-array>
 
     <!-- Parked, not parked for autonomous ending -->
 
     <string-array name="ending_positions">
-        <item>Other</item>
-        <item>End Position 1</item>
-        <item>End Position 2</item>
+        <item>No Climb</item>
+        <item>High</item>
+        <item>Middle</item>
+        <item>Low</item>
     </string-array>
 
     <!--
@@ -50,12 +52,8 @@
     </string-array>
 
     <string-array name="spectating_types">
-        <item>Red Far</item>
-        <item>Red Middle</item>
-        <item>Red Near</item>
-        <item>Blue Far</item>
-        <item>Blue Middle</item>
-        <item>Blue Near</item>
+        <item>Red</item>
+        <item>Blue</item>
     </string-array>
 
 

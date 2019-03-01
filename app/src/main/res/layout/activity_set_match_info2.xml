@@ -35,6 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:text="Match Type"
+            android:textSize="16sp"
             android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/CompType"
             app:layout_constraintStart_toStartOf="@+id/CompType" />
@@ -84,6 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:text="Spectating Team"
+            android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/SpectatingSpinner"
             app:layout_constraintStart_toStartOf="@+id/SpectatingSpinner" />
 
@@ -100,13 +102,14 @@
             app:layout_constraintTop_toBottomOf="@+id/CompType" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/sandstorm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="20dp"
-            android:text="Autonomous Phase"
+            android:text="Sandstorm Phase"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.109"
             app:layout_constraintStart_toStartOf="parent"
@@ -118,7 +121,7 @@
             android:layout_height="0dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="36dp"
-            android:text="Teleoperated Phase"
+            android:text="Clear Skies Phase"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/autoNotes" />
 
@@ -143,6 +146,7 @@
             android:layout_height="21dp"
             android:layout_marginBottom="8dp"
             android:text="Starting Position"
+            android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/startingPositionForm "
             app:layout_constraintStart_toStartOf="@+id/startingPositionForm " />
 
@@ -152,11 +156,12 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="612dp"
-            android:text="Autonomous Notes"
+            android:layout_marginTop="964dp"
+            android:text="Sandstorm Notes"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -222,7 +227,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="TeleOp Notes"
+            android:text="Clear Skies Notes"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -251,6 +256,146 @@
             app:layout_constraintHorizontal_bias="0.509"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/autoNotes" />
+
+        <CheckBox
+            android:id="@+id/autonomousCB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="60dp"
+            android:text="Autonomous?"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/startingPositionForm " />
+
+        <CheckBox
+            android:id="@+id/getOffPlatformCheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Off Platform?"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/autonomousCB" />
+
+        <CheckBox
+            android:id="@+id/crossLineCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Cross Line?"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/getOffPlatformCheckbox" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:text="Hatch [LO/MID/HI]"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/crossLineCheckBox" />
+
+        <Spinner
+            android:id="@+id/sandstormHatchLow"
+            android:layout_width="85dp"
+            android:layout_height="67dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="8dp"
+            android:entries="@array/general_count"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <Spinner
+            android:id="@+id/sandstormHatchHigh"
+            android:layout_width="85dp"
+            android:layout_height="67dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:entries="@array/general_count"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.28"
+            app:layout_constraintStart_toEndOf="@+id/sandstormHatchMid2"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <Spinner
+            android:id="@+id/sandstormHatchMid2"
+            android:layout_width="85dp"
+            android:layout_height="67dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="8dp"
+            android:entries="@array/general_count"
+            app:layout_constraintStart_toEndOf="@+id/sandstormHatchLow"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="276dp"
+            android:text="Cargo [LO/MID/HI]"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <!---->
+
+        <Spinner
+            android:id="@+id/sandstormCargoLow"
+            android:layout_width="85dp"
+            android:layout_height="67dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="8dp"
+            android:entries="@array/general_count"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <Spinner
+            android:id="@+id/sandstormCargoHigh"
+            android:layout_width="85dp"
+            android:layout_height="67dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:entries="@array/general_count"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.28"
+            app:layout_constraintStart_toEndOf="@+id/sandstormCargoMid2"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <Spinner
+            android:id="@+id/sandstormCargoMid2"
+            android:layout_width="85dp"
+            android:layout_height="67dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="8dp"
+            android:entries="@array/general_count"
+            app:layout_constraintStart_toEndOf="@+id/sandstormCargoLow"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 
     </android.support.constraint.ConstraintLayout>
