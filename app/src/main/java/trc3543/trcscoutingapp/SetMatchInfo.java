@@ -255,6 +255,18 @@ public class SetMatchInfo extends AppCompatActivity
             endingLocation.setSelection(((ArrayAdapter)endingLocation.getAdapter()).getPosition(OwOWhatsThis[27]));
 
             Spinner helpedRobotSpinner = (Spinner) findViewById(R.id.climbHelpSpinner);
+            if (OwOWhatsThis[28].equals("None"))
+            {
+                helpedRobotSpinner.setSelection(0);
+            }
+            else if (OwOWhatsThis[28].contains("1"))
+            {
+                helpedRobotSpinner.setSelection(1);
+            }
+            else
+            {
+                helpedRobotSpinner.setSelection(2);
+            }
             helpedRobotSpinner.setSelection(Integer.parseInt(OwOWhatsThis[28]));
 
             // populate if match was won.
