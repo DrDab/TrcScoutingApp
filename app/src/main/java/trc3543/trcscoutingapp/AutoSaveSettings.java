@@ -56,7 +56,15 @@ public class AutoSaveSettings extends AppCompatActivity
         CheckBox cb1 = (CheckBox) findViewById(R.id.toggle_autosave);
         Spinner mySpinner = (Spinner) findViewById(R.id.timerchoice);
         cb1.setChecked(DataStore.useAutosave);
-        mySpinner.setSelection(((ArrayAdapter)mySpinner.getAdapter()).getPosition(minutes + " minutes"));
+        if (minutes == 120)
+        {
+            mySpinner.setSelection(((ArrayAdapter)mySpinner.getAdapter()).getPosition("2 hours"));
+        }
+        else
+        {
+            mySpinner.setSelection(((ArrayAdapter)mySpinner.getAdapter()).getPosition(minutes + " minutes"));
+        }
+
     }
 
     public void parseSettings(View view)
@@ -82,6 +90,10 @@ public class AutoSaveSettings extends AppCompatActivity
         else if (timerChoiceRawText.matches("20 minutes"))
         {
             seconds = 1200;
+        }
+        else if (timerChoiceRawText.matches("2 hours"))
+        {
+            seconds = 7200;
         }
         try {
             writeSettingsToFile(autoSave, seconds);
