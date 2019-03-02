@@ -60,14 +60,14 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="48dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="48dp"
             android:contentDescription="Confirm Selection."
             android:onClick="confirmTypes"
             android:text="Confirm"
             android:textStyle="bold"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.37"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/matchWon" />
 
@@ -113,7 +113,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.109"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/startingPositionForm " />
+            app:layout_constraintTop_toBottomOf="@+id/startingPositionForm" />
 
         <TextView
             android:id="@+id/textView6"
@@ -147,8 +147,8 @@
             android:layout_marginBottom="8dp"
             android:text="Starting Position"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/startingPositionForm "
-            app:layout_constraintStart_toStartOf="@+id/startingPositionForm " />
+            app:layout_constraintBottom_toTopOf="@+id/startingPositionForm"
+            app:layout_constraintStart_toStartOf="@+id/startingPositionForm" />
 
         <TextView
             android:id="@+id/textView15"
@@ -156,7 +156,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="964dp"
+            android:layout_marginTop="1044dp"
             android:text="Sandstorm Notes"
             android:textColor="@android:color/black"
             android:textSize="18sp"
@@ -166,7 +166,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Spinner
-            android:id="@+id/startingPositionForm "
+            android:id="@+id/startingPositionForm"
             android:layout_width="315dp"
             android:layout_height="28dp"
             android:layout_marginEnd="8dp"
@@ -249,11 +249,10 @@
             android:layout_height="28dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="480dp"
+            android:layout_marginTop="672dp"
             android:entries="@array/ending_positions"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.509"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/autoNotes" />
 
@@ -268,7 +267,7 @@
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/startingPositionForm " />
+            app:layout_constraintTop_toBottomOf="@+id/startingPositionForm" />
 
         <CheckBox
             android:id="@+id/getOffPlatformCheckbox"
@@ -353,14 +352,14 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="276dp"
+            android:layout_marginTop="16dp"
             android:text="Cargo [LO/MID/HI]"
             android:textColor="@android:color/black"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/sandstormHatchesDropped" />
 
         <!---->
 
@@ -396,6 +395,218 @@
             android:entries="@array/general_count"
             app:layout_constraintStart_toEndOf="@+id/sandstormCargoLow"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="96dp"
+            android:text="Hatches Dropped"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <Spinner
+            android:id="@+id/sandstormHatchesDropped"
+            android:layout_width="85dp"
+            android:layout_height="67dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:entries="@array/general_count"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="96dp"
+            android:text="Cargo Dropped"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <Spinner
+            android:id="@+id/sandstormCargoDropped2"
+            android:layout_width="85dp"
+            android:layout_height="67dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:entries="@array/general_count"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+        <CheckBox
+            android:id="@+id/defenseRobot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:text="Defense Robot?"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:text="Hatch [LO/MID/HI]"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/defenseRobot" />
+
+
+        <!-- oashoisajfoisajoihbjsoaidjfoisagjoi -->
+
+        <Spinner
+            android:id="@+id/clearHatchLow"
+            android:layout_width="85dp"
+            android:layout_height="67dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="8dp"
+            android:entries="@array/general_count"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+        <Spinner
+            android:id="@+id/clearHatchHigh"
+            android:layout_width="85dp"
+            android:layout_height="67dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:entries="@array/general_count"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.28"
+            app:layout_constraintStart_toEndOf="@+id/clearHatchMid2"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+        <Spinner
+            android:id="@+id/clearHatchMid2"
+            android:layout_width="85dp"
+            android:layout_height="67dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="8dp"
+            android:entries="@array/general_count"
+            app:layout_constraintStart_toEndOf="@+id/clearHatchLow"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+        <TextView
+            android:id="@+id/textView55"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="96dp"
+            android:text="Hatches Dropped"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+        <Spinner
+            android:id="@+id/clearHatchesDropped"
+            android:layout_width="85dp"
+            android:layout_height="67dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:entries="@array/general_count"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView55" />
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Cargo [LO/MID/HI]"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clearHatchesDropped" />
+
+
+        <!--  ffffffffffff !-->
+        <Spinner
+            android:id="@+id/clearCargoLow"
+            android:layout_width="85dp"
+            android:layout_height="67dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="8dp"
+            android:entries="@array/general_count"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+        <Spinner
+            android:id="@+id/clearCargoHigh"
+            android:layout_width="85dp"
+            android:layout_height="67dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:entries="@array/general_count"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.28"
+            app:layout_constraintStart_toEndOf="@+id/clearCargoMid2"
+            app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+        <Spinner
+            android:id="@+id/clearCargoMid2"
+            android:layout_width="85dp"
+            android:layout_height="67dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="8dp"
+            android:entries="@array/general_count"
+            app:layout_constraintStart_toEndOf="@+id/clearCargoLow"
+            app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+        <TextView
+            android:id="@+id/textView56"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="96dp"
+            android:text="Cargo Dropped"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+        <Spinner
+            android:id="@+id/clearCargoDropped"
+            android:layout_width="85dp"
+            android:layout_height="67dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:entries="@array/general_count"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView56" />
 
 
     </android.support.constraint.ConstraintLayout>
