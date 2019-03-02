@@ -44,35 +44,52 @@ public class SetMatchInfo extends AppCompatActivity
 {
     public static final boolean USE_DEBUG = false;
 
-    static int editingoption = -1;
+    private int editingoption = -1;
 
-    static int matchNumber;
-    static String competitionName;
+    private int matchNumber;
 
-    static String matchType;
+    private String matchType;
+    private String spectatingTeamFieldPosition;
 
-    static String spectatingTeamFieldPosition;
-
-    static int spectatingTeamNumber;
+    private int spectatingTeamNumber;
 
     // Driver's PoV.
-    static String startingPosition;
+    private String startingPosition;
 
-    // Autonomous Phase.
+    // Sandstorm Phase
+    private boolean hasAutonomous;
+    private boolean offPlatform;
+    private boolean crossLine;
+    private int sHatchLow;
+    private int sHatchMid;
+    private int sHatchHigh;
+    private int sHatchDropped;
+    private int sCargoLow;
+    private int sCargoMid;
+    private int sCargoHigh;
+    private int sCargoDropped;
 
-
-    // Teleoperated Phase.
-
+    // Clear Skies Phase
+    private boolean isDefenseRobot;
+    private int cHatchLow;
+    private int cHatchMid;
+    private int cHatchHigh;
+    private int cHatchDropped;
+    private int cCargoLow;
+    private int cCargoMid;
+    private int cCargoHigh;
+    private int cCargoDropped;
 
     // Endgame
-    static String endingLocation = "";
+    private int robotsHelped;
+    private String endingLocation = "";
 
     // Was the match won?
-    static boolean matchWon = false;
+    private boolean matchWon = false;
 
     // Auxiliary Notes.
-    static String autonotes;
-    static String telenotes;
+    private String autonotes;
+    private String telenotes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -110,6 +127,11 @@ public class SetMatchInfo extends AppCompatActivity
             Log.d("SetMatchInfo", editingoption + " " + read);
             String[] OwOWhatsThis = read.split(",");
 
+            for (int i = 0; i < OwOWhatsThis.length; i++)
+            {
+                Log.d("SetMatchInfo", i + ")" + OwOWhatsThis[i]);
+            }
+
             // populate the match number.
             EditText mnum = (EditText) findViewById(R.id.matchNum);
             mnum.setText(OwOWhatsThis[2]);
@@ -139,27 +161,109 @@ public class SetMatchInfo extends AppCompatActivity
 
             // populate autonomous notes.
             EditText aunotes = (EditText) findViewById(R.id.autoNotes);
-            String rawautonotes = OwOWhatsThis[9];
+            String rawautonotes = OwOWhatsThis[30];
             rawautonotes = rawautonotes.replaceAll("^\"|\"$", ""); // remove quotation marks
             aunotes.setText(rawautonotes);
             Log.d("SetMatchInfo", "Autonomous Notes Set: \"" + rawautonotes + "\"");
 
+            // sjaoifoisajfioasofjiowsa
+            CheckBox haveAutonomousCB = (CheckBox) findViewById(R.id.autonomousCB);
+            haveAutonomousCB.setChecked(OwOWhatsThis[7].equals("true"));
+
+            CheckBox offPlatformCB = (CheckBox) findViewById(R.id.getOffPlatformCheckbox);
+            offPlatformCB.setChecked(OwOWhatsThis[8].equals("true"));
+
+            CheckBox crosslineCB = (CheckBox) findViewById(R.id.crossLineCheckBox);
+            crosslineCB.setChecked(OwOWhatsThis[9].equals("true"));
+
+            int sandstormHatchLow = Integer.parseInt(OwOWhatsThis[10]);
+            int sandstormHatchMid = Integer.parseInt(OwOWhatsThis[11]);
+            int sandstormHatchHigh = Integer.parseInt(OwOWhatsThis[12]);
+            int sandstormHatchDrop = Integer.parseInt(OwOWhatsThis[13]);
+
+            int sandstormCargoLow = Integer.parseInt(OwOWhatsThis[14]);
+            int sandstormCargoMid = Integer.parseInt(OwOWhatsThis[15]);
+            int sandstormCargoHigh = Integer.parseInt(OwOWhatsThis[16]);
+            int sandstormCargoDrop = Integer.parseInt(OwOWhatsThis[17]);
+
+            Spinner shl = (Spinner) findViewById(R.id.sandstormHatchLow);
+            shl.setSelection(sandstormHatchLow);
+
+            Spinner shm = (Spinner) findViewById(R.id.sandstormHatchMid2);
+            shm.setSelection(sandstormHatchMid);
+
+            Spinner shh = (Spinner) findViewById(R.id.sandstormHatchHigh);
+            shh.setSelection(sandstormHatchHigh);
+
+            Spinner shd = (Spinner) findViewById(R.id.sandstormHatchesDropped);
+            shd.setSelection(sandstormHatchDrop);
+
+            Spinner scl = (Spinner) findViewById(R.id.sandstormCargoLow);
+            scl.setSelection(sandstormCargoLow);
+
+            Spinner scm = (Spinner) findViewById(R.id.sandstormCargoMid2);
+            scm.setSelection(sandstormCargoMid);
+
+            Spinner sch = (Spinner) findViewById(R.id.sandstormCargoHigh);
+            sch.setSelection(sandstormCargoHigh);
+
+            Spinner scd = (Spinner) findViewById(R.id.sandstormCargoDropped2);
+            scd.setSelection(sandstormCargoDrop);
+
             // =====================[ BEGIN TELEOPERATED PHASE ]===================== //
 
+            CheckBox defenseCB = (CheckBox) findViewById(R.id.defenseRobot);
+            defenseCB.setChecked(OwOWhatsThis[18].equals("true"));
 
+            int clearHatchLow = Integer.parseInt(OwOWhatsThis[19]);
+            int clearHatchMid = Integer.parseInt(OwOWhatsThis[20]);
+            int clearHatchHigh = Integer.parseInt(OwOWhatsThis[21]);
+            int clearHatchDrop = Integer.parseInt(OwOWhatsThis[22]);
+
+            int clearCargoLow = Integer.parseInt(OwOWhatsThis[23]);
+            int clearCargoMid = Integer.parseInt(OwOWhatsThis[24]);
+            int clearCargoHigh = Integer.parseInt(OwOWhatsThis[25]);
+            int clearCargoDrop = Integer.parseInt(OwOWhatsThis[26]);
+
+            Spinner chl = (Spinner) findViewById(R.id.clearHatchLow);
+            chl.setSelection(clearHatchLow);
+
+            Spinner chm = (Spinner) findViewById(R.id.clearHatchMid2);
+            chm.setSelection(clearHatchMid);
+
+            Spinner chh = (Spinner) findViewById(R.id.clearHatchHigh);
+            chh.setSelection(clearHatchHigh);
+
+            Spinner chd = (Spinner) findViewById(R.id.clearHatchesDropped);
+            chd.setSelection(clearHatchDrop);
+
+            Spinner ccl = (Spinner) findViewById(R.id.clearCargoLow);
+            ccl.setSelection(clearCargoLow);
+
+            Spinner ccm = (Spinner) findViewById(R.id.clearCargoMid2);
+            ccm.setSelection(clearCargoMid);
+
+            Spinner cch = (Spinner) findViewById(R.id.clearCargoHigh);
+            cch.setSelection(clearCargoHigh);
+
+            Spinner ccd = (Spinner) findViewById(R.id.clearCargoDropped);
+            ccd.setSelection(clearCargoDrop);
 
             // =====================[ BEGIN ENDGAME ]===================== //
 
             Spinner endingLocation =(Spinner) findViewById(R.id.endingLocation);
-            endingLocation.setSelection(((ArrayAdapter)endingLocation.getAdapter()).getPosition(OwOWhatsThis[7]));
+            endingLocation.setSelection(((ArrayAdapter)endingLocation.getAdapter()).getPosition(OwOWhatsThis[27]));
+
+            Spinner helpedRobotSpinner = (Spinner) findViewById(R.id.climbHelpSpinner);
+            helpedRobotSpinner.setSelection(Integer.parseInt(OwOWhatsThis[28]));
 
             // populate if match was won.
             CheckBox matchWon = (CheckBox) findViewById(R.id.matchWon);
-            matchWon.setChecked(OwOWhatsThis[8].contains("Yes"));
+            matchWon.setChecked(OwOWhatsThis[29].contains("true"));
 
             // populate teleop notes.
             EditText tonotes = (EditText) findViewById(R.id.teleopnotes);
-            String rawtonotes = OwOWhatsThis[10];
+            String rawtonotes = OwOWhatsThis[31];
             rawtonotes = rawtonotes.replaceAll("^\"|\"$", ""); // remove quotation marks
             tonotes.setText(rawtonotes);
 
@@ -267,14 +371,87 @@ public class SetMatchInfo extends AppCompatActivity
         if (!breakCond)
         {
             // read autonomous stuff.
+            CheckBox haveAutonomousCB = (CheckBox) findViewById(R.id.autonomousCB);
+            hasAutonomous = haveAutonomousCB.isChecked();
 
+            CheckBox offPlatformCB = (CheckBox) findViewById(R.id.getOffPlatformCheckbox);
+            offPlatform = offPlatformCB.isChecked();
+
+            CheckBox crossLineCB = (CheckBox) findViewById(R.id.crossLineCheckBox);
+            crossLine = crossLineCB.isChecked();
+
+            Spinner shl = (Spinner) findViewById(R.id.sandstormHatchLow);
+            sHatchLow = Integer.parseInt(shl.getSelectedItem().toString());
+
+            Spinner shm = (Spinner) findViewById(R.id.sandstormHatchMid2);
+            sHatchMid = Integer.parseInt(shm.getSelectedItem().toString());
+
+            Spinner shh = (Spinner) findViewById(R.id.sandstormHatchHigh);
+            sHatchHigh = Integer.parseInt(shh.getSelectedItem().toString());
+
+            Spinner shd = (Spinner) findViewById(R.id.sandstormHatchesDropped);
+            sHatchDropped = Integer.parseInt(shd.getSelectedItem().toString());
+
+            // lol
+
+            Spinner scl = (Spinner) findViewById(R.id.sandstormCargoLow);
+            sCargoLow = Integer.parseInt(scl.getSelectedItem().toString());
+
+            Spinner scm = (Spinner) findViewById(R.id.sandstormCargoMid2);
+            sCargoMid = Integer.parseInt(scm.getSelectedItem().toString());
+
+            Spinner sch = (Spinner) findViewById(R.id.sandstormCargoHigh);
+            sCargoHigh = Integer.parseInt(sch.getSelectedItem().toString());
+
+            Spinner scd = (Spinner) findViewById(R.id.sandstormCargoDropped2);
+            sCargoDropped = Integer.parseInt(scd.getSelectedItem().toString());
         }
         if (!breakCond)
         {
             // read teleop stuff.
+            CheckBox defenseCB = (CheckBox) findViewById(R.id.defenseRobot);
+            isDefenseRobot = defenseCB.isChecked();
 
+            Spinner chl = (Spinner) findViewById(R.id.clearHatchLow);
+            cHatchLow = Integer.parseInt(chl.getSelectedItem().toString());
+
+            Spinner chm = (Spinner) findViewById(R.id.clearHatchMid2);
+            cHatchMid = Integer.parseInt(chm.getSelectedItem().toString());
+
+            Spinner chh = (Spinner) findViewById(R.id.clearHatchHigh);
+            cHatchHigh = Integer.parseInt(chh.getSelectedItem().toString());
+
+            Spinner chd = (Spinner) findViewById(R.id.clearHatchesDropped);
+            cHatchDropped = Integer.parseInt(chd.getSelectedItem().toString());
+
+            Spinner ccl = (Spinner) findViewById(R.id.clearCargoLow);
+            cCargoLow = Integer.parseInt(ccl.getSelectedItem().toString());
+
+            Spinner ccm = (Spinner) findViewById(R.id.clearCargoMid2);
+            cCargoMid = Integer.parseInt(ccm.getSelectedItem().toString());
+
+            Spinner cch = (Spinner) findViewById(R.id.clearCargoHigh);
+            cCargoHigh = Integer.parseInt(cch.getSelectedItem().toString());
+
+            Spinner ccd = (Spinner) findViewById(R.id.clearCargoDropped);
+            cCargoDropped = Integer.parseInt(ccd.getSelectedItem().toString());
 
             // read endgame stuff.
+            Spinner climbHelpSpinner = (Spinner) findViewById(R.id.climbHelpSpinner);
+            String chs = climbHelpSpinner.getSelectedItem().toString();
+            if (chs.equals("None"))
+            {
+                robotsHelped = 0;
+            }
+            else if (chs.contains("1"))
+            {
+                robotsHelped = 1;
+            }
+            else if (chs.contains("2"))
+            {
+                robotsHelped = 2;
+            }
+
             Spinner endLocationSpinner = (Spinner) findViewById(R.id.endingLocation);
             endingLocation = endLocationSpinner.getSelectedItem().toString();
         }
@@ -294,18 +471,9 @@ public class SetMatchInfo extends AppCompatActivity
             containsOwnTeam = "*";
         }
 
-        String match_won_yes_or_no = "";
-        if (matchWon)
-        {
-            match_won_yes_or_no = "Yes";
-        }
-        else
-        {
-            match_won_yes_or_no = "No";
-        }
-
         String listMsg = String.format("Match # %d (%s) Team: %d", matchNumber, matchType, spectatingTeamNumber);
-        String CSVFormat = containsOwnTeam + "," + DataStore.getDateAsString() + "," + matchNumber + "," + matchType + "," + spectatingTeamNumber + "," + spectatingTeamFieldPosition + "," + startingPosition+","+endingLocation+","+match_won_yes_or_no+",\""+autonotes+"\",\""+telenotes+"\"";
+        String CSVFormat = containsOwnTeam + "," + DataStore.getDateAsString() + "," + matchNumber + "," + matchType + "," + spectatingTeamNumber + "," + spectatingTeamFieldPosition + "," + startingPosition+","+ hasAutonomous +"," + offPlatform + ","+ crossLine + ","+ sHatchLow + "," + sHatchMid + "," + sHatchHigh + "," + sHatchDropped + "," + sCargoLow + "," + sCargoMid + "," + sCargoHigh + "," + sCargoDropped +"," + isDefenseRobot + "," + cHatchLow + "," + cHatchMid + "," + cHatchHigh + "," + cHatchDropped + "," + cCargoLow + "," + cCargoMid + "," + cCargoHigh + "," + cCargoDropped + "," + endingLocation+","+ robotsHelped + "," + matchWon+",\""+autonotes+"\",\""+telenotes+"\"";
+        Log.d("SetMatchInfo", CSVFormat);
 
         if (USE_DEBUG)
         {

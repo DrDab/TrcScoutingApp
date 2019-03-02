@@ -60,14 +60,14 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="48dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="92dp"
             android:contentDescription="Confirm Selection."
             android:onClick="confirmTypes"
             android:text="Confirm"
             android:textStyle="bold"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintHorizontal_bias="0.523"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/matchWon" />
 
@@ -226,13 +226,13 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="56dp"
             android:text="Clear Skies Notes"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/endingLocation" />
+            app:layout_constraintTop_toBottomOf="@+id/climbHelpSpinner" />
 
         <TextView
             android:id="@+id/textView10"
@@ -249,10 +249,11 @@
             android:layout_height="28dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="672dp"
+            android:layout_marginTop="684dp"
             android:entries="@array/ending_positions"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.509"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/autoNotes" />
 
@@ -607,6 +608,28 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView56" />
+
+        <Spinner
+            android:id="@+id/climbHelpSpinner"
+            android:layout_width="315dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="48dp"
+            android:entries="@array/robots_helped_climb"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.509"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/endingLocation" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Climbing Help"
+            app:layout_constraintBottom_toTopOf="@+id/climbHelpSpinner"
+            app:layout_constraintStart_toStartOf="@+id/climbHelpSpinner" />
 
 
     </android.support.constraint.ConstraintLayout>

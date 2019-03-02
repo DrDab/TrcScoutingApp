@@ -128,6 +128,12 @@
         <item>25</item>
     </string-array>
 
+    <string-array name="robots_helped_climb">
+        <item>None</item>
+        <item>1 robot</item>
+        <item>2 robots</item>
+    </string-array>
+
     <string name="title_activity_settings">Settings</string>
 
     <!-- Strings related to Settings -->
