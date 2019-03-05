@@ -27,7 +27,7 @@ import javax.swing.ScrollPaneConstants;
 
 public class MainRunner 
 {
-	public static final String VERSION_ID = "0.2a_anth_con";
+	public static final String VERSION_ID = "0.3a";
 	
 	public static final int EditText = 1;
 	public static final int Spinner = 2;
