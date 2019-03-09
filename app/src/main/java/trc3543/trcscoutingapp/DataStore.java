@@ -46,7 +46,7 @@ public class DataStore extends AppCompatActivity
 {
     // Begin season-specific info.
     public static final String DATA_FOLDER_NAME = "TrcScoutingApp";
-    public static final String CSV_HEADER = "Contains Your Team, Date, Match #, Match Type, Team Number, Spectating Team, Starting Position, SP-Autonomous, SP-Off Platform, SP-Cross Line, SP-HatchLow, SP-HatchMid, SP-HatchHigh, SP-HatchDropped, SP-CargoLow, SP-CargoMid, SP-CargoHigh, SP-CargoDropped, CP-Defense, CP-HatchLow, CP-HatchMid, CP-HatchHigh, CP-HatchDropped, CP-CargoLow, CP-CargoMid, CP-CargoHigh, CP-CargoDropped, EG-Ending Location, EG-Climbing Help, Match Won, Sandstorm Notes, Clear Skies Notes";
+    public static final String CSV_HEADER = "Contains Your Team, Date, Match #, Match Type, Team Number, Spectating Team, Starting Position, SP-Autonomous, SP-Off Platform, SP-Cross Line, SP-HatchLow, SP-HatchMid, SP-HatchHigh, SP-HatchDropped, SP-CargoLow, SP-CargoMid, SP-CargoHigh, SP-CargoDropped, CP-Defense, CP-HatchLow, CP-HatchMid, CP-HatchHigh, CP-HatchDropped, CP-HatchFromLoadingZone, CP-CargoLow, CP-CargoMid, CP-CargoHigh, CP-CargoDropped, CP-CargoFromLoadingZone, EG-Ending Location, EG-Climbing Help, Penalties, Yellow Card, Red Card, Red Score, Blue Score, Robot Dead Time, Sandstorm Notes, Clear Skies Notes";
     public static final String VERSION_NUMBER = "1.3.3-frc-INDEV";
     // End season-specific info.
 

@@ -25,6 +25,8 @@ package trc3543.trcscoutingapp;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,6 +35,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -75,21 +78,53 @@ public class SetMatchInfo extends AppCompatActivity
     private int cHatchMid;
     private int cHatchHigh;
     private int cHatchDropped;
+    private boolean cHatchesFromLoadingZone;
     private int cCargoLow;
     private int cCargoMid;
     private int cCargoHigh;
     private int cCargoDropped;
+    private boolean cCargoFromLoadingZone;
 
     // Endgame
     private int robotsHelped;
     private String endingLocation = "";
 
-    // Was the match won?
-    private boolean matchWon = false;
+    // scores at the end?
+    private boolean hasPenalty;
+    private boolean yellowCard;
+    private boolean redCard;
+    private int redScore;
+    private int blueScore;
+    private double robotDeadTime;
 
     // Auxiliary Notes.
     private String autonotes;
     private String telenotes;
+
+
+    //
+    // STOPWATCH CONSTANTS AND VARIABLES - DO NOT TOUCH! (please)
+    //
+
+    final int MSG_START_TIMER = 0;
+    final int MSG_STOP_TIMER = 1;
+    final int MSG_UPDATE_TIMER = 2;
+    final int REFRESH_RATE = 100;
+
+    private Stopwatch timer = null;
+    private Handler stopwatchHandler = null;
+
+    private Button startClock = null;
+    private Button resetClock = null;
+
+    private EditText clockDisplay = null;
+    private boolean clockState = false; // false = stopped, true = started.
+    private boolean clockFirstStart = false;
+    private double timeAccumulated = 0.0;
+
+    //
+    // END STOPWATCH CONSTANTS
+    //
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -105,6 +140,50 @@ public class SetMatchInfo extends AppCompatActivity
         {
             // TODO Auto-generated catch block
         }
+
+        // stopwatch handler code.
+        // update title bar and stopwatch display every 100ms after start.
+        timer = new Stopwatch();
+        clockDisplay = (EditText) findViewById(R.id.stopwatchDisp);
+        startClock = (Button) findViewById(R.id.clockStartButton);
+        resetClock = (Button) findViewById(R.id.clockResetButton);
+
+        stopwatchHandler = new Handler()
+        {
+            @Override
+            public void handleMessage(Message msg)
+            {
+                super.handleMessage(msg);
+                switch (msg.what)
+                {
+                    case MSG_START_TIMER:
+                        if (!clockFirstStart)
+                        {
+                            clockFirstStart = true;
+                            timer.start();
+                        }
+                        else
+                        {
+                            timer.resume();
+                        }
+                        stopwatchHandler.sendEmptyMessage(MSG_UPDATE_TIMER);
+                        break;
+
+                    case MSG_UPDATE_TIMER:
+                        clockDisplay.setText((double)timer.getElapsedTime() / 1000.0 + "");
+                        stopwatchHandler.sendEmptyMessageDelayed(MSG_UPDATE_TIMER, REFRESH_RATE);
+                        break;
+                    case MSG_STOP_TIMER:
+                        clockDisplay.setText((double)timer.getElapsedTime() / 1000.0 + "");
+                        stopwatchHandler.removeMessages(MSG_UPDATE_TIMER);
+                        timer.pause();
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        };
 
         try
         {
@@ -161,7 +240,7 @@ public class SetMatchInfo extends AppCompatActivity
 
             // populate autonomous notes.
             EditText aunotes = (EditText) findViewById(R.id.autoNotes);
-            String rawautonotes = OwOWhatsThis[30];
+            String rawautonotes = OwOWhatsThis[37];
             rawautonotes = rawautonotes.replaceAll("^\"|\"$", ""); // remove quotation marks
             aunotes.setText(rawautonotes);
             Log.d("SetMatchInfo", "Autonomous Notes Set: \"" + rawautonotes + "\"");
@@ -219,11 +298,13 @@ public class SetMatchInfo extends AppCompatActivity
             int clearHatchMid = Integer.parseInt(OwOWhatsThis[20]);
             int clearHatchHigh = Integer.parseInt(OwOWhatsThis[21]);
             int clearHatchDrop = Integer.parseInt(OwOWhatsThis[22]);
+            boolean clearHatchPickupFromLoadingZone = Boolean.parseBoolean(OwOWhatsThis[23]);
 
-            int clearCargoLow = Integer.parseInt(OwOWhatsThis[23]);
-            int clearCargoMid = Integer.parseInt(OwOWhatsThis[24]);
-            int clearCargoHigh = Integer.parseInt(OwOWhatsThis[25]);
-            int clearCargoDrop = Integer.parseInt(OwOWhatsThis[26]);
+            int clearCargoLow = Integer.parseInt(OwOWhatsThis[24]);
+            int clearCargoMid = Integer.parseInt(OwOWhatsThis[25]);
+            int clearCargoHigh = Integer.parseInt(OwOWhatsThis[26]);
+            int clearCargoDrop = Integer.parseInt(OwOWhatsThis[27]);
+            boolean clearCargoPickupFromLoadingZone = Boolean.parseBoolean(OwOWhatsThis[28]);
 
             Spinner chl = (Spinner) findViewById(R.id.clearHatchLow);
             chl.setSelection(clearHatchLow);
@@ -237,6 +318,9 @@ public class SetMatchInfo extends AppCompatActivity
             Spinner chd = (Spinner) findViewById(R.id.clearHatchesDropped);
             chd.setSelection(clearHatchDrop);
 
+            CheckBox hatchLZCB = (CheckBox) findViewById(R.id.hatchFromLoadingZone);
+            hatchLZCB.setChecked(clearHatchPickupFromLoadingZone);
+
             Spinner ccl = (Spinner) findViewById(R.id.clearCargoLow);
             ccl.setSelection(clearCargoLow);
 
@@ -249,33 +333,40 @@ public class SetMatchInfo extends AppCompatActivity
             Spinner ccd = (Spinner) findViewById(R.id.clearCargoDropped);
             ccd.setSelection(clearCargoDrop);
 
+            CheckBox cargoLZCB = (CheckBox) findViewById(R.id.cargoInLoadingZone);
+            cargoLZCB.setChecked(clearCargoPickupFromLoadingZone);
+
             // =====================[ BEGIN ENDGAME ]===================== //
 
             Spinner endingLocation =(Spinner) findViewById(R.id.endingLocation);
-            endingLocation.setSelection(((ArrayAdapter)endingLocation.getAdapter()).getPosition(OwOWhatsThis[27]));
+            endingLocation.setSelection(((ArrayAdapter)endingLocation.getAdapter()).getPosition(OwOWhatsThis[29]));
 
             Spinner helpedRobotSpinner = (Spinner) findViewById(R.id.climbHelpSpinner);
-            if (OwOWhatsThis[28].equals("None"))
-            {
-                helpedRobotSpinner.setSelection(0);
-            }
-            else if (OwOWhatsThis[28].contains("1"))
-            {
-                helpedRobotSpinner.setSelection(1);
-            }
-            else
-            {
-                helpedRobotSpinner.setSelection(2);
-            }
-            helpedRobotSpinner.setSelection(Integer.parseInt(OwOWhatsThis[28]));
+            helpedRobotSpinner.setSelection(Integer.parseInt(OwOWhatsThis[30]));
 
-            // populate if match was won.
-            CheckBox matchWon = (CheckBox) findViewById(R.id.matchWon);
-            matchWon.setChecked(OwOWhatsThis[29].contains("true"));
+            CheckBox penaltyCB = (CheckBox) findViewById(R.id.penaltyCB);
+            penaltyCB.setChecked(Boolean.parseBoolean(OwOWhatsThis[31]));
+
+            CheckBox yellowCardCB = (CheckBox) findViewById(R.id.yellowcardCB);
+            yellowCardCB.setChecked(Boolean.parseBoolean(OwOWhatsThis[32]));
+
+            CheckBox redcardCB = (CheckBox) findViewById(R.id.redcardCB);
+            redcardCB.setChecked(Boolean.parseBoolean(OwOWhatsThis[33]));
+
+            EditText redScore = (EditText) findViewById(R.id.redScore);
+            redScore.setText(OwOWhatsThis[34] + "");
+
+            EditText blueScore = (EditText) findViewById(R.id.blueScore);
+            blueScore.setText(OwOWhatsThis[35] + "");
+
+            //
+            EditText robotDeadTime = (EditText) findViewById(R.id.stopwatchDisp);
+            robotDeadTime.setText(OwOWhatsThis[36] + "");
+
 
             // populate teleop notes.
             EditText tonotes = (EditText) findViewById(R.id.teleopnotes);
-            String rawtonotes = OwOWhatsThis[31];
+            String rawtonotes = OwOWhatsThis[38];
             rawtonotes = rawtonotes.replaceAll("^\"|\"$", ""); // remove quotation marks
             tonotes.setText(rawtonotes);
 
@@ -376,9 +467,44 @@ public class SetMatchInfo extends AppCompatActivity
         }
         if (!breakCond)
         {
-            Log.d("SetMatchInfo","Checking if match won.");
-            CheckBox matchWonCheckBox = (CheckBox) findViewById(R.id.matchWon);
-            matchWon = matchWonCheckBox.isChecked();
+            Log.d("SetMatchInfo","Checking match general statistics.");
+
+            CheckBox penaltyCB = (CheckBox) findViewById(R.id.penaltyCB);
+            hasPenalty = penaltyCB.isChecked();
+
+            CheckBox yellowCardCB = (CheckBox) findViewById(R.id.yellowcardCB);
+            yellowCard = yellowCardCB.isChecked();
+
+            CheckBox redcardCB = (CheckBox) findViewById(R.id.redcardCB);
+            redCard = redcardCB.isChecked();
+
+            EditText redScoreForm = (EditText) findViewById(R.id.redScore);
+            EditText blueScoreForm = (EditText) findViewById(R.id.blueScore);
+            try
+            {
+                redScore = Integer.parseInt(redScoreForm.getText().toString());
+                blueScore = Integer.parseInt(blueScoreForm.getText().toString());
+            }
+            catch (Exception e)
+            {
+                Snackbar.make(view, "Issue with score formatting", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                breakCond = true;
+            }
+
+            EditText deathClockForm = (EditText) findViewById(R.id.stopwatchDisp);
+            try
+            {
+                robotDeadTime = Double.parseDouble(deathClockForm.getText().toString());
+            }
+            catch (Exception e)
+            {
+                Snackbar.make(view, "Issue with stopwatch formatting", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                breakCond = true;
+            }
+
+
         }
         if (!breakCond)
         {
@@ -436,6 +562,9 @@ public class SetMatchInfo extends AppCompatActivity
             Spinner chd = (Spinner) findViewById(R.id.clearHatchesDropped);
             cHatchDropped = Integer.parseInt(chd.getSelectedItem().toString());
 
+            CheckBox chflz = (CheckBox) findViewById(R.id.cargoInLoadingZone);
+            cHatchesFromLoadingZone = chflz.isChecked();
+
             Spinner ccl = (Spinner) findViewById(R.id.clearCargoLow);
             cCargoLow = Integer.parseInt(ccl.getSelectedItem().toString());
 
@@ -447,6 +576,9 @@ public class SetMatchInfo extends AppCompatActivity
 
             Spinner ccd = (Spinner) findViewById(R.id.clearCargoDropped);
             cCargoDropped = Integer.parseInt(ccd.getSelectedItem().toString());
+
+            CheckBox ccflz = (CheckBox) findViewById(R.id.hatchFromLoadingZone);
+            cCargoFromLoadingZone = ccflz.isChecked();
 
             // read endgame stuff.
             Spinner climbHelpSpinner = (Spinner) findViewById(R.id.climbHelpSpinner);
@@ -484,7 +616,7 @@ public class SetMatchInfo extends AppCompatActivity
         }
 
         String listMsg = String.format("Match # %d (%s) Team: %d", matchNumber, matchType, spectatingTeamNumber);
-        String CSVFormat = containsOwnTeam + "," + DataStore.getDateAsString() + "," + matchNumber + "," + matchType + "," + spectatingTeamNumber + "," + spectatingTeamFieldPosition + "," + startingPosition+","+ hasAutonomous +"," + offPlatform + ","+ crossLine + ","+ sHatchLow + "," + sHatchMid + "," + sHatchHigh + "," + sHatchDropped + "," + sCargoLow + "," + sCargoMid + "," + sCargoHigh + "," + sCargoDropped +"," + isDefenseRobot + "," + cHatchLow + "," + cHatchMid + "," + cHatchHigh + "," + cHatchDropped + "," + cCargoLow + "," + cCargoMid + "," + cCargoHigh + "," + cCargoDropped + "," + endingLocation+","+ robotsHelped + "," + matchWon+",\""+autonotes+"\",\""+telenotes+"\"";
+        String CSVFormat = containsOwnTeam + "," + DataStore.getDateAsString() + "," + matchNumber + "," + matchType + "," + spectatingTeamNumber + "," + spectatingTeamFieldPosition + "," + startingPosition+","+ hasAutonomous +"," + offPlatform + ","+ crossLine + ","+ sHatchLow + "," + sHatchMid + "," + sHatchHigh + "," + sHatchDropped + "," + sCargoLow + "," + sCargoMid + "," + sCargoHigh + "," + sCargoDropped +"," + isDefenseRobot + "," + cHatchLow + "," + cHatchMid + "," + cHatchHigh + "," + cHatchDropped + "," + cHatchesFromLoadingZone + "," + cCargoLow + "," + cCargoMid + "," + cCargoHigh + "," + cCargoDropped + "," + cCargoFromLoadingZone + "," + endingLocation+","+ robotsHelped + "," + hasPenalty +"," + yellowCard + "," + redCard + "," + redScore + "," + blueScore + "," + robotDeadTime + ",\""+autonotes+"\",\""+telenotes+"\"";
         Log.d("SetMatchInfo", CSVFormat);
 
         if (USE_DEBUG)
@@ -543,6 +675,27 @@ public class SetMatchInfo extends AppCompatActivity
             }
         }
         return super.dispatchTouchEvent(event);
+    }
+
+    public void stopwatchTogglerOnClick(View v)
+    {
+        clockState = !clockState;
+        if (clockState)
+        {
+            startClock.setText("Stop");
+            stopwatchHandler.sendEmptyMessage(MSG_START_TIMER);
+        }
+        else
+        {
+            startClock.setText("Start");
+            stopwatchHandler.sendEmptyMessage(MSG_STOP_TIMER);
+        }
+    }
+
+    public void stopwatchResetOnClick(View v)
+    {
+        timer.reset();
+        clockDisplay.setText(timer.getElapsedTime() / 1000.0 + "");
     }
 
 }
