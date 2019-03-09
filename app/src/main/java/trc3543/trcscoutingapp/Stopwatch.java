@@ -38,8 +38,8 @@ public class Stopwatch
 
     public void setElapsedTime(long curElapsedTime)
     {
-        this.currentTime = System.currentTimeMillis();
-        this.startTime = currentTime - curElapsedTime;
+        this.currentTime = curElapsedTime;
+        //this.startTime = System.currentTimeMillis() - curElapsedTime;
     }
 
     public long getElapsedTime()
