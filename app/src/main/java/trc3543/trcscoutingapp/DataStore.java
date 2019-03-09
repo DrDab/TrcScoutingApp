@@ -54,7 +54,7 @@ public class DataStore extends AppCompatActivity
     // The following variables are not supposed to be changed.
     // DO NOT CHANGE THESE VARIABLES.
     public static boolean useAutosave = true;
-    public static int autosaveSeconds = 300;
+    public static int autosaveSeconds = 7200;
 
     public static ArrayList<Match> matchList = new ArrayList<Match>();
 

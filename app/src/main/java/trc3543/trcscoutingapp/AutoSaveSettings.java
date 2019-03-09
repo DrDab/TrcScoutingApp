@@ -40,9 +40,6 @@ import java.io.PrintWriter;
 @SuppressWarnings("all")
 public class AutoSaveSettings extends AppCompatActivity
 {
-    static boolean autoSave;
-    static int seconds;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -71,10 +68,11 @@ public class AutoSaveSettings extends AppCompatActivity
     {
         // read in whether auto saving is enabled.
         CheckBox cb1 = (CheckBox) findViewById(R.id.toggle_autosave);
-        autoSave = cb1.isChecked();
+        boolean autoSave = cb1.isChecked();
         // read in the frequency of auto-saving.
         Spinner mySpinner = (Spinner) findViewById(R.id.timerchoice);
         String timerChoiceRawText = mySpinner.getSelectedItem().toString();
+        int seconds = 7200;
         if (timerChoiceRawText.matches("2 minutes"))
         {
             seconds = 120;
