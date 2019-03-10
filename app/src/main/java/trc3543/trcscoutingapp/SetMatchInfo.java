@@ -713,9 +713,11 @@ public class SetMatchInfo extends AppCompatActivity
 
     public void stopwatchResetOnClick(View v)
     {
+        setTitle("Add Match");
         timer.reset();
         clockDisplay.setText(timer.getElapsedTime() / 1000.0 + "");
     }
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)
@@ -733,8 +735,9 @@ public class SetMatchInfo extends AppCompatActivity
                 startClock.setText("Start");
                 stopwatchHandler.sendEmptyMessage(MSG_STOP_TIMER);
             }
+            return true;
         }
-        return true;
+        return super.onKeyDown(keyCode, event);
     }
 
 }
