@@ -31,6 +31,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -170,11 +171,29 @@ public class SetMatchInfo extends AppCompatActivity
                         break;
 
                     case MSG_UPDATE_TIMER:
-                        clockDisplay.setText((double)timer.getElapsedTime() / 1000.0 + "");
+                        double time = (double) timer.getElapsedTime() / 1000.0;
+                        if (time == 0.0)
+                        {
+                            setTitle("Add Match");
+                        }
+                        else
+                        {
+                            setTitle("Add Match (☠: " + time + ")");
+                        }
+                        clockDisplay.setText(time + "");
                         stopwatchHandler.sendEmptyMessageDelayed(MSG_UPDATE_TIMER, REFRESH_RATE);
                         break;
                     case MSG_STOP_TIMER:
-                        clockDisplay.setText((double)timer.getElapsedTime() / 1000.0 + "");
+                        time = (double) timer.getElapsedTime() / 1000.0;
+                        if (time == 0.0)
+                        {
+                            setTitle("Add Match");
+                        }
+                        else
+                        {
+                            setTitle("Add Match (☠: " + time + ")");
+                        }
+                        clockDisplay.setText(time + "");
                         stopwatchHandler.removeMessages(MSG_UPDATE_TIMER);
                         timer.pause();
                         break;
@@ -696,6 +715,26 @@ public class SetMatchInfo extends AppCompatActivity
     {
         timer.reset();
         clockDisplay.setText(timer.getElapsedTime() / 1000.0 + "");
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if ((keyCode == KeyEvent.KEYCODE_VOLUME_UP))
+        {
+            clockState = !clockState;
+            if (clockState)
+            {
+                startClock.setText("Stop");
+                stopwatchHandler.sendEmptyMessage(MSG_START_TIMER);
+            }
+            else
+            {
+                startClock.setText("Start");
+                stopwatchHandler.sendEmptyMessage(MSG_STOP_TIMER);
+            }
+        }
+        return true;
     }
 
 }
