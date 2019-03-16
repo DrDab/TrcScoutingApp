@@ -753,6 +753,7 @@ public class SetMatchInfo extends AppCompatActivity
     }
 
 
+    /*
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {
@@ -773,5 +774,6 @@ public class SetMatchInfo extends AppCompatActivity
         }
         return super.onKeyDown(keyCode, event);
     }
+    */
 
 }
