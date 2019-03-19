@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "trc3543.trcscoutingapp"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 26
         versionCode 3
         versionName "1.3.3"
@@ -35,4 +35,5 @@ dependencies {
     implementation files('libs/javax.json-1.0.2.jar')
     implementation files('libs/core-3.3.3.jar')
     implementation files('libs/javase-3.3.3.jar')
+    compile 'com.github.travijuu:numberpicker:1.0.7'
 }

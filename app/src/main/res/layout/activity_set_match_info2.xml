@@ -901,27 +901,27 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="25dp"
+            android:layout_width="10dp"
             android:layout_height="1193dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="332dp"
+            android:layout_marginTop="336dp"
             android:background="@android:color/holo_green_dark"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.987"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/autonomousCB"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:color/holo_green_dark"/>
+            app:srcCompat="@android:color/holo_green_dark" />
 
         <ImageView
             android:id="@+id/imageView4"
-            android:layout_width="25dp"
+            android:layout_width="10dp"
             android:layout_height="1600dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:background="@android:color/holo_red_dark"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.981"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/textView16c"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
             app:srcCompat="@android:color/holo_red_dark" />
