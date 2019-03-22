@@ -183,7 +183,7 @@ public class DataStore extends AppCompatActivity
             madoka.println(CSV_HEADER);
             for(Match match : matchList)
             {
-                madoka.println(match.getCsvString());
+                madoka.println(DataStore.unescapeFormat(match.getCsvString()));
             }
             madoka.println("End Of Log");
             madoka.flush();
@@ -322,6 +322,16 @@ public class DataStore extends AppCompatActivity
     public static String getFileName(String username)
     {
         return username + "_" + getTimeStamp("yyyyMMdd@HHmmss") + ".csv";
+    }
+
+    public static String escapeFormat(String input)
+    {
+        return input.replaceAll(",", "<COMMA>");
+    }
+
+    public static String unescapeFormat(String input)
+    {
+        return input.replaceAll("<COMMA>", ",");
     }
 
 }

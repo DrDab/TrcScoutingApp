@@ -263,7 +263,7 @@ public class SetMatchInfo extends AppCompatActivity
 
             // populate autonomous notes.
             EditText aunotes = (EditText) findViewById(R.id.autoNotes);
-            String rawautonotes = OwOWhatsThis[41];
+            String rawautonotes = DataStore.unescapeFormat(OwOWhatsThis[41]);
             rawautonotes = rawautonotes.replaceAll("^\"|\"$", ""); // remove quotation marks
             aunotes.setText(rawautonotes);
             Log.d("SetMatchInfo", "Autonomous Notes Set: \"" + rawautonotes + "\"");
@@ -407,7 +407,7 @@ public class SetMatchInfo extends AppCompatActivity
 
             // populate teleop notes.
             EditText tonotes = (EditText) findViewById(R.id.teleopnotes);
-            String rawtonotes = OwOWhatsThis[42];
+            String rawtonotes = DataStore.unescapeFormat(OwOWhatsThis[42]);
             rawtonotes = rawtonotes.replaceAll("^\"|\"$", ""); // remove quotation marks
             tonotes.setText(rawtonotes);
 
@@ -669,7 +669,7 @@ public class SetMatchInfo extends AppCompatActivity
         }
 
         String listMsg = String.format("Match # %d (%s) Team: %d", matchNumber, matchType, spectatingTeamNumber);
-        String CSVFormat = containsOwnTeam + "," + DataStore.getDateAsString() + "," + matchNumber + "," + matchType + "," + spectatingTeamNumber + "," + spectatingTeamFieldPosition + "," + startingPosition+","+ hasAutonomous +"," + offPlatform + ","+ crossLine + ","+ sHatchLow + "," + sHatchMid + "," + sHatchHigh + "," + sHatchDropped + "," + sCargoLow + "," + sCargoMid + "," + sCargoHigh + "," + sCargoDropped +"," + sCargoShipHatches + "," + sCargoShipCargo + "," +  isDefenseRobot + "," + cHatchLow + "," + cHatchMid + "," + cHatchHigh + "," + cHatchDropped + "," + cHatchesFromLoadingZone + "," + cCargoLow + "," + cCargoMid + "," + cCargoHigh + "," + cCargoDropped + "," + cCargoFromLoadingZone + "," + cCargoShipHatches + "," + cCargoShipCargo + "," +  endingLocation+","+ robotsHelped + "," + hasPenalty +"," + yellowCard + "," + redCard + "," + redScore + "," + blueScore + "," + robotDeadTime + ",\""+autonotes+"\",\""+telenotes+"\"";
+        String CSVFormat = containsOwnTeam + "," + DataStore.getDateAsString() + "," + matchNumber + "," + matchType + "," + spectatingTeamNumber + "," + spectatingTeamFieldPosition + "," + startingPosition+","+ hasAutonomous +"," + offPlatform + ","+ crossLine + ","+ sHatchLow + "," + sHatchMid + "," + sHatchHigh + "," + sHatchDropped + "," + sCargoLow + "," + sCargoMid + "," + sCargoHigh + "," + sCargoDropped +"," + sCargoShipHatches + "," + sCargoShipCargo + "," +  isDefenseRobot + "," + cHatchLow + "," + cHatchMid + "," + cHatchHigh + "," + cHatchDropped + "," + cHatchesFromLoadingZone + "," + cCargoLow + "," + cCargoMid + "," + cCargoHigh + "," + cCargoDropped + "," + cCargoFromLoadingZone + "," + cCargoShipHatches + "," + cCargoShipCargo + "," +  endingLocation+","+ robotsHelped + "," + hasPenalty +"," + yellowCard + "," + redCard + "," + redScore + "," + blueScore + "," + robotDeadTime + ",\""+DataStore.escapeFormat(autonotes)+"\",\""+DataStore.escapeFormat(telenotes)+"\"";
         Log.d("SetMatchInfo", CSVFormat);
 
         if (USE_DEBUG)
