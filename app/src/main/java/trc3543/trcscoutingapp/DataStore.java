@@ -46,7 +46,7 @@ public class DataStore extends AppCompatActivity
 {
     // Begin season-specific info.
     public static final String DATA_FOLDER_NAME = "TrcPitScouting";
-    public static final String CSV_HEADER = "Contains Your Team, Date, Match #, Match Type, Team Number, Spectating Team, Starting Position, SP-Autonomous, SP-Off Platform, SP-Cross Line, SP-RocketHatchLow, SP-RocketHatchMid, SP-RocketHatchHigh, SP-RocketHatchDropped, SP-RocketCargoLow, SP-RocketCargoMid, SP-RocketCargoHigh, SP-RocketCargoDropped, SP-CargoShipHatches, SP-CargoShipCargo, CP-Defense, CP-RocketHatchLow, CP-RocketHatchMid, CP-RocketHatchHigh, CP-RocketHatchDropped, CP-HatchFromLoadingZone, CP-RocketCargoLow, CP-RocketCargoMid, CP-RocketCargoHigh, CP-RocketCargoDropped, CP-CargoFromLoadingZone, CP-CargoShipHatches, CP-CargoShipCargo, EG-Ending Location, EG-Climbing Help, Penalties, Yellow Card, Red Card, Red Score, Blue Score, Robot Dead Time, Sandstorm Notes, Clear Skies Notes";
+    public static final String CSV_HEADER = "Team #, Team Name, Drive Train, High Cargo, High Hatch, Mid Cargo, Mid Hatch, Low Cargo, Low Hatch, Hatches from Ground, Defense/Offense, Climb Level, Programming Language, Robot Delivery Preference, Top Features, Other Notes, Sandstorm Opmode, Sandstorm Start from Level 2";
     public static final String VERSION_NUMBER = "1.3.3-frc-INDEV";
     // End season-specific info.
 
@@ -73,7 +73,7 @@ public class DataStore extends AppCompatActivity
 
     public static synchronized boolean writeArraylistsToJSON() throws IOException
     {
-        File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+        File writeDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         if (!writeDirectory.exists())
         {
             writeDirectory.mkdir();
@@ -183,7 +183,7 @@ public class DataStore extends AppCompatActivity
             madoka.println(CSV_HEADER);
             for(Match match : matchList)
             {
-                madoka.println(match.getCsvString());
+                madoka.println(unescapeFormat(match.getCsvString()));
             }
             madoka.println("End Of Log");
             madoka.flush();
@@ -322,6 +322,16 @@ public class DataStore extends AppCompatActivity
     public static String getFileName(String username)
     {
         return username + "_" + getTimeStamp("yyyyMMdd@HHmmss") + ".csv";
+    }
+
+    public static String escapeFormat(String input)
+    {
+        return input.replaceAll(",", "<COMMA>");
+    }
+
+    public static String unescapeFormat(String input)
+    {
+        return input.replaceAll("<COMMA>", ",");
     }
 
 }

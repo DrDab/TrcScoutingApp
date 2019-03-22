@@ -44,18 +44,17 @@
         completions."
     </string>
 
-    <string-array name="game_types">
-        <item>Practice</item>
-        <item>Qualification</item>
-        <item>Semi-Final</item>
-        <item>Final</item>
+    <string-array name="drivebase_types">
+        <item>Mechanum</item>
+        <item>West Coast</item>
+        <item>Swerve</item>
+        <item>Other</item>
     </string-array>
 
-    <string-array name="spectating_types">
-        <item>Red</item>
-        <item>Blue</item>
+    <string-array name="playstyles">
+        <item>Defense</item>
+        <item>Offense</item>
     </string-array>
-
 
     <string-array name="save_times">
         <item>2 minutes</item>
@@ -75,29 +74,33 @@
         <item>Yes</item>
     </string-array>
 
-    <string-array name="flexible_yes_or_no">
-        <item>Didn't Attempt</item>
-        <item>Attempted and failed</item>
-        <item>Yes</item>
-    </string-array>
-
     <string-array name="three_positions">
         <item>Left</item>
         <item>Middle</item>
         <item>Right</item>
     </string-array>
 
-    <string-array name="speeds">
-        <item>A lot slower than us</item>
-        <item>Slower than us</item>
-        <item>Faster than us</item>
-        <item>A lot faster than us</item>
+    <string-array name="climb_level">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
     </string-array>
 
-    <string-array name="robot_breakdown">
-        <item>Not Disabled</item>
-        <item>Partially Disabled</item>
-        <item>Disabled</item>
+    <string-array name="programming_langs">
+        <item>Java</item>
+        <item>C++</item>
+        <item>LabVIEW</item>
+    </string-array>
+
+    <string-array name="cargo_or_rocket">
+        <item>Cargo</item>
+        <item>Rocket</item>
+    </string-array>
+
+    <string-array name="autonomous_or_teleop">
+        <item>Autonomous</item>
+        <item>Teleoperated</item>
     </string-array>
 
     <string-array name="general_count">
