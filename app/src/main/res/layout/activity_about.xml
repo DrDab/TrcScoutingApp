@@ -14,7 +14,7 @@
         android:layout_marginEnd="67dp"
         android:layout_marginStart="67dp"
         android:layout_marginTop="62dp"
-        android:text="TRC Scouting App"
+        android:text="TRC Pit Scouting"
         android:textColor="@android:color/white"
         android:textSize="24sp"
         android:textStyle="bold"
