@@ -326,11 +326,19 @@ public class DataStore extends AppCompatActivity
 
     public static String escapeFormat(String input)
     {
+        if (input == null)
+        {
+            return "";
+        }
         return input.replaceAll(",", "<COMMA>");
     }
 
     public static String unescapeFormat(String input)
     {
+        if (input == null)
+        {
+            return "";
+        }
         return input.replaceAll("<COMMA>", ",");
     }
 
