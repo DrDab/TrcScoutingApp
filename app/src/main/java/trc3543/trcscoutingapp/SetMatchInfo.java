@@ -25,8 +25,6 @@ package trc3543.trcscoutingapp;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
-import android.os.Handler;
-import android.os.Message;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -34,17 +32,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
+
+import com.travijuu.numberpicker.library.NumberPicker;
 
 import java.io.IOException;
 
@@ -88,12 +86,10 @@ public class SetMatchInfo extends AppCompatActivity
     private int cHatchMid;
     private int cHatchHigh;
     private int cHatchDropped;
-    private boolean cHatchesFromLoadingZone;
     private int cCargoLow;
     private int cCargoMid;
     private int cCargoHigh;
     private int cCargoDropped;
-    private boolean cCargoFromLoadingZone;
     private int cCargoShipHatches;
     private int cCargoShipCargo;
 
@@ -107,11 +103,72 @@ public class SetMatchInfo extends AppCompatActivity
     private boolean redCard;
     private int redScore;
     private int blueScore;
-    private double robotDeadTime;
+    private boolean robotDead;
 
     // Auxiliary Notes.
     private String autonotes;
     private String telenotes;
+
+
+    // BEGIN UI ELEMENTS
+
+    // SANDSTORM //
+    private Spinner matchTypeSpinner;
+    private EditText matchNumEdit;
+    private EditText teamNumEdit;
+    private Spinner spectatingTeamSpinner;
+
+    private RadioGroup startingPositionRG;
+    private CheckBox autonomousCB;
+    private CheckBox crossLineCB;
+    private CheckBox offPlatformCB;
+
+    private NumberPicker sandstormCHigh;
+    private NumberPicker sandstormCMid;
+    private NumberPicker sandstormCLow;
+
+    private NumberPicker sandstormHHigh;
+    private NumberPicker sandstormHMid;
+    private NumberPicker sandstormHLow;
+
+    private NumberPicker sandstormCargoShipCargo;
+    private NumberPicker sandstormCargoShipHatches;
+    private NumberPicker sandstormCargoShipCargoDropped;
+    private NumberPicker sandstormCargoShipHatchesDropped;
+
+    private EditText sandstormNotes;
+
+    // CLEAR SKIES //
+    private CheckBox defenseRobot;
+
+    private NumberPicker clearSkiesCHigh;
+    private NumberPicker clearSkiesCMid;
+    private NumberPicker clearSkiesCLow;
+
+    private NumberPicker clearSkiesHHigh;
+    private NumberPicker clearSkiesHMid;
+    private NumberPicker clearSkiesHLow;
+
+    private NumberPicker clearSkiesCargoShipCargo;
+    private NumberPicker clearSkiesCargoShipHatches;
+    private NumberPicker clearSkiesCargoShipCargoDropped;
+    private NumberPicker clearSkiesCargoShipHatchesDropped;
+
+    private CheckBox deadRobot;
+
+    private Spinner endingLocationSpinner;
+    private Spinner climbingHelpSpinner;
+
+    private CheckBox penaltiesCB;
+    private CheckBox yellowcardCB;
+    private CheckBox redcardCB;
+
+    private EditText clearskiesNotes;
+
+    private EditText redScoreForm;
+    private EditText blueScoreForm;
+
+    // END UI ELEMENTS
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -163,7 +220,34 @@ public class SetMatchInfo extends AppCompatActivity
 
         // done initializing tabbed layout.
 
+
         // initialize all ui elements.
+
+        // SANDSTORM ELEMENTS //
+        matchTypeSpinner = (Spinner) findViewById(R.id.matchType);
+        matchNumEdit = (EditText) findViewById(R.id.matchNum);
+        teamNumEdit = (EditText) findViewById(R.id.teamNum);
+        spectatingTeamSpinner = (Spinner) findViewById(R.id.allianceSpinner);
+        startingPositionRG = (RadioGroup) findViewById(R.id.robotStartRadioGroup);
+        autonomousCB = (CheckBox) findViewById(R.id.autonomousCB);
+        crossLineCB = (CheckBox) findViewById(R.id.crossedLineCB);
+        offPlatformCB = (CheckBox) findViewById(R.id.offplatformCB);
+
+        sandstormCHigh = (NumberPicker) findViewById(R.id.sandstormCargoTop);
+        sandstormCMid = (NumberPicker) findViewById(R.id.sandstormCargoMid);
+        sandstormCLow = (NumberPicker) findViewById(R.id.sandstormCargoLow);
+
+        sandstormHHigh = (NumberPicker) findViewById(R.id.sandstormHatchTop);
+        sandstormHMid = (NumberPicker) findViewById(R.id.sandstormHatchMid);
+        sandstormHLow = (NumberPicker) findViewById(R.id.sandstormHatchLow);
+
+        sandstormCargoShipCargo = (NumberPicker) findViewById(R.id.sandstormCargoShip);
+        sandstormCargoShipHatches = (NumberPicker) findViewById(R.id.sandstormHatchesShip);
+
+        sandstormCargoShipCargoDropped = (NumberPicker) findViewById(R.id.sandstormCargoDropped);
+        sandstormCargoShipHatchesDropped = (NumberPicker) findViewById(R.id.sandstormHatchesDropped);
+
+        sandstormNotes = (EditText) findViewById(R.id.sandstormNotes);
 
         // done initializing ui elements.
 
@@ -221,7 +305,7 @@ public class SetMatchInfo extends AppCompatActivity
         }
 
         String listMsg = String.format("Match # %d (%s) Team: %d", matchNumber, matchType, spectatingTeamNumber);
-        String CSVFormat = containsOwnTeam + "," + DataStore.getDateAsString() + "," + matchNumber + "," + matchType + "," + spectatingTeamNumber + "," + spectatingTeamFieldPosition + "," + startingPosition+","+ hasAutonomous +"," + offPlatform + ","+ crossLine + ","+ sHatchLow + "," + sHatchMid + "," + sHatchHigh + "," + sHatchDropped + "," + sCargoLow + "," + sCargoMid + "," + sCargoHigh + "," + sCargoDropped +"," + sCargoShipHatches + "," + sCargoShipCargo + "," +  isDefenseRobot + "," + cHatchLow + "," + cHatchMid + "," + cHatchHigh + "," + cHatchDropped + "," + cHatchesFromLoadingZone + "," + cCargoLow + "," + cCargoMid + "," + cCargoHigh + "," + cCargoDropped + "," + cCargoFromLoadingZone + "," + cCargoShipHatches + "," + cCargoShipCargo + "," +  endingLocation+","+ robotsHelped + "," + hasPenalty +"," + yellowCard + "," + redCard + "," + redScore + "," + blueScore + "," + robotDeadTime + ",\""+DataStore.escapeFormat(autonotes)+"\",\""+DataStore.escapeFormat(telenotes)+"\"";
+        String CSVFormat = containsOwnTeam + "," + DataStore.getDateAsString() + "," + matchNumber + "," + matchType + "," + spectatingTeamNumber + "," + spectatingTeamFieldPosition + "," + startingPosition+","+ hasAutonomous +"," + offPlatform + ","+ crossLine + ","+ sHatchLow + "," + sHatchMid + "," + sHatchHigh + "," + sHatchDropped + "," + sCargoLow + "," + sCargoMid + "," + sCargoHigh + "," + sCargoDropped +"," + sCargoShipHatches + "," + sCargoShipCargo + "," +  isDefenseRobot + "," + cHatchLow + "," + cHatchMid + "," + cHatchHigh + "," + cHatchDropped + "," + cCargoLow + "," + cCargoMid + "," + cCargoHigh + "," + cCargoDropped + "," + cCargoShipHatches + "," + cCargoShipCargo + "," +  endingLocation+","+ robotsHelped + "," + hasPenalty +"," + yellowCard + "," + redCard + "," + redScore + "," + blueScore + "," + robotDead + ",\""+DataStore.escapeFormat(autonotes)+"\",\""+DataStore.escapeFormat(telenotes)+"\"";
         Log.d("SetMatchInfo", CSVFormat);
 
         if (USE_DEBUG)
