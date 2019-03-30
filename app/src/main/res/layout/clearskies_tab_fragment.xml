@@ -316,6 +316,46 @@
                 app:layout_constraintBottom_toTopOf="@+id/climbHelpSpinner"
                 app:layout_constraintStart_toStartOf="@+id/climbHelpSpinner" />
 
+            <CheckBox
+                android:id="@+id/penaltyCB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:text="Penalties?"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/climbHelpSpinner" />
+
+            <CheckBox
+                android:id="@+id/yellowcardCB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:text="Yellow Card"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/penaltyCB" />
+
+            <CheckBox
+                android:id="@+id/redcardCB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:text="Red Card"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.501"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/yellowcardCB" />
+
             <EditText
                 android:id="@+id/clearSkiesNotes"
                 android:layout_width="237dp"
@@ -331,7 +371,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/space2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/climbHelpSpinner" />
+                app:layout_constraintTop_toBottomOf="@+id/redcardCB" />
 
             <EditText
                 android:id="@+id/redScore"
