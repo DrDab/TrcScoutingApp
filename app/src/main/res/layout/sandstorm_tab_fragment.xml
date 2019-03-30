@@ -1,15 +1,220 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:numberpicker="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+    <Spinner
+        android:id="@+id/matchType"
+        android:layout_width="125dp"
+        android:layout_height="35dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="17dp"
+        android:entries="@array/game_types" />
+
+    <EditText
+        android:id="@+id/matchNum"
+        android:layout_width="195dp"
+        android:layout_height="40dp"
+        android:layout_alignTop="@+id/matchType"
+        android:layout_toEndOf="@+id/matchType"
+        android:layout_toRightOf="@+id/matchType"
+        android:ems="10"
+        android:hint="Match #"
+        android:inputType="numberSigned" />
+
+    <EditText
+        android:id="@+id/teamNum"
+        android:layout_width="320dp"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/matchType"
+        android:layout_alignStart="@+id/matchType"
+        android:layout_below="@+id/matchNum"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="Team #"
+        android:inputType="numberSigned" />
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="200dp"
+        android:layout_height="35dp"
+        android:layout_below="@+id/teamNum"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:entries="@array/spectating_types" />
+
+    <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Sandstorm"
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
+        android:layout_alignLeft="@+id/teamNum"
+        android:layout_alignStart="@+id/teamNum"
+        android:layout_below="@+id/spinner2"
+        android:id="@+id/robotStartRadioGroup"
+        android:layout_marginTop="30dp">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start Top?"
+            android:id="@+id/startTop"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start Middle?"
+            android:id="@+id/startMid"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start Low?"
+            android:id="@+id/startLow" />
+
+    </RadioGroup>
+
+    <CheckBox
+        android:id="@+id/autonomousCB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/teamNum"
+        android:layout_alignRight="@+id/teamNum"
+        android:layout_alignTop="@+id/robotStartRadioGroup"
+        android:text="Autonomous?" />
+
+    <CheckBox
+        android:id="@+id/crossedLineCB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/autonomousCB"
+        android:layout_alignStart="@+id/autonomousCB"
+        android:layout_below="@+id/autonomousCB"
+        android:text="Crosses Line?" />
+
+    <CheckBox
+        android:id="@+id/offplatformCB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/crossedLineCB"
+        android:layout_alignStart="@+id/crossedLineCB"
+        android:layout_below="@+id/crossedLineCB"
+        android:text="Off Platform?" />
+
+    <TextView
+        android:id="@+id/rocketText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/offplatformCB"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp"
+        android:text="Rocket"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="150dp"
+        android:layout_height="225dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/rocketText"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/deepspace_rocket" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/robotStartRadioGroup"
+                android:layout_alignStart="@+id/robotStartRadioGroup"
+                android:layout_alignTop="@+id/imageView"
+                android:text="Cargo"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/offplatformCB"
+                android:layout_alignRight="@+id/offplatformCB"
+                android:layout_alignTop="@+id/imageView"
+                android:text="Hatches"
+                android:textColor="@android:color/black"
+                android:textSize="16dp" />
+
+            <com.travijuu.numberpicker.library.NumberPicker
+                android:id="@+id/sandstormCargoTop"
+                android:layout_width="130dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/textView5"
+                numberpicker:value="0"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="35dp" />
+
+            <com.travijuu.numberpicker.library.NumberPicker
+                android:id="@+id/sandstormCargoMid"
+                android:layout_width="130dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/sandstormCargoTop"
+                numberpicker:value="0"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="20dp" />
+
+            <com.travijuu.numberpicker.library.NumberPicker
+                android:id="@+id/sandstormCargoLow"
+                android:layout_width="130dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/sandstormCargoMid"
+                android:layout_alignParentLeft="true"
+                numberpicker:value="0"
+                android:layout_marginTop="20dp" />
+
+            <!-- OWO -->
+
+            <com.travijuu.numberpicker.library.NumberPicker
+                android:id="@+id/sandstormHatchTop"
+                android:layout_width="130dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/textView6"
+                android:layout_alignParentRight="true"
+                numberpicker:value="0"
+                android:layout_marginTop="35dp" />
+
+            <com.travijuu.numberpicker.library.NumberPicker
+                android:id="@+id/sandstormHatchMid"
+                android:layout_width="130dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/sandstormHatchTop"
+                android:layout_alignParentRight="true"
+                numberpicker:value="0"
+                android:layout_marginTop="20dp" />
+
+            <com.travijuu.numberpicker.library.NumberPicker
+                android:id="@+id/sandstormHatchLow"
+                android:layout_width="130dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/sandstormHatchMid"
+                android:layout_alignParentRight="true"
+                numberpicker:value="0"
+                android:layout_marginTop="20dp" />
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
 
 </RelativeLayout>
