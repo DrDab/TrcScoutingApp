@@ -9,6 +9,8 @@
         android:icon="@android:drawable/ic_menu_save"
         android:orderInCategory="300"
         android:title="Save"
-        app:showAsAction="ifRoom"></item>
+        app:showAsAction="ifRoom"
+        android:actionViewClass="android.widget.ImageButton"
+        tools:ignore="AppCompatResource"></item>
 
 </menu>

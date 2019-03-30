@@ -36,9 +36,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
@@ -317,7 +319,26 @@ public class SetMatchInfo extends AppCompatActivity
     {
         boolean breakCond = false;
 
-
+        if (!breakCond)
+        {
+            try
+            {
+                Log.d("SetMatchInfo","Parsing Match Number.");
+                matchNumber = Integer.parseInt(matchNumEdit.getText().toString());
+            }
+            catch(NumberFormatException e)
+            {
+                Snackbar.make(view, "Issue with Match number Formatting", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                breakCond = true;
+            }
+            catch(NullPointerException e)
+            {
+                Snackbar.make(view, "Match number cannot be empty.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                breakCond = true;
+            }
+        }
 
         if (!breakCond)
         {
@@ -416,7 +437,7 @@ public class SetMatchInfo extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_save)
         {
-            confirmTypes(null);
+            confirmTypes(findViewById(R.id.action_save));
             return true;
         }
 
