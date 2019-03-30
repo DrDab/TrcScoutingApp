@@ -249,6 +249,37 @@ public class SetMatchInfo extends AppCompatActivity
 
         sandstormNotes = (EditText) findViewById(R.id.sandstormNotes);
 
+        // CLEAR SKIES ELEMENTS //
+        defenseRobot = (CheckBox) findViewById(R.id.defenseRobotCB);
+
+        clearSkiesCHigh = (NumberPicker) findViewById(R.id.clearSkiesCargoTop);
+        clearSkiesCMid = (NumberPicker) findViewById(R.id.clearSkiesCargoMid);
+        clearSkiesCLow = (NumberPicker) findViewById(R.id.clearSkiesCargoLow);
+
+        clearSkiesHHigh = (NumberPicker) findViewById(R.id.clearSkiesHatchTop);
+        clearSkiesHMid = (NumberPicker) findViewById(R.id.clearSkiesHatchMid);
+        clearSkiesHLow = (NumberPicker) findViewById(R.id.clearSkiesHatchLow);
+
+        clearSkiesCargoShipCargo = (NumberPicker) findViewById(R.id.clearSkiesCargoShip);
+        clearSkiesCargoShipHatches = (NumberPicker) findViewById(R.id.clearSkiesHatchesShip);
+
+        clearSkiesCargoShipCargoDropped = (NumberPicker) findViewById(R.id.clearSkiesCargoDropped);
+        clearSkiesCargoShipHatchesDropped = (NumberPicker) findViewById(R.id.clearSkiesHatchesDropped);
+
+        deadRobot = (CheckBox) findViewById(R.id.deadRobotCB);
+
+        endingLocationSpinner = (Spinner) findViewById(R.id.endingLocation);
+        climbingHelpSpinner = (Spinner) findViewById(R.id.climbHelpSpinner);
+
+        penaltiesCB = (CheckBox) findViewById(R.id.penaltyCB);
+        yellowcardCB = (CheckBox) findViewById(R.id.yellowcardCB);
+        redcardCB = (CheckBox) findViewById(R.id.redcardCB);
+
+        clearskiesNotes = (EditText) findViewById(R.id.clearSkiesNotes);
+
+        redScoreForm = (EditText) findViewById(R.id.redScore);
+        blueScoreForm = (EditText) findViewById(R.id.blueScore);
+
         // done initializing ui elements.
 
         try
