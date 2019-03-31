@@ -2,9 +2,10 @@
     <!-- BEGIN GAME SPECIFIC STUFF -->
 
     <string-array name="starting_positions">
-        <item>High</item>
-        <item>Middle</item>
+        <item>Select Position...</item>
         <item>Low</item>
+        <item>Middle</item>
+        <!-- <item>High</item> -->
     </string-array>
 
     <!-- Parked, not parked for autonomous ending -->

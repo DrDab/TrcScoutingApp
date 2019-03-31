@@ -497,6 +497,12 @@ public class SetMatchInfo extends AppCompatActivity
                         .setAction("Action", null).show();
                 breakCond = true;
             }
+            else if (startingPosition.equals("Select Position..."))
+            {
+                Snackbar.make(view, "Starting Position must be populated!", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                breakCond = true;
+            }
         }
         if (!breakCond)
         {
