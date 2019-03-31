@@ -2,6 +2,7 @@
 :start
 echo TRC Scouting App Data Grabber
 echo (C) Titan Robotics Club 2019
+adb kill-server
 :prompt
 echo.
 echo       Choice Menu
