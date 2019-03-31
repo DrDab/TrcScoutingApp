@@ -263,7 +263,7 @@ public class SetMatchInfo extends AppCompatActivity
 
             // populate autonomous notes.
             EditText aunotes = (EditText) findViewById(R.id.autoNotes);
-            String rawautonotes = DataStore.unescapeFormat(OwOWhatsThis[41]);
+            String rawautonotes = DataStore.unescapeFormat(OwOWhatsThis[44]);
             rawautonotes = rawautonotes.replaceAll("^\"|\"$", ""); // remove quotation marks
             aunotes.setText(rawautonotes);
             Log.d("SetMatchInfo", "Autonomous Notes Set: \"" + rawautonotes + "\"");
@@ -380,34 +380,55 @@ public class SetMatchInfo extends AppCompatActivity
             // =====================[ BEGIN ENDGAME ]===================== //
 
             Spinner endingLocation =(Spinner) findViewById(R.id.endingLocation);
-            endingLocation.setSelection(((ArrayAdapter)endingLocation.getAdapter()).getPosition(OwOWhatsThis[33]));
+
+            int noClimbCnt = Integer.parseInt(OwOWhatsThis[33]);
+            int lowClimbCnt = Integer.parseInt(OwOWhatsThis[34]);
+            int midClimbCnt = Integer.parseInt(OwOWhatsThis[35]);
+            int highClimbCnt = Integer.parseInt(OwOWhatsThis[36]);
+
+            if (noClimbCnt == 1)
+            {
+                endingLocation.setSelection(0);
+            }
+            else if (highClimbCnt == 1)
+            {
+                endingLocation.setSelection(1);
+            }
+            else if (midClimbCnt == 1)
+            {
+                endingLocation.setSelection(2);
+            }
+            else
+            {
+                endingLocation.setSelection(3);
+            }
 
             Spinner helpedRobotSpinner = (Spinner) findViewById(R.id.climbHelpSpinner);
-            helpedRobotSpinner.setSelection(Integer.parseInt(OwOWhatsThis[34]));
+            helpedRobotSpinner.setSelection(Integer.parseInt(OwOWhatsThis[37]));
 
             CheckBox penaltyCB = (CheckBox) findViewById(R.id.penaltyCB);
-            penaltyCB.setChecked(Boolean.parseBoolean(OwOWhatsThis[35]));
+            penaltyCB.setChecked(Boolean.parseBoolean(OwOWhatsThis[38]));
 
             CheckBox yellowCardCB = (CheckBox) findViewById(R.id.yellowcardCB);
-            yellowCardCB.setChecked(Boolean.parseBoolean(OwOWhatsThis[36]));
+            yellowCardCB.setChecked(Boolean.parseBoolean(OwOWhatsThis[39]));
 
             CheckBox redcardCB = (CheckBox) findViewById(R.id.redcardCB);
-            redcardCB.setChecked(Boolean.parseBoolean(OwOWhatsThis[37]));
+            redcardCB.setChecked(Boolean.parseBoolean(OwOWhatsThis[40]));
 
             EditText redScore = (EditText) findViewById(R.id.redScore);
-            redScore.setText(OwOWhatsThis[38] + "");
+            redScore.setText(OwOWhatsThis[41] + "");
 
             EditText blueScore = (EditText) findViewById(R.id.blueScore);
-            blueScore.setText(OwOWhatsThis[39] + "");
+            blueScore.setText(OwOWhatsThis[42] + "");
 
             //
             EditText robotDeadTime = (EditText) findViewById(R.id.stopwatchDisp);
-            robotDeadTime.setText(OwOWhatsThis[40] + "");
+            robotDeadTime.setText(OwOWhatsThis[43] + "");
 
 
             // populate teleop notes.
             EditText tonotes = (EditText) findViewById(R.id.teleopnotes);
-            String rawtonotes = DataStore.unescapeFormat(OwOWhatsThis[42]);
+            String rawtonotes = DataStore.unescapeFormat(OwOWhatsThis[45]);
             rawtonotes = rawtonotes.replaceAll("^\"|\"$", ""); // remove quotation marks
             tonotes.setText(rawtonotes);
 
@@ -674,8 +695,30 @@ public class SetMatchInfo extends AppCompatActivity
             containsOwnTeam = "*";
         }
 
+        int noClimbCnt = 0;
+        int lowClimbCnt = 0;
+        int midClimbCnt = 0;
+        int highClimbCnt = 0;
+
+        if (endingLocation.equals("No Climb"))
+        {
+            noClimbCnt = 1;
+        }
+        else if (endingLocation.equals("High"))
+        {
+            highClimbCnt = 1;
+        }
+        else if (endingLocation.equals("Middle"))
+        {
+            midClimbCnt = 1;
+        }
+        else
+        {
+            lowClimbCnt = 1;
+        }
+
         String listMsg = String.format("Match # %d (%s) Team: %d", matchNumber, matchType, spectatingTeamNumber);
-        String CSVFormat = containsOwnTeam + "," + DataStore.getDateAsString() + "," + matchNumber + "," + matchType + "," + spectatingTeamNumber + "," + spectatingTeamFieldPosition + "," + startingPosition+","+ hasAutonomous +"," + offPlatform + ","+ crossLine + ","+ sHatchLow + "," + sHatchMid + "," + sHatchHigh + "," + sHatchDropped + "," + sCargoLow + "," + sCargoMid + "," + sCargoHigh + "," + sCargoDropped +"," + sCargoShipHatches + "," + sCargoShipCargo + "," +  isDefenseRobot + "," + cHatchLow + "," + cHatchMid + "," + cHatchHigh + "," + cHatchDropped + "," + cHatchesFromLoadingZone + "," + cCargoLow + "," + cCargoMid + "," + cCargoHigh + "," + cCargoDropped + "," + cCargoFromLoadingZone + "," + cCargoShipHatches + "," + cCargoShipCargo + "," +  endingLocation+","+ robotsHelped + "," + hasPenalty +"," + yellowCard + "," + redCard + "," + redScore + "," + blueScore + "," + robotDeadTime + ",\""+DataStore.escapeFormat(autonotes)+"\",\""+DataStore.escapeFormat(telenotes)+"\"";
+        String CSVFormat = containsOwnTeam + "," + DataStore.getDateAsString() + "," + matchNumber + "," + matchType + "," + spectatingTeamNumber + "," + spectatingTeamFieldPosition + "," + startingPosition+","+ hasAutonomous +"," + offPlatform + ","+ crossLine + ","+ sHatchLow + "," + sHatchMid + "," + sHatchHigh + "," + sHatchDropped + "," + sCargoLow + "," + sCargoMid + "," + sCargoHigh + "," + sCargoDropped +"," + sCargoShipHatches + "," + sCargoShipCargo + "," +  isDefenseRobot + "," + cHatchLow + "," + cHatchMid + "," + cHatchHigh + "," + cHatchDropped + "," + cHatchesFromLoadingZone + "," + cCargoLow + "," + cCargoMid + "," + cCargoHigh + "," + cCargoDropped + "," + cCargoFromLoadingZone + "," + cCargoShipHatches + "," + cCargoShipCargo + "," +  noClimbCnt+","+ lowClimbCnt + "," + midClimbCnt + "," + highClimbCnt + "," + robotsHelped + "," + hasPenalty +"," + yellowCard + "," + redCard + "," + redScore + "," + blueScore + "," + robotDeadTime + ",\""+DataStore.escapeFormat(autonotes)+"\",\""+DataStore.escapeFormat(telenotes)+"\"";
         Log.d("SetMatchInfo", CSVFormat);
 
         if (USE_DEBUG)
