@@ -2,7 +2,7 @@
 :start
 echo TRC Scouting App Installer
 echo (C) Titan Robotics Club 2019
-adb kill-server
+taskkill /im adb.exe /f
 :prompt
 echo.
 echo       Choice Menu
