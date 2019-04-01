@@ -20,7 +20,7 @@ exit
 :pull
 echo Pulling data from phone...
 mkdir outputs
-adb shell ls sdcard/TrcScoutingApp/*.csv | tr '\r' ' ' | xargs -n1 adb pull
+adb shell ls sdcard/TrcScoutingApp/*.csv | tr '\r' ' ' | xargs -n1 ./adb pull
 for /r "." %%x in (*.csv) do move "%%x" "outputs"
 echo Done
 goto :start
