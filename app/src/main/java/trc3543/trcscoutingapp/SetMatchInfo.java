@@ -91,7 +91,7 @@ public class SetMatchInfo extends AppCompatActivity
     private int cCargoShipCargo;
 
     // Endgame
-    private int robotsHelped;
+    private boolean robotsHelped;
     private String endingLocation = "";
 
     // scores at the end?
@@ -404,7 +404,7 @@ public class SetMatchInfo extends AppCompatActivity
             }
 
             Spinner helpedRobotSpinner = (Spinner) findViewById(R.id.climbHelpSpinner);
-            helpedRobotSpinner.setSelection(Integer.parseInt(OwOWhatsThis[37]));
+            helpedRobotSpinner.setSelection(Boolean.parseBoolean(OwOWhatsThis[37]) ? 1 : 0);
 
             CheckBox penaltyCB = (CheckBox) findViewById(R.id.penaltyCB);
             penaltyCB.setChecked(Boolean.parseBoolean(OwOWhatsThis[38]));
@@ -663,17 +663,13 @@ public class SetMatchInfo extends AppCompatActivity
             // read endgame stuff.
             Spinner climbHelpSpinner = (Spinner) findViewById(R.id.climbHelpSpinner);
             String chs = climbHelpSpinner.getSelectedItem().toString();
-            if (chs.equals("None"))
+            if (chs.equals("No"))
             {
-                robotsHelped = 0;
+                robotsHelped = false;
             }
-            else if (chs.contains("1"))
+            else
             {
-                robotsHelped = 1;
-            }
-            else if (chs.contains("2"))
-            {
-                robotsHelped = 2;
+                robotsHelped = true;
             }
 
             Spinner endLocationSpinner = (Spinner) findViewById(R.id.endingLocation);
