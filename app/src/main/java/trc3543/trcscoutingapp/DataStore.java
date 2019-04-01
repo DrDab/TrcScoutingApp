@@ -58,7 +58,7 @@ public class DataStore extends AppCompatActivity
 
     public static ArrayList<Match> matchList = new ArrayList<Match>();
 
-    public static int selfTeamNumber = 3543;
+    public static int selfTeamNumber = 492;
     public static String firstName = "Unknown";
     public static String lastName = "Unknown";
 
@@ -216,14 +216,14 @@ public class DataStore extends AppCompatActivity
             }
             catch (NumberFormatException e)
             {
-                selfTeamNumber = 3543; // can't read team num, return to default value.
+                selfTeamNumber = 492; // can't read team num, return to default value.
             }
             firstName = br.readLine();
             lastName = br.readLine();
         }
         else
         {
-            selfTeamNumber = 3543; // return by default
+            selfTeamNumber = 492; // return by default
         }
     }
 
