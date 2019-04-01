@@ -48,7 +48,7 @@ public class AutoSaveSettings extends AppCompatActivity
         setTitle("AutoSave Config");
         setTitleColor(Color.parseColor("#ff669900"));
 
-        int minutes = DataStore.autosaveSeconds / 60;
+        int minutes = DataStore.autosaveSeconds / 5;
 
         CheckBox cb1 = (CheckBox) findViewById(R.id.toggle_autosave);
         Spinner mySpinner = (Spinner) findViewById(R.id.timerchoice);
