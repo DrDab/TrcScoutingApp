@@ -392,7 +392,7 @@ public class SetMatchInfo extends AppCompatActivity
             }
             else if (highClimbCnt == 1)
             {
-                endingLocation.setSelection(1);
+                endingLocation.setSelection(3);
             }
             else if (midClimbCnt == 1)
             {
@@ -400,7 +400,7 @@ public class SetMatchInfo extends AppCompatActivity
             }
             else
             {
-                endingLocation.setSelection(3);
+                endingLocation.setSelection(1);
             }
 
             Spinner helpedRobotSpinner = (Spinner) findViewById(R.id.climbHelpSpinner);
