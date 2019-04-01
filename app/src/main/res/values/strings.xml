@@ -2,7 +2,6 @@
     <!-- BEGIN GAME SPECIFIC STUFF -->
 
     <string-array name="starting_positions">
-        <item>Select Starting Position</item>
         <item>Low</item>
         <item>Middle</item>
     </string-array>
