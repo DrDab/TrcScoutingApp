@@ -2,19 +2,17 @@
     <!-- BEGIN GAME SPECIFIC STUFF -->
 
     <string-array name="starting_positions">
-        <item>Select Position...</item>
         <item>Low</item>
         <item>Middle</item>
-        <!-- <item>High</item> -->
     </string-array>
 
     <!-- Parked, not parked for autonomous ending -->
 
     <string-array name="ending_positions">
-        <item>No Climb</item>
-        <item>High</item>
-        <item>Middle</item>
+        <item>Not in HAB</item>
         <item>Low</item>
+        <item>Middle</item>
+        <item>High</item>
     </string-array>
 
     <!--
@@ -46,15 +44,19 @@
     </string>
 
     <string-array name="game_types">
-        <item>Practice</item>
         <item>Qualification</item>
-        <item>Semi-Final</item>
+        <item>Quarterfinal</item>
+        <item>Semifinal</item>
         <item>Final</item>
     </string-array>
 
     <string-array name="spectating_types">
-        <item>Red</item>
-        <item>Blue</item>
+        <item>Red 1</item>
+        <item>Red 2</item>
+        <item>Red 3</item>
+        <item>Blue 1</item>
+        <item>Blue 2</item>
+        <item>Blue 3</item>
     </string-array>
 
 
@@ -89,10 +91,11 @@
     </string-array>
 
     <string-array name="speeds">
-        <item>A lot slower than us</item>
-        <item>Slower than us</item>
-        <item>Faster than us</item>
-        <item>A lot faster than us</item>
+        <item>Much slower</item>
+        <item>Slower</item>
+        <item>Similar</item>
+        <item>Faster</item>
+        <item>Much faster</item>
     </string-array>
 
     <string-array name="robot_breakdown">
@@ -131,9 +134,8 @@
     </string-array>
 
     <string-array name="robots_helped_climb">
-        <item>None</item>
-        <item>1 robot</item>
-        <item>2 robots</item>
+        <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string name="title_activity_settings">Settings</string>
