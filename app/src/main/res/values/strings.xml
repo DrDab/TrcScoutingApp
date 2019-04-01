@@ -45,7 +45,7 @@
 
     <string-array name="game_types">
         <item>Qualification</item>
-        <item>Quaterfinal</item>
+        <item>Quarterfinal</item>
         <item>Semifinal</item>
         <item>Final</item>
     </string-array>
