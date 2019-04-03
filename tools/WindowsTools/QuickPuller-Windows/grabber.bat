@@ -23,13 +23,13 @@ exit
 echo Pulling match data from phone...
 mkdir matchdata
 adb shell ls sdcard/TrcScoutingApp/*.csv | tr '\r' ' ' | xargs -n1 ./adb pull
-for /r "." %%x in (*.csv) do move "%%x" "matchdata"
+move *.csv matchdata
 echo Done
 goto :start
 :pullpit
 echo Pulling pit data from phone...
 mkdir pitdata
 adb shell ls sdcard/TrcPitScouting/*.csv | tr '\r' ' ' | xargs -n1 ./adb pull
-for /r "." %%x in (*.csv) do move "%%x" "pitdata"
+move *.csv matchdata
 echo Done
 goto :start

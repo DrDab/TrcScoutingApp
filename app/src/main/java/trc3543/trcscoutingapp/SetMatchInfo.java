@@ -236,60 +236,60 @@ public class SetMatchInfo extends AppCompatActivity
 
             // populate the match number.
             EditText mnum = (EditText) findViewById(R.id.matchNum);
-            mnum.setText(OwOWhatsThis[2]);
-            Log.d("SetMatchInfo", "Match Number Set: " + OwOWhatsThis[2]);
+            mnum.setText(OwOWhatsThis[3]);
+            Log.d("SetMatchInfo", "Match Number Set: " + OwOWhatsThis[3]);
 
             // populate the match type.
             Spinner mtype =(Spinner) findViewById(R.id.CompType);
-            mtype.setSelection(((ArrayAdapter)mtype.getAdapter()).getPosition(OwOWhatsThis[3]));
-            Log.d("SetMatchInfo", "Match Type Set: " + OwOWhatsThis[3]);
+            mtype.setSelection(((ArrayAdapter)mtype.getAdapter()).getPosition(OwOWhatsThis[4]));
+            Log.d("SetMatchInfo", "Match Type Set: " + OwOWhatsThis[4]);
 
             // populate the team number.
             EditText tnum = (EditText) findViewById(R.id.teamNum);
-            tnum.setText(OwOWhatsThis[4]);
-            Log.d("SetMatchInfo", "Team Number Set: " + OwOWhatsThis[4]);
+            tnum.setText(OwOWhatsThis[5]);
+            Log.d("SetMatchInfo", "Team Number Set: " + OwOWhatsThis[5]);
 
             // populate the spectating team.
             Spinner specteam =(Spinner) findViewById(R.id.SpectatingSpinner);
-            specteam.setSelection(((ArrayAdapter)specteam.getAdapter()).getPosition(OwOWhatsThis[5]));
-            Log.d("SetMatchInfo", "Spectating Team: " + OwOWhatsThis[5]);
+            specteam.setSelection(((ArrayAdapter)specteam.getAdapter()).getPosition(OwOWhatsThis[6]));
+            Log.d("SetMatchInfo", "Spectating Team: " + OwOWhatsThis[6]);
 
             // populate the starting position.
             Spinner spos =(Spinner) findViewById(R.id.startingPositionForm);
-            spos.setSelection(((ArrayAdapter)spos.getAdapter()).getPosition(OwOWhatsThis[6]));
-            Log.d("SetMatchInfo", "Starting Position Set: " + OwOWhatsThis[6]);
+            spos.setSelection(((ArrayAdapter)spos.getAdapter()).getPosition(OwOWhatsThis[7]));
+            Log.d("SetMatchInfo", "Starting Position Set: " + OwOWhatsThis[7]);
 
             // =====================[ BEGIN AUTONOMOUS PHASE ]===================== //
 
             // populate autonomous notes.
             EditText aunotes = (EditText) findViewById(R.id.autoNotes);
-            String rawautonotes = DataStore.unescapeFormat(OwOWhatsThis[44]);
+            String rawautonotes = DataStore.unescapeFormat(OwOWhatsThis[45]);
             rawautonotes = rawautonotes.replaceAll("^\"|\"$", ""); // remove quotation marks
             aunotes.setText(rawautonotes);
             Log.d("SetMatchInfo", "Autonomous Notes Set: \"" + rawautonotes + "\"");
 
             // sjaoifoisajfioasofjiowsa
             CheckBox haveAutonomousCB = (CheckBox) findViewById(R.id.autonomousCB);
-            haveAutonomousCB.setChecked(OwOWhatsThis[7].equals("true"));
+            haveAutonomousCB.setChecked(OwOWhatsThis[8].equals("true"));
 
             CheckBox offPlatformCB = (CheckBox) findViewById(R.id.getOffPlatformCheckbox);
-            offPlatformCB.setChecked(OwOWhatsThis[8].equals("true"));
+            offPlatformCB.setChecked(OwOWhatsThis[9].equals("true"));
 
             CheckBox crosslineCB = (CheckBox) findViewById(R.id.crossLineCheckBox);
-            crosslineCB.setChecked(OwOWhatsThis[9].equals("true"));
+            crosslineCB.setChecked(OwOWhatsThis[10].equals("true"));
 
-            int sandstormHatchLow = Integer.parseInt(OwOWhatsThis[10]);
-            int sandstormHatchMid = Integer.parseInt(OwOWhatsThis[11]);
-            int sandstormHatchHigh = Integer.parseInt(OwOWhatsThis[12]);
-            int sandstormHatchDrop = Integer.parseInt(OwOWhatsThis[13]);
+            int sandstormHatchLow = Integer.parseInt(OwOWhatsThis[11]);
+            int sandstormHatchMid = Integer.parseInt(OwOWhatsThis[12]);
+            int sandstormHatchHigh = Integer.parseInt(OwOWhatsThis[13]);
+            int sandstormHatchDrop = Integer.parseInt(OwOWhatsThis[14]);
 
-            int sandstormCargoLow = Integer.parseInt(OwOWhatsThis[14]);
-            int sandstormCargoMid = Integer.parseInt(OwOWhatsThis[15]);
-            int sandstormCargoHigh = Integer.parseInt(OwOWhatsThis[16]);
-            int sandstormCargoDrop = Integer.parseInt(OwOWhatsThis[17]);
+            int sandstormCargoLow = Integer.parseInt(OwOWhatsThis[15]);
+            int sandstormCargoMid = Integer.parseInt(OwOWhatsThis[16]);
+            int sandstormCargoHigh = Integer.parseInt(OwOWhatsThis[17]);
+            int sandstormCargoDrop = Integer.parseInt(OwOWhatsThis[18]);
 
-            int sandstormCargoShipHatches = Integer.parseInt(OwOWhatsThis[18]);
-            int sandstormCargoShipCargo = Integer.parseInt(OwOWhatsThis[19]);
+            int sandstormCargoShipHatches = Integer.parseInt(OwOWhatsThis[19]);
+            int sandstormCargoShipCargo = Integer.parseInt(OwOWhatsThis[20]);
 
             Spinner shl = (Spinner) findViewById(R.id.sandstormHatchLow);
             shl.setSelection(sandstormHatchLow);
@@ -324,22 +324,22 @@ public class SetMatchInfo extends AppCompatActivity
             // =====================[ BEGIN TELEOPERATED PHASE ]===================== //
 
             CheckBox defenseCB = (CheckBox) findViewById(R.id.defenseRobot);
-            defenseCB.setChecked(OwOWhatsThis[20].equals("true"));
+            defenseCB.setChecked(OwOWhatsThis[21].equals("true"));
 
-            int clearHatchLow = Integer.parseInt(OwOWhatsThis[21]);
-            int clearHatchMid = Integer.parseInt(OwOWhatsThis[22]);
-            int clearHatchHigh = Integer.parseInt(OwOWhatsThis[23]);
-            int clearHatchDrop = Integer.parseInt(OwOWhatsThis[24]);
-            boolean clearHatchPickupFromLoadingZone = Boolean.parseBoolean(OwOWhatsThis[25]);
+            int clearHatchLow = Integer.parseInt(OwOWhatsThis[22]);
+            int clearHatchMid = Integer.parseInt(OwOWhatsThis[23]);
+            int clearHatchHigh = Integer.parseInt(OwOWhatsThis[24]);
+            int clearHatchDrop = Integer.parseInt(OwOWhatsThis[25]);
+            boolean clearHatchPickupFromLoadingZone = Boolean.parseBoolean(OwOWhatsThis[26]);
 
-            int clearCargoLow = Integer.parseInt(OwOWhatsThis[26]);
-            int clearCargoMid = Integer.parseInt(OwOWhatsThis[27]);
-            int clearCargoHigh = Integer.parseInt(OwOWhatsThis[28]);
-            int clearCargoDrop = Integer.parseInt(OwOWhatsThis[29]);
-            boolean clearCargoPickupFromLoadingZone = Boolean.parseBoolean(OwOWhatsThis[30]);
+            int clearCargoLow = Integer.parseInt(OwOWhatsThis[27]);
+            int clearCargoMid = Integer.parseInt(OwOWhatsThis[28]);
+            int clearCargoHigh = Integer.parseInt(OwOWhatsThis[29]);
+            int clearCargoDrop = Integer.parseInt(OwOWhatsThis[30]);
+            boolean clearCargoPickupFromLoadingZone = Boolean.parseBoolean(OwOWhatsThis[31]);
 
-            int clearCargoShipHatches = Integer.parseInt(OwOWhatsThis[31]);
-            int clearCargoShipCargo = Integer.parseInt(OwOWhatsThis[32]);
+            int clearCargoShipHatches = Integer.parseInt(OwOWhatsThis[32]);
+            int clearCargoShipCargo = Integer.parseInt(OwOWhatsThis[33]);
 
             Spinner chl = (Spinner) findViewById(R.id.clearHatchLow);
             chl.setSelection(clearHatchLow);
@@ -381,10 +381,10 @@ public class SetMatchInfo extends AppCompatActivity
 
             Spinner endingLocation =(Spinner) findViewById(R.id.endingLocation);
 
-            int noClimbCnt = Integer.parseInt(OwOWhatsThis[33]);
-            int lowClimbCnt = Integer.parseInt(OwOWhatsThis[34]);
-            int midClimbCnt = Integer.parseInt(OwOWhatsThis[35]);
-            int highClimbCnt = Integer.parseInt(OwOWhatsThis[36]);
+            int noClimbCnt = Integer.parseInt(OwOWhatsThis[34]);
+            int lowClimbCnt = Integer.parseInt(OwOWhatsThis[35]);
+            int midClimbCnt = Integer.parseInt(OwOWhatsThis[36]);
+            int highClimbCnt = Integer.parseInt(OwOWhatsThis[37]);
 
             if (noClimbCnt == 1)
             {
@@ -404,31 +404,31 @@ public class SetMatchInfo extends AppCompatActivity
             }
 
             Spinner helpedRobotSpinner = (Spinner) findViewById(R.id.climbHelpSpinner);
-            helpedRobotSpinner.setSelection(Boolean.parseBoolean(OwOWhatsThis[37]) ? 1 : 0);
+            helpedRobotSpinner.setSelection(Boolean.parseBoolean(OwOWhatsThis[38]) ? 1 : 0);
 
             CheckBox penaltyCB = (CheckBox) findViewById(R.id.penaltyCB);
-            penaltyCB.setChecked(Boolean.parseBoolean(OwOWhatsThis[38]));
+            penaltyCB.setChecked(Boolean.parseBoolean(OwOWhatsThis[39]));
 
             CheckBox yellowCardCB = (CheckBox) findViewById(R.id.yellowcardCB);
-            yellowCardCB.setChecked(Boolean.parseBoolean(OwOWhatsThis[39]));
+            yellowCardCB.setChecked(Boolean.parseBoolean(OwOWhatsThis[40]));
 
             CheckBox redcardCB = (CheckBox) findViewById(R.id.redcardCB);
-            redcardCB.setChecked(Boolean.parseBoolean(OwOWhatsThis[40]));
+            redcardCB.setChecked(Boolean.parseBoolean(OwOWhatsThis[41]));
 
             EditText redScore = (EditText) findViewById(R.id.redScore);
-            redScore.setText(OwOWhatsThis[41] + "");
+            redScore.setText(OwOWhatsThis[42] + "");
 
             EditText blueScore = (EditText) findViewById(R.id.blueScore);
-            blueScore.setText(OwOWhatsThis[42] + "");
+            blueScore.setText(OwOWhatsThis[43] + "");
 
             //
             EditText robotDeadTime = (EditText) findViewById(R.id.stopwatchDisp);
-            robotDeadTime.setText(OwOWhatsThis[43] + "");
+            robotDeadTime.setText(OwOWhatsThis[44] + "");
 
 
             // populate teleop notes.
             EditText tonotes = (EditText) findViewById(R.id.teleopnotes);
-            String rawtonotes = DataStore.unescapeFormat(OwOWhatsThis[45]);
+            String rawtonotes = DataStore.unescapeFormat(OwOWhatsThis[46]);
             rawtonotes = rawtonotes.replaceAll("^\"|\"$", ""); // remove quotation marks
             tonotes.setText(rawtonotes);
 
@@ -518,7 +518,7 @@ public class SetMatchInfo extends AppCompatActivity
                         .setAction("Action", null).show();
                 breakCond = true;
             }
-            else if (startingPosition.equals("Select Position..."))
+            else if (startingPosition.equals("Select Starting Location"))
             {
                 Snackbar.make(view, "Starting Position must be populated!", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
@@ -714,7 +714,7 @@ public class SetMatchInfo extends AppCompatActivity
         }
 
         String listMsg = String.format("Match # %d (%s) Team: %d", matchNumber, matchType, spectatingTeamNumber);
-        String CSVFormat = containsOwnTeam + "," + DataStore.getDateAsString() + "," + matchNumber + "," + matchType + "," + spectatingTeamNumber + "," + spectatingTeamFieldPosition + "," + startingPosition+","+ hasAutonomous +"," + offPlatform + ","+ crossLine + ","+ sHatchLow + "," + sHatchMid + "," + sHatchHigh + "," + sHatchDropped + "," + sCargoLow + "," + sCargoMid + "," + sCargoHigh + "," + sCargoDropped +"," + sCargoShipHatches + "," + sCargoShipCargo + "," +  isDefenseRobot + "," + cHatchLow + "," + cHatchMid + "," + cHatchHigh + "," + cHatchDropped + "," + cHatchesFromLoadingZone + "," + cCargoLow + "," + cCargoMid + "," + cCargoHigh + "," + cCargoDropped + "," + cCargoFromLoadingZone + "," + cCargoShipHatches + "," + cCargoShipCargo + "," +  noClimbCnt+","+ lowClimbCnt + "," + midClimbCnt + "," + highClimbCnt + "," + robotsHelped + "," + hasPenalty +"," + yellowCard + "," + redCard + "," + redScore + "," + blueScore + "," + robotDeadTime + ",\""+DataStore.escapeFormat(autonotes)+"\",\""+DataStore.escapeFormat(telenotes)+"\"";
+        String CSVFormat = "\"" + DataStore.escapeFormat(DataStore.firstName + " " + DataStore.lastName) + "\"," + containsOwnTeam + "," + DataStore.getDateAsString() + "," + matchNumber + "," + matchType + "," + spectatingTeamNumber + "," + spectatingTeamFieldPosition + "," + startingPosition+","+ hasAutonomous +"," + offPlatform + ","+ crossLine + ","+ sHatchLow + "," + sHatchMid + "," + sHatchHigh + "," + sHatchDropped + "," + sCargoLow + "," + sCargoMid + "," + sCargoHigh + "," + sCargoDropped +"," + sCargoShipHatches + "," + sCargoShipCargo + "," +  isDefenseRobot + "," + cHatchLow + "," + cHatchMid + "," + cHatchHigh + "," + cHatchDropped + "," + cHatchesFromLoadingZone + "," + cCargoLow + "," + cCargoMid + "," + cCargoHigh + "," + cCargoDropped + "," + cCargoFromLoadingZone + "," + cCargoShipHatches + "," + cCargoShipCargo + "," +  noClimbCnt+","+ lowClimbCnt + "," + midClimbCnt + "," + highClimbCnt + "," + robotsHelped + "," + hasPenalty +"," + yellowCard + "," + redCard + "," + redScore + "," + blueScore + "," + robotDeadTime + ",\""+DataStore.escapeFormat(autonotes)+"\",\""+DataStore.escapeFormat(telenotes)+"\"";
         Log.d("SetMatchInfo", CSVFormat);
 
         if (USE_DEBUG)
