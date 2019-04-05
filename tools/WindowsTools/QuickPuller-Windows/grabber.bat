@@ -30,6 +30,6 @@ goto :start
 echo Pulling pit data from phone...
 mkdir pitdata
 adb shell ls sdcard/TrcPitScouting/*.csv | tr '\r' ' ' | xargs -n1 ./adb pull
-move *.csv matchdata
+move *.csv pitdata
 echo Done
 goto :start
