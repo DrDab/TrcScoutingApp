@@ -48,7 +48,7 @@ goto :prompt
 echo Pulling recent match data from phone...
 mkdir matchdata
 adb shell ls sdcard/TrcScoutingApp/*.csv | tr '\r' ' ' | xargs -n1 ./adb pull -a
-ls *.csv -t | tail -n +2 | xargs rm
+ls *.csv -t | tail -n +2 | xargs ./rm
 move *.csv matchdata
 echo Done
 goto :prompt
@@ -57,7 +57,7 @@ goto :prompt
 echo Pulling recent pit data from phone...
 mkdir pitdata
 adb shell ls sdcard/TrcPitScouting/*.csv | tr '\r' ' ' | xargs -n1 ./adb pull -a
-ls *.csv -t | tail -n +2 | xargs rm
+ls *.csv -t | tail -n +2 | xargs ./rm
 move *.csv pitdata
 echo Done
 goto :prompt
