@@ -36,6 +36,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
@@ -43,10 +44,14 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.travijuu.numberpicker.library.NumberPicker;
 
+import org.w3c.dom.Text;
+
 import java.io.IOException;
+import java.util.ArrayList;
 
 import trc3543.gamespecific.PagerAdapter;
 
@@ -192,14 +197,16 @@ public class SetMatchInfo extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        ArrayList<String> tabs = new ArrayList<String>();
+        tabs.add("Sandstorm");
+        tabs.add("Clear Skies");;
+
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Sandstorm"));
-        tabLayout.addTab(tabLayout.newTab().setText("Clear Skies"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         final PagerAdapter adapter = new PagerAdapter
-                (getSupportFragmentManager(), tabLayout.getTabCount());
+                (getSupportFragmentManager(), tabs);
 
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -222,6 +229,11 @@ public class SetMatchInfo extends AppCompatActivity
 
         // done initializing tabbed layout.
 
+        // test
+
+        //((EditText)(adapter.getItem(0).getView().findViewById(R.id.matchNum))).setText("Hallo");
+
+        // end tests
 
         // initialize all ui elements.
 
