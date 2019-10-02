@@ -80,7 +80,7 @@
     </string-array>
 
     <string-array name="flexible_yes_or_no">
-        <item>Didn't Attempt</item>
+        <item>Didn\'t Attempt</item>
         <item>Attempted and failed</item>
         <item>Yes</item>
     </string-array>
