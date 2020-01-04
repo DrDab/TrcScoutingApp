@@ -83,7 +83,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:text="Special Thanks to: Michael Tsang, Paul Malmsten, Amy McIvor, Chris Helms, Eric Nelson, Chris Nathman, Abhay Deshpande, Ian Wang, Sophia Z. and Karkitheya Vemuri"
+        android:text="Special Thanks to: Michael Tsang, Paul Malmsten, Amy McIvor, Chris Helms, Eric Nelson, Chris Nathman, Abhay Deshpande, Ian Wang, Sophia Z., Elaine Zheng, Katie Wang, Isaac Anderson and Karkitheya Vemuri"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
