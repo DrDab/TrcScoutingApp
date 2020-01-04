@@ -127,15 +127,7 @@ public class SendReport extends AppCompatActivity
 
                         for(;;)
                         {
-                            runOnUiThread(new Runnable()
-                            {
-
-                                @Override
-                                public void run()
-                                {
-                                    statusBox.setText(String.format("Connecting to server %s:%d...", ip, port));
-                                }
-                            });
+                            updateStatusDisplay(String.format("Connecting to server %s:%d...", ip, port));
                             if (sock.isClosed())
                             {
                                 isclosed = true;
@@ -165,41 +157,17 @@ public class SendReport extends AppCompatActivity
                                 }
                                 else if (receiveMessage.equals("auth_failed"))
                                 {
-                                    runOnUiThread(new Runnable()
-                                    {
-
-                                        @Override
-                                        public void run()
-                                        {
-                                            statusBox.setText("[FAIL] Incorrect login.\nPlease check your username and password, or contact the sysadmin.");
-                                        }
-                                    });
+                                    updateStatusDisplay("[FAIL] Incorrect login.\nPlease check your username and password, or contact the sysadmin.");
                                     isclosed = true;
                                 }
                                 else if (receiveMessage.equals("json_success"))
                                 {
-                                    runOnUiThread(new Runnable()
-                                    {
-
-                                        @Override
-                                        public void run()
-                                        {
-                                            statusBox.setText(String.format("[SUCCESS] %d entries sent successfully!", DataStore.matchList.size()));
-                                        }
-                                    });
+                                    updateStatusDisplay(String.format("[SUCCESS] %d entries sent successfully!", DataStore.matchList.size()));
                                     isclosed = true;
                                 }
                                 else
                                 {
-                                    runOnUiThread(new Runnable()
-                                    {
-
-                                        @Override
-                                        public void run()
-                                        {
-                                            statusBox.setText("[FAIL] JSON data is malformed, or an error happened.");
-                                        }
-                                    });
+                                    updateStatusDisplay("[FAIL] JSON data is malformed, or an error happened.");
                                     isclosed = true;
                                 }
 
@@ -224,15 +192,7 @@ public class SendReport extends AppCompatActivity
                     }
                     catch (final Exception e)
                     {
-                        runOnUiThread(new Runnable()
-                        {
-
-                            @Override
-                            public void run()
-                            {
-                                statusBox.setText(e.toString());
-                            }
-                        });
+                        updateStatusDisplay(e.toString());
                     }
                 }
             });
@@ -244,6 +204,18 @@ public class SendReport extends AppCompatActivity
         {
             statusBox.setText(e.toString());
         }
+    }
+
+    public void updateStatusDisplay(final String status)
+    {
+        runOnUiThread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                statusBox.setText(status);
+            }
+        });
     }
 
     public void onSaveClicked(View vue)
