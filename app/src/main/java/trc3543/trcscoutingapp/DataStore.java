@@ -47,8 +47,9 @@ public class DataStore extends AppCompatActivity
 {
     // Begin season-specific info.
     public static final String DATA_FOLDER_NAME = "TrcScoutingApp";
-    public static final String CSV_HEADER = "User ID, Contains Your Team, Date, Match #, Match Type, Team Number, Spectating Team, Starting Position, SP-Autonomous, SP-Off Platform, SP-Cross Line, SP-RocketHatchLow, SP-RocketHatchMid, SP-RocketHatchHigh, SP-RocketHatchDropped, SP-RocketCargoLow, SP-RocketCargoMid, SP-RocketCargoHigh, SP-RocketCargoDropped, SP-CargoShipHatches, SP-CargoShipCargo, CP-Defense, CP-RocketHatchLow, CP-RocketHatchMid, CP-RocketHatchHigh, CP-RocketHatchDropped, CP-HatchFromLoadingZone, CP-RocketCargoLow, CP-RocketCargoMid, CP-RocketCargoHigh, CP-RocketCargoDropped, CP-CargoFromLoadingZone, CP-CargoShipHatches, CP-CargoShipCargo, EG-No Climb, EG-Low Climb, EG-Mid Climb, EG-High Climb, EG-Climbing Help, Penalties, Yellow Card, Red Card, Red Score, Blue Score, Robot Dead Time, Sandstorm Notes, Clear Skies Notes";
+    public static final String CSV_HEADER = "Match#, Team#, MatchType, Alliance, Notes";
     public static final String VERSION_NUMBER = "1.3.3-frc-INDEV";
+    public static final int YEAR_NUMBER = 2020;
     // End season-specific info.
 
 
@@ -79,7 +80,7 @@ public class DataStore extends AppCompatActivity
         {
             writeDirectory.mkdir();
         }
-        File cache = new File(writeDirectory, "cache.json");
+        File cache = new File(writeDirectory, "cache-" + YEAR_NUMBER + ".json");
         if(!cache.exists())
         {
             cache.createNewFile();
@@ -99,7 +100,7 @@ public class DataStore extends AppCompatActivity
         {
             readDirectory.mkdir();
         }
-        File cache = new File(readDirectory, "cache.json");
+        File cache = new File(readDirectory, "cache-" + YEAR_NUMBER + ".json");
         if (cache.exists())
         {
             String jsonData = new String(Files.readAllBytes(cache.toPath()));
