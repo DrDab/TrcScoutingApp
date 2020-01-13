@@ -35,6 +35,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ public class DataStore extends AppCompatActivity
     public static boolean useAutosave = true;
     public static int autosaveSeconds = 7200;
 
-    public static ArrayList<Match> matchList = new ArrayList<Match>();
+    public static ArrayList<MatchInfo> matchList = new ArrayList<MatchInfo>();
 
     public static int selfTeamNumber = 492;
     public static String firstName = "Unknown";
@@ -71,7 +72,7 @@ public class DataStore extends AppCompatActivity
     public static String username = null;
     public static String password = null;
 
-    public static synchronized boolean writeArraylistsToJSON() throws IOException
+    public static synchronized void writeArraylistsToJSON() throws IOException, JSONException
     {
         File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
         if (!writeDirectory.exists())
@@ -83,47 +84,17 @@ public class DataStore extends AppCompatActivity
         {
             cache.createNewFile();
         }
-        else
-        {
-            cache.delete();
-            cache = new File(writeDirectory, "cache.json");
-            cache.createNewFile();
-        }
-        PrintWriter pw = new PrintWriter(new FileWriter(cache, true));
+        PrintWriter pw = new PrintWriter(new FileWriter(cache));
         JSONObject jsonObject = new JSONObject();
-        JSONArray displayContestsArray = new JSONArray();
-        JSONArray csvContestsArray = new JSONArray();
-        JSONArray uuidArray = new JSONArray();
-
-        for(int i = 0; i < matchList.size(); i++)
-        {
-            displayContestsArray.put(matchList.get(i).getDispString());
-            csvContestsArray.put(matchList.get(i).getCsvString());
-            uuidArray.put(matchList.get(i).getUUID());
-        }
-
-        try
-        {
-            jsonObject.put("disp", (Object)displayContestsArray);
-            jsonObject.put("csv", (Object)csvContestsArray);
-            jsonObject.put("uuid", (Object)uuidArray);
-        }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-            return false;
-        }
-
+        JSONArray matchArray = GsonUtilz.MatchInfoArrayListToJSONArray(matchList);
+        jsonObject.put("matches", matchArray);
         pw.println(jsonObject.toString());
-        pw.flush();
         pw.close();
-        return true;
     }
 
-    public static synchronized void readArraylistsFromJSON() throws IOException
+    public static synchronized void readArraylistsFromJSON() throws IOException, JSONException
     {
         File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
-        int saiodfjsajofojfdfjisafbj;
         if (!readDirectory.exists())
         {
             readDirectory.mkdir();
@@ -131,32 +102,9 @@ public class DataStore extends AppCompatActivity
         File cache = new File(readDirectory, "cache.json");
         if (cache.exists())
         {
-            BufferedReader br = new BufferedReader(new FileReader(cache));
-            String jsonData = "";
-            String in = null;
-            while ((in = br.readLine()) != null)
-            {
-                jsonData += in;
-            }
-            br.close();
-            try
-            {
-                matchList.clear();
-
-                JSONObject jsonObject = new JSONObject(jsonData);
-                JSONArray displayContestsArray = jsonObject.getJSONArray("disp");
-                JSONArray csvContestsArray = jsonObject.getJSONArray("csv");
-                JSONArray uuidArray = jsonObject.getJSONArray("uuid");
-
-                for(int i = 0; i < csvContestsArray.length(); i++)
-                {
-                    matchList.add(new Match(displayContestsArray.getString(i), csvContestsArray.getString(i), uuidArray.getString(i)));
-                }
-            }
-            catch (JSONException e)
-            {
-                e.printStackTrace();
-            }
+            String jsonData = new String(Files.readAllBytes(cache.toPath()));
+            JSONObject jsonCacheObject = new JSONObject(jsonData);
+            matchList = GsonUtilz.JSONArrayToMatchInfoArrayList(jsonCacheObject.getJSONArray("matches"));
         }
     }
 
@@ -178,16 +126,14 @@ public class DataStore extends AppCompatActivity
             {
                 log.createNewFile();
             }
-            PrintWriter madoka = new PrintWriter(new FileWriter(log, true));
-            madoka.println("Log by: " + firstName + " " + lastName + ", written on " + getDateAsString());
-            madoka.println(CSV_HEADER);
-            for(Match match : matchList)
+            PrintWriter pw = new PrintWriter(new FileWriter(log, true));
+            pw.println("Log by: " + firstName + " " + lastName + ", written on " + getDateAsString());
+            pw.println(CSV_HEADER);
+            for(MatchInfo match : matchList)
             {
-                madoka.println(DataStore.unescapeFormat(match.getCsvString()));
+                pw.println(DataStore.unescapeFormat(match.getCsvString()));
             }
-            madoka.println("End Of Log");
-            madoka.flush();
-            madoka.close();
+            pw.close();
             return true;
         }
     }

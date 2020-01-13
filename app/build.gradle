@@ -36,4 +36,5 @@ dependencies {
     implementation files('libs/core-3.3.3.jar')
     implementation files('libs/javase-3.3.3.jar')
     compile 'com.github.travijuu:numberpicker:1.0.7'
+    implementation files('libs/gson-2.8.2.jar')
 }

@@ -1,27 +1,7 @@
 <resources>
     <!-- BEGIN GAME SPECIFIC STUFF -->
 
-    <string-array name="starting_positions">
-        <item>Select Starting Location</item>
-        <item>Low</item>
-        <item>Middle</item>
-    </string-array>
 
-    <!-- Parked, not parked for autonomous ending -->
-
-    <string-array name="ending_positions">
-        <item>Not in HAB</item>
-        <item>Low</item>
-        <item>Middle</item>
-        <item>High</item>
-    </string-array>
-
-    <!--
-    <string-array name="starting_hanging_positions">
-        <item>Hanging</item>
-        <item>Ground</item>
-    </string-array>
-    -->
 
     <!-- END GAME SPECIFIC STUFF -->
 

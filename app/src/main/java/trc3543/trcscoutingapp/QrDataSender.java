@@ -127,13 +127,12 @@ public class QrDataSender extends AppCompatActivity
 
     private String getJSONSerializedMessage(int id)
     {
-        Match match = DataStore.matchList.get(id);
+        MatchInfo match = DataStore.matchList.get(id);
         try
         {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("phoneId", DataStore.firstName + "_" + DataStore.lastName + "_" + DataStore.selfTeamNumber);
-            jsonObject.put("csvline", match.getCsvString());
-            jsonObject.put("uuid", match.getUUID());
+            jsonObject.put("match", GsonUtilz.MatchInfoToJSONObject(match));
             return jsonObject.toString();
         }
         catch (JSONException e)

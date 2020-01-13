@@ -45,19 +45,20 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import org.json.JSONException;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.UUID;
 
 @SuppressWarnings("all")
 public class AddMatches extends AppCompatActivity
 {
     public static final boolean MAKE_CHANGES_READ_ONLY = false;
 
-    static ArrayAdapter<Match> adapter;
+    static ArrayAdapter<MatchInfo> adapter;
     static ListView contestList;
 
     private Runnable autosaverunnable = null;
@@ -88,7 +89,7 @@ public class AddMatches extends AppCompatActivity
         {
             DataStore.readArraylistsFromJSON();
         }
-        catch (IOException e)
+        catch (IOException | JSONException e)
         {
             e.printStackTrace();
         }
@@ -97,7 +98,7 @@ public class AddMatches extends AppCompatActivity
         setSupportActionBar(toolbar);
         contestList = (ListView) findViewById(R.id.listView);
 
-        adapter = new ArrayAdapter<Match>(AddMatches.this, android.R.layout.simple_list_item_1, DataStore.matchList);
+        adapter = new ArrayAdapter<MatchInfo>(AddMatches.this, android.R.layout.simple_list_item_1, DataStore.matchList);
 
         contestList.setAdapter(adapter);
         contestList.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -108,23 +109,15 @@ public class AddMatches extends AppCompatActivity
                 // position = position selected
                 AlertDialog alertDialog = new AlertDialog.Builder(AddMatches.this).create();
                 alertDialog.setTitle("Game Information");
-                if (listEmpty())
+                if (MAKE_CHANGES_READ_ONLY)
                 {
-                    alertDialog.setMessage("No Games Yet");
+                    String s = DataStore.matchList.get(position).getCsvString();
+                    alertDialog.setMessage(s);
                     alertDialog.show();
                 }
                 else
                 {
-                    if (MAKE_CHANGES_READ_ONLY)
-                    {
-                        String s = DataStore.matchList.get(position).getCsvString();
-                        alertDialog.setMessage(s);
-                        alertDialog.show();
-                    }
-                    else
-                    {
-                        openCompNamePrompt(true, position);
-                    }
+                    openCompNamePrompt(true, position);
                 }
 
             }
@@ -134,35 +127,32 @@ public class AddMatches extends AppCompatActivity
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int i, long l)
             {
-                if (!DataStore.matchList.contains("No Entries Yet"))
-                {
-                    new AlertDialog.Builder(AddMatches.this)
-                            .setTitle("Are you sure?")
-                            .setMessage("Are you sure you want to delete this element?")
-                            .setPositiveButton("YES", new DialogInterface.OnClickListener()
+                new AlertDialog.Builder(AddMatches.this)
+                        .setTitle("Are you sure?")
+                        .setMessage("Are you sure you want to delete this element?")
+                        .setPositiveButton("YES", new DialogInterface.OnClickListener()
+                        {
+                            public void onClick(DialogInterface dialog, int whichButton)
                             {
-                                public void onClick(DialogInterface dialog, int whichButton)
+                                removeFromList(i);
+                                try
                                 {
-                                    removeFromList(i);
-                                    try
-                                    {
-                                        DataStore.writeArraylistsToJSON();
-                                    }
-                                    catch (IOException e)
-                                    {
-                                        e.printStackTrace();
-                                    }
-                                    adapter.notifyDataSetChanged();
+                                    DataStore.writeArraylistsToJSON();
                                 }
-                            })
-                            .setNegativeButton("NO", new DialogInterface.OnClickListener()
+                                catch (IOException | JSONException e)
+                                {
+                                    e.printStackTrace();
+                                }
+                                adapter.notifyDataSetChanged();
+                            }
+                        })
+                        .setNegativeButton("NO", new DialogInterface.OnClickListener()
+                        {
+                            public void onClick(DialogInterface dialog, int whichButton)
                             {
-                                public void onClick(DialogInterface dialog, int whichButton)
-                                {
-                                }
-                            })
-                            .show();
-                }
+                            }
+                        })
+                        .show();
                 return true;
             }
         });
@@ -178,11 +168,6 @@ public class AddMatches extends AppCompatActivity
 
             }
         });
-
-        if (DataStore.matchList.size() == 0)
-        {
-            addToList("No Entries Yet", null);
-        }
 
         // check if user information is saved. if not, open the settings window.
         boolean openSettingsCondition = false;
@@ -332,7 +317,7 @@ public class AddMatches extends AppCompatActivity
             // ask for user confirmation
             new AlertDialog.Builder(this)
                     .setTitle("Are you sure?")
-                    .setMessage("Are you sure you want to clear the contest history?")
+                    .setMessage("Are you sure you want to delete all matches in this session?")
                     .setPositiveButton("YES", new DialogInterface.OnClickListener()
                     {
                         public void onClick(DialogInterface dialog, int whichButton)
@@ -342,11 +327,10 @@ public class AddMatches extends AppCompatActivity
                             {
                                 DataStore.writeArraylistsToJSON();
                             }
-                            catch (IOException e)
+                            catch (IOException | JSONException e)
                             {
                                 e.printStackTrace();
                             }
-                            addToList("No Entries Yet", null);
                             adapter.notifyDataSetChanged();
                         }
                     })
@@ -382,49 +366,20 @@ public class AddMatches extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    public static synchronized void addToList(String dispString, String csvString)
+    public static synchronized void addToList(MatchInfo matchInfo)
     {
         synchronized (DataStore.matchList)
         {
-            if (listHasPlaceHolder())
-            {
-                removeFromList("No Entries Yet", null);
-            }
-
-            DataStore.matchList.add(new Match(dispString, csvString, UUID.randomUUID().toString()));
+            DataStore.matchList.add(matchInfo);
             adapter.notifyDataSetChanged();
         }
     }
 
-    public static synchronized void resetListItem(String dispString, String csvString, int pos)
+    public static synchronized void resetListItem(MatchInfo matchInfo, int pos)
     {
         synchronized (DataStore.matchList)
         {
-            Match match = DataStore.matchList.get(pos);
-            match.setCsvString(csvString);
-            match.setDispString(dispString);
-            adapter.notifyDataSetChanged();
-        }
-    }
-
-    public static synchronized void removeFromList(String dispString, String csvString)
-    {
-        synchronized (DataStore.matchList)
-        {
-            for (int i = 0; i < DataStore.matchList.size(); i++)
-            {
-                String csvStringCmp = DataStore.matchList.get(i).getCsvString();
-                String dispStringCmp = DataStore.matchList.get(i).getDispString();
-                if ((csvString == null ? true : csvStringCmp.equals(csvString)) && (dispString == null ? true : dispStringCmp.equals(dispString)))
-                {
-                    DataStore.matchList.remove(i);
-                    break;
-                }
-            }
-            if (DataStore.matchList.size() == 0 && !dispString.equals("No Entries Yet"))
-            {
-                addToList("No Entries Yet", null);
-            }
+            DataStore.matchList.set(pos, matchInfo);
             adapter.notifyDataSetChanged();
         }
     }
@@ -434,28 +389,8 @@ public class AddMatches extends AppCompatActivity
         synchronized (DataStore.matchList)
         {
             DataStore.matchList.remove(index);
-            if (DataStore.matchList.size() == 0)
-            {
-                addToList("No Entries Yet", null);
-            }
             adapter.notifyDataSetChanged();
         }
-    }
-
-
-    public static synchronized boolean listHasPlaceHolder()
-    {
-        synchronized (DataStore.matchList)
-        {
-            for(int i = 0; i < DataStore.matchList.size(); i++)
-            {
-                if (DataStore.matchList.get(i).getDispString().equals("No Entries Yet") || DataStore.matchList.get(i).getCsvString() == null)
-                {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     public static synchronized boolean listEmpty()
@@ -465,11 +400,6 @@ public class AddMatches extends AppCompatActivity
             if (DataStore.matchList.size() == 0)
             {
                 return true;
-            }
-
-            if (DataStore.matchList.size() == 1)
-            {
-                return listHasPlaceHolder();
             }
         }
 
