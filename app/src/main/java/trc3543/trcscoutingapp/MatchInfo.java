@@ -1,11 +1,9 @@
 package trc3543.trcscoutingapp;
 
 import java.io.Serializable;
-import java.util.Iterator;
 import java.util.UUID;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -48,15 +46,12 @@ public class MatchInfo implements Serializable
 
     public boolean allFieldsPopulated() throws JSONException
     {
-        JSONObject testObj = GsonUtilz.MatchInfoToJSONObject(this);
-        Iterator<String> testObjKeys = testObj.keys();
-        while (testObjKeys.hasNext())
+        if (matchNumber == null ||
+                teamNumber == null ||
+                alliance == null ||
+                matchNumber == null)
         {
-            String key = testObjKeys.next();
-            if (testObj.isNull(key))
-            {
-                return false;
-            }
+            return false;
         }
         return true;
     }

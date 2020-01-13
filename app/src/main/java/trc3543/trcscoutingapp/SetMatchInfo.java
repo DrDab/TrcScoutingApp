@@ -141,7 +141,7 @@ public class SetMatchInfo extends AppCompatActivity
         }
         else
         {
-            Snackbar.make(view, "Nope", Snackbar.LENGTH_LONG)
+            Snackbar.make(view, "Please make sure all required fields are populated.", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         }
     }

@@ -132,7 +132,7 @@ public class DataStore extends AppCompatActivity
             pw.println(CSV_HEADER);
             for(MatchInfo match : matchList)
             {
-                pw.println(DataStore.unescapeFormat(match.getCsvString()));
+                pw.println(match.getCsvString());
             }
             pw.close();
             return true;
@@ -271,22 +271,5 @@ public class DataStore extends AppCompatActivity
         return username + "_" + getTimeStamp("yyyyMMdd@HHmmss") + ".csv";
     }
 
-    public static String escapeFormat(String input)
-    {
-        if (input == null)
-        {
-            return "";
-        }
-        return input.replaceAll(",", "<COMMA>");
-    }
-
-    public static String unescapeFormat(String input)
-    {
-        if (input == null)
-        {
-            return "";
-        }
-        return input.replaceAll("<COMMA>", ",");
-    }
 
 }
