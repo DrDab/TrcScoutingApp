@@ -24,11 +24,10 @@ package trc3543.trcscoutingapp;
 
 import android.graphics.Color;
 import android.os.Environment;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.EditText;
 
 import java.io.File;
