@@ -20,9 +20,12 @@
  * SOFTWARE.
  */
 
-package trc3543.trcscoutingapp;
+package trc3543.trcscoutingapp.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import trc3543.trcscoutingapp.data.DataStore;
+import trc3543.trcscoutingapp.R;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;

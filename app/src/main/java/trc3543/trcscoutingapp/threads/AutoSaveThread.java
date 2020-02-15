@@ -20,37 +20,45 @@
  * SOFTWARE.
  */
 
-package trc3543.trcscoutingapp;
+package trc3543.trcscoutingapp.threads;
 
-import android.graphics.Color;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.TextView;
+import android.util.Log;
 
-import java.util.Date;
+import java.io.IOException;
 
-public class About extends AppCompatActivity
+import trc3543.trcscoutingapp.data.DataStore;
+
+public class AutoSaveThread
 {
-    private TextView versionIdText;
-    private TextView buildDateText;
-    private TextView nfcSupportedText;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
+    public AutoSaveThread()
     {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about);
-        setTitle("About This App");
-        setTitleColor(Color.parseColor("#ff669900"));
+        Log.d("AutoSave", "Initialized autosave thread.");
+    }
 
-        versionIdText = (TextView) findViewById(R.id.versionIdText);
-        versionIdText.setText("Version: " + DataStore.VERSION_NUMBER);
-
-        buildDateText = (TextView) findViewById(R.id.buildDateText);
-        Date buildDate = new Date(BuildConfig.TIMESTAMP);
-        buildDateText.setText("Build Date: " + buildDate.getTime());
-
-        nfcSupportedText = (TextView) findViewById(R.id.nfcSupportedText);
-        nfcSupportedText.setText(DataStore.deviceSupportsNfc ? "NFC Supported" : "NFC Not Supported");
+    public void run()
+    {
+        boolean done = false;
+        for(;;)
+        {
+            double time = System.currentTimeMillis() / 1000.0;
+            if (time % DataStore.autosaveSeconds != 0)
+            {
+                done = false;
+            }
+            if (time % DataStore.autosaveSeconds == 0 && !done && DataStore.useAutosave)
+            {
+                Log.d("AutoSave", "Auto saving at time=" + time);
+                String filename = DataStore.getFileName(DataStore.firstName + "_" + DataStore.lastName);
+                try
+                {
+                    DataStore.writeContestsToCsv(filename);
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+                done = true;
+            }
+        }
     }
 }

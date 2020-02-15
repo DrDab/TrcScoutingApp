@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package trc3543.trcscoutingapp;
+package trc3543.trcscoutingapp.ui;
 
 import android.Manifest;
 import android.app.Activity;
@@ -37,6 +37,11 @@ import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import trc3543.trcscoutingapp.threads.AutoSaveThread;
+import trc3543.trcscoutingapp.data.DataStore;
+import trc3543.trcscoutingapp.data.MatchInfo;
+import trc3543.trcscoutingapp.R;
+
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
