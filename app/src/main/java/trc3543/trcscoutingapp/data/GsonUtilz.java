@@ -1,4 +1,4 @@
-package trc3543.trcscoutingapp;
+package trc3543.trcscoutingapp.data;
 
 import com.google.gson.Gson;
 

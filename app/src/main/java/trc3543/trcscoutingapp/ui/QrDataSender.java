@@ -1,4 +1,4 @@
-package trc3543.trcscoutingapp;
+package trc3543.trcscoutingapp.ui;
 
 import android.graphics.Bitmap;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import qrutils.QRCode;
+import trc3543.trcscoutingapp.data.DataStore;
+import trc3543.trcscoutingapp.data.GsonUtilz;
+import trc3543.trcscoutingapp.data.MatchInfo;
+import trc3543.trcscoutingapp.R;
 
 public class QrDataSender extends AppCompatActivity
 {
