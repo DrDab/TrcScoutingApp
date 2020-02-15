@@ -35,7 +35,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -73,6 +72,25 @@ public class DataStore extends AppCompatActivity
     public static String username = null;
     public static String password = null;
 
+
+    private static String getTextFileContents(File file)
+    {
+        StringBuilder contentBuilder = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new FileReader(file)))
+        {
+            String sCurrentLine;
+            while ((sCurrentLine = br.readLine()) != null)
+            {
+                contentBuilder.append(sCurrentLine).append("\n");
+            }
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return contentBuilder.toString();
+    }
+
     public static synchronized void writeArraylistsToJSON() throws IOException, JSONException
     {
         File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
@@ -103,7 +121,7 @@ public class DataStore extends AppCompatActivity
         File cache = new File(readDirectory, "cache-" + YEAR_NUMBER + ".json");
         if (cache.exists())
         {
-            String jsonData = new String(Files.readAllBytes(cache.toPath()));
+            String jsonData = getTextFileContents(cache);
             JSONObject jsonCacheObject = new JSONObject(jsonData);
             matchList = GsonUtilz.JSONArrayToMatchInfoArrayList(jsonCacheObject.getJSONArray("matches"));
         }
