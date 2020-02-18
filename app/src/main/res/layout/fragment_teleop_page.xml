@@ -9,24 +9,248 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:text="Button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
-
         <TextView
-            android:id="@+id/tvTitle"
+            android:id="@+id/teleOpText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TeleOp"
+            android:text="Teleoperated Period"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/teleopPowerPortsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Power Ports"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/teleOpText" />
+
+        <com.travijuu.numberpicker.library.NumberPicker
+            android:id="@+id/lowerCellsCounter"
+            android:layout_width="40dp"
+            android:layout_height="129dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            app:custom_layout="@layout/custom_number_picker"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lowerCellsText"
+            app:max="50"
+            app:min="0"
+            app:unit="1"
+            app:value="0" />
+
+        <TextView
+            android:id="@+id/lowerCellsText"
+            android:layout_width="57dp"
+            android:layout_height="23dp"
+            android:layout_marginTop="16dp"
+            android:text="Lower"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.045"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/teleopPowerPortsText" />
+        <TextView
+            android:id="@+id/outerCellsText"
+            android:layout_width="57dp"
+            android:layout_height="26dp"
+            android:layout_marginLeft="44dp"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="16dp"
+            android:text="Outer"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/lowerCellsText"
+            app:layout_constraintTop_toBottomOf="@+id/teleopPowerPortsText" />
+
+        <com.travijuu.numberpicker.library.NumberPicker
+            android:id="@+id/outerCellsCounter"
+            android:layout_width="40dp"
+            android:layout_height="129dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="4dp"
+            app:custom_layout="@layout/custom_number_picker"
+            app:layout_constraintStart_toEndOf="@+id/lowerCellsCounter"
+            app:layout_constraintTop_toBottomOf="@+id/outerCellsText"
+            app:max="50"
+            app:min="0"
+            app:unit="1"
+            app:value="0" />
+
+        <TextView
+            android:id="@+id/innerCellsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="52dp"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="16dp"
+            android:text="Inner"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/outerCellsText"
+            app:layout_constraintTop_toBottomOf="@+id/teleopPowerPortsText" />
+
+        <com.travijuu.numberpicker.library.NumberPicker
+            android:id="@+id/innerCellsCounter"
+            android:layout_width="40dp"
+            android:layout_height="129dp"
+            android:layout_marginLeft="64dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="8dp"
+            app:custom_layout="@layout/custom_number_picker"
+            app:layout_constraintStart_toEndOf="@+id/outerCellsCounter"
+            app:layout_constraintTop_toBottomOf="@+id/innerCellsText"
+            app:max="50"
+            app:min="0"
+            app:unit="1"
+            app:value="0" />
+
+        <TextView
+            android:id="@+id/missedCellsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Missed"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.569"
+            app:layout_constraintStart_toEndOf="@+id/innerCellsText"
+            app:layout_constraintTop_toBottomOf="@+id/teleopPowerPortsText" />
+
+        <com.travijuu.numberpicker.library.NumberPicker
+            android:id="@+id/missedCellsCounter"
+            android:layout_width="40dp"
+            android:layout_height="129dp"
+            android:layout_marginTop="8dp"
+            app:custom_layout="@layout/custom_number_picker"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.611"
+            app:layout_constraintStart_toEndOf="@+id/innerCellsCounter"
+            app:layout_constraintTop_toBottomOf="@+id/missedCellsText"
+            app:max="50"
+            app:min="0"
+            app:unit="1"
+            app:value="0" />
+
+        <TextView
+            android:id="@+id/shieldGeneratorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="188dp"
+            android:text="Shield Generator"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/teleopPowerPortsText" />
+
+        <Space
+            android:layout_width="3dp"
+            android:layout_height="532dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/teleopPowerPortsText" />
+
+        <CheckBox
+            android:id="@+id/shieldGeneratorStage1"
+            android:layout_width="66dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="1"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            app:layout_constraintStart_toEndOf="@+id/shieldGeneratorStageText"
+            app:layout_constraintTop_toBottomOf="@+id/shieldGeneratorText" />
+
+        <TextView
+            android:id="@+id/shieldGeneratorStageText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:text="Stage:"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shieldGeneratorText" />
+
+        <CheckBox
+            android:id="@+id/shieldGeneratorStage2"
+            android:layout_width="66dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="2"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            app:layout_constraintStart_toEndOf="@+id/shieldGeneratorStage1"
+            app:layout_constraintTop_toBottomOf="@+id/shieldGeneratorText" />
+
+        <CheckBox
+            android:id="@+id/shieldGeneratorStage3"
+            android:layout_width="66dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="12dp"
+            android:text="3"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.103"
+            app:layout_constraintStart_toEndOf="@+id/shieldGeneratorStage2"
+            app:layout_constraintTop_toBottomOf="@+id/shieldGeneratorText" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="68dp"
+            android:text="Control Panel"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/shieldGeneratorStage2" />
+
+        <CheckBox
+            android:id="@+id/ctrlPanelRotationCheckBox"
+            android:layout_width="112dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="12dp"
+            android:text="Rotation"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+        <CheckBox
+            android:id="@+id/ctrlPanelPositionCheckBox"
+            android:layout_width="109dp"
+            android:layout_height="31dp"
+            android:layout_marginTop="12dp"
+            android:text="Position"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ctrlPanelRotationCheckBox" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
