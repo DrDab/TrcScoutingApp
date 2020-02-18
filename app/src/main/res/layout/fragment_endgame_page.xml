@@ -10,23 +10,112 @@
         android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/finishedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:text="Button"
+            android:layout_marginTop="512dp"
+            android:text="Finished"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+            app:layout_constraintTop_toTopOf="@+id/generatorSwitchText" />
 
         <TextView
-            android:id="@+id/tvTitle"
+            android:id="@+id/endgameText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Endgame"
+            android:layout_marginTop="16dp"
+            android:text="Endgame Period"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/generatorSwitchText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Generator Switch"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/endgameText" />
+
+        <Space
+            android:layout_width="7dp"
+            android:layout_height="635dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/endgameText" />
+
+        <CheckBox
+            android:id="@+id/endgameParkedCB"
+            android:layout_width="128dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="20dp"
+            android:text="Parked"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/generatorSwitchText" />
+
+        <CheckBox
+            android:id="@+id/endgameHangingCB"
+            android:layout_width="124dp"
+            android:layout_height="38dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Hanging"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.527"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/endgameParkedCB" />
+
+        <CheckBox
+            android:id="@+id/endgameSupportingMechanismCB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Supporting Mechanism"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/endgameHangingCB" />
+
+        <CheckBox
+            android:id="@+id/endgameLevelCB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Level"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/endgameSupportingMechanismCB" />
+
+        <EditText
+            android:id="@+id/gameNotes"
+            android:layout_width="337dp"
+            android:layout_height="203dp"
+            android:layout_marginTop="24dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Notes (optional)..."
+            android:inputType="textMultiLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/endgameLevelCB" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
