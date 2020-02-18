@@ -12,7 +12,6 @@ public class MatchInfo implements Serializable
     private static final long serialVersionUID = 1L;
 
     // misc. variables.
-
     @SerializedName("uuid")
     public String uuid;
 
@@ -32,7 +31,6 @@ public class MatchInfo implements Serializable
     public String notes;
 
     // autonomous variables.
-
     @SerializedName("initLineCrossed")
     public Boolean initLineCrossed;
 
@@ -49,32 +47,52 @@ public class MatchInfo implements Serializable
     public Integer autonomousMissed;
 
     // teleop variables.
-
     @SerializedName("teleopLower")
     public Integer teleopLower;
 
+    @SerializedName("teleopOuter")
+    public Integer teleopOuter;
 
-    public MatchInfo(Integer matchNumber, Integer teamNumber, String alliance, String matchType, String notes)
-    {
-        this.uuid = UUID.randomUUID().toString();
-        this.matchNumber = matchNumber;
-        this.teamNumber = teamNumber;
-        this.alliance = alliance;
-        this.matchType = matchType;
-        this.notes = notes;
-    }
+    @SerializedName("teleopInner")
+    public Integer teleopInner;
 
-    public MatchInfo()
-    {
-        this(null, null, null, null, null);
-    }
+    @SerializedName("teleopMissed")
+    public Integer teleopMissed;
+
+    @SerializedName("shieldStage1")
+    public Boolean shieldStage1;
+
+    @SerializedName("shieldStage2")
+    public Boolean shieldStage2;
+
+    @SerializedName("shieldStage3")
+    public Boolean shieldStage3;
+
+    @SerializedName("controlPanelRotated")
+    public Boolean controlPanelRotated;
+
+    @SerializedName("controlPanelPositioned")
+    public Boolean controlPanelPositioned;
+
+    // endgame variables.
+    @SerializedName("generatorSwitchParked")
+    public Boolean generatorSwitchParked;
+
+    @SerializedName("generatorSwitchHanging")
+    public Boolean generatorSwitchHanging;
+
+    @SerializedName("generatorSwitchSupportingMechanism")
+    public Boolean generatorSwitchSupportingMechanism;
+
+    @SerializedName("generatorSwitchLevel")
+    public Boolean generatorSwitchLevel;
 
     public boolean allFieldsPopulated() throws JSONException
     {
         if (matchNumber == null ||
                 teamNumber == null ||
                 alliance == null ||
-                matchNumber == null)
+                matchType == null)
         {
             return false;
         }
@@ -88,18 +106,30 @@ public class MatchInfo implements Serializable
 
     public String getCsvString()
     {
-        String toReturn = "";
-        toReturn += matchNumber;
-        toReturn += ",";
-        toReturn += teamNumber;
-        toReturn += ",";
-        toReturn += matchType;
-        toReturn += ",";
-        toReturn += alliance;
-        toReturn += ",\"";
-        toReturn += notes;
-        toReturn += "\",";
-        return toReturn;
+        CsvOrder csvOrder = new CsvOrder(matchNumber,
+                teamNumber,
+                matchType,
+                alliance,
+                initLineCrossed,
+                autonomousLower,
+                autonomousOuter,
+                autonomousInner,
+                autonomousMissed,
+                teleopLower,
+                teleopOuter,
+                teleopInner,
+                teleopMissed,
+                shieldStage1,
+                shieldStage2,
+                shieldStage3,
+                controlPanelRotated,
+                controlPanelPositioned,
+                generatorSwitchParked,
+                generatorSwitchHanging,
+                generatorSwitchSupportingMechanism,
+                generatorSwitchLevel,
+                notes);
+        return csvOrder.csvString;
     }
 
     @Override
@@ -108,4 +138,26 @@ public class MatchInfo implements Serializable
         return getDisplayString();
     }
 
+    private class CsvOrder
+    {
+        public String csvString;
+        public CsvOrder(Object... params)
+        {
+            this.csvString = "";
+            for (Object s : params)
+            {
+                boolean isStr = s instanceof String;
+                if (isStr)
+                {
+                    this.csvString += "\"";
+                }
+                this.csvString += s.toString();
+                if (isStr)
+                {
+                    this.csvString += "\"";
+                }
+                this.csvString += ",";
+            }
+        }
+    }
 }
