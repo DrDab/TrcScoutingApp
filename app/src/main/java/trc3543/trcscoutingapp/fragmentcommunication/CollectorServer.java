@@ -21,20 +21,24 @@ import java.util.HashMap;
 
 public class CollectorServer
 {
+    int port;
     Stopwatch st;
     ServerSocket ssock;
-    ArrayList<CollectorServerThread> threads = new ArrayList<>();
-    HashMap<Integer, CollectorServerThread> threadIdMap = new HashMap<>();
-    HashMap<Integer, JSONObject> resultSettingQueued = new HashMap<>();
+    ArrayList<CollectorServerThread> threads;
+    HashMap<Integer, CollectorServerThread> threadIdMap;
+    HashMap<Integer, JSONObject> resultSettingQueued;
     Gson gson;
 
     public static final boolean DEBUG = true;
 
     public CollectorServer(Stopwatch st, int port) throws IOException
     {
+        this.port = port;
         this.st = st;
-        this.ssock = new ServerSocket(port);
         this.gson = new Gson();
+        this.threads = new ArrayList<>();
+        this.threadIdMap = new HashMap<>();
+        this.resultSettingQueued = new HashMap<>();
         dbg("Collector Server initialized.\n");
     }
 
@@ -78,6 +82,7 @@ public class CollectorServer
 
     public void run() throws IOException
     {
+        this.ssock = new ServerSocket(port);
         dbg("Collector Server Listening on port %d...\n", ssock.getLocalPort());
         while (true)
         {

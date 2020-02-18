@@ -15,23 +15,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 // In this case, the fragment displays simple text based on the page
-public class SamplePageFragment extends Fragment
+public class EndgameFragment extends Fragment
 {
     public static final String ARG_PAGE = "ARG_PAGE";
 
     private View view;
-
-    private int mPage;
-    private TextView textView;
-    private Button button;
-
     private Thread sendThread;
 
-    public static SamplePageFragment newInstance(int page)
+    public static EndgameFragment newInstance(int page)
     {
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE, page);
-        SamplePageFragment fragment = new SamplePageFragment();
+        EndgameFragment fragment = new EndgameFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -40,7 +35,7 @@ public class SamplePageFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        mPage = getArguments().getInt(ARG_PAGE);
+        //mPage = getArguments().getInt(ARG_PAGE);
     }
 
     // Inflate the fragment layout we defined above for this fragment
@@ -50,23 +45,25 @@ public class SamplePageFragment extends Fragment
     {
         if (view == null)
         {
-            view = inflater.inflate(R.layout.fragment_sample_page, container, false);
-            textView = (TextView) view.findViewById(R.id.tvTitle);
-            button = (Button) view.findViewById(R.id.button);
-            textView.setText("Fragment #" + mPage);
+            view = inflater.inflate(R.layout.fragment_endgame_page, container, false);
         }
+
+        /*
+        textView = (TextView) view.findViewById(R.id.tvTitle);
+        button = (Button) view.findViewById(R.id.button);
+        textView.setText("Fragment #" + mPage);
+         */
+
 
         if (sendThread == null)
         {
-            CollectorClient collectorClient = new CollectorClient(mPage)
+            CollectorClient collectorClient = new CollectorClient(0)
             {
                 @Override
                 public JSONObject onRequestFields() throws JSONException
                 {
                     JSONObject data = new JSONObject();
                     data.put("sample", "LoremIpsum");
-                    data.put("tvTitleText", textView.getText());
-                    data.put("buttonText", button.getText());
                     return data;
                 }
 
@@ -81,8 +78,9 @@ public class SamplePageFragment extends Fragment
                         {
                             try
                             {
-                                textView.setText(fieldData.get("textView").toString());
-                                button.setText(fieldData.get("buttonText").toString());
+                                // ui actions here
+                                JSONObject j = new JSONObject();
+                                j.put("a", "");
                             }
                             catch (JSONException e)
                             {

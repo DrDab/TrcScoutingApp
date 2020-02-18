@@ -1,170 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="trc3543.trcscoutingapp.ui.SetMatchInfo">
+    android:orientation="vertical"
+    tools:context="trc3543.trcscoutingapp.fragments.">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.astuetz.PagerSlidingTabStrip
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="48dip" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="trc3543.trcscoutingapp.ui.SetMatchInfo">
+        android:layout_below="@+id/tabs">
+    </androidx.viewpager.widget.ViewPager>
 
-        <Button
-            android:id="@+id/ConfirmButton"
-            android:layout_width="91dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="40dp"
-            android:contentDescription="Confirm Selection."
-            android:onClick="confirmTypes"
-            android:text="Confirm"
-            android:textStyle="bold"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.424"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/notes" />
-
-        <EditText
-            android:id="@+id/matchNum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="Match #"
-            android:inputType="numberSigned"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.503"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/teamNum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="Team #"
-            android:inputType="numberSigned"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.503"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/matchNum" />
-
-        <EditText
-            android:id="@+id/notes"
-            android:layout_width="316dp"
-            android:layout_height="147dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="Notes..."
-            android:inputType="textMultiLine"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.518"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-        <Space
-            android:id="@+id/space2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="11dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Spinner
-            android:id="@+id/matchTypeSpinner"
-            android:layout_width="315dp"
-            android:layout_height="28dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="40dp"
-            android:entries="@array/game_types"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.512"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/teamNum" />
-
-        <Spinner
-            android:id="@+id/SpectatingSpinner"
-            android:layout_width="315dp"
-            android:layout_height="28dp"
-            android:layout_marginTop="40dp"
-            android:entries="@array/spectating_types"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/matchTypeSpinner" />
-
-        <TextView
-            android:id="@+id/describText1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="Match Type"
-            android:textSize="16sp"
-            android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/matchTypeSpinner"
-            app:layout_constraintStart_toStartOf="@+id/matchTypeSpinner" />
-
-
-        <!---->
-
-
-        <!-- oashoisajfoisajoihbjsoaidjfoisagjoi -->
-
-
-        <!--  ffffffffffff !-->
-
-        <TextView
-            android:id="@+id/describText2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:text="Spectating Team"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/SpectatingSpinner"
-            app:layout_constraintStart_toStartOf="@+id/SpectatingSpinner" />
-
-        <TextView
-            android:id="@+id/sandstorm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:text="Autonomous Phase"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.121"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/SpectatingSpinner" />
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="147dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="56dp"
-            android:text="Teleoperated Phase"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sandstorm" />
-
-        <!-- adfaosdaoijsoifjasf -->
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</LinearLayout>

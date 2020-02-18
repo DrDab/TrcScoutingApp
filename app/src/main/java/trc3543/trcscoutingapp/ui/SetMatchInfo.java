@@ -25,11 +25,18 @@ package trc3543.trcscoutingapp.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
+
+import com.astuetz.PagerSlidingTabStrip;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import trc3543.trcscoutingapp.data.DataStore;
 import trc3543.trcscoutingapp.data.MatchInfo;
 import trc3543.trcscoutingapp.R;
+import trc3543.trcscoutingapp.fragmentcommunication.CollectorServer;
+import trc3543.trcscoutingapp.fragmentcommunication.Stopwatch;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -40,6 +47,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -51,14 +59,9 @@ public class SetMatchInfo extends AppCompatActivity
     private int editingoption = -1;
 
     private MatchInfo matchInfo;
-
-    // elements
-    private EditText matchNumEditText;
-    private EditText teamNumEditText;
-    private Spinner allianceSpinner;
-    private Spinner matchTypeSpinner;
-    private EditText notesEditText;
-
+    private FragmentPagerAdapter fpa;
+    private Stopwatch stp;
+    private CollectorServer listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -67,11 +70,42 @@ public class SetMatchInfo extends AppCompatActivity
         setContentView(R.layout.activity_set_match_info2);
         setTitle("Add Match");
 
-        this.matchNumEditText = (EditText) findViewById(R.id.matchNum);
-        this.teamNumEditText = (EditText) findViewById(R.id.teamNum);
-        this.allianceSpinner = (Spinner) findViewById(R.id.SpectatingSpinner);
-        this.matchTypeSpinner = (Spinner) findViewById(R.id.matchTypeSpinner);
-        this.notesEditText = (EditText) findViewById(R.id.notes);
+        // Get the ViewPager and set it's PagerAdapter so that it can display items
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fpa = new CustomFragmentPagerAdapter(fragmentManager);
+        viewPager.setAdapter(fpa);
+
+        // Give the PagerSlidingTabStrip the ViewPager
+        PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+        // Attach the view pager to the tab strip
+        tabStrip.setViewPager(viewPager);
+
+        stp = new Stopwatch();
+
+        try
+        {
+            listener = new CollectorServer(stp, 36541);
+            new Thread(new Runnable()
+            {
+                public void run()
+                {
+                    try
+                    {
+                        listener.run();
+                    }
+                    catch (IOException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            ).start();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
 
         try
         {
@@ -99,14 +133,18 @@ public class SetMatchInfo extends AppCompatActivity
         // populate the boxes if already filled.
         if (editingoption != -1)
         {
-            matchInfo = DataStore.matchList.get(editingoption);
-            String read = matchInfo.getCsvString();
-            Log.d("SetMatchInfo", editingoption + " " + read);
-            setEditTextValue(matchNumEditText, matchInfo.matchNumber);
-            setEditTextValue(teamNumEditText, matchInfo.teamNumber);
-            setSpinnerByTextValue(allianceSpinner, matchInfo.alliance);
-            setSpinnerByTextValue(matchTypeSpinner, matchInfo.matchType);
-            setEditTextValue(notesEditText, matchInfo.notes);
+            matchInfo = DataStore.matchList.get(editingoption);;
+            try
+            {
+                JSONObject test = new JSONObject();
+                test.put("textView", "Hello Dynamic Text");
+                test.put("buttonText", "Hello Button");
+                listener.setFields(2, test);
+            }
+            catch (IOException | JSONException e)
+            {
+                e.printStackTrace();
+            }
         }
         else
         {
@@ -122,11 +160,7 @@ public class SetMatchInfo extends AppCompatActivity
         {
             try
             {
-                matchInfo.matchNumber = Integer.parseInt(matchNumEditText.getText().toString());
-                matchInfo.teamNumber = Integer.parseInt(teamNumEditText.getText().toString());
-                matchInfo.alliance = allianceSpinner.getSelectedItem().toString();
-                matchInfo.matchType = matchTypeSpinner.getSelectedItem().toString();
-                matchInfo.notes = notesEditText.getText().toString();
+               // confirm types here.
             }
             catch (Exception e)
             {
@@ -219,5 +253,19 @@ public class SetMatchInfo extends AppCompatActivity
     private void setEditTextValue(EditText editText, Object toSet)
     {
         editText.setText(toSet.toString() + "");
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        try
+        {
+            listener.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 }
