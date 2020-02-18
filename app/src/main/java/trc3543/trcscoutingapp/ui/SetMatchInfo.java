@@ -36,6 +36,7 @@ import trc3543.trcscoutingapp.data.DataStore;
 import trc3543.trcscoutingapp.data.MatchInfo;
 import trc3543.trcscoutingapp.R;
 import trc3543.trcscoutingapp.fragmentcommunication.CollectorServer;
+import trc3543.trcscoutingapp.fragmentcommunication.CollectorTransaction;
 import trc3543.trcscoutingapp.fragmentcommunication.Stopwatch;
 
 import android.os.Bundle;
@@ -50,6 +51,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 @SuppressWarnings("all")
 public class SetMatchInfo extends AppCompatActivity
@@ -70,19 +72,8 @@ public class SetMatchInfo extends AppCompatActivity
         setContentView(R.layout.activity_set_match_info2);
         setTitle("Add Match");
 
-        // Get the ViewPager and set it's PagerAdapter so that it can display items
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fpa = new CustomFragmentPagerAdapter(fragmentManager);
-        viewPager.setAdapter(fpa);
-
-        // Give the PagerSlidingTabStrip the ViewPager
-        PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
-        // Attach the view pager to the tab strip
-        tabStrip.setViewPager(viewPager);
 
         stp = new Stopwatch();
-
         try
         {
             listener = new CollectorServer(stp, 36541);
@@ -110,6 +101,20 @@ public class SetMatchInfo extends AppCompatActivity
             // if our server has an exception, quit the activity.
             finish();
         }
+
+        // Get the ViewPager and set it's PagerAdapter so that it can display items
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fpa = new CustomFragmentPagerAdapter(fragmentManager);
+        viewPager.setAdapter(fpa);
+
+        // Give the PagerSlidingTabStrip the ViewPager
+        PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+        // Attach the view pager to the tab strip
+        tabStrip.setViewPager(viewPager);
+
+        // initialize all fragments at start of activity.
+        viewPager.setOffscreenPageLimit(fpa.getCount());
 
         try
         {
@@ -165,6 +170,7 @@ public class SetMatchInfo extends AppCompatActivity
             try
             {
                // confirm types here.
+                HashMap<Integer, CollectorTransaction> resultsAll = listener.getResultsAll();
             }
             catch (Exception e)
             {
