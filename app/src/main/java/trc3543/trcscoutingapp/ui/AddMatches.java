@@ -57,6 +57,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 
 @SuppressWarnings("all")
 public class AddMatches extends AppCompatActivity
@@ -169,6 +171,7 @@ public class AddMatches extends AppCompatActivity
             public void onClick(View view)
             {
                 // place a message
+
                 openCompNamePrompt(false, -1);
 
             }

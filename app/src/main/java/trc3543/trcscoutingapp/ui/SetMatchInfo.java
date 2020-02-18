@@ -97,6 +97,8 @@ public class SetMatchInfo extends AppCompatActivity
                     catch (IOException e)
                     {
                         e.printStackTrace();
+                        // if our server has an exception, quit the activity.
+                        finish();
                     }
                 }
             }
@@ -105,6 +107,8 @@ public class SetMatchInfo extends AppCompatActivity
         catch (IOException e)
         {
             e.printStackTrace();
+            // if our server has an exception, quit the activity.
+            finish();
         }
 
         try

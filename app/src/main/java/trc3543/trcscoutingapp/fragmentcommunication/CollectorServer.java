@@ -113,7 +113,10 @@ public class CollectorServer
 
     public void close() throws IOException
     {
-        ssock.close();
+        if (ssock != null)
+        {
+            ssock.close();
+        }
     }
 
 

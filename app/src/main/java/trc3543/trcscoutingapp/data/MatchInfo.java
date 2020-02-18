@@ -11,6 +11,8 @@ public class MatchInfo implements Serializable
 {
     private static final long serialVersionUID = 1L;
 
+    // misc. variables.
+
     @SerializedName("uuid")
     public String uuid;
 
@@ -28,6 +30,29 @@ public class MatchInfo implements Serializable
 
     @SerializedName("notes")
     public String notes;
+
+    // autonomous variables.
+
+    @SerializedName("initLineCrossed")
+    public Boolean initLineCrossed;
+
+    @SerializedName("autonomousLower")
+    public Integer autonomousLower;
+
+    @SerializedName("autonomousOuter")
+    public Integer autonomousOuter;
+
+    @SerializedName("autonomousInner")
+    public Integer autonomousInner;
+
+    @SerializedName("autonomousMissed")
+    public Integer autonomousMissed;
+
+    // teleop variables.
+
+    @SerializedName("teleopLower")
+    public Integer teleopLower;
+
 
     public MatchInfo(Integer matchNumber, Integer teamNumber, String alliance, String matchType, String notes)
     {

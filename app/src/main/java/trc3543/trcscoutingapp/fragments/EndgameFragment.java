@@ -21,6 +21,7 @@ public class EndgameFragment extends Fragment
 
     private View view;
     private Thread sendThread;
+    private int mPage;
 
     public static EndgameFragment newInstance(int page)
     {
@@ -35,7 +36,7 @@ public class EndgameFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        //mPage = getArguments().getInt(ARG_PAGE);
+        mPage = getArguments().getInt(ARG_PAGE);
     }
 
     // Inflate the fragment layout we defined above for this fragment
@@ -57,7 +58,7 @@ public class EndgameFragment extends Fragment
 
         if (sendThread == null)
         {
-            CollectorClient collectorClient = new CollectorClient(0)
+            CollectorClient collectorClient = new CollectorClient(mPage)
             {
                 @Override
                 public JSONObject onRequestFields() throws JSONException
