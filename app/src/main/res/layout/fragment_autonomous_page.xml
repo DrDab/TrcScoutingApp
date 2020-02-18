@@ -9,35 +9,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/ConfirmButton"
-            android:layout_width="91dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="40dp"
-            android:contentDescription="Confirm Selection."
-            android:onClick="confirmTypes"
-            android:text="Confirm"
-            android:textStyle="bold"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.424"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/notes" />
-
         <EditText
             android:id="@+id/matchNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:ems="10"
             android:hint="Match #"
             android:inputType="numberSigned"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintHorizontal_bias="0.043"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,33 +35,9 @@
             android:hint="Team #"
             android:inputType="numberSigned"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintHorizontal_bias="0.043"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/matchNum" />
-
-        <EditText
-            android:id="@+id/notes"
-            android:layout_width="316dp"
-            android:layout_height="147dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="Notes..."
-            android:inputType="textMultiLine"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.518"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-        <Space
-            android:id="@+id/space2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="11dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <Spinner
             android:id="@+id/matchTypeSpinner"
@@ -86,26 +45,27 @@
             android:layout_height="28dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="44dp"
             android:entries="@array/game_types"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.512"
+            app:layout_constraintHorizontal_bias="0.1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/teamNum" />
 
         <Spinner
-            android:id="@+id/SpectatingSpinner"
+            android:id="@+id/spectatingTeamSpinner"
             android:layout_width="315dp"
             android:layout_height="28dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="36dp"
             android:entries="@array/spectating_types"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.166"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/matchTypeSpinner" />
 
         <TextView
-            android:id="@+id/describText1"
+            android:id="@+id/matchTypeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -116,52 +76,161 @@
             app:layout_constraintStart_toStartOf="@+id/matchTypeSpinner" />
 
 
-        <!---->
-
-
-        <!-- oashoisajfoisajoihbjsoaidjfoisagjoi -->
-
-
-        <!--  ffffffffffff !-->
-
         <TextView
-            android:id="@+id/describText2"
+            android:id="@+id/spectatingTeamText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:text="Spectating Team"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/SpectatingSpinner"
-            app:layout_constraintStart_toStartOf="@+id/SpectatingSpinner" />
+            app:layout_constraintBottom_toTopOf="@+id/spectatingTeamSpinner"
+            app:layout_constraintStart_toStartOf="@+id/spectatingTeamSpinner" />
 
         <TextView
-            android:id="@+id/sandstorm"
+            android:id="@+id/autonomousText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:text="Autonomous Phase"
-            android:textSize="16sp"
+            android:layout_marginTop="24dp"
+            android:text="Autonomous Period"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.121"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/SpectatingSpinner" />
+            app:layout_constraintTop_toBottomOf="@+id/spectatingTeamSpinner" />
+
+        <com.travijuu.numberpicker.library.NumberPicker
+            android:id="@+id/lowerCellsCounter"
+            android:layout_width="40dp"
+            android:layout_height="129dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            app:custom_layout="@layout/custom_number_picker"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lowerCellsText"
+            app:max="50"
+            app:min="0"
+            app:unit="1"
+            app:value="0" />
 
         <TextView
-            android:id="@+id/textView6"
-            android:layout_width="147dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="56dp"
-            android:text="Teleoperated Phase"
-            android:textSize="16sp"
+            android:id="@+id/lowerCellsText"
+            android:layout_width="57dp"
+            android:layout_height="23dp"
+            android:layout_marginTop="16dp"
+            android:text="Lower"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.045"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sandstorm" />
+            app:layout_constraintTop_toBottomOf="@+id/initLineCrossedCB" />
 
-        <!-- adfaosdaoijsoifjasf -->
+        <CheckBox
+            android:id="@+id/initLineCrossedCB"
+            android:layout_width="173dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="9dp"
+            android:text="Init Line Crossed"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/autonomousText" />
+
+        <TextView
+            android:id="@+id/outerCellsText"
+            android:layout_width="57dp"
+            android:layout_height="26dp"
+            android:layout_marginLeft="44dp"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="16dp"
+            android:text="Outer"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/lowerCellsText"
+            app:layout_constraintTop_toBottomOf="@+id/initLineCrossedCB" />
+
+        <com.travijuu.numberpicker.library.NumberPicker
+            android:id="@+id/outerCellsCounter"
+            android:layout_width="40dp"
+            android:layout_height="129dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="4dp"
+            app:custom_layout="@layout/custom_number_picker"
+            app:layout_constraintStart_toEndOf="@+id/lowerCellsCounter"
+            app:layout_constraintTop_toBottomOf="@+id/outerCellsText"
+            app:max="50"
+            app:min="0"
+            app:unit="1"
+            app:value="0" />
+
+        <TextView
+            android:id="@+id/innerCellsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="52dp"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="16dp"
+            android:text="Inner"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/outerCellsText"
+            app:layout_constraintTop_toBottomOf="@+id/initLineCrossedCB" />
+
+        <com.travijuu.numberpicker.library.NumberPicker
+            android:id="@+id/innerCellsCounter"
+            android:layout_width="40dp"
+            android:layout_height="129dp"
+            android:layout_marginLeft="64dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="8dp"
+            app:custom_layout="@layout/custom_number_picker"
+            app:layout_constraintStart_toEndOf="@+id/outerCellsCounter"
+            app:layout_constraintTop_toBottomOf="@+id/innerCellsText"
+            app:max="50"
+            app:min="0"
+            app:unit="1"
+            app:value="0" />
+
+        <TextView
+            android:id="@+id/missedCellsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Missed"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.569"
+            app:layout_constraintStart_toEndOf="@+id/innerCellsText"
+            app:layout_constraintTop_toBottomOf="@+id/initLineCrossedCB" />
+
+        <com.travijuu.numberpicker.library.NumberPicker
+            android:id="@+id/missedCellsCounter"
+            android:layout_width="40dp"
+            android:layout_height="129dp"
+            android:layout_marginTop="8dp"
+            app:custom_layout="@layout/custom_number_picker"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.611"
+            app:layout_constraintStart_toEndOf="@+id/innerCellsCounter"
+            app:layout_constraintTop_toBottomOf="@+id/missedCellsText"
+            app:max="50"
+            app:min="0"
+            app:unit="1"
+            app:value="0" />
+
+        <Space
+            android:id="@+id/autonomousSpaceBottom"
+            android:layout_width="1dp"
+            android:layout_height="262dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/initLineCrossedCB" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
