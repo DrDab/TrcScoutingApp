@@ -89,6 +89,11 @@ public class MatchInfo implements Serializable
     @SerializedName("generatorSwitchLevel")
     public Boolean generatorSwitchLevel;
 
+    public JSONObject toJSONObject() throws JSONException
+    {
+        return new JSONObject(new Gson().toJson(this));
+    }
+
     public static MatchInfo fromFragmentJSONData(String... fragmentJSONStrings)
             throws JSONException
     {
