@@ -128,10 +128,8 @@ public class SetMatchInfo extends AppCompatActivity
         try
         {
             Intent myIntent = getIntent();
-            String editoptionstr = myIntent.getStringExtra("EditOption");
-            Log.d("SetMatchInfo", "editoptionsstr=\"" + editoptionstr + "\"");
-            editingoption = Integer.parseInt(editoptionstr);
-            Log.d("SetMatchInfo", "Got edit option: " + editingoption);
+            editingoption = myIntent.getIntExtra("EditOption", -1);
+            Log.d("SetMatchInfo", "Got edit option index: " + editingoption);
         }
         catch (Exception e)
         {
@@ -142,7 +140,7 @@ public class SetMatchInfo extends AppCompatActivity
         // populate the boxes if already filled.
         if (editingoption != -1)
         {
-            matchInfo = DataStore.matchList.get(editingoption);;
+            matchInfo = DataStore.matchList.get(editingoption);
             try
             {
                 JSONObject test = new JSONObject();
@@ -171,6 +169,9 @@ public class SetMatchInfo extends AppCompatActivity
             {
                // confirm types here.
                 HashMap<Integer, CollectorTransaction> resultsAll = listener.getResultsAll();
+                matchInfo = MatchInfo.fromFragmentJSONData(resultsAll.get(0).transactionInfo,
+                        resultsAll.get(1).transactionInfo,
+                        resultsAll.get(2).transactionInfo);
             }
             catch (Exception e)
             {
@@ -178,7 +179,7 @@ public class SetMatchInfo extends AppCompatActivity
             }
         }
 
-        breakCond = breakCond && !matchInfo.allFieldsPopulated();
+        breakCond = breakCond || !matchInfo.allFieldsPopulated();
 
         if (!breakCond)
         {

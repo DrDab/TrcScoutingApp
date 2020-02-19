@@ -1,9 +1,12 @@
 package trc3543.trcscoutingapp.data;
 
 import java.io.Serializable;
+import java.util.Iterator;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 public class MatchInfo implements Serializable
@@ -86,16 +89,42 @@ public class MatchInfo implements Serializable
     @SerializedName("generatorSwitchLevel")
     public Boolean generatorSwitchLevel;
 
-    public boolean allFieldsPopulated() throws JSONException
+    public static MatchInfo fromFragmentJSONData(String... fragmentJSONStrings)
+            throws JSONException
     {
-        if (matchNumber == null ||
-                teamNumber == null ||
-                alliance == null ||
-                matchType == null)
+        JSONObject head = new JSONObject();
+
+        for (String fragmentJSONString : fragmentJSONStrings)
         {
-            return false;
+            JSONObject fragmentJSONObject = new JSONObject(fragmentJSONString);
+            Iterator<String> keyIterator = fragmentJSONObject.keys();
+            while (keyIterator.hasNext()) {
+                String key = keyIterator.next();
+                Object value = fragmentJSONObject.get(key);
+                head.put(key, value);
+            }
         }
-        return true;
+
+        Gson gson = new Gson();
+        MatchInfo toReturn = gson.fromJson(head.toString(), MatchInfo.class);
+        return toReturn;
+    }
+
+    private boolean checkAnyNull(Object... args)
+    {
+        for (Object cur : args)
+        {
+            if (cur == null)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean allFieldsPopulated()
+    {
+        return !checkAnyNull(matchNumber, teamNumber);
     }
 
     public String getDisplayString()

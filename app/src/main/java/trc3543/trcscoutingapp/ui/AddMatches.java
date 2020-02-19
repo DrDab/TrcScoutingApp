@@ -418,12 +418,12 @@ public class AddMatches extends AppCompatActivity
         if (!modifyingExisting)
         {
             intent = new Intent(this, SetMatchInfo.class);
-            intent.putExtra("EditOption", -1 + "");
+            intent.putExtra("EditOption", -1);
         }
         else
         {
             intent = new Intent(this, SetMatchInfo.class);
-            intent.putExtra("EditOption", option + "");
+            intent.putExtra("EditOption", option);
         }
         startActivity(intent);
     }

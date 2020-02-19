@@ -73,19 +73,27 @@ public class AutonomousFragment extends Fragment
             CollectorClient collectorClient = new CollectorClient(mPage)
             {
                 @Override
-                public JSONObject onRequestFields() throws JSONException
+                public JSONObject onRequestFields()
                 {
-                    JSONObject data = new JSONObject();
-                    data.put("matchNumber", Integer.parseInt(getEditTextValue(matchNumET)));
-                    data.put("teamNumber", Integer.parseInt(getEditTextValue(teamNumET)));
-                    data.put("matchType", matchTypeSpinner.getSelectedItem().toString());
-                    data.put("alliance", allianceSpinner.getSelectedItem().toString());
-                    data.put("initLineCrossed", initLineCrossedCB.isChecked());
-                    data.put("autonomousLower", lowerCellsPicker.getValue());
-                    data.put("autonomousOuter", outerCellsPicker.getValue());
-                    data.put("autonomousInner", innerCellsPicker.getValue());
-                    data.put("autonomousMissed", missedCellsPicker.getValue());
-                    return data;
+                    try
+                    {
+                        JSONObject data = new JSONObject();
+                        data.put("matchNumber", Integer.parseInt(getEditTextValue(matchNumET)));
+                        data.put("teamNumber", Integer.parseInt(getEditTextValue(teamNumET)));
+                        data.put("matchType", matchTypeSpinner.getSelectedItem().toString());
+                        data.put("alliance", allianceSpinner.getSelectedItem().toString());
+                        data.put("initLineCrossed", initLineCrossedCB.isChecked());
+                        data.put("autonomousLower", lowerCellsPicker.getValue());
+                        data.put("autonomousOuter", outerCellsPicker.getValue());
+                        data.put("autonomousInner", innerCellsPicker.getValue());
+                        data.put("autonomousMissed", missedCellsPicker.getValue());
+                        return data;
+                    }
+                    catch (Exception e)
+                    {
+                        e.printStackTrace();
+                        return new JSONObject();
+                    }
                 }
 
                 @Override
