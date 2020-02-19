@@ -143,7 +143,7 @@ class CollectorServerThread implements Runnable
 
     private boolean isDone = false;
 
-    public CollectorServerThread(Socket sock, Stopwatch st, CollectorServer collectorServer)
+    public CollectorServerThread(Socket sock, Stopwatch st, CollectorServer collectorServer) throws IOException
     {
         this.sock = sock;
         this.st = st;
@@ -151,6 +151,7 @@ class CollectorServerThread implements Runnable
         this.requestingAuthentication = true;
         this.receivedTransactionReady = false;
         this.clientId = -1;
+        this.bw = new BufferedWriter(new OutputStreamWriter(sock.getOutputStream()));
     }
 
     public void closeSocket() throws IOException
@@ -168,10 +169,25 @@ class CollectorServerThread implements Runnable
         return sock.isClosed();
     }
 
-    private void sendMessageOverride(String msg) throws IOException
+    private void sendMessageOverride(final String msg) throws IOException
     {
-        bw.write(msg+"\n");
-        bw.flush();
+        new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                try
+                {
+                    bw.write(msg+"\n");
+                    bw.flush();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
     }
 
     private void sendTransactionMsg(CollectorTransaction transaction) throws IOException
@@ -181,13 +197,16 @@ class CollectorServerThread implements Runnable
 
     public CollectorTransaction getResults() throws IOException
     {
+        //collectorServer.dbg("Begin getting results for %d",clientId);
         receivedTransactionReady = false;
         CollectorTransaction transaction = new CollectorTransaction(CollectorTransaction.TransactionType.REQUEST_FIELDS, null);
+        //collectorServer.dbg("collector msg sent for %d",clientId);
         sendTransactionMsg(transaction);
         double startTime = st.getTime();
-        while (st.getTime() - startTime < 0.2 && !receivedTransactionReady)
+        while (st.getTime() - startTime <= 0.2 && !receivedTransactionReady)
         {
         }
+        //collectorServer.dbg("got results for %d",clientId);
         if (!receivedTransactionReady)
         {
             return null;
@@ -215,7 +234,6 @@ class CollectorServerThread implements Runnable
         try
         {
             String clientMessage;
-            bw = new BufferedWriter(new OutputStreamWriter(sock.getOutputStream()));
             InputStream istream = sock.getInputStream();
             BufferedReader receiveRead = new BufferedReader(new InputStreamReader(istream));
 

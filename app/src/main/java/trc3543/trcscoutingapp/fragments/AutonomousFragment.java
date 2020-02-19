@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Spinner;
+
+import com.travijuu.numberpicker.library.NumberPicker;
 
 import androidx.fragment.app.Fragment;
 import trc3543.trcscoutingapp.R;
@@ -21,6 +24,16 @@ public class AutonomousFragment extends Fragment
     private View view;
     private Thread sendThread;
     private int mPage;
+
+    private EditText matchNumET;
+    private EditText teamNumET;
+    private Spinner matchTypeSpinner;
+    private Spinner allianceSpinner;
+    private CheckBox initLineCrossedCB;
+    private NumberPicker lowerCellsPicker;
+    private NumberPicker outerCellsPicker;
+    private NumberPicker innerCellsPicker;
+    private NumberPicker missedCellsPicker;
 
     public static AutonomousFragment newInstance(int page)
     {
@@ -38,22 +51,22 @@ public class AutonomousFragment extends Fragment
         mPage = getArguments().getInt(ARG_PAGE);
     }
 
-    // Inflate the fragment layout we defined above for this fragment
-    // Set the associated text for the title
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         if (view == null)
         {
             view = inflater.inflate(R.layout.fragment_autonomous_page, container, false);
+            matchNumET = (EditText) view.findViewById(R.id.matchNum);
+            teamNumET = (EditText) view.findViewById(R.id.teamNum);
+            matchTypeSpinner = (Spinner) view.findViewById(R.id.matchTypeSpinner);
+            allianceSpinner = (Spinner) view.findViewById(R.id.spectatingTeamSpinner);
+            initLineCrossedCB = (CheckBox) view.findViewById(R.id.initLineCrossedCB);
+            lowerCellsPicker = (NumberPicker) view.findViewById(R.id.lowerCellsCounter);
+            outerCellsPicker = (NumberPicker) view.findViewById(R.id.outerCellsCounter);
+            innerCellsPicker = (NumberPicker) view.findViewById(R.id.innerCellsCounter);
+            missedCellsPicker = (NumberPicker) view.findViewById(R.id.missedCellsCounter);
         }
-
-        /*
-        textView = (TextView) view.findViewById(R.id.tvTitle);
-        button = (Button) view.findViewById(R.id.button);
-        textView.setText("Fragment #" + mPage);
-         */
-
 
         if (sendThread == null)
         {
@@ -63,7 +76,15 @@ public class AutonomousFragment extends Fragment
                 public JSONObject onRequestFields() throws JSONException
                 {
                     JSONObject data = new JSONObject();
-                    data.put("sample", "LoremIpsum");
+                    data.put("matchNumber", Integer.parseInt(getEditTextValue(matchNumET)));
+                    data.put("teamNumber", Integer.parseInt(getEditTextValue(teamNumET)));
+                    data.put("matchType", matchTypeSpinner.getSelectedItem().toString());
+                    data.put("alliance", allianceSpinner.getSelectedItem().toString());
+                    data.put("initLineCrossed", initLineCrossedCB.isChecked());
+                    data.put("autonomousLower", lowerCellsPicker.getValue());
+                    data.put("autonomousOuter", outerCellsPicker.getValue());
+                    data.put("autonomousInner", innerCellsPicker.getValue());
+                    data.put("autonomousMissed", missedCellsPicker.getValue());
                     return data;
                 }
 
@@ -79,8 +100,15 @@ public class AutonomousFragment extends Fragment
                             try
                             {
                                 // ui actions here
-                                JSONObject j = new JSONObject();
-                                j.put("a", "");
+                                setEditTextValue(matchNumET, fieldData.getInt("matchNumber"));
+                                setEditTextValue(teamNumET, fieldData.getInt("teamNumber"));
+                                setSpinnerByTextValue(matchTypeSpinner, fieldData.getString("matchType"));
+                                setSpinnerByTextValue(allianceSpinner, fieldData.getString("alliance"));
+                                setCheckbox(initLineCrossedCB, fieldData.getBoolean("initLineCrossed"));
+                                setNumberPickerVal(lowerCellsPicker, fieldData.getInt("autonomousLower"));
+                                setNumberPickerVal(outerCellsPicker, fieldData.getInt("autonomousOuter"));
+                                setNumberPickerVal(innerCellsPicker, fieldData.getInt("autonomousInner"));
+                                setNumberPickerVal(missedCellsPicker, fieldData.getInt("autonomousMissed"));
                             }
                             catch (JSONException e)
                             {
@@ -95,4 +123,37 @@ public class AutonomousFragment extends Fragment
         }
         return view;
     }
+
+    private void setSpinnerByTextValue(Spinner spinner, String toSelect)
+    {
+        for (int i = 0; i < spinner.getCount(); i++)
+        {
+            if (spinner.getItemAtPosition(i).equals(toSelect))
+            {
+                spinner.setSelection(i);
+                break;
+            }
+        }
+    }
+
+    private void setEditTextValue(EditText editText, Object toSet)
+    {
+        editText.setText(toSet.toString() + "");
+    }
+
+    private void setCheckbox(CheckBox checkbox, Boolean toSet)
+    {
+        checkbox.setChecked(toSet);
+    }
+
+    private void setNumberPickerVal(NumberPicker numberPicker, Integer toSet)
+    {
+        numberPicker.setValue(toSet);
+    }
+
+    private String getEditTextValue(EditText editText)
+    {
+        return editText.getText().toString();
+    }
+
 }

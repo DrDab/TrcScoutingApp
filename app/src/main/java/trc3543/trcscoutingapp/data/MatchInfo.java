@@ -146,15 +146,18 @@ public class MatchInfo implements Serializable
             this.csvString = "";
             for (Object s : params)
             {
-                boolean isStr = s instanceof String;
-                if (isStr)
+                if (s != null)
                 {
-                    this.csvString += "\"";
-                }
-                this.csvString += s.toString();
-                if (isStr)
-                {
-                    this.csvString += "\"";
+                    boolean isStr = s instanceof String;
+                    if (isStr)
+                    {
+                        this.csvString += "\"";
+                    }
+                    this.csvString += s.toString();
+                    if (isStr)
+                    {
+                        this.csvString += "\"";
+                    }
                 }
                 this.csvString += ",";
             }
