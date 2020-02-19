@@ -3,7 +3,12 @@ package trc3543.trcscoutingapp.fragments;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;;
+import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Spinner;;
+
+import com.travijuu.numberpicker.library.NumberPicker;
 
 import androidx.fragment.app.Fragment;
 import trc3543.trcscoutingapp.R;
@@ -19,6 +24,16 @@ public class TeleOpFragment extends Fragment
     private View view;
     private Thread sendThread;
     private int mPage;
+
+    private NumberPicker lowerCellsPicker;
+    private NumberPicker outerCellsPicker;
+    private NumberPicker innerCellsPicker;
+    private NumberPicker missedCellsPicker;
+    private CheckBox stage1CB;
+    private CheckBox stage2CB;
+    private CheckBox stage3CB;
+    private CheckBox rotationCB;
+    private CheckBox positionCB;
 
     public static TeleOpFragment newInstance(int page)
     {
@@ -44,14 +59,16 @@ public class TeleOpFragment extends Fragment
         if (view == null)
         {
             view = inflater.inflate(R.layout.fragment_teleop_page, container, false);
+            lowerCellsPicker = (NumberPicker) view.findViewById(R.id.lowerCellsCounter);
+            outerCellsPicker = (NumberPicker) view.findViewById(R.id.outerCellsCounter);
+            innerCellsPicker = (NumberPicker) view.findViewById(R.id.innerCellsCounter);
+            missedCellsPicker = (NumberPicker) view.findViewById(R.id.missedCellsCounter);
+            stage1CB = (CheckBox) view.findViewById(R.id.shieldGeneratorStage1);
+            stage2CB = (CheckBox) view.findViewById(R.id.shieldGeneratorStage2);
+            stage3CB = (CheckBox) view.findViewById(R.id.shieldGeneratorStage3);
+            rotationCB = (CheckBox) view.findViewById(R.id.ctrlPanelRotationCheckBox);
+            positionCB = (CheckBox) view.findViewById(R.id.ctrlPanelPositionCheckBox);
         }
-
-        /*
-        textView = (TextView) view.findViewById(R.id.tvTitle);
-        button = (Button) view.findViewById(R.id.button);
-        textView.setText("Fragment #" + mPage);
-         */
-
 
         if (sendThread == null)
         {
@@ -61,7 +78,15 @@ public class TeleOpFragment extends Fragment
                 public JSONObject onRequestFields() throws JSONException
                 {
                     JSONObject data = new JSONObject();
-                    data.put("sample", "LoremIpsum");
+                    data.put("teleopLower", lowerCellsPicker.getValue());
+                    data.put("teleopOuter", outerCellsPicker.getValue());
+                    data.put("teleopInner", innerCellsPicker.getValue());
+                    data.put("teleopMissed", missedCellsPicker.getValue());
+                    data.put("shieldStage1", stage1CB.isChecked());
+                    data.put("shieldStage2", stage2CB.isChecked());
+                    data.put("shieldStage3", stage3CB.isChecked());
+                    data.put("controlPanelRotated", rotationCB.isChecked());
+                    data.put("controlPanelPositioned", positionCB.isChecked());
                     return data;
                 }
 
@@ -77,8 +102,15 @@ public class TeleOpFragment extends Fragment
                             try
                             {
                                 // ui actions here
-                                JSONObject j = new JSONObject();
-                                j.put("a", "");
+                                setNumberPickerVal(lowerCellsPicker, fieldData.getInt("teleopLower"));
+                                setNumberPickerVal(outerCellsPicker, fieldData.getInt("teleopOuter"));
+                                setNumberPickerVal(innerCellsPicker, fieldData.getInt("teleopInner"));
+                                setNumberPickerVal(missedCellsPicker, fieldData.getInt("teleopMissed"));
+                                setCheckbox(stage1CB, fieldData.getBoolean("shieldStage1"));
+                                setCheckbox(stage2CB, fieldData.getBoolean("shieldStage2"));
+                                setCheckbox(stage3CB, fieldData.getBoolean("shieldStage3"));
+                                setCheckbox(rotationCB, fieldData.getBoolean("controlPanelRotated"));
+                                setCheckbox(positionCB, fieldData.getBoolean("controlPanelPositioned"));
                             }
                             catch (JSONException e)
                             {
@@ -92,5 +124,15 @@ public class TeleOpFragment extends Fragment
             sendThread.start();
         }
         return view;
+    }
+
+    private void setCheckbox(CheckBox checkbox, Boolean toSet)
+    {
+        checkbox.setChecked(toSet);
+    }
+
+    private void setNumberPickerVal(NumberPicker numberPicker, Integer toSet)
+    {
+        numberPicker.setValue(toSet);
     }
 }
