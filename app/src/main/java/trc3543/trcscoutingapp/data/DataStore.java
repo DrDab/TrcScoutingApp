@@ -46,7 +46,7 @@ public class DataStore extends AppCompatActivity
 {
     // Begin season-specific info.
     public static final String DATA_FOLDER_NAME = "TrcScoutingApp";
-    public static final String CSV_HEADER = "Match#, Team#, MatchType, Alliance, Notes";
+    public static final String CSV_HEADER = "matchNum, teamNum, matchType, alliance, initLineCrossed, autonomousLowerCells, autonomousOuterCells, autonomousInnerCells, autonomousMissedCells, teleopLowerCells, teleopOuterCells, teleopInnerCells, teleopMissedCells, shieldStage1, shieldStage2, shieldStage3, controlPanelRotated, controlPanelPositioned, generatorSwitchParked, generatorSwitchHanging, generatorSwitchSupportingMechanism, generatorSwitchLevel, notes";
     public static final String VERSION_NUMBER = "1.3.3-frc-INDEV";
     public static final int YEAR_NUMBER = 2020;
     // End season-specific info.
