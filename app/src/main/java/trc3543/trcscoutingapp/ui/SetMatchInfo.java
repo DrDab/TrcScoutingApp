@@ -183,7 +183,7 @@ public class SetMatchInfo extends AppCompatActivity
         if (!breakCond)
         {
             // All values are confirmed, move to next screen.
-            Log.d("SetMatchInfo","Esketit!");
+            Log.d("SetMatchInfo", "Moving to next screen.");
             moveToNextScreen(view);
         }
         else

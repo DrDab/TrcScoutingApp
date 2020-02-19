@@ -1,7 +1,6 @@
 package trc3543.trcscoutingapp.data;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 import org.json.JSONException;
 

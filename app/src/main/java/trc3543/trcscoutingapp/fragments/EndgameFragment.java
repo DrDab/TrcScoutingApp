@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
+
+import com.travijuu.numberpicker.library.NumberPicker;
 
 import androidx.fragment.app.Fragment;
 import trc3543.trcscoutingapp.R;
@@ -14,7 +17,6 @@ import trc3543.trcscoutingapp.fragmentcommunication.CollectorClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-// In this case, the fragment displays simple text based on the page
 public class EndgameFragment extends Fragment
 {
     public static final String ARG_PAGE = "ARG_PAGE";
@@ -22,6 +24,12 @@ public class EndgameFragment extends Fragment
     private View view;
     private Thread sendThread;
     private int mPage;
+
+    private CheckBox parkedCB;
+    private CheckBox hangingCB;
+    private CheckBox supportingCB;
+    private CheckBox levelCB;
+    private EditText notesET;
 
     public static EndgameFragment newInstance(int page)
     {
@@ -47,14 +55,12 @@ public class EndgameFragment extends Fragment
         if (view == null)
         {
             view = inflater.inflate(R.layout.fragment_endgame_page, container, false);
+            parkedCB = (CheckBox) view.findViewById(R.id.endgameParkedCB);
+            hangingCB = (CheckBox) view.findViewById(R.id.endgameHangingCB);
+            supportingCB = (CheckBox) view.findViewById(R.id.endgameSupportingMechanismCB);
+            levelCB = (CheckBox) view.findViewById(R.id.endgameLevelCB);
+            notesET = (EditText) view.findViewById(R.id.gameNotes);
         }
-
-        /*
-        textView = (TextView) view.findViewById(R.id.tvTitle);
-        button = (Button) view.findViewById(R.id.button);
-        textView.setText("Fragment #" + mPage);
-         */
-
 
         if (sendThread == null)
         {
@@ -64,7 +70,11 @@ public class EndgameFragment extends Fragment
                 public JSONObject onRequestFields() throws JSONException
                 {
                     JSONObject data = new JSONObject();
-                    data.put("sample", "LoremIpsum");
+                    data.put("generatorSwitchParked", parkedCB.isChecked());
+                    data.put("generatorSwitchHanging", hangingCB.isChecked());
+                    data.put("generatorSwitchSupportingMechanism", supportingCB.isChecked());
+                    data.put("generatorSwitchLevel", levelCB.isChecked());
+                    data.put("notes", getEditTextValue(notesET));
                     return data;
                 }
 
@@ -79,9 +89,11 @@ public class EndgameFragment extends Fragment
                         {
                             try
                             {
-                                // ui actions here
-                                JSONObject j = new JSONObject();
-                                j.put("a", "");
+                                setCheckbox(parkedCB, fieldData.getBoolean("generatorSwitchParked"));
+                                setCheckbox(hangingCB, fieldData.getBoolean("generatorSwitchHanging"));
+                                setCheckbox(supportingCB, fieldData.getBoolean("generatorSwitchSupportingMechanism"));
+                                setCheckbox(levelCB, fieldData.getBoolean("generatorSwitchLevel"));
+                                setEditTextValue(notesET, fieldData.getString("notes"));
                             }
                             catch (JSONException e)
                             {
@@ -95,5 +107,20 @@ public class EndgameFragment extends Fragment
             sendThread.start();
         }
         return view;
+    }
+
+    private void setEditTextValue(EditText editText, Object toSet)
+    {
+        editText.setText(toSet.toString() + "");
+    }
+
+    private void setCheckbox(CheckBox checkbox, Boolean toSet)
+    {
+        checkbox.setChecked(toSet);
+    }
+
+    private String getEditTextValue(EditText editText)
+    {
+        return editText.getText().toString();
     }
 }

@@ -155,5 +155,4 @@ public class AutonomousFragment extends Fragment
     {
         return editText.getText().toString();
     }
-
 }
