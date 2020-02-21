@@ -1,4 +1,4 @@
 {
     "port":3621,
-    "header":"Lorem Ipsum Dolor Sit Amet"
+    "header":"matchNum, teamNum, matchType, alliance, initLineCrossed, autonomousLowerCells, autonomousOuterCells, autonomousInnerCells, autonomousMissedCells, teleopLowerCells, teleopOuterCells, teleopInnerCells, teleopMissedCells, shieldStage1, shieldStage2, shieldStage3, controlPanelRotated, controlPanelPositioned, generatorSwitchParked, generatorSwitchHanging, generatorSwitchSupportingMechanism, generatorSwitchLevel, notes"
 }
