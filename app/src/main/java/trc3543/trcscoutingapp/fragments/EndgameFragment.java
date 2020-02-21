@@ -111,11 +111,19 @@ public class EndgameFragment extends Fragment
 
     private void setEditTextValue(EditText editText, Object toSet)
     {
+        if (toSet == null)
+        {
+            return;
+        }
         editText.setText(toSet.toString() + "");
     }
 
     private void setCheckbox(CheckBox checkbox, Boolean toSet)
     {
+        if (toSet == null)
+        {
+            return;
+        }
         checkbox.setChecked(toSet);
     }
 

@@ -417,8 +417,17 @@ public class AddMatches extends AppCompatActivity
         Intent intent = null;
         if (!modifyingExisting)
         {
+            MatchInfo prev = DataStore.matchList == null ? null :
+                    DataStore.matchList.size() > 0 ?
+                            DataStore.matchList.get(DataStore.matchList.size() - 1) : null;
             intent = new Intent(this, SetMatchInfo.class);
             intent.putExtra("EditOption", -1);
+            if (prev != null)
+            {
+                intent.putExtra("PrevMatch", prev.matchNumber);
+                intent.putExtra("PrevAlliance", prev.alliance);
+                intent.putExtra("PrevMatchType", prev.matchType);
+            }
         }
         else
         {

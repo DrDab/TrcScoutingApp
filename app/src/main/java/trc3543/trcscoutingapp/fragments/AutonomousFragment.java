@@ -108,10 +108,12 @@ public class AutonomousFragment extends Fragment
                             try
                             {
                                 // ui actions here
+                                // hacky fix cause i'm lazy: load the fields that get auto-populated before the ones that don't,
+                                // so the exception will be thrown after everything needed loads, so that everything needed loads.
                                 setEditTextValue(matchNumET, fieldData.getInt("matchNumber"));
-                                setEditTextValue(teamNumET, fieldData.getInt("teamNumber"));
                                 setSpinnerByTextValue(matchTypeSpinner, fieldData.getString("matchType"));
                                 setSpinnerByTextValue(allianceSpinner, fieldData.getString("alliance"));
+                                setEditTextValue(teamNumET, fieldData.getInt("teamNumber"));
                                 setCheckbox(initLineCrossedCB, fieldData.getBoolean("initLineCrossed"));
                                 setNumberPickerVal(lowerCellsPicker, fieldData.getInt("autonomousLower"));
                                 setNumberPickerVal(outerCellsPicker, fieldData.getInt("autonomousOuter"));
@@ -134,6 +136,10 @@ public class AutonomousFragment extends Fragment
 
     private void setSpinnerByTextValue(Spinner spinner, String toSelect)
     {
+        if (toSelect == null)
+        {
+            return;
+        }
         for (int i = 0; i < spinner.getCount(); i++)
         {
             if (spinner.getItemAtPosition(i).equals(toSelect))
@@ -146,16 +152,28 @@ public class AutonomousFragment extends Fragment
 
     private void setEditTextValue(EditText editText, Object toSet)
     {
+        if (toSet == null)
+        {
+            return;
+        }
         editText.setText(toSet.toString() + "");
     }
 
     private void setCheckbox(CheckBox checkbox, Boolean toSet)
     {
+        if (toSet == null)
+        {
+            return;
+        }
         checkbox.setChecked(toSet);
     }
 
     private void setNumberPickerVal(NumberPicker numberPicker, Integer toSet)
     {
+        if (toSet == null)
+        {
+            return;
+        }
         numberPicker.setValue(toSet);
     }
 

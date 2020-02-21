@@ -126,11 +126,19 @@ public class TeleOpFragment extends Fragment
 
     private void setCheckbox(CheckBox checkbox, Boolean toSet)
     {
+        if (toSet == null)
+        {
+            return;
+        }
         checkbox.setChecked(toSet);
     }
 
     private void setNumberPickerVal(NumberPicker numberPicker, Integer toSet)
     {
+        if (toSet == null)
+        {
+            return;
+        }
         numberPicker.setValue(toSet);
     }
 }

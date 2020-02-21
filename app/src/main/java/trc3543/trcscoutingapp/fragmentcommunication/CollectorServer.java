@@ -29,6 +29,8 @@ public class CollectorServer
     HashMap<Integer, JSONObject> resultSettingQueued;
     Gson gson;
 
+    public boolean isRunning;
+
     public static final boolean DEBUG = true;
 
     public CollectorServer(Stopwatch st, int port) throws IOException
@@ -39,6 +41,7 @@ public class CollectorServer
         this.threads = new ArrayList<>();
         this.threadIdMap = new HashMap<>();
         this.resultSettingQueued = new HashMap<>();
+        this.isRunning = false;
         dbg("Collector Server initialized.\n");
     }
 
@@ -86,6 +89,7 @@ public class CollectorServer
         dbg("Collector Server Listening on port %d...\n", ssock.getLocalPort());
         while (true)
         {
+            this.isRunning = true;
             Socket sock = null;
             try
             {
@@ -109,6 +113,7 @@ public class CollectorServer
                 break;
             }
         }
+        this.isRunning = false;
     }
 
     public void close() throws IOException

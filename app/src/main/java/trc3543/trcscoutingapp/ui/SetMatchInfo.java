@@ -66,13 +66,36 @@ public class SetMatchInfo extends AppCompatActivity
     private Stopwatch stp;
     private CollectorServer listener;
 
+    private String[] autoFields = new String[]{"matchNumber",
+            "teamNumber",
+            "matchType",
+            "alliance",
+            "initLineCrossed",
+            "autonomousLower",
+            "autonomousOuter",
+            "autonomousInner",
+            "autonomousMissed"};
+    private String[] teleFields = new String[]{"teleopLower",
+            "teleopOuter",
+            "teleopInner",
+            "teleopMissed",
+            "shieldStage1",
+            "shieldStage2",
+            "shieldStage3",
+            "controlPanelRotated",
+            "controlPanelPositioned"};
+    private String[] endgameFields = new String[]{"generatorSwitchParked",
+            "generatorSwitchHanging",
+            "generatorSwitchSupportingMechanism",
+            "generatorSwitchLevel",
+            "notes"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_match_info2);
         setTitle("Add Match");
-
 
         stp = new Stopwatch();
         try
@@ -126,9 +149,9 @@ public class SetMatchInfo extends AppCompatActivity
             // TODO Auto-generated catch block
         }
 
+        Intent myIntent = getIntent();
         try
         {
-            Intent myIntent = getIntent();
             editingoption = myIntent.getIntExtra("EditOption", -1);
             Log.d("SetMatchInfo", "Got edit option index: " + editingoption);
         }
@@ -139,37 +162,14 @@ public class SetMatchInfo extends AppCompatActivity
         }
 
         // populate the boxes if already filled.
+        JSONObject autonomousData = new JSONObject();
+        JSONObject teleopData = new JSONObject();
+        JSONObject endgameData = new JSONObject();
         if (editingoption != -1)
         {
             matchInfo = DataStore.matchList.get(editingoption);
             try
             {
-                JSONObject autonomousData = new JSONObject();
-                JSONObject teleopData = new JSONObject();
-                JSONObject endgameData = new JSONObject();
-                String[] autoFields = new String[]{"matchNumber",
-                        "teamNumber",
-                        "matchType",
-                        "alliance",
-                        "initLineCrossed",
-                        "autonomousLower",
-                        "autonomousOuter",
-                        "autonomousInner",
-                        "autonomousMissed"};
-                String[] teleFields = new String[]{"teleopLower",
-                        "teleopOuter",
-                        "teleopInner",
-                        "teleopMissed",
-                        "shieldStage1",
-                        "shieldStage2",
-                        "shieldStage3",
-                        "controlPanelRotated",
-                        "controlPanelPositioned"};
-                String[] endgameFields = new String[]{"generatorSwitchParked",
-                        "generatorSwitchHanging",
-                        "generatorSwitchSupportingMechanism",
-                        "generatorSwitchLevel",
-                        "notes"};
                 PhaseClassifier phaseClassifier = new PhaseClassifier(matchInfo.toJSONObject(), autoFields, teleFields, endgameFields);
                 listener.setFields(0, phaseClassifier.getAutoFields());
                 listener.setFields(1, phaseClassifier.getTeleopFields());
@@ -183,6 +183,31 @@ public class SetMatchInfo extends AppCompatActivity
         else
         {
             matchInfo = new MatchInfo();
+            int matchNumberAutoPop = myIntent.getIntExtra("PrevMatch", -1);
+            String matchAllianceAutoPop = myIntent.getStringExtra("PrevAlliance");
+            String matchTypeAutoPop = myIntent.getStringExtra("PrevMatchType");
+            try
+            {
+                JSONObject dataToAutoPopulate = new JSONObject();
+                if (matchNumberAutoPop != -1)
+                {
+                    dataToAutoPopulate.put("matchNumber", matchNumberAutoPop + 1);
+                }
+                if (matchAllianceAutoPop != null)
+                {
+                    dataToAutoPopulate.put("alliance", matchAllianceAutoPop);
+                }
+                if (matchTypeAutoPop != null)
+                {
+                    dataToAutoPopulate.put("matchType", matchTypeAutoPop);
+                }
+                listener.setFields(0, dataToAutoPopulate);
+            }
+            catch (JSONException | IOException e)
+            {
+                e.printStackTrace();
+            }
+
         }
     }
 
