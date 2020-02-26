@@ -89,7 +89,7 @@ public class SetMatchInfo extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_match_info2);
-        setTitle("Add Match");
+        setTitle("Add Team");
 
         this.teamNumEditText = findViewById(R.id.teamNum);
         this.notesEditText = findViewById(R.id.notes);
