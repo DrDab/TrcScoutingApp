@@ -93,7 +93,7 @@ public class DataStore extends AppCompatActivity
 
     public static synchronized void writeArraylistsToJSON() throws IOException, JSONException
     {
-        File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+        File writeDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         if (!writeDirectory.exists())
         {
             writeDirectory.mkdir();
