@@ -85,7 +85,7 @@ public class AddMatches extends AppCompatActivity
         {
             AlertDialog alertDialog1 = new AlertDialog.Builder(AddMatches.this).create();
             alertDialog1.setTitle("Warning! (DON'T CLOSE)");
-            alertDialog1.setMessage("Please go into Settings > Apps > \"TRC Scouting App\" > Permissions and check Storage.");
+            alertDialog1.setMessage("Please go into Settings > Apps > \"TRC Pit Scouting\" > Permissions and check Storage.");
             alertDialog1.show();
             return;
         }

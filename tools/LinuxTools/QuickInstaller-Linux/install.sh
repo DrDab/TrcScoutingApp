@@ -4,6 +4,7 @@ while true; do
 	echo
 	echo "      Choice Menu"
 	echo "[1] - Install app on phone"
+	echo "[8] - Access phone shell"
 	echo "[9] - Exit "
 	read input
 	if [ "$input" = "1" ];
@@ -11,6 +12,9 @@ while true; do
 		echo "Installing App..."
  		adb install -r app.apk;
 		echo "Done"
+	elif [ "$input" = "8" ];
+	then
+		adb shell;
 	elif [ "$input" = "9" ];
 	then
 		echo "Bye!"

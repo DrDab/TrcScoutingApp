@@ -36,6 +36,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -53,12 +54,35 @@ public class SetMatchInfo extends AppCompatActivity
     private MatchInfo matchInfo;
 
     // elements
-    private EditText matchNumEditText;
     private EditText teamNumEditText;
-    private Spinner allianceSpinner;
-    private Spinner matchTypeSpinner;
+    private Spinner driveTrainSpinner;
+    private Spinner langSpinner;
+    private EditText powerCellsChamberCapacity;
+    private EditText cycleTimeEditText;
+    private CheckBox startNearAudience;
+    private CheckBox startMidPos;
+    private CheckBox startAwayFromAudience;
+    private CheckBox canCrossInitLine;
+    private CheckBox autoShootingLow;
+    private CheckBox autoShootingHigh;
+    private CheckBox autoShootingInner;
+    private EditText autoShootingNumber;
+    private CheckBox controlPanelRotation;
+    private CheckBox controlPanelPosition;
+    private CheckBox shootingFromNearField;
+    private CheckBox shootingFromMidField;
+    private CheckBox shootingFromFarField;
+    private CheckBox teleopShootingLow;
+    private CheckBox teleopShootingHigh;
+    private CheckBox teleopShootingInner;
+    private CheckBox pickupGround;
+    private CheckBox pickupFeederStation;
+    private Spinner pickupType;
+    private Spinner strategyType;
+    private CheckBox driveUnderTrench;
+    private CheckBox climbing;
+    private CheckBox balancing;
     private EditText notesEditText;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -67,11 +91,35 @@ public class SetMatchInfo extends AppCompatActivity
         setContentView(R.layout.activity_set_match_info2);
         setTitle("Add Match");
 
-        this.matchNumEditText = (EditText) findViewById(R.id.matchNum);
-        this.teamNumEditText = (EditText) findViewById(R.id.teamNum);
-        this.allianceSpinner = (Spinner) findViewById(R.id.SpectatingSpinner);
-        this.matchTypeSpinner = (Spinner) findViewById(R.id.matchTypeSpinner);
-        this.notesEditText = (EditText) findViewById(R.id.notes);
+        this.teamNumEditText = findViewById(R.id.teamNum);
+        this.notesEditText = findViewById(R.id.notes);
+        this.driveTrainSpinner = findViewById(R.id.driveTrainSpinner);
+        this.langSpinner = findViewById(R.id.langSpinner);
+        this.powerCellsChamberCapacity = findViewById(R.id.cellsInChamberET);
+        this.cycleTimeEditText = findViewById(R.id.cycleTimeET);
+        this.startNearAudience = findViewById(R.id.startingPosNearCB);
+        this.startMidPos = findViewById(R.id.startingPosMidCB);
+        this.startAwayFromAudience = findViewById(R.id.startingPosFarCB);
+        this.canCrossInitLine = findViewById(R.id.crossInitLineCB);
+        this.autoShootingLow = findViewById(R.id.autoShootingLowCB);
+        this.autoShootingHigh = findViewById(R.id.autoShootingHighCB);
+        this.autoShootingInner = findViewById(R.id.autoShootingInnerCB);
+        this.autoShootingNumber = findViewById(R.id.autoCellsScoreET);
+        this.controlPanelPosition = findViewById(R.id.controlPanelPositioningCB);
+        this.controlPanelRotation = findViewById(R.id.controlPanelRotationCB);
+        this.shootingFromNearField = findViewById(R.id.teleopShootingLocNearCB);
+        this.shootingFromMidField = findViewById(R.id.teleopShootingLocMidCB);
+        this.shootingFromFarField = findViewById(R.id.teleopShootingLocFarCB);
+        this.teleopShootingLow = findViewById(R.id.teleopShootingLow);
+        this.teleopShootingHigh = findViewById(R.id.teleopShootingHigh);
+        this.teleopShootingInner = findViewById(R.id.teleopShootingInner);
+        this.pickupGround = findViewById(R.id.pickuplocationGround);
+        this.pickupFeederStation = findViewById(R.id.pickuplocationFeederStation);
+        this.pickupType = findViewById(R.id.pickupTypeSpinner);
+        this.strategyType = findViewById(R.id.generalStrategySpinner);
+        this.driveUnderTrench = findViewById(R.id.driveUnderTrenchCB);
+        this.climbing = findViewById(R.id.climbingCB);
+        this.balancing = findViewById(R.id.balancingCB);
 
         try
         {
@@ -102,10 +150,34 @@ public class SetMatchInfo extends AppCompatActivity
             matchInfo = DataStore.matchList.get(editingoption);
             String read = matchInfo.getCsvString();
             Log.d("SetMatchInfo", editingoption + " " + read);
-            setEditTextValue(matchNumEditText, matchInfo.matchNumber);
             setEditTextValue(teamNumEditText, matchInfo.teamNumber);
-            setSpinnerByTextValue(allianceSpinner, matchInfo.alliance);
-            setSpinnerByTextValue(matchTypeSpinner, matchInfo.matchType);
+            setSpinnerByTextValue(driveTrainSpinner, matchInfo.driveTrain);
+            setSpinnerByTextValue(langSpinner, matchInfo.programmingLanguage);
+            setEditTextValue(powerCellsChamberCapacity, matchInfo.powerCellsChamberCapacity);
+            setEditTextValue(cycleTimeEditText, matchInfo.cycleTime);
+            setCheckBox(startNearAudience, matchInfo.startNearAudience);
+            setCheckBox(startMidPos, matchInfo.startMidPos);
+            setCheckBox(startAwayFromAudience, matchInfo.startAwayFromAudience);
+            setCheckBox(canCrossInitLine, matchInfo.canCrossInitLine);
+            setCheckBox(autoShootingLow, matchInfo.autoShootingLow);
+            setCheckBox(autoShootingHigh, matchInfo.autoShootingHigh);
+            setCheckBox(autoShootingInner, matchInfo.autoShootingInner);
+            setEditTextValue(autoShootingNumber, matchInfo.autoShootingNumber);
+            setCheckBox(controlPanelRotation, matchInfo.controlPanelRotation);
+            setCheckBox(controlPanelPosition, matchInfo.controlPanelPosition);
+            setCheckBox(shootingFromNearField, matchInfo.shootingFromNearField);
+            setCheckBox(shootingFromMidField, matchInfo.shootingFromMidField);
+            setCheckBox(shootingFromFarField, matchInfo.shootingFromFarField);
+            setCheckBox(teleopShootingLow, matchInfo.teleopShootingLow);
+            setCheckBox(teleopShootingHigh, matchInfo.teleopShootingHigh);
+            setCheckBox(teleopShootingInner, matchInfo.teleopShootingInner);
+            setCheckBox(pickupGround, matchInfo.pickupGround);
+            setCheckBox(pickupFeederStation, matchInfo.pickupFeederStation);
+            setSpinnerByTextValue(pickupType, matchInfo.pickupType);
+            setSpinnerByTextValue(strategyType, matchInfo.strategyType);
+            setCheckBox(driveUnderTrench, matchInfo.driveUnderTrench);
+            setCheckBox(climbing, matchInfo.climbing);
+            setCheckBox(balancing, matchInfo.balancing);
             setEditTextValue(notesEditText, matchInfo.notes);
         }
         else
@@ -122,11 +194,35 @@ public class SetMatchInfo extends AppCompatActivity
         {
             try
             {
-                matchInfo.matchNumber = Integer.parseInt(matchNumEditText.getText().toString());
-                matchInfo.teamNumber = Integer.parseInt(teamNumEditText.getText().toString());
-                matchInfo.alliance = allianceSpinner.getSelectedItem().toString();
-                matchInfo.matchType = matchTypeSpinner.getSelectedItem().toString();
-                matchInfo.notes = notesEditText.getText().toString();
+                matchInfo.teamNumber = getEditTextNumericValue(teamNumEditText);
+                matchInfo.driveTrain = getSpinnerTextValue(driveTrainSpinner);
+                matchInfo.programmingLanguage = getSpinnerTextValue(langSpinner);
+                matchInfo.powerCellsChamberCapacity = getEditTextNumericValue(powerCellsChamberCapacity);
+                matchInfo.cycleTime = getEditTextNumericValue(cycleTimeEditText);
+                matchInfo.startNearAudience = getCheckBox(startNearAudience);
+                matchInfo.startMidPos = getCheckBox(startMidPos);
+                matchInfo.startAwayFromAudience = getCheckBox(startAwayFromAudience);
+                matchInfo.canCrossInitLine = getCheckBox(canCrossInitLine);
+                matchInfo.autoShootingLow = getCheckBox(autoShootingLow);
+                matchInfo.autoShootingHigh = getCheckBox(autoShootingHigh);
+                matchInfo.autoShootingInner = getCheckBox(autoShootingInner);
+                matchInfo.autoShootingNumber = getEditTextNumericValue(autoShootingNumber);
+                matchInfo.controlPanelRotation = getCheckBox(controlPanelRotation);
+                matchInfo.controlPanelPosition = getCheckBox(controlPanelPosition);
+                matchInfo.shootingFromNearField = getCheckBox(shootingFromNearField);
+                matchInfo.shootingFromMidField = getCheckBox(shootingFromMidField);
+                matchInfo.shootingFromFarField = getCheckBox(shootingFromFarField);
+                matchInfo.teleopShootingLow = getCheckBox(teleopShootingLow);
+                matchInfo.teleopShootingHigh = getCheckBox(teleopShootingHigh);
+                matchInfo.teleopShootingInner = getCheckBox(teleopShootingInner);
+                matchInfo.pickupGround = getCheckBox(pickupGround);
+                matchInfo.pickupFeederStation = getCheckBox(pickupFeederStation);
+                matchInfo.pickupType = getSpinnerTextValue(pickupType);
+                matchInfo.strategyType = getSpinnerTextValue(strategyType);
+                matchInfo.driveUnderTrench = getCheckBox(driveUnderTrench);
+                matchInfo.climbing = getCheckBox(climbing);
+                matchInfo.balancing = getCheckBox(balancing);
+                matchInfo.notes = getEditTextValue(notesEditText);
             }
             catch (Exception e)
             {
@@ -139,7 +235,8 @@ public class SetMatchInfo extends AppCompatActivity
         if (!breakCond)
         {
             // All values are confirmed, move to next screen.
-            Log.d("SetMatchInfo","Esketit!");
+            Log.d("SetMatchInfo","Moving to next screen");
+            Log.d("owo", matchInfo.getCsvString());
             moveToNextScreen(view);
         }
         else
@@ -216,8 +313,33 @@ public class SetMatchInfo extends AppCompatActivity
         }
     }
 
+    public String getSpinnerTextValue(Spinner spinner)
+    {
+        return spinner.getSelectedItem().toString();
+    }
+
     private void setEditTextValue(EditText editText, Object toSet)
     {
         editText.setText(toSet.toString() + "");
+    }
+
+    public String getEditTextValue(EditText editText)
+    {
+        return editText.getText().toString();
+    }
+
+    public Integer getEditTextNumericValue(EditText editText)
+    {
+        return Integer.parseInt(editText.getText().toString());
+    }
+
+    private void setCheckBox(CheckBox checkBox, Boolean toSet)
+    {
+        checkBox.setChecked(toSet);
+    }
+
+    public Boolean getCheckBox(CheckBox checkBox)
+    {
+        return checkBox.isChecked();
     }
 }

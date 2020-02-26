@@ -35,7 +35,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -46,9 +45,37 @@ import java.util.Locale;
 public class DataStore extends AppCompatActivity
 {
     // Begin season-specific info.
-    public static final String DATA_FOLDER_NAME = "TrcScoutingApp";
-    public static final String CSV_HEADER = "Match#, Team#, MatchType, Alliance, Notes";
-    public static final String VERSION_NUMBER = "1.3.3-frc-INDEV";
+    public static final String DATA_FOLDER_NAME = "TrcPitScouting";
+    public static final String CSV_HEADER = "teamNumber," +
+            "driveTrain," +
+            "programmingLanguage," +
+            "powerCellsChamberCapacity," +
+            "cycleTime," +
+            "AT-startNearAudience," +
+            "AT-startMidPos," +
+            "AT-startAwayFromAudience," +
+            "AT-canCrossInitLine," +
+            "AT-autoShootingLow," +
+            "AT-autoShootingHigh," +
+            "AT-autoShootingInner," +
+            "AT-autoShootingNumber," +
+            "AT-controlPanelRotation," +
+            "AT-controlPanelPosition," +
+            "TO-shootingFromNearField," +
+            "TO-shootingFromMidField," +
+            "TO-shootingFromFarField," +
+            "TO-teleopShootingLow," +
+            "TO-teleopShootingHigh," +
+            "TO-teleopShootingInner," +
+            "TO-pickupGround," +
+            "TO-pickupFeederStation," +
+            "TO-pickupType," +
+            "TO-strategyType," +
+            "TO-driveUnderTrench," +
+            "TO-climbing," +
+            "TO-balancing," +
+            "notes\n";
+    public static final String VERSION_NUMBER = "1.3.4-frc";
     public static final int YEAR_NUMBER = 2020;
     // End season-specific info.
 
@@ -73,9 +100,27 @@ public class DataStore extends AppCompatActivity
     public static String username = null;
     public static String password = null;
 
+    private static String getTextFileContents(File file)
+    {
+        StringBuilder contentBuilder = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new FileReader(file)))
+        {
+            String sCurrentLine;
+            while ((sCurrentLine = br.readLine()) != null)
+            {
+                contentBuilder.append(sCurrentLine).append("\n");
+            }
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return contentBuilder.toString();
+    }
+
     public static synchronized void writeArraylistsToJSON() throws IOException, JSONException
     {
-        File writeDirectory = new File(Environment.getExternalStorageDirectory(), "TrcScoutingApp");
+        File writeDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         if (!writeDirectory.exists())
         {
             writeDirectory.mkdir();
@@ -103,7 +148,7 @@ public class DataStore extends AppCompatActivity
         File cache = new File(readDirectory, "cache-" + YEAR_NUMBER + ".json");
         if (cache.exists())
         {
-            String jsonData = new String(Files.readAllBytes(cache.toPath()));
+            String jsonData = getTextFileContents(cache);
             JSONObject jsonCacheObject = new JSONObject(jsonData);
             matchList = GsonUtilz.JSONArrayToMatchInfoArrayList(jsonCacheObject.getJSONArray("matches"));
         }

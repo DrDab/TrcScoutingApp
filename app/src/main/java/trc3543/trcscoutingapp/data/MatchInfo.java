@@ -1,9 +1,6 @@
 package trc3543.trcscoutingapp.data;
 
 import java.io.Serializable;
-import java.util.UUID;
-
-import org.json.JSONException;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -11,76 +8,181 @@ public class MatchInfo implements Serializable
 {
     private static final long serialVersionUID = 1L;
 
-    @SerializedName("uuid")
-    public String uuid;
-
-    @SerializedName("matchNumber")
-    public Integer matchNumber;
-
     @SerializedName("teamNumber")
     public Integer teamNumber;
 
-    @SerializedName("alliance")
-    public String alliance;
+    @SerializedName("driveTrain")
+    public String driveTrain;
 
-    @SerializedName("matchType")
-    public String matchType;
+    @SerializedName("programmingLanguage")
+    public String programmingLanguage;
+
+    @SerializedName("powerCellsChamberCapacity")
+    public Integer powerCellsChamberCapacity;
+
+    @SerializedName("cycleTime")
+    public Integer cycleTime;
+
+    // autonomous
+    @SerializedName("startNearAudience")
+    public Boolean startNearAudience;
+
+    @SerializedName("startMidPos")
+    public Boolean startMidPos;
+
+    @SerializedName("startAwayFromAudience")
+    public Boolean startAwayFromAudience;
+
+    @SerializedName("canCrossInitLine")
+    public Boolean canCrossInitLine;
+
+    @SerializedName("autoShootingLow")
+    public Boolean autoShootingLow;
+
+    @SerializedName("autoShootingHigh")
+    public Boolean autoShootingHigh;
+
+    @SerializedName("autoShootingInner")
+    public Boolean autoShootingInner;
+
+    @SerializedName("autoShootingNumber")
+    public Integer autoShootingNumber;
+
+    @SerializedName("controlPanelRotation")
+    public Boolean controlPanelRotation;
+
+    @SerializedName("controlPanelPosition")
+    public Boolean controlPanelPosition;
+
+    // teleop
+    @SerializedName("shootingFromNearField")
+    public Boolean shootingFromNearField;
+
+    @SerializedName("shootingFromMidField")
+    public Boolean shootingFromMidField;
+
+    @SerializedName("shootingFromFarField")
+    public Boolean shootingFromFarField;
+
+    @SerializedName("teleopShootingLow")
+    public Boolean teleopShootingLow;
+
+    @SerializedName("teleopShootingHigh")
+    public Boolean teleopShootingHigh;
+
+    @SerializedName("teleopShootingInner")
+    public Boolean teleopShootingInner;
+
+    @SerializedName("pickupGround")
+    public Boolean pickupGround;
+
+    @SerializedName("pickupFeederStation")
+    public Boolean pickupFeederStation;
+
+    @SerializedName("pickupType")
+    public String pickupType;
+
+    @SerializedName("strategyType")
+    public String strategyType;
+
+    @SerializedName("driveUnderTrench")
+    public Boolean driveUnderTrench;
+
+    @SerializedName("climbing")
+    public Boolean climbing;
+
+    @SerializedName("balancing")
+    public Boolean balancing;
 
     @SerializedName("notes")
     public String notes;
 
-    public MatchInfo(Integer matchNumber, Integer teamNumber, String alliance, String matchType, String notes)
-    {
-        this.uuid = UUID.randomUUID().toString();
-        this.matchNumber = matchNumber;
-        this.teamNumber = teamNumber;
-        this.alliance = alliance;
-        this.matchType = matchType;
-        this.notes = notes;
-    }
-
-    public MatchInfo()
-    {
-        this(null, null, null, null, null);
-    }
-
-    public boolean allFieldsPopulated() throws JSONException
-    {
-        if (matchNumber == null ||
-                teamNumber == null ||
-                alliance == null ||
-                matchNumber == null)
-        {
-            return false;
-        }
-        return true;
-    }
-
     public String getDisplayString()
     {
-        return String.format("Match # %d (%s) Team: %d", matchNumber, matchType, teamNumber);
+        return String.format("Team %d", teamNumber);
     }
 
     public String getCsvString()
     {
-        String toReturn = "";
-        toReturn += matchNumber;
-        toReturn += ",";
-        toReturn += teamNumber;
-        toReturn += ",";
-        toReturn += matchType;
-        toReturn += ",";
-        toReturn += alliance;
-        toReturn += ",\"";
-        toReturn += notes;
-        toReturn += "\",";
-        return toReturn;
+        CsvOrder csvOrder = new CsvOrder(teamNumber,
+                driveTrain,
+                programmingLanguage,
+                powerCellsChamberCapacity,
+                cycleTime,
+                startNearAudience,
+                startMidPos,
+                startAwayFromAudience,
+                canCrossInitLine,
+                autoShootingLow,
+                autoShootingHigh,
+                autoShootingInner,
+                autoShootingNumber,
+                controlPanelRotation,
+                controlPanelPosition,
+                shootingFromNearField,
+                shootingFromMidField,
+                shootingFromFarField,
+                teleopShootingLow,
+                teleopShootingHigh,
+                teleopShootingInner,
+                pickupGround,
+                pickupFeederStation,
+                pickupType,
+                strategyType,
+                driveUnderTrench,
+                climbing,
+                balancing,
+                notes);
+        return csvOrder.csvString;
     }
 
     @Override
     public String toString()
     {
         return getDisplayString();
+    }
+
+    private boolean checkAnyNull(Object... args)
+    {
+        for (Object cur : args)
+        {
+            if (cur == null)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean allFieldsPopulated()
+    {
+        return !checkAnyNull(teamNumber, powerCellsChamberCapacity, cycleTime);
+    }
+
+    private class CsvOrder
+    {
+        public String csvString;
+        public CsvOrder(Object... params)
+        {
+            this.csvString = "";
+            for (Object s : params)
+            {
+                if (s != null)
+                {
+                    boolean isStr = s instanceof String;
+                    if (isStr)
+                    {
+                        this.csvString += "\"";
+                    }
+                    this.csvString += s.toString();
+                    if (isStr)
+                    {
+                        this.csvString += "\"";
+                    }
+                }
+                this.csvString += ",";
+            }
+        }
     }
 
 }
