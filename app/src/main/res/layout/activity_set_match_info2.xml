@@ -48,13 +48,13 @@
             android:layout_height="147dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="1852dp"
+            android:layout_marginTop="2136dp"
             android:ems="10"
             android:hint="Notes..."
             android:inputType="textMultiLine"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.632"
+            app:layout_constraintHorizontal_bias="0.468"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -107,6 +107,34 @@
             app:layout_constraintBottom_toTopOf="@+id/langSpinner"
             app:layout_constraintStart_toStartOf="@+id/langSpinner" />
 
+        <!-- -->
+
+        <Spinner
+            android:id="@+id/shootingAccuracySpinner"
+            android:layout_width="315dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="184dp"
+            android:entries="@array/shooting_accuracy"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/teamNum" />
+
+        <TextView
+            android:id="@+id/shootingAccuracyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Shooting Accuracy"
+            android:textSize="16sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/shootingAccuracySpinner"
+            app:layout_constraintStart_toStartOf="@+id/shootingAccuracySpinner" />
+
+        <!-- -->
+
 
         <TextView
             android:id="@+id/autonomousText"
@@ -114,7 +142,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="224dp"
+            android:layout_marginTop="368dp"
             android:text="Autonomous"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -127,7 +155,7 @@
             android:layout_width="147dp"
             android:layout_height="0dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="600dp"
+            android:layout_marginTop="688dp"
             android:text="Teleoperated"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -136,8 +164,8 @@
             app:layout_constraintTop_toBottomOf="@+id/autonomousText" />
 
         <Space
-            android:layout_width="41dp"
-            android:layout_height="2084dp"
+            android:layout_width="30dp"
+            android:layout_height="2392dp"
             android:layout_marginTop="92dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
@@ -148,11 +176,12 @@
             android:id="@+id/cellsInChamberET"
             android:layout_width="321dp"
             android:layout_height="43dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="108dp"
             android:ems="10"
             android:hint="# Cell Storage Capacity"
             android:inputType="numberSigned"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.477"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/langSpinner" />
 
@@ -160,9 +189,21 @@
             android:id="@+id/cycleTimeET"
             android:layout_width="321dp"
             android:layout_height="43dp"
-            android:layout_marginTop="84dp"
+            android:layout_marginTop="172dp"
             android:ems="10"
             android:hint="Cycle Time (seconds)"
+            android:inputType="numberSigned"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/langSpinner" />
+
+        <EditText
+            android:id="@+id/cyclesPerMatchET"
+            android:layout_width="321dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="236dp"
+            android:ems="10"
+            android:hint="# Cycles/Match"
             android:inputType="numberSigned"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -172,12 +213,12 @@
             android:id="@+id/startingPosPrefText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:text="Starting Position Can-Do"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/autonomousText" />
 
@@ -220,7 +261,7 @@
             android:id="@+id/crossInitLineCB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="28dp"
             android:text="Can Cross Init Line"
             android:textSize="22sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -232,7 +273,7 @@
             android:id="@+id/autoShootingText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="220dp"
+            android:layout_marginTop="284dp"
             android:text="Auto Shooting"
             android:textColor="@android:color/black"
             android:textSize="18sp"
@@ -275,20 +316,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/autoShootingText" />
 
+        <!-- -->
+
         <EditText
             android:id="@+id/autoCellsScoreET"
             android:layout_width="309dp"
             android:layout_height="49dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="168dp"
             android:ems="10"
             android:hint="Cell Delivery Capacity"
             android:inputType="numberSigned"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.489"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/autoShootingInnerCB" />
-
-        <!-- -->
 
         <TextView
             android:id="@+id/controlPanelText"
@@ -333,12 +373,12 @@
             android:id="@+id/teleopShootingLocText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="668dp"
+            android:layout_marginTop="724dp"
             android:text="TeleOp Shooting Locations"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.543"
+            app:layout_constraintHorizontal_bias="0.456"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/autonomousText" />
 
@@ -383,7 +423,7 @@
             android:id="@+id/teleopShootingText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="864dp"
+            android:layout_marginTop="916dp"
             android:text="TeleOp Shooting"
             android:textColor="@android:color/black"
             android:textSize="18sp"
@@ -432,12 +472,12 @@
             android:id="@+id/pickupLocationText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1036dp"
+            android:layout_marginTop="1092dp"
             android:text="Pickup Location"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.492"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/autonomousText" />
 
@@ -473,7 +513,7 @@
             android:layout_height="28dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="72dp"
             android:entries="@array/pickup_type"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
@@ -521,7 +561,7 @@
             android:id="@+id/driveUnderTrenchCB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="36dp"
             android:text="Drive Under Trench?"
             android:textColor="@android:color/black"
             android:textSize="18sp"
@@ -533,12 +573,12 @@
             android:id="@+id/climbingCB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="60dp"
             android:text="Climbing"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.482"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/driveUnderTrenchCB" />
 
@@ -546,11 +586,11 @@
             android:id="@+id/balancingCB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
             android:text="Balancing"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.511"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/climbingCB" />
 

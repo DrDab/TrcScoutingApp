@@ -57,8 +57,10 @@ public class SetMatchInfo extends AppCompatActivity
     private EditText teamNumEditText;
     private Spinner driveTrainSpinner;
     private Spinner langSpinner;
+    private Spinner shootingAccuracySpinner;
     private EditText powerCellsChamberCapacity;
     private EditText cycleTimeEditText;
+    private EditText cyclesPerMatchEditText;
     private CheckBox startNearAudience;
     private CheckBox startMidPos;
     private CheckBox startAwayFromAudience;
@@ -95,8 +97,10 @@ public class SetMatchInfo extends AppCompatActivity
         this.notesEditText = findViewById(R.id.notes);
         this.driveTrainSpinner = findViewById(R.id.driveTrainSpinner);
         this.langSpinner = findViewById(R.id.langSpinner);
+        this.shootingAccuracySpinner = findViewById(R.id.shootingAccuracySpinner);
         this.powerCellsChamberCapacity = findViewById(R.id.cellsInChamberET);
         this.cycleTimeEditText = findViewById(R.id.cycleTimeET);
+        this.cyclesPerMatchEditText = findViewById(R.id.cyclesPerMatchET);
         this.startNearAudience = findViewById(R.id.startingPosNearCB);
         this.startMidPos = findViewById(R.id.startingPosMidCB);
         this.startAwayFromAudience = findViewById(R.id.startingPosFarCB);
@@ -153,8 +157,10 @@ public class SetMatchInfo extends AppCompatActivity
             setEditTextValue(teamNumEditText, matchInfo.teamNumber);
             setSpinnerByTextValue(driveTrainSpinner, matchInfo.driveTrain);
             setSpinnerByTextValue(langSpinner, matchInfo.programmingLanguage);
+            setSpinnerByTextValue(shootingAccuracySpinner, matchInfo.shootingAccuracy);
             setEditTextValue(powerCellsChamberCapacity, matchInfo.powerCellsChamberCapacity);
             setEditTextValue(cycleTimeEditText, matchInfo.cycleTime);
+            setEditTextValue(cyclesPerMatchEditText, matchInfo.cyclesPerMatch);
             setCheckBox(startNearAudience, matchInfo.startNearAudience);
             setCheckBox(startMidPos, matchInfo.startMidPos);
             setCheckBox(startAwayFromAudience, matchInfo.startAwayFromAudience);
@@ -197,8 +203,10 @@ public class SetMatchInfo extends AppCompatActivity
                 matchInfo.teamNumber = getEditTextNumericValue(teamNumEditText);
                 matchInfo.driveTrain = getSpinnerTextValue(driveTrainSpinner);
                 matchInfo.programmingLanguage = getSpinnerTextValue(langSpinner);
+                matchInfo.shootingAccuracy = getSpinnerTextValue(shootingAccuracySpinner);
                 matchInfo.powerCellsChamberCapacity = getEditTextNumericValue(powerCellsChamberCapacity);
                 matchInfo.cycleTime = getEditTextNumericValue(cycleTimeEditText);
+                matchInfo.cyclesPerMatch = getEditTextNumericValue(cyclesPerMatchEditText);
                 matchInfo.startNearAudience = getCheckBox(startNearAudience);
                 matchInfo.startMidPos = getCheckBox(startMidPos);
                 matchInfo.startAwayFromAudience = getCheckBox(startAwayFromAudience);

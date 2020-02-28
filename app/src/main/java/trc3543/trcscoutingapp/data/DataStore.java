@@ -49,8 +49,10 @@ public class DataStore extends AppCompatActivity
     public static final String CSV_HEADER = "teamNumber," +
             "driveTrain," +
             "programmingLanguage," +
+            "shootingAccuracy" +
             "powerCellsChamberCapacity," +
             "cycleTime," +
+            "cyclesPerMatch," +
             "AT-startNearAudience," +
             "AT-startMidPos," +
             "AT-startAwayFromAudience," +

@@ -17,11 +17,17 @@ public class MatchInfo implements Serializable
     @SerializedName("programmingLanguage")
     public String programmingLanguage;
 
+    @SerializedName("shootingAccuracy")
+    public String shootingAccuracy;
+
     @SerializedName("powerCellsChamberCapacity")
     public Integer powerCellsChamberCapacity;
 
     @SerializedName("cycleTime")
     public Integer cycleTime;
+
+    @SerializedName("cyclesPerMatch")
+    public Integer cyclesPerMatch;
 
     // autonomous
     @SerializedName("startNearAudience")
@@ -107,8 +113,10 @@ public class MatchInfo implements Serializable
         CsvOrder csvOrder = new CsvOrder(teamNumber,
                 driveTrain,
                 programmingLanguage,
+                shootingAccuracy,
                 powerCellsChamberCapacity,
                 cycleTime,
+                cyclesPerMatch,
                 startNearAudience,
                 startMidPos,
                 startAwayFromAudience,
@@ -156,7 +164,7 @@ public class MatchInfo implements Serializable
 
     public boolean allFieldsPopulated()
     {
-        return !checkAnyNull(teamNumber, powerCellsChamberCapacity, cycleTime);
+        return !checkAnyNull(teamNumber, powerCellsChamberCapacity, cycleTime, cyclesPerMatch);
     }
 
     private class CsvOrder
