@@ -111,18 +111,18 @@ public class AddMatches extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView arg0, View arg1, int position, long arg3)
             {
-                // position = position selected
-                AlertDialog alertDialog = new AlertDialog.Builder(AddMatches.this).create();
-                alertDialog.setTitle("Game Information");
                 if (MAKE_CHANGES_READ_ONLY)
                 {
+                    AlertDialog alertDialog = new AlertDialog.Builder(AddMatches.this).create();
+                    alertDialog.setTitle("Game Information");
                     String s = DataStore.matchList.get(position).getCsvString();
                     alertDialog.setMessage(s);
                     alertDialog.show();
                 }
                 else
                 {
-                    openCompNamePrompt(true, position);
+                    // position = position selected
+                    openMatchEditPrompt(true, position);
                 }
 
             }
@@ -168,10 +168,8 @@ public class AddMatches extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                // place a message
-
-                openCompNamePrompt(false, -1);
-
+                // if the floating plus button is clicked, open the prompt to add a match.
+                openMatchEditPrompt(false, -1);
             }
         });
 
@@ -412,7 +410,7 @@ public class AddMatches extends AppCompatActivity
         return false;
     }
 
-    public void openCompNamePrompt(boolean modifyingExisting, int option)
+    public void openMatchEditPrompt(boolean modifyingExisting, int option)
     {
         Intent intent = null;
         if (!modifyingExisting)

@@ -146,7 +146,7 @@ public class SetMatchInfo extends AppCompatActivity
         }
         catch (IOException e)
         {
-            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
 
         Intent myIntent = getIntent();
@@ -227,6 +227,7 @@ public class SetMatchInfo extends AppCompatActivity
             }
             catch (Exception e)
             {
+                e.printStackTrace();
                 breakCond = true;
             }
         }
