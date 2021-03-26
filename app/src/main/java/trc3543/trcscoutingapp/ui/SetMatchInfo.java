@@ -40,16 +40,21 @@ import trc3543.trcscoutingapp.fragmentcommunication.CollectorTransaction;
 import trc3543.trcscoutingapp.fragmentcommunication.Stopwatch;
 
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -62,33 +67,8 @@ public class SetMatchInfo extends AppCompatActivity
     private int editingoption = -1;
 
     private MatchInfo matchInfo;
-    private FragmentPagerAdapter fpa;
-    private Stopwatch stp;
-    private CollectorServer listener;
 
-    private String[] autoFields = new String[]{"matchNumber",
-            "teamNumber",
-            "matchType",
-            "alliance",
-            "initLineCrossed",
-            "autonomousLower",
-            "autonomousOuter",
-            "autonomousInner",
-            "autonomousMissed"};
-    private String[] teleFields = new String[]{"teleopLower",
-            "teleopOuter",
-            "teleopInner",
-            "teleopMissed",
-            "shieldStage1",
-            "shieldStage2",
-            "shieldStage3",
-            "controlPanelRotated",
-            "controlPanelPositioned"};
-    private String[] endgameFields = new String[]{"generatorSwitchParked",
-            "generatorSwitchHanging",
-            "generatorSwitchSupportingMechanism",
-            "generatorSwitchLevel",
-            "notes"};
+    private WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -97,48 +77,11 @@ public class SetMatchInfo extends AppCompatActivity
         setContentView(R.layout.activity_set_match_info2);
         setTitle("Add Match");
 
-        stp = new Stopwatch();
-        try
-        {
-            listener = new CollectorServer(stp, 36541);
-            new Thread(new Runnable()
-            {
-                public void run()
-                {
-                    try
-                    {
-                        listener.run();
-                    }
-                    catch (IOException e)
-                    {
-                        e.printStackTrace();
-                        // if our server has an exception, quit the activity.
-                        finish();
-                    }
-                }
-            }
-            ).start();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-            // if our server has an exception, quit the activity.
-            finish();
-        }
+        WebView webView = (WebView) findViewById(R.id.webview);
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
 
-        // Get the ViewPager and set it's PagerAdapter so that it can display items
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fpa = new CustomFragmentPagerAdapter(fragmentManager);
-        viewPager.setAdapter(fpa);
-
-        // Give the PagerSlidingTabStrip the ViewPager
-        PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
-        // Attach the view pager to the tab strip
-        tabStrip.setViewPager(viewPager);
-
-        // initialize all fragments at start of activity.
-        viewPager.setOffscreenPageLimit(fpa.getCount());
+        webView.loadUrl("file:///sdcard/TrcScoutingApp/Furry.html");
 
         try
         {
@@ -168,17 +111,7 @@ public class SetMatchInfo extends AppCompatActivity
         if (editingoption != -1)
         {
             matchInfo = DataStore.matchList.get(editingoption);
-            try
-            {
-                PhaseClassifier phaseClassifier = new PhaseClassifier(matchInfo.toJSONObject(), autoFields, teleFields, endgameFields);
-                listener.setFields(0, phaseClassifier.getAutoFields());
-                listener.setFields(1, phaseClassifier.getTeleopFields());
-                listener.setFields(2, phaseClassifier.getEndFields());
-            }
-            catch (IOException | JSONException e)
-            {
-                e.printStackTrace();
-            }
+           // load the match info
         }
         else
         {
@@ -186,27 +119,7 @@ public class SetMatchInfo extends AppCompatActivity
             int matchNumberAutoPop = myIntent.getIntExtra("PrevMatch", -1);
             String matchAllianceAutoPop = myIntent.getStringExtra("PrevAlliance");
             String matchTypeAutoPop = myIntent.getStringExtra("PrevMatchType");
-            try
-            {
-                JSONObject dataToAutoPopulate = new JSONObject();
-                if (matchNumberAutoPop != -1)
-                {
-                    dataToAutoPopulate.put("matchNumber", matchNumberAutoPop + 1);
-                }
-                if (matchAllianceAutoPop != null)
-                {
-                    dataToAutoPopulate.put("alliance", matchAllianceAutoPop);
-                }
-                if (matchTypeAutoPop != null)
-                {
-                    dataToAutoPopulate.put("matchType", matchTypeAutoPop);
-                }
-                listener.setFields(0, dataToAutoPopulate);
-            }
-            catch (JSONException | IOException e)
-            {
-                e.printStackTrace();
-            }
+            // new match. populate match number, and previously saved alliance/match type.
 
         }
     }
@@ -220,10 +133,6 @@ public class SetMatchInfo extends AppCompatActivity
             try
             {
                // confirm types here.
-                HashMap<Integer, CollectorTransaction> resultsAll = listener.getResultsAll();
-                matchInfo = MatchInfo.fromFragmentJSONData(resultsAll.get(0).transactionInfo,
-                        resultsAll.get(1).transactionInfo,
-                        resultsAll.get(2).transactionInfo);
             }
             catch (Exception e)
             {
@@ -323,14 +232,7 @@ public class SetMatchInfo extends AppCompatActivity
     protected void onDestroy()
     {
         super.onDestroy();
-        try
-        {
-            listener.close();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+
     }
 
     private class PhaseClassifier
