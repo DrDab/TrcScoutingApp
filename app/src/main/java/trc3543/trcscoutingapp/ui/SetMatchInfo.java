@@ -66,30 +66,6 @@ public class SetMatchInfo extends AppCompatActivity
     private Stopwatch stp;
     private CollectorServer listener;
 
-    private String[] autoFields = new String[]{"matchNumber",
-            "teamNumber",
-            "matchType",
-            "alliance",
-            "initLineCrossed",
-            "autonomousLower",
-            "autonomousOuter",
-            "autonomousInner",
-            "autonomousMissed"};
-    private String[] teleFields = new String[]{"teleopLower",
-            "teleopOuter",
-            "teleopInner",
-            "teleopMissed",
-            "shieldStage1",
-            "shieldStage2",
-            "shieldStage3",
-            "controlPanelRotated",
-            "controlPanelPositioned"};
-    private String[] endgameFields = new String[]{"generatorSwitchParked",
-            "generatorSwitchHanging",
-            "generatorSwitchSupportingMechanism",
-            "generatorSwitchLevel",
-            "notes"};
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -162,18 +138,15 @@ public class SetMatchInfo extends AppCompatActivity
         }
 
         // populate the boxes if already filled.
-        JSONObject autonomousData = new JSONObject();
-        JSONObject teleopData = new JSONObject();
-        JSONObject endgameData = new JSONObject();
         if (editingoption != -1)
         {
             matchInfo = DataStore.matchList.get(editingoption);
             try
             {
-                PhaseClassifier phaseClassifier = new PhaseClassifier(matchInfo.toJSONObject(), autoFields, teleFields, endgameFields);
-                listener.setFields(0, phaseClassifier.getAutoFields());
-                listener.setFields(1, phaseClassifier.getTeleopFields());
-                listener.setFields(2, phaseClassifier.getEndFields());
+                JSONObject jsonMatchInfo = matchInfo.toJSONObject();
+                listener.setFields(0, jsonMatchInfo);
+                listener.setFields(1, jsonMatchInfo);
+                listener.setFields(2, jsonMatchInfo);
             }
             catch (IOException | JSONException e)
             {
@@ -330,68 +303,6 @@ public class SetMatchInfo extends AppCompatActivity
         catch (IOException e)
         {
             e.printStackTrace();
-        }
-    }
-
-    private class PhaseClassifier
-    {
-        private JSONObject autoFields;
-        private JSONObject teleopFields;
-        private JSONObject endFields;
-
-        public PhaseClassifier(JSONObject matchInfoJsonObj, String[] autoCat, String[] telCat, String[] endCat)
-                throws JSONException
-        {
-            autoFields = new JSONObject();
-            teleopFields = new JSONObject();
-            endFields = new JSONObject();
-            HashMap<String, Boolean> autoMap = new HashMap<>();
-            for (String s : autoCat)
-            {
-                autoMap.put(s, true);
-            }
-            HashMap<String, Boolean> teleMap = new HashMap<>();
-            for (String s : telCat)
-            {
-                teleMap.put(s, true);
-            }
-            HashMap<String, Boolean> endgMap = new HashMap<>();
-            for (String s : endCat)
-            {
-                endgMap.put(s, true);
-            }
-            Iterator<String> keyIterator = matchInfoJsonObj.keys();
-            while (keyIterator.hasNext())
-            {
-                String key = keyIterator.next();
-                if (autoMap.containsKey(key))
-                {
-                    autoFields.put(key, matchInfoJsonObj.get(key));
-                }
-                if (teleMap.containsKey(key))
-                {
-                    teleopFields.put(key, matchInfoJsonObj.get(key));
-                }
-                if (endgMap.containsKey(key))
-                {
-                    endFields.put(key, matchInfoJsonObj.get(key));
-                }
-            }
-        }
-
-        public JSONObject getAutoFields()
-        {
-            return this.autoFields;
-        }
-
-        public JSONObject getTeleopFields()
-        {
-            return this.teleopFields;
-        }
-
-        public JSONObject getEndFields()
-        {
-            return this.endFields;
         }
     }
 }
