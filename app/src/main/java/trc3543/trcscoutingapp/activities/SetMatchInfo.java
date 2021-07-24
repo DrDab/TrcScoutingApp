@@ -55,8 +55,9 @@ import java.io.IOException;
 @SuppressWarnings("all")
 public class SetMatchInfo extends AppCompatActivity
 {
-    private int editingoption = -1;
+    public static final String MODULE_NAME = "SetMatchInfo";
 
+    private int editingoption = -1;
     private MatchInfo matchInfo;
     private FragmentPagerAdapter fpa;
     private FragmentsDataViewModel viewModel;
@@ -71,16 +72,20 @@ public class SetMatchInfo extends AppCompatActivity
         Intent myIntent = getIntent();
         try
         {
+            Log.d(MODULE_NAME, "Getting edit option index from passed Intent...");
             editingoption = myIntent.getIntExtra("EditOption", -1);
-            Log.d("SetMatchInfo", "Got edit option index: " + editingoption);
+            Log.d(MODULE_NAME, "Got edit option index: " + editingoption);
         }
         catch (Exception e)
         {
-            Log.d("SetMatchInfo","You shouldn't see this message");
+            Log.d(MODULE_NAME, "Failed to get edit option index from passed Intent. Defaulting to" +
+                    " -1.");
+            e.printStackTrace();
             editingoption = -1;
         }
 
         // populate the boxes if already filled.
+        Log.d(MODULE_NAME, "Fetching match JSON information from edit option index...");
         matchInfo = editingoption == -1 ? null : DataStore.matchList.get(editingoption);
         String matchInfoJsonObjStr = null;
 
@@ -92,6 +97,9 @@ public class SetMatchInfo extends AppCompatActivity
         {
             jsonException.printStackTrace();
         }
+
+        Log.d(MODULE_NAME, matchInfoJsonObjStr == null ? "No match JSON info to fetch." :
+                "Fetched match JSON info: " + matchInfoJsonObjStr);
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -116,27 +124,40 @@ public class SetMatchInfo extends AppCompatActivity
             e.printStackTrace();
         }
 
+        Log.d(MODULE_NAME, "Initializing " + FragmentsDataViewModel.MODULE_NAME + "...");
         viewModel = new ViewModelProvider(this).get(FragmentsDataViewModel.class);
     }
 
     public void confirmTypes(View view) throws JSONException
     {
-        JSONObject[] pageData = new JSONObject[3];
-        pageData[0] = viewModel.getInfoFromPage(0);
-        pageData[1] = viewModel.getInfoFromPage(1);
-        pageData[2] = viewModel.getInfoFromPage(2);
-        matchInfo = MatchInfo.fromMultipleJSONObjects(pageData[0], pageData[1], pageData[2]);
+        Log.d(MODULE_NAME, "Confirm button pressed. Retrieving information from pages...");
+        JSONObject[] pageData = new JSONObject[viewModel.getNumRegistered()];
+
+        for (int i = 0; i < fpa.getCount(); i++)
+        {
+            pageData[i] = viewModel.getInfoFromPage(i);
+            if (pageData[i] == null)
+            {
+                Log.d(MODULE_NAME, "Page " + i + " returned null data! Notifying user.");
+                spawnUserMistakeSnackbar(view);
+                return;
+            }
+        }
+
+        matchInfo = MatchInfo.fromMultipleJSONObjects(pageData);
+
+        Log.d(MODULE_NAME, "Checking if all necessary fields are populated.");
 
         if (matchInfo.allNeededFieldsPopulated())
         {
             // All values are confirmed, move to next screen.
-            Log.d("SetMatchInfo", "Moving to next screen.");
+            Log.d(MODULE_NAME, "All fields populated. Moving to next screen.");
             moveToNextScreen(view);
         }
         else
         {
-            Snackbar.make(view, "Please make sure all required fields are populated.", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+            Log.d(MODULE_NAME, "Necessary fields are missing. Notifying user.");
+            spawnUserMistakeSnackbar(view);
         }
     }
 
@@ -144,17 +165,19 @@ public class SetMatchInfo extends AppCompatActivity
     {
         if (editingoption == -1)
         {
-            Log.d("SetMatchInfo","Adding new entry to list.");
+            Log.d(MODULE_NAME, "Adding new entry to list.");
             AddMatches.addToList(matchInfo);
         }
         else
         {
-            Log.d("SetMatchInfo","Resetting list entry: " + editingoption);
+            Log.d(MODULE_NAME, "Resetting list entry " + editingoption);
             AddMatches.resetListItem(matchInfo, editingoption);
+            Log.d(MODULE_NAME, "List entry " + editingoption + " reset.");
         }
 
         try
         {
+            Log.d(MODULE_NAME, "Writing updated match list to JSON file.");
             DataStore.writeArraylistsToJSON();
         }
         catch (IOException | JSONException e)
@@ -163,6 +186,12 @@ public class SetMatchInfo extends AppCompatActivity
         }
 
         finish();
+    }
+
+    public void spawnUserMistakeSnackbar(View view)
+    {
+        Snackbar.make(view, "Please make sure all required fields are populated.", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
     }
 
     /**
@@ -203,15 +232,9 @@ public class SetMatchInfo extends AppCompatActivity
         }
     }
 
-    private void setEditTextValue(EditText editText, Object toSet)
-    {
-        editText.setText(toSet.toString() + "");
-    }
-
     @Override
     protected void onDestroy()
     {
         super.onDestroy();
-
     }
 }
