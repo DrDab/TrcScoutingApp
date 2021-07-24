@@ -130,17 +130,13 @@ public class SetMatchInfo extends AppCompatActivity
 
     public void confirmTypes(View view) throws JSONException
     {
-        boolean breakCond = false;
-
-        breakCond = breakCond || !matchInfo.allFieldsPopulated();
-
         JSONObject[] pageData = new JSONObject[3];
         pageData[0] = viewModel.getInfoFromPage(0);
         pageData[1] = viewModel.getInfoFromPage(1);
         pageData[2] = viewModel.getInfoFromPage(2);
-        matchInfo = matchInfo.fromMultipleJSONObjects(pageData[0], pageData[1], pageData[2]);
+        matchInfo = MatchInfo.fromMultipleJSONObjects(pageData[0], pageData[1], pageData[2]);
 
-        if (!breakCond)
+        if (matchInfo.allNeededFieldsPopulated())
         {
             // All values are confirmed, move to next screen.
             Log.d("SetMatchInfo", "Moving to next screen.");
@@ -182,8 +178,7 @@ public class SetMatchInfo extends AppCompatActivity
     }
 
     /**
-     * This code snippet written by ZMan; may great honor be laid upon this act of chivalry:
-     *
+     * by: ZMan, source: StackOverflow
      * Answer: https://stackoverflow.com/questions/4828636/edittext-clear-focus-on-touch-outside
      * User: https://stackoverflow.com/users/1591623/zman
      */

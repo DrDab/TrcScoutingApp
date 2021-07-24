@@ -128,7 +128,7 @@ public class MatchInfo implements Serializable
         return false;
     }
 
-    public boolean allFieldsPopulated()
+    public boolean allNeededFieldsPopulated()
     {
         return !checkAnyNull(matchNumber, teamNumber);
     }
