@@ -17,23 +17,18 @@ import trc3543.trcscoutingapp.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public abstract class AbstractPageFragment extends Fragment implements ActivityCommunicableFragment
+public abstract class AbstractPageFragment extends Fragment
 {
     public static final String ARG_PAGE = "ARG_PAGE";
     public static final String ARG_INIT_JSON_FIELDS = "ARG_INIT_JSON_FIELDS";
 
-    private View view;
+    View view;
     private FragmentsDataViewModel viewModel;
-    private int mPage;
+    private int pageNum;
+
+
 
     /*
-
-
-    public static AbstractPageFragment newInstance(int page)
-    {
-        return newInstance(page, null);
-    }
-
     public static AbstractPageFragment newInstance(int page, String initJsonFields)
     {
         Bundle args = new Bundle();
@@ -47,7 +42,7 @@ public abstract class AbstractPageFragment extends Fragment implements ActivityC
 
      */
 
-    public abstract void instantiateViews(LayoutInflater inflater);
+    public abstract void instantiateViews(LayoutInflater inflater, ViewGroup container);
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -60,7 +55,7 @@ public abstract class AbstractPageFragment extends Fragment implements ActivityC
     {
         if (view == null)
         {
-            instantiateViews(inflater);
+            instantiateViews(inflater, container);
         }
         try
         {
@@ -76,20 +71,19 @@ public abstract class AbstractPageFragment extends Fragment implements ActivityC
             jsonException.printStackTrace();
         }
 
-        mPage = getArguments().getInt(ARG_PAGE);
+        pageNum = getArguments().getInt(ARG_PAGE);
         viewModel = new ViewModelProvider(requireActivity()).get(FragmentsDataViewModel.class);
         viewModel.register(this);
 
         return view;
     }
 
-    public abstract void setFields(JSONObject fieldData);
+    public abstract void setFields(JSONObject fieldData) throws JSONException;
 
     public abstract JSONObject getFields();
 
-    @Override
     public int getPage()
     {
-        return mPage;
+        return pageNum;
     }
 }

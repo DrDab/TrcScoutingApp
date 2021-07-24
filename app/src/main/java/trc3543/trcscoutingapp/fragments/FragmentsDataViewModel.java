@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModel;
 public class FragmentsDataViewModel extends ViewModel
 {
     public static final String MODULE_NAME = "FragmentsDataViewModel";
-    private Map<Integer, ActivityCommunicableFragment> pageFragmentMap;
+    private Map<Integer, AbstractPageFragment> pageFragmentMap;
 
     public FragmentsDataViewModel()
     {
@@ -30,7 +30,7 @@ public class FragmentsDataViewModel extends ViewModel
         return pageFragmentMap.size();
     }
 
-    public void register(ActivityCommunicableFragment fragment)
+    public void register(AbstractPageFragment fragment)
     {
         pageFragmentMap.put(fragment.getPage(), fragment);
         Log.d(MODULE_NAME, "Registered fragment " + fragment.getPage());
