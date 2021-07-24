@@ -20,7 +20,6 @@ public abstract class AbstractPageFragment extends Fragment
     private FragmentsDataViewModel viewModel;
     private int pageNum;
 
-
     public abstract void instantiateViews(LayoutInflater inflater, ViewGroup container);
 
     @Override

@@ -74,7 +74,7 @@ public class AddMatches extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_matches);
 
-        Log.d("FileIO","External Storage Directory: " + Environment.getExternalStorageDirectory().toString());
+        Log.d("FileIO", "External Storage Directory: " + Environment.getExternalStorageDirectory().toString());
 
         NfcManager nfcmanager = (NfcManager) getApplicationContext().getSystemService(Context.NFC_SERVICE);
         NfcAdapter nfcadapter = nfcmanager.getDefaultAdapter();
@@ -279,95 +279,88 @@ public class AddMatches extends AppCompatActivity
     {
         int id = item.getItemId();
 
-        if (id == R.id.action_about)
+        switch (id)
         {
-            // popup about screen
-            Intent intent = new Intent(this, About.class);
-            startActivity(intent);
-            return true;
-        }
-        else if (id == R.id.action_makecsv)
-        {
-            String filename = DataStore.getFileName(DataStore.firstName + "_" + DataStore.lastName);
-            try
-            {
-                DataStore.writeContestsToCsv(filename);
-            }
-            catch (IOException e)
-            {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            new AlertDialog.Builder(this)
-                    .setTitle("CSV Write Successful")
-                    .setMessage("Scouting data written to file \"" + filename + "\"")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener()
-                    {
-                        public void onClick(DialogInterface dialog, int whichButton)
-                        {
-                        }
-                    })
-                    .show();
-        }
-        else if (id == R.id.action_transmitresults)
-        {
-            Intent intent = new Intent(this, SendReport.class);
-            startActivity(intent);
-            return true;
-        }
-        else if (id == R.id.action_ac)
-        {
-            // clear the screen
-            // ask for user confirmation
-            new AlertDialog.Builder(this)
-                    .setTitle("Are you sure?")
-                    .setMessage("Are you sure you want to delete all matches in this session?")
-                    .setPositiveButton("YES", new DialogInterface.OnClickListener()
-                    {
-                        public void onClick(DialogInterface dialog, int whichButton)
-                        {
-                            DataStore.matchList.clear();
-                            try
-                            {
-                                DataStore.writeArraylistsToJSON();
-                            }
-                            catch (IOException | JSONException e)
-                            {
-                                e.printStackTrace();
-                            }
-                            adapter.notifyDataSetChanged();
-                        }
-                    })
-                    .setNegativeButton("NO", new DialogInterface.OnClickListener()
-                    {
-                        public void onClick(DialogInterface dialog, int whichButton)
-                        {
-                        }
-                    })
-                    .show();
+            case R.id.action_about:
+                Intent intent = new Intent(this, About.class);
+                startActivity(intent);
+                return true;
 
+            case R.id.action_makecsv:
+                String filename = DataStore.getFileName(DataStore.firstName + "_" + DataStore.lastName);
+                try
+                {
+                    DataStore.writeContestsToCsv(filename);
+                }
+                catch (IOException e)
+                {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                new AlertDialog.Builder(this)
+                        .setTitle("CSV Write Successful")
+                        .setMessage("Scouting data written to file \"" + filename + "\"")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener()
+                        {
+                            public void onClick(DialogInterface dialog, int whichButton)
+                            {
+                            }
+                        })
+                        .show();
+                return true;
+
+            case R.id.action_transmitresults:
+                intent = new Intent(this, SendReport.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.action_ac:
+                new AlertDialog.Builder(this)
+                        .setTitle("Are you sure?")
+                        .setMessage("Are you sure you want to delete all matches in this session?")
+                        .setPositiveButton("YES", new DialogInterface.OnClickListener()
+                        {
+                            public void onClick(DialogInterface dialog, int whichButton)
+                            {
+                                DataStore.matchList.clear();
+                                try
+                                {
+                                    DataStore.writeArraylistsToJSON();
+                                }
+                                catch (IOException | JSONException e)
+                                {
+                                    e.printStackTrace();
+                                }
+                                adapter.notifyDataSetChanged();
+                            }
+                        })
+                        .setNegativeButton("NO", new DialogInterface.OnClickListener()
+                        {
+                            public void onClick(DialogInterface dialog, int whichButton)
+                            {
+                            }
+                        })
+                        .show();
+                return true;
+
+            case R.id.action_config:
+                intent = new Intent(this, Settings.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.action_autosave_set:
+                intent = new Intent(this, AutoSaveSettings.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.action_qrsend:
+                intent = new Intent(this, QrDataSender.class);
+                startActivity(intent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        else if (id == R.id.action_config)
-        {
-            // popup settings window
-            Intent intent = new Intent(this, Settings.class);
-            startActivity(intent);
-            return true;
-        }
-        else if (id == R.id.action_autosave_set)
-        {
-            // popup automatic save settings window
-            Intent intent = new Intent(this, AutoSaveSettings.class);
-            startActivity(intent);
-            return true;
-        }
-        else if (id == R.id.action_qrsend)
-        {
-            Intent intent = new Intent(this, QrDataSender.class);
-            startActivity(intent);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     public static synchronized void addToList(MatchInfo matchInfo)
