@@ -11,6 +11,7 @@ import android.widget.EditText;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import trc3543.trcscoutingapp.R;
+import trc3543.trcscoutingapp.uiutil.UIUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -86,36 +87,13 @@ public class EndgameFragment extends Fragment implements ActivityCommunicableFra
         return view;
     }
 
-    private void setEditTextValue(EditText editText, Object toSet)
-    {
-        if (toSet == null)
-        {
-            return;
-        }
-        editText.setText(toSet.toString() + "");
-    }
-
-    private void setCheckbox(CheckBox checkbox, Boolean toSet)
-    {
-        if (toSet == null)
-        {
-            return;
-        }
-        checkbox.setChecked(toSet);
-    }
-
-    private String getEditTextValue(EditText editText)
-    {
-        return editText.getText().toString();
-    }
-
     public void setFields(JSONObject fieldData) throws JSONException
     {
-        setCheckbox(parkedCB, fieldData.getBoolean("generatorSwitchParked"));
-        setCheckbox(hangingCB, fieldData.getBoolean("generatorSwitchHanging"));
-        setCheckbox(supportingCB, fieldData.getBoolean("generatorSwitchSupportingMechanism"));
-        setCheckbox(levelCB, fieldData.getBoolean("generatorSwitchLevel"));
-        setEditTextValue(notesET, fieldData.getString("notes"));
+        UIUtils.setCheckbox(parkedCB, fieldData.getBoolean("generatorSwitchParked"));
+        UIUtils.setCheckbox(hangingCB, fieldData.getBoolean("generatorSwitchHanging"));
+        UIUtils.setCheckbox(supportingCB, fieldData.getBoolean("generatorSwitchSupportingMechanism"));
+        UIUtils.setCheckbox(levelCB, fieldData.getBoolean("generatorSwitchLevel"));
+        UIUtils.setEditTextValue(notesET, fieldData.getString("notes"));
     }
 
     @Override
@@ -128,7 +106,7 @@ public class EndgameFragment extends Fragment implements ActivityCommunicableFra
             data.put("generatorSwitchHanging", hangingCB.isChecked());
             data.put("generatorSwitchSupportingMechanism", supportingCB.isChecked());
             data.put("generatorSwitchLevel", levelCB.isChecked());
-            data.put("notes", getEditTextValue(notesET));
+            data.put("notes", UIUtils.getEditTextValue(notesET));
             return data;
         }
         catch (Exception e)

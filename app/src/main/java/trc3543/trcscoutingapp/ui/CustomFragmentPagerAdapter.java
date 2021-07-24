@@ -9,7 +9,8 @@ import trc3543.trcscoutingapp.fragments.AutonomousFragment;
 import trc3543.trcscoutingapp.fragments.EndgameFragment;
 import trc3543.trcscoutingapp.fragments.TeleOpFragment;
 
-public class CustomFragmentPagerAdapter extends FragmentPagerAdapter {
+public class CustomFragmentPagerAdapter extends FragmentPagerAdapter
+{
     final int PAGE_COUNT = 3;
     private String tabTitles[] = new String[] { "Autonomous", "Teleoperated", "Endgame" };
     private Fragment[] fragments = new Fragment[3];

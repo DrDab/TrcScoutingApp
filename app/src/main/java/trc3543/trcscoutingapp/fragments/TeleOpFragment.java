@@ -11,6 +11,7 @@ import com.travijuu.numberpicker.library.NumberPicker;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import trc3543.trcscoutingapp.R;
+import trc3543.trcscoutingapp.uiutil.UIUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -95,35 +96,17 @@ public class TeleOpFragment extends Fragment implements ActivityCommunicableFrag
         return view;
     }
 
-    private void setCheckbox(CheckBox checkbox, Boolean toSet)
-    {
-        if (toSet == null)
-        {
-            return;
-        }
-        checkbox.setChecked(toSet);
-    }
-
-    private void setNumberPickerVal(NumberPicker numberPicker, Integer toSet)
-    {
-        if (toSet == null)
-        {
-            return;
-        }
-        numberPicker.setValue(toSet);
-    }
-
     public void setFields(JSONObject fieldData) throws JSONException
     {
-        setNumberPickerVal(lowerCellsPicker, fieldData.getInt("teleopLower"));
-        setNumberPickerVal(outerCellsPicker, fieldData.getInt("teleopOuter"));
-        setNumberPickerVal(innerCellsPicker, fieldData.getInt("teleopInner"));
-        setNumberPickerVal(missedCellsPicker, fieldData.getInt("teleopMissed"));
-        setCheckbox(stage1CB, fieldData.getBoolean("shieldStage1"));
-        setCheckbox(stage2CB, fieldData.getBoolean("shieldStage2"));
-        setCheckbox(stage3CB, fieldData.getBoolean("shieldStage3"));
-        setCheckbox(rotationCB, fieldData.getBoolean("controlPanelRotated"));
-        setCheckbox(positionCB, fieldData.getBoolean("controlPanelPositioned"));
+        UIUtils.setNumberPickerVal(lowerCellsPicker, fieldData.getInt("teleopLower"));
+        UIUtils.setNumberPickerVal(outerCellsPicker, fieldData.getInt("teleopOuter"));
+        UIUtils.setNumberPickerVal(innerCellsPicker, fieldData.getInt("teleopInner"));
+        UIUtils.setNumberPickerVal(missedCellsPicker, fieldData.getInt("teleopMissed"));
+        UIUtils.setCheckbox(stage1CB, fieldData.getBoolean("shieldStage1"));
+        UIUtils.setCheckbox(stage2CB, fieldData.getBoolean("shieldStage2"));
+        UIUtils.setCheckbox(stage3CB, fieldData.getBoolean("shieldStage3"));
+        UIUtils.setCheckbox(rotationCB, fieldData.getBoolean("controlPanelRotated"));
+        UIUtils.setCheckbox(positionCB, fieldData.getBoolean("controlPanelPositioned"));
     }
 
     @Override
