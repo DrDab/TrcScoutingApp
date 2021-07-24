@@ -138,7 +138,7 @@ public class SetMatchInfo extends AppCompatActivity
         pageData[0] = viewModel.getInfoFromPage(0);
         pageData[1] = viewModel.getInfoFromPage(1);
         pageData[2] = viewModel.getInfoFromPage(2);
-        matchInfo = matchInfo.fromFragmentJSONData(pageData[0].toString(), pageData[1].toString(), pageData[2].toString());
+        matchInfo = matchInfo.fromMultipleJSONObjects(pageData[0], pageData[1], pageData[2]);
 
         if (!breakCond)
         {

@@ -94,14 +94,15 @@ public class MatchInfo implements Serializable
         return new JSONObject(new Gson().toJson(this));
     }
 
-    public static MatchInfo fromFragmentJSONData(String... fragmentJSONStrings)
+    public static MatchInfo fromMultipleJSONObjects(JSONObject... fragmentJSONObjects)
             throws JSONException
     {
         JSONObject head = new JSONObject();
 
-        for (String fragmentJSONString : fragmentJSONStrings)
+        for (JSONObject fragmentJSONObject : fragmentJSONObjects)
         {
-            JSONObject fragmentJSONObject = new JSONObject(fragmentJSONString);
+            if (fragmentJSONObject == null)
+                continue;
             Iterator<String> keyIterator = fragmentJSONObject.keys();
             while (keyIterator.hasNext()) {
                 String key = keyIterator.next();

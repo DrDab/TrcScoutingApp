@@ -62,7 +62,7 @@ public class FragmentsDataViewModel extends ViewModel
             return null;
         }
         JSONObject jsonObject = pageFragmentMap.get(page).getFields();
-        Log.d(MODULE_NAME, page + " info=" + (jsonObject == null ? "NULL" : jsonObject.toString()));
+        Log.d(MODULE_NAME, "Page " + page + " info=" + (jsonObject == null ? "NULL" : jsonObject.toString()));
         return jsonObject;
     }
 }
