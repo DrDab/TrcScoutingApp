@@ -64,9 +64,6 @@ import java.io.IOException;
 @SuppressWarnings("all")
 public class AddMatches extends AppCompatActivity
 {
-<<<<<<< HEAD
-=======
->>>>>>> 9a690ff461998cc17b7a9b7b99adad381d26dbe2
     public static final int WRITE_EXT_STORAGE_PERM_CODE = 621;
 
     static ArrayAdapter<MatchInfo> adapter;
