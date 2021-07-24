@@ -4,15 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.Spinner;
-
-import com.travijuu.numberpicker.library.NumberPicker;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import trc3543.trcscoutingapp.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
