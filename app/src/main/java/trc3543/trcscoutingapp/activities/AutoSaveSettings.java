@@ -39,6 +39,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import static trc3543.trcscoutingapp.data.AppInfo.DATA_FOLDER_NAME;
+
 @SuppressWarnings("all")
 public class AutoSaveSettings extends AppCompatActivity
 {
@@ -105,7 +107,7 @@ public class AutoSaveSettings extends AppCompatActivity
 
     public void writeSettingsToFile(boolean autoSave, int seconds) throws IOException
     {
-        File writeDirectory = new File(Environment.getExternalStorageDirectory(), DataStore.DATA_FOLDER_NAME);
+        File writeDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         if (!writeDirectory.exists())
         {
             writeDirectory.mkdir();

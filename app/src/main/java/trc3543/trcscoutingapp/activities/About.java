@@ -33,6 +33,8 @@ import android.widget.TextView;
 
 import java.util.Date;
 
+import static trc3543.trcscoutingapp.data.AppInfo.VERSION_NUMBER;
+
 public class About extends AppCompatActivity
 {
     private TextView versionIdText;
@@ -48,7 +50,7 @@ public class About extends AppCompatActivity
         setTitleColor(Color.parseColor("#ff669900"));
 
         versionIdText = (TextView) findViewById(R.id.versionIdText);
-        versionIdText.setText("Version: " + DataStore.VERSION_NUMBER);
+        versionIdText.setText("Version: " + VERSION_NUMBER);
 
         buildDateText = (TextView) findViewById(R.id.buildDateText);
         Date buildDate = new Date(BuildConfig.TIMESTAMP);

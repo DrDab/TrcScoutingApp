@@ -38,6 +38,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import static trc3543.trcscoutingapp.data.AppInfo.DATA_FOLDER_NAME;
+
 @SuppressWarnings("all")
 public class Settings extends AppCompatActivity
 {
@@ -57,7 +59,7 @@ public class Settings extends AppCompatActivity
         EditText firstNameForm = (EditText) findViewById(R.id.firstNameForm);
         EditText lastNameForm = (EditText) findViewById(R.id.lastNameForm);
 
-        File readDirectory = new File(Environment.getExternalStorageDirectory(), DataStore.DATA_FOLDER_NAME);
+        File readDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         if (!readDirectory.exists())
         {
             readDirectory.mkdir();
@@ -157,7 +159,7 @@ public class Settings extends AppCompatActivity
 
     public void writeSettingsToFile(String firstname, String lastname, int teamNum) throws IOException
     {
-        File writeDirectory = new File(Environment.getExternalStorageDirectory(), DataStore.DATA_FOLDER_NAME);
+        File writeDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
         if (!writeDirectory.exists())
         {
             writeDirectory.mkdir();

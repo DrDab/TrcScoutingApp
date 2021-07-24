@@ -61,6 +61,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import static trc3543.trcscoutingapp.data.AppInfo.DATA_FOLDER_NAME;
+
 @SuppressWarnings("all")
 public class AddMatches extends AppCompatActivity
 {
@@ -181,7 +183,7 @@ public class AddMatches extends AppCompatActivity
         boolean openSettingsCondition = false;
         if (!DataStore.existsSave())
         {
-            File writeDirectory = new File(Environment.getExternalStorageDirectory(), DataStore.DATA_FOLDER_NAME);
+            File writeDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
             if (!writeDirectory.exists())
             {
                 Log.d("FileIO", "Creating write directory: " + writeDirectory.toString());
@@ -193,7 +195,7 @@ public class AddMatches extends AppCompatActivity
         else
         {
             // if file exists, check that all data is entered.
-            File writeDirectory = new File(Environment.getExternalStorageDirectory(), DataStore.DATA_FOLDER_NAME);
+            File writeDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
             if (!writeDirectory.exists())
             {
                 writeDirectory.mkdir();
