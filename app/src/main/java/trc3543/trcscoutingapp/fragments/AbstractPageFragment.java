@@ -27,21 +27,6 @@ public abstract class AbstractPageFragment extends Fragment
     private int pageNum;
 
 
-
-    /*
-    public static AbstractPageFragment newInstance(int page, String initJsonFields)
-    {
-        Bundle args = new Bundle();
-        args.putInt(ARG_PAGE, page);
-        args.putString(ARG_INIT_JSON_FIELDS, initJsonFields);
-        AbstractPageFragment fragment = new AbstractPageFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-
-     */
-
     public abstract void instantiateViews(LayoutInflater inflater, ViewGroup container);
 
     @Override
@@ -57,14 +42,13 @@ public abstract class AbstractPageFragment extends Fragment
         {
             instantiateViews(inflater, container);
         }
+
         try
         {
             String jsonFieldsStr = getArguments().getString(ARG_INIT_JSON_FIELDS);
             JSONObject initFieldData = jsonFieldsStr == null ? null : new JSONObject(jsonFieldsStr);
             if (initFieldData != null)
-            {
                 setFields(initFieldData);
-            }
         }
         catch (JSONException jsonException)
         {
