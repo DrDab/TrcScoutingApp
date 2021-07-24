@@ -1,6 +1,7 @@
 package trc3543.trcscoutingapp.fragutil;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -19,14 +20,17 @@ import trc3543.trcscoutingapp.fragments.TeleOpFragment;
  */
 public class CustomFragmentPagerAdapter extends FragmentPagerAdapter
 {
-    final int PAGE_COUNT = 3;
+    public static final String MODULE_NAME = "CustomFragmentPagerAdap";
+    static final int PAGE_COUNT = 3;
     private String[] tabTitles = new String[PAGE_COUNT];
     private AbstractPageFragment[] fragments = new AbstractPageFragment[PAGE_COUNT];
 
     public CustomFragmentPagerAdapter(FragmentManager fm, String initJsonFields)
     {
         super(fm);
+        Log.d(MODULE_NAME, "Instantiating " + PAGE_COUNT + " pages...");
         instantiatePageFragments(initJsonFields);
+        Log.d(MODULE_NAME, PAGE_COUNT + " pages initialized.");
     }
 
     /**
@@ -58,6 +62,9 @@ public class CustomFragmentPagerAdapter extends FragmentPagerAdapter
      */
     public void initAbsPageFragment(Class<?> abstractPageFragmentClass, int page, String tabTitle, String initJsonFields)
     {
+        Log.d(MODULE_NAME, "Instantiating page fragment " + page + " (title=" +
+                (tabTitle == null ? "NULL" : tabTitle) + ", initJsonFields=" +
+                (initJsonFields == null ? "NULL" : initJsonFields) + ").");
         try
         {
             fragments[page] = (AbstractPageFragment) abstractPageFragmentClass.newInstance();
@@ -68,6 +75,7 @@ public class CustomFragmentPagerAdapter extends FragmentPagerAdapter
         {
             e.printStackTrace();
         }
+        Log.d(MODULE_NAME, "Instantiated page fragment " + page + ".");
     }
 
     /**
