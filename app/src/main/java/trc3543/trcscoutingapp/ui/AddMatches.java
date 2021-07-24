@@ -24,6 +24,7 @@ package trc3543.trcscoutingapp.ui;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -33,6 +34,8 @@ import android.nfc.NfcManager;
 import android.os.Bundle;
 import android.os.Environment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -61,7 +64,7 @@ import java.io.IOException;
 @SuppressWarnings("all")
 public class AddMatches extends AppCompatActivity
 {
-    public static final boolean MAKE_CHANGES_READ_ONLY = false;
+    public static final int WRITE_EXT_STORAGE_PERM_CODE = 621;
 
     static ArrayAdapter<MatchInfo> adapter;
     static ListView contestList;
@@ -81,15 +84,27 @@ public class AddMatches extends AppCompatActivity
         DataStore.deviceSupportsNfc = nfcadapter != null && nfcadapter.isEnabled();
 
         // let's check if we have file permissions before running.
-        if (!verifySystemPermissions(this))
+        if (verifySystemPermissions(this))
+        {
+            initializeAppElements();
+        }
+        else
         {
             AlertDialog alertDialog1 = new AlertDialog.Builder(AddMatches.this).create();
-            alertDialog1.setTitle("Warning! (DON'T CLOSE)");
-            alertDialog1.setMessage("Please go into Settings > Apps > \"TRC Scouting App\" > Permissions and check Storage.");
+            alertDialog1.setTitle("Permission Request");
+            alertDialog1.setMessage("Please enable external storage permission.");
+            alertDialog1.setButton(Dialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    ActivityCompat.requestPermissions(AddMatches.this, new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE }, WRITE_EXT_STORAGE_PERM_CODE);
+                }
+            });
             alertDialog1.show();
-            return;
         }
+    }
 
+    public void initializeAppElements()
+    {
         try
         {
             DataStore.readArraylistsFromJSON();
@@ -111,20 +126,7 @@ public class AddMatches extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView arg0, View arg1, int position, long arg3)
             {
-                if (MAKE_CHANGES_READ_ONLY)
-                {
-                    AlertDialog alertDialog = new AlertDialog.Builder(AddMatches.this).create();
-                    alertDialog.setTitle("Game Information");
-                    String s = DataStore.matchList.get(position).getCsvString();
-                    alertDialog.setMessage(s);
-                    alertDialog.show();
-                }
-                else
-                {
-                    // position = position selected
-                    openMatchEditPrompt(true, position);
-                }
-
+                openMatchEditPrompt(true, position);
             }
         });
         contestList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
@@ -428,39 +430,25 @@ public class AddMatches extends AppCompatActivity
         startActivity(intent);
     }
 
-    private static final int REQUEST_EXTERNAL_STORAGE = 1;
-    private static String[] PERMISSIONS_STORAGE = {
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    };
-
     public static boolean verifySystemPermissions(Activity activity)
     {
-        // Check if we have write permission
-        int externalStoragePermission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        Log.d("FileIO", "Checking File I/O Permissions...");
-        if (externalStoragePermission != PackageManager.PERMISSION_GRANTED)
-        {
-            // We don't have permission so prompt the user
-            Log.d("FileIO", "File permissions insufficient, requesting privileges...");
-            return false;
-        }
+        return ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+    }
 
-        if (DataStore.deviceSupportsNfc)
-        {
-            Log.d("NfcPermission", "Device supports NFC!");
-            if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.NFC) != PackageManager.PERMISSION_GRANTED)
-            {
-                Log.d("NfcPermission", "NFC permissions insufficient, requesting privileges...");
-                return false;
-            }
-        }
-        else
-        {
-            Log.d("NfcPermission", "Device does not support NFC!");
-        }
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grantResults)
+    {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        return true;
+        if (requestCode == WRITE_EXT_STORAGE_PERM_CODE)
+        {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                initializeAppElements();
+            else
+                return;
+        }
     }
 
 }
