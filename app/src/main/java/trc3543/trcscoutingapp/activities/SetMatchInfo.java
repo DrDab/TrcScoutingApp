@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package trc3543.trcscoutingapp.ui;
+package trc3543.trcscoutingapp.activities;
 
 import android.content.Context;
 import android.content.Intent;

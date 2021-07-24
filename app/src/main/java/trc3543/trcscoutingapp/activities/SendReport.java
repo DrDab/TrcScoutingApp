@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package trc3543.trcscoutingapp.ui;
+package trc3543.trcscoutingapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import trc3543.trcscoutingapp.data.DataStore;

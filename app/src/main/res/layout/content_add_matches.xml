@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="trc3543.trcscoutingapp.ui.AddMatches"
+    tools:context="trc3543.trcscoutingapp.activities.AddMatches"
     tools:showIn="@layout/activity_add_matches">
     <ListView
         android:id="@+id/listView"

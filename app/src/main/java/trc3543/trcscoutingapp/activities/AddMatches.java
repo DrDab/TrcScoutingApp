@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package trc3543.trcscoutingapp.ui;
+package trc3543.trcscoutingapp.activities;
 
 import android.Manifest;
 import android.app.Activity;
@@ -93,10 +93,12 @@ public class AddMatches extends AppCompatActivity
             AlertDialog alertDialog1 = new AlertDialog.Builder(AddMatches.this).create();
             alertDialog1.setTitle("Permission Request");
             alertDialog1.setMessage("Please enable external storage permission.");
-            alertDialog1.setButton(Dialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+            alertDialog1.setButton(Dialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener()
+            {
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    ActivityCompat.requestPermissions(AddMatches.this, new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE }, WRITE_EXT_STORAGE_PERM_CODE);
+                public void onClick(DialogInterface dialog, int which)
+                {
+                    spawnExternalMemoryPermsRequest();
                 }
             });
             alertDialog1.show();
@@ -435,6 +437,11 @@ public class AddMatches extends AppCompatActivity
         return ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
     }
 
+    public void spawnExternalMemoryPermsRequest()
+    {
+        ActivityCompat.requestPermissions(AddMatches.this, new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE }, WRITE_EXT_STORAGE_PERM_CODE);
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String[] permissions,
@@ -447,7 +454,7 @@ public class AddMatches extends AppCompatActivity
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
                 initializeAppElements();
             else
-                return;
+                spawnExternalMemoryPermsRequest();
         }
     }
 
