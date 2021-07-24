@@ -1,4 +1,4 @@
-package trc3543.trcscoutingapp.fragments;
+package trc3543.trcscoutingapp.fragutil;
 
 import android.util.Log;
 
@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import androidx.lifecycle.ViewModel;
+import trc3543.trcscoutingapp.fragments.AbstractPageFragment;
 
 public class FragmentsDataViewModel extends ViewModel
 {

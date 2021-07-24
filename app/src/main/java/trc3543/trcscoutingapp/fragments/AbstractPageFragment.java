@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import trc3543.trcscoutingapp.fragutil.FragmentsDataViewModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
