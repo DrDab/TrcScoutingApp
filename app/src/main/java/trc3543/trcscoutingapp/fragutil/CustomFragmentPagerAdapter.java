@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import trc3543.trcscoutingapp.data.AppInfo;
 import trc3543.trcscoutingapp.fragments.AbstractPageFragment;
 import trc3543.trcscoutingapp.fragments.AutonomousFragment;
 import trc3543.trcscoutingapp.fragments.EndgameFragment;
@@ -43,9 +44,10 @@ public class CustomFragmentPagerAdapter extends FragmentPagerAdapter
      */
     public void instantiatePageFragments(String initJsonFields)
     {
-        initAbsPageFragment(AutonomousFragment.class, 0, "Autonomous", initJsonFields);
-        initAbsPageFragment(TeleOpFragment.class, 1, "Teleoperated", initJsonFields);
-        initAbsPageFragment(EndgameFragment.class, 2, "Endgame", initJsonFields);
+        for (int i = 0; i < AppInfo.NUM_PAGES; i++)
+        {
+            initAbsPageFragment(AppInfo.FRAGMENT_CLASSES[i], i, AppInfo.TAB_NAMES[i], initJsonFields);
+        }
     }
 
     /**
