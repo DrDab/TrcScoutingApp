@@ -66,7 +66,13 @@ import static trc3543.trcscoutingapp.data.AppInfo.DATA_FOLDER_NAME;
 @SuppressWarnings("all")
 public class AddMatches extends AppCompatActivity
 {
+    public static final String MODULE_NAME = "AddMatches";
+
+    // permission codes
     public static final int WRITE_EXT_STORAGE_PERM_CODE = 621;
+
+    // activity request code
+    public static final int LAUNCH_SETMATCHINFO_REQUEST = 42;
 
     static ArrayAdapter<MatchInfo> adapter;
     static ListView contestList;
@@ -79,7 +85,7 @@ public class AddMatches extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_matches);
 
-        Log.d("FileIO", "External Storage Directory: " + Environment.getExternalStorageDirectory().toString());
+        Log.d(MODULE_NAME, "External Storage Directory: " + Environment.getExternalStorageDirectory().toString());
 
         NfcManager nfcmanager = (NfcManager) getApplicationContext().getSystemService(Context.NFC_SERVICE);
         NfcAdapter nfcadapter = nfcmanager.getDefaultAdapter();
@@ -431,7 +437,7 @@ public class AddMatches extends AppCompatActivity
             intent = new Intent(this, SetMatchInfo.class);
             intent.putExtra("EditOption", option);
         }
-        startActivity(intent);
+        startActivityForResult(intent, LAUNCH_SETMATCHINFO_REQUEST);
     }
 
     public static boolean verifySystemPermissions(Activity activity)
@@ -458,6 +464,42 @@ public class AddMatches extends AppCompatActivity
             else
                 spawnExternalMemoryPermsRequest();
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == LAUNCH_SETMATCHINFO_REQUEST)
+            if(resultCode == Activity.RESULT_OK)
+            {
+                Log.d(MODULE_NAME, "SetMatchInfo activity result callback triggered with reuslt.");
+                boolean editExisting = data.getBooleanExtra("editExisting", false);
+                int existingEntryIndex = data.getIntExtra("existingEntryIndex", -1);
+                MatchInfo matchInfo = (MatchInfo) data.getSerializableExtra("matchInfo");
+                if (editExisting)
+                {
+                    Log.d(MODULE_NAME, "Resetting list entry " + existingEntryIndex);
+                    resetListItem(matchInfo, existingEntryIndex);
+                    Log.d(MODULE_NAME, "List entry " + existingEntryIndex + " reset.");
+                }
+                else
+                {
+                    Log.d(MODULE_NAME, "Adding new entry to list.");
+                    addToList(matchInfo);
+                }
+
+                try
+                {
+                    Log.d(MODULE_NAME, "Writing updated match list to JSON file.");
+                    DataStore.writeArraylistsToJSON();
+                }
+                catch (IOException | JSONException e)
+                {
+                    e.printStackTrace();
+                };
+            }
     }
 
 }

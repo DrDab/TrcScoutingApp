@@ -22,6 +22,7 @@
 
 package trc3543.trcscoutingapp.activities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
@@ -163,28 +164,14 @@ public class SetMatchInfo extends AppCompatActivity
 
     public void moveToNextScreen(View view)
     {
-        if (editingoption == -1)
-        {
-            Log.d(MODULE_NAME, "Adding new entry to list.");
-            AddMatches.addToList(matchInfo);
-        }
-        else
-        {
-            Log.d(MODULE_NAME, "Resetting list entry " + editingoption);
-            AddMatches.resetListItem(matchInfo, editingoption);
-            Log.d(MODULE_NAME, "List entry " + editingoption + " reset.");
-        }
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("editExisting", editingoption != -1);
+        returnIntent.putExtra("existingEntryIndex", editingoption);
+        returnIntent.putExtra("matchInfo", matchInfo);
 
-        try
-        {
-            Log.d(MODULE_NAME, "Writing updated match list to JSON file.");
-            DataStore.writeArraylistsToJSON();
-        }
-        catch (IOException | JSONException e)
-        {
-            e.printStackTrace();
-        }
+        Log.d(MODULE_NAME, "Finishing activity with result Intent info: " + returnIntent.getExtras().toString());
 
+        setResult(Activity.RESULT_OK, returnIntent);
         finish();
     }
 
