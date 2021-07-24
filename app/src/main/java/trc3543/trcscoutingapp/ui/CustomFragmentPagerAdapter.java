@@ -2,8 +2,6 @@ package trc3543.trcscoutingapp.ui;
 
 import android.os.Bundle;
 
-import org.json.JSONObject;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -15,23 +13,29 @@ import trc3543.trcscoutingapp.fragments.TeleOpFragment;
 public class CustomFragmentPagerAdapter extends FragmentPagerAdapter
 {
     final int PAGE_COUNT = 3;
-    private String tabTitles[] = new String[] { "Autonomous", "Teleoperated", "Endgame" };
+    private String tabTitles[] = new String[PAGE_COUNT];
     private AbstractPageFragment[] fragments = new AbstractPageFragment[PAGE_COUNT];
 
     public CustomFragmentPagerAdapter(FragmentManager fm, String initJsonFields)
     {
         super(fm);
-        fragments[0] = new AutonomousFragment();
-        fragments[0].setArguments(getArgsBundle(0, initJsonFields));
-        fragments[1] = new TeleOpFragment();
-        fragments[1].setArguments(getArgsBundle(1, initJsonFields));
-        fragments[2] = new EndgameFragment();
-        fragments[2].setArguments(getArgsBundle(2, initJsonFields));
+        initAbsPageFragment(AutonomousFragment.class, 0, "Autonomous", initJsonFields);
+        initAbsPageFragment(TeleOpFragment.class, 1, "Teleoperated", initJsonFields);
+        initAbsPageFragment(EndgameFragment.class, 2, "Endgame", initJsonFields);
     }
 
-    public CustomFragmentPagerAdapter(FragmentManager fm)
+    public void initAbsPageFragment(Class<?> abstractPageFragmentClass, int page, String tabTitle, String initJsonFields)
     {
-       this(fm, null);
+        try
+        {
+            fragments[page] = (AbstractPageFragment) abstractPageFragmentClass.newInstance();
+            fragments[page].setArguments(getArgsBundle(page, initJsonFields));
+            tabTitles[page] = tabTitle;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public Bundle getArgsBundle(int page, String initJsonFields)
