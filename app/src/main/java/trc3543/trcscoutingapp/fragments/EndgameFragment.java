@@ -12,7 +12,8 @@ import trc3543.trcscoutingapp.uiutil.UIUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class EndgameFragment extends AbstractPageFragment {
+public class EndgameFragment extends AbstractPageFragment
+{
     private CheckBox parkedCB;
     private CheckBox hangingCB;
     private CheckBox supportingCB;
@@ -21,7 +22,8 @@ public class EndgameFragment extends AbstractPageFragment {
     private Button confirmButton;
 
     @Override
-    public void instantiateViews(LayoutInflater inflater, ViewGroup container) {
+    public void instantiateViews(LayoutInflater inflater, ViewGroup container)
+    {
         view = inflater.inflate(R.layout.fragment_endgame_page, container, false);
         parkedCB = (CheckBox) view.findViewById(R.id.endgameParkedCB);
         hangingCB = (CheckBox) view.findViewById(R.id.endgameHangingCB);
@@ -32,7 +34,8 @@ public class EndgameFragment extends AbstractPageFragment {
     }
 
     @Override
-    public void setFields(JSONObject fieldData) throws JSONException {
+    public void setFields(JSONObject fieldData) throws JSONException
+    {
         UIUtils.setCheckbox(parkedCB, fieldData.getBoolean("generatorSwitchParked"));
         UIUtils.setCheckbox(hangingCB, fieldData.getBoolean("generatorSwitchHanging"));
         UIUtils.setCheckbox(supportingCB, fieldData.getBoolean("generatorSwitchSupportingMechanism"));
@@ -41,7 +44,8 @@ public class EndgameFragment extends AbstractPageFragment {
     }
 
     @Override
-    public JSONObject getFields() {
+    public JSONObject getFields()
+    {
         try
         {
             JSONObject data = new JSONObject();
