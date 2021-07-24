@@ -220,18 +220,6 @@ public class SetMatchInfo extends AppCompatActivity
         return super.dispatchTouchEvent(event);
     }
 
-    private void setSpinnerByTextValue(Spinner spinner, String toSelect)
-    {
-        for (int i = 0; i < spinner.getCount(); i++)
-        {
-            if (spinner.getItemAtPosition(i).equals(toSelect))
-            {
-                spinner.setSelection(i);
-                break;
-            }
-        }
-    }
-
     @Override
     protected void onDestroy()
     {
