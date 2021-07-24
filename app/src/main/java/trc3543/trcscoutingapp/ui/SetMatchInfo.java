@@ -54,8 +54,6 @@ import java.io.IOException;
 @SuppressWarnings("all")
 public class SetMatchInfo extends AppCompatActivity
 {
-    public static final boolean USE_DEBUG = false;
-
     private int editingoption = -1;
 
     private MatchInfo matchInfo;
@@ -82,30 +80,22 @@ public class SetMatchInfo extends AppCompatActivity
         }
 
         // populate the boxes if already filled.
-        if (editingoption != -1)
-        {
-            matchInfo = DataStore.matchList.get(editingoption);
-        }
-        else
-        {
-            matchInfo = new MatchInfo();
-            int matchNumberAutoPop = myIntent.getIntExtra("PrevMatch", -1);
-            String matchAllianceAutoPop = myIntent.getStringExtra("PrevAlliance");
-            String matchTypeAutoPop = myIntent.getStringExtra("PrevMatchType");
+        matchInfo = editingoption == -1 ? null : DataStore.matchList.get(editingoption);
+        String matchInfoJsonObjStr = null;
 
+        try
+        {
+            matchInfoJsonObjStr = matchInfo == null ? null : matchInfo.toJSONObject().toString();
         }
-
-        JSONObject initMatchInfo = null;
-        try {
-            initMatchInfo = matchInfo.toJSONObject();
-        } catch (JSONException jsonException) {
+        catch (JSONException jsonException)
+        {
             jsonException.printStackTrace();
         }
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fpa = new CustomFragmentPagerAdapter(fragmentManager, initMatchInfo == null ? null : initMatchInfo.toString());
+        fpa = new CustomFragmentPagerAdapter(fragmentManager, matchInfoJsonObjStr);
         viewPager.setAdapter(fpa);
 
         // Give the PagerSlidingTabStrip the ViewPager
@@ -171,10 +161,7 @@ public class SetMatchInfo extends AppCompatActivity
             e.printStackTrace();
         }
 
-        if (!USE_DEBUG)
-        {
-            finish();
-        }
+        finish();
     }
 
     /**
