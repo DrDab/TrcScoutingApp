@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "trc3543.trcscoutingapp"
-        minSdkVersion 16
+        minSdkVersion 22
         targetSdkVersion 28
         versionCode 4
         versionName "1.4.0"
@@ -19,6 +19,10 @@ android {
         }
     }
     buildToolsVersion '28.0.3'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {

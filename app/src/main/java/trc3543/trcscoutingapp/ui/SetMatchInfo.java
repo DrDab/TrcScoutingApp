@@ -31,13 +31,12 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 import trc3543.trcscoutingapp.data.DataStore;
 import trc3543.trcscoutingapp.data.MatchInfo;
 import trc3543.trcscoutingapp.R;
-import trc3543.trcscoutingapp.fragmentcommunication.CollectorServer;
-import trc3543.trcscoutingapp.fragmentcommunication.CollectorTransaction;
-import trc3543.trcscoutingapp.fragmentcommunication.Stopwatch;
+import trc3543.trcscoutingapp.fragments.FragmentsDataViewModel;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -51,8 +50,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
 
 @SuppressWarnings("all")
 public class SetMatchInfo extends AppCompatActivity
@@ -63,8 +60,7 @@ public class SetMatchInfo extends AppCompatActivity
 
     private MatchInfo matchInfo;
     private FragmentPagerAdapter fpa;
-    private Stopwatch stp;
-    private CollectorServer listener;
+    private FragmentsDataViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -73,39 +69,43 @@ public class SetMatchInfo extends AppCompatActivity
         setContentView(R.layout.activity_set_match_info2);
         setTitle("Add Match");
 
-        stp = new Stopwatch();
+        Intent myIntent = getIntent();
         try
         {
-            listener = new CollectorServer(stp, 36541);
-            new Thread(new Runnable()
-            {
-                public void run()
-                {
-                    try
-                    {
-                        listener.run();
-                    }
-                    catch (IOException e)
-                    {
-                        e.printStackTrace();
-                        // if our server has an exception, quit the activity.
-                        finish();
-                    }
-                }
-            }
-            ).start();
+            editingoption = myIntent.getIntExtra("EditOption", -1);
+            Log.d("SetMatchInfo", "Got edit option index: " + editingoption);
         }
-        catch (IOException e)
+        catch (Exception e)
         {
-            e.printStackTrace();
-            // if our server has an exception, quit the activity.
-            finish();
+            Log.d("SetMatchInfo","You shouldn't see this message");
+            editingoption = -1;
+        }
+
+        // populate the boxes if already filled.
+        if (editingoption != -1)
+        {
+            matchInfo = DataStore.matchList.get(editingoption);
+        }
+        else
+        {
+            matchInfo = new MatchInfo();
+            int matchNumberAutoPop = myIntent.getIntExtra("PrevMatch", -1);
+            String matchAllianceAutoPop = myIntent.getStringExtra("PrevAlliance");
+            String matchTypeAutoPop = myIntent.getStringExtra("PrevMatchType");
+
+        }
+
+        JSONObject initMatchInfo = null;
+        try {
+            initMatchInfo = matchInfo.toJSONObject();
+        } catch (JSONException jsonException) {
+            jsonException.printStackTrace();
         }
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fpa = new CustomFragmentPagerAdapter(fragmentManager);
+        fpa = new CustomFragmentPagerAdapter(fragmentManager, initMatchInfo == null ? null : initMatchInfo.toString());
         viewPager.setAdapter(fpa);
 
         // Give the PagerSlidingTabStrip the ViewPager
@@ -125,87 +125,20 @@ public class SetMatchInfo extends AppCompatActivity
             e.printStackTrace();
         }
 
-        Intent myIntent = getIntent();
-        try
-        {
-            editingoption = myIntent.getIntExtra("EditOption", -1);
-            Log.d("SetMatchInfo", "Got edit option index: " + editingoption);
-        }
-        catch (Exception e)
-        {
-            Log.d("SetMatchInfo","You shouldn't see this message");
-            editingoption = -1;
-        }
-
-        // populate the boxes if already filled.
-        if (editingoption != -1)
-        {
-            matchInfo = DataStore.matchList.get(editingoption);
-            try
-            {
-                JSONObject jsonMatchInfo = matchInfo.toJSONObject();
-                listener.setFields(0, jsonMatchInfo);
-                listener.setFields(1, jsonMatchInfo);
-                listener.setFields(2, jsonMatchInfo);
-            }
-            catch (IOException | JSONException e)
-            {
-                e.printStackTrace();
-            }
-        }
-        else
-        {
-            matchInfo = new MatchInfo();
-            int matchNumberAutoPop = myIntent.getIntExtra("PrevMatch", -1);
-            String matchAllianceAutoPop = myIntent.getStringExtra("PrevAlliance");
-            String matchTypeAutoPop = myIntent.getStringExtra("PrevMatchType");
-            try
-            {
-                JSONObject dataToAutoPopulate = new JSONObject();
-                if (matchNumberAutoPop != -1)
-                {
-                    dataToAutoPopulate.put("matchNumber", matchNumberAutoPop + 1);
-                }
-                if (matchAllianceAutoPop != null)
-                {
-                    dataToAutoPopulate.put("alliance", matchAllianceAutoPop);
-                }
-                if (matchTypeAutoPop != null)
-                {
-                    dataToAutoPopulate.put("matchType", matchTypeAutoPop);
-                }
-                listener.setFields(0, dataToAutoPopulate);
-            }
-            catch (JSONException | IOException e)
-            {
-                e.printStackTrace();
-            }
-
-        }
+        viewModel = new ViewModelProvider(this).get(FragmentsDataViewModel.class);
     }
 
     public void confirmTypes(View view) throws JSONException
     {
         boolean breakCond = false;
 
-        if (!breakCond)
-        {
-            try
-            {
-               // confirm types here.
-                HashMap<Integer, CollectorTransaction> resultsAll = listener.getResultsAll();
-                matchInfo = MatchInfo.fromFragmentJSONData(resultsAll.get(0).transactionInfo,
-                        resultsAll.get(1).transactionInfo,
-                        resultsAll.get(2).transactionInfo);
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-                breakCond = true;
-            }
-        }
-
         breakCond = breakCond || !matchInfo.allFieldsPopulated();
+
+        JSONObject[] pageData = new JSONObject[3];
+        pageData[0] = viewModel.getInfoFromPage(0);
+        pageData[1] = viewModel.getInfoFromPage(1);
+        pageData[2] = viewModel.getInfoFromPage(2);
+        matchInfo = matchInfo.fromFragmentJSONData(pageData[0].toString(), pageData[1].toString(), pageData[2].toString());
 
         if (!breakCond)
         {
@@ -296,13 +229,6 @@ public class SetMatchInfo extends AppCompatActivity
     protected void onDestroy()
     {
         super.onDestroy();
-        try
-        {
-            listener.close();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+
     }
 }

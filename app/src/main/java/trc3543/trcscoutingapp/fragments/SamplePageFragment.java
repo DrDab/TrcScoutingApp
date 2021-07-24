@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import trc3543.trcscoutingapp.R;
-import trc3543.trcscoutingapp.fragmentcommunication.CollectorClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -56,45 +55,6 @@ public class SamplePageFragment extends Fragment
             textView.setText("Fragment #" + mPage);
         }
 
-        if (sendThread == null)
-        {
-            CollectorClient collectorClient = new CollectorClient(mPage)
-            {
-                @Override
-                public JSONObject onRequestFields() throws JSONException
-                {
-                    JSONObject data = new JSONObject();
-                    data.put("sample", "LoremIpsum");
-                    data.put("tvTitleText", textView.getText());
-                    data.put("buttonText", button.getText());
-                    return data;
-                }
-
-                @Override
-                public void onSettingFields(final JSONObject fieldData) throws JSONException
-                {
-                    // your code here!
-                    getActivity().runOnUiThread(new Runnable()
-                    {
-                        @Override
-                        public void run()
-                        {
-                            try
-                            {
-                                textView.setText(fieldData.get("textView").toString());
-                                button.setText(fieldData.get("buttonText").toString());
-                            }
-                            catch (JSONException e)
-                            {
-                                e.printStackTrace();
-                            }
-                        }
-                    });
-                }
-            };
-            sendThread = new Thread(collectorClient);
-            sendThread.start();
-        }
         return view;
     }
 }

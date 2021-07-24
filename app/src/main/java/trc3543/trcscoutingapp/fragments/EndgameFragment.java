@@ -4,25 +4,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
-
-import com.travijuu.numberpicker.library.NumberPicker;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import trc3543.trcscoutingapp.R;
-import trc3543.trcscoutingapp.fragmentcommunication.CollectorClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class EndgameFragment extends Fragment
-{
+public class EndgameFragment extends Fragment implements ActivityCommunicableFragment {
     public static final String ARG_PAGE = "ARG_PAGE";
+    public static final String ARG_INIT_JSON_FIELDS = "ARG_INIT_JSON_FIELDS";
 
     private View view;
-    private Thread sendThread;
+    private FragmentsDataViewModel viewModel;
     private int mPage;
 
     private CheckBox parkedCB;
@@ -30,11 +28,18 @@ public class EndgameFragment extends Fragment
     private CheckBox supportingCB;
     private CheckBox levelCB;
     private EditText notesET;
+    private Button confirmButton;
 
     public static EndgameFragment newInstance(int page)
     {
+        return newInstance(page, null);
+    }
+
+    public static EndgameFragment newInstance(int page, String initJsonFields)
+    {
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE, page);
+        args.putString(ARG_INIT_JSON_FIELDS, initJsonFields);
         EndgameFragment fragment = new EndgameFragment();
         fragment.setArguments(args);
         return fragment;
@@ -44,11 +49,8 @@ public class EndgameFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        mPage = getArguments().getInt(ARG_PAGE);
     }
 
-    // Inflate the fragment layout we defined above for this fragment
-    // Set the associated text for the title
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -60,52 +62,27 @@ public class EndgameFragment extends Fragment
             supportingCB = (CheckBox) view.findViewById(R.id.endgameSupportingMechanismCB);
             levelCB = (CheckBox) view.findViewById(R.id.endgameLevelCB);
             notesET = (EditText) view.findViewById(R.id.gameNotes);
+            confirmButton = (Button) view.findViewById(R.id.btnConfirm);
         }
 
-        if (sendThread == null)
+        try
         {
-            CollectorClient collectorClient = new CollectorClient(mPage)
+            String jsonFieldsStr = getArguments().getString(ARG_INIT_JSON_FIELDS);
+            JSONObject initFieldData = jsonFieldsStr == null ? null : new JSONObject(jsonFieldsStr);
+            if (initFieldData != null)
             {
-                @Override
-                public JSONObject onRequestFields() throws JSONException
-                {
-                    JSONObject data = new JSONObject();
-                    data.put("generatorSwitchParked", parkedCB.isChecked());
-                    data.put("generatorSwitchHanging", hangingCB.isChecked());
-                    data.put("generatorSwitchSupportingMechanism", supportingCB.isChecked());
-                    data.put("generatorSwitchLevel", levelCB.isChecked());
-                    data.put("notes", getEditTextValue(notesET));
-                    return data;
-                }
-
-                @Override
-                public void onSettingFields(final JSONObject fieldData) throws JSONException
-                {
-                    // your code here!
-                    getActivity().runOnUiThread(new Runnable()
-                    {
-                        @Override
-                        public void run()
-                        {
-                            try
-                            {
-                                setCheckbox(parkedCB, fieldData.getBoolean("generatorSwitchParked"));
-                                setCheckbox(hangingCB, fieldData.getBoolean("generatorSwitchHanging"));
-                                setCheckbox(supportingCB, fieldData.getBoolean("generatorSwitchSupportingMechanism"));
-                                setCheckbox(levelCB, fieldData.getBoolean("generatorSwitchLevel"));
-                                setEditTextValue(notesET, fieldData.getString("notes"));
-                            }
-                            catch (JSONException e)
-                            {
-                                e.printStackTrace();
-                            }
-                        }
-                    });
-                }
-            };
-            sendThread = new Thread(collectorClient);
-            sendThread.start();
+                setFields(initFieldData);
+            }
         }
+        catch (JSONException jsonException)
+        {
+            jsonException.printStackTrace();
+        }
+
+        mPage = getArguments().getInt(ARG_PAGE);
+        viewModel = new ViewModelProvider(requireActivity()).get(FragmentsDataViewModel.class);
+        viewModel.register(this);
+
         return view;
     }
 
@@ -130,5 +107,40 @@ public class EndgameFragment extends Fragment
     private String getEditTextValue(EditText editText)
     {
         return editText.getText().toString();
+    }
+
+    public void setFields(JSONObject fieldData) throws JSONException
+    {
+        setCheckbox(parkedCB, fieldData.getBoolean("generatorSwitchParked"));
+        setCheckbox(hangingCB, fieldData.getBoolean("generatorSwitchHanging"));
+        setCheckbox(supportingCB, fieldData.getBoolean("generatorSwitchSupportingMechanism"));
+        setCheckbox(levelCB, fieldData.getBoolean("generatorSwitchLevel"));
+        setEditTextValue(notesET, fieldData.getString("notes"));
+    }
+
+    @Override
+    public JSONObject getFields()
+    {
+        try
+        {
+            JSONObject data = new JSONObject();
+            data.put("generatorSwitchParked", parkedCB.isChecked());
+            data.put("generatorSwitchHanging", hangingCB.isChecked());
+            data.put("generatorSwitchSupportingMechanism", supportingCB.isChecked());
+            data.put("generatorSwitchLevel", levelCB.isChecked());
+            data.put("notes", getEditTextValue(notesET));
+            return data;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public int getPage()
+    {
+        return mPage;
     }
 }

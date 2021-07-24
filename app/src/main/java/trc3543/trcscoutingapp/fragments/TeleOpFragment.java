@@ -9,18 +9,19 @@ import android.widget.CheckBox;
 import com.travijuu.numberpicker.library.NumberPicker;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import trc3543.trcscoutingapp.R;
-import trc3543.trcscoutingapp.fragmentcommunication.CollectorClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class TeleOpFragment extends Fragment
+public class TeleOpFragment extends Fragment implements ActivityCommunicableFragment
 {
     public static final String ARG_PAGE = "ARG_PAGE";
+    public static final String ARG_INIT_JSON_FIELDS = "ARG_INIT_JSON_FIELDS";
 
     private View view;
-    private Thread sendThread;
+    private FragmentsDataViewModel viewModel;
     private int mPage;
 
     private NumberPicker lowerCellsPicker;
@@ -35,8 +36,14 @@ public class TeleOpFragment extends Fragment
 
     public static TeleOpFragment newInstance(int page)
     {
+        return newInstance(page, null);
+    }
+
+    public static TeleOpFragment newInstance(int page, String initJsonFields)
+    {
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE, page);
+        args.putString(ARG_INIT_JSON_FIELDS, initJsonFields);
         TeleOpFragment fragment = new TeleOpFragment();
         fragment.setArguments(args);
         return fragment;
@@ -46,7 +53,6 @@ public class TeleOpFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        mPage = getArguments().getInt(ARG_PAGE);
     }
 
     // Inflate the fragment layout we defined above for this fragment
@@ -68,59 +74,24 @@ public class TeleOpFragment extends Fragment
             positionCB = (CheckBox) view.findViewById(R.id.ctrlPanelPositionCheckBox);
         }
 
-        if (sendThread == null)
+        try
         {
-            CollectorClient collectorClient = new CollectorClient(mPage)
+            String jsonFieldsStr = getArguments().getString(ARG_INIT_JSON_FIELDS);
+            JSONObject initFieldData = jsonFieldsStr == null ? null : new JSONObject(jsonFieldsStr);
+            if (initFieldData != null)
             {
-                @Override
-                public JSONObject onRequestFields() throws JSONException
-                {
-                    JSONObject data = new JSONObject();
-                    data.put("teleopLower", lowerCellsPicker.getValue());
-                    data.put("teleopOuter", outerCellsPicker.getValue());
-                    data.put("teleopInner", innerCellsPicker.getValue());
-                    data.put("teleopMissed", missedCellsPicker.getValue());
-                    data.put("shieldStage1", stage1CB.isChecked());
-                    data.put("shieldStage2", stage2CB.isChecked());
-                    data.put("shieldStage3", stage3CB.isChecked());
-                    data.put("controlPanelRotated", rotationCB.isChecked());
-                    data.put("controlPanelPositioned", positionCB.isChecked());
-                    return data;
-                }
-
-                @Override
-                public void onSettingFields(final JSONObject fieldData) throws JSONException
-                {
-                    // your code here!
-                    getActivity().runOnUiThread(new Runnable()
-                    {
-                        @Override
-                        public void run()
-                        {
-                            try
-                            {
-                                // ui actions here
-                                setNumberPickerVal(lowerCellsPicker, fieldData.getInt("teleopLower"));
-                                setNumberPickerVal(outerCellsPicker, fieldData.getInt("teleopOuter"));
-                                setNumberPickerVal(innerCellsPicker, fieldData.getInt("teleopInner"));
-                                setNumberPickerVal(missedCellsPicker, fieldData.getInt("teleopMissed"));
-                                setCheckbox(stage1CB, fieldData.getBoolean("shieldStage1"));
-                                setCheckbox(stage2CB, fieldData.getBoolean("shieldStage2"));
-                                setCheckbox(stage3CB, fieldData.getBoolean("shieldStage3"));
-                                setCheckbox(rotationCB, fieldData.getBoolean("controlPanelRotated"));
-                                setCheckbox(positionCB, fieldData.getBoolean("controlPanelPositioned"));
-                            }
-                            catch (JSONException e)
-                            {
-                                e.printStackTrace();
-                            }
-                        }
-                    });
-                }
-            };
-            sendThread = new Thread(collectorClient);
-            sendThread.start();
+                setFields(initFieldData);
+            }
         }
+        catch (JSONException jsonException)
+        {
+            jsonException.printStackTrace();
+        }
+
+        mPage = getArguments().getInt(ARG_PAGE);
+        viewModel = new ViewModelProvider(requireActivity()).get(FragmentsDataViewModel.class);
+        viewModel.register(this);
+
         return view;
     }
 
@@ -140,5 +111,48 @@ public class TeleOpFragment extends Fragment
             return;
         }
         numberPicker.setValue(toSet);
+    }
+
+    public void setFields(JSONObject fieldData) throws JSONException
+    {
+        setNumberPickerVal(lowerCellsPicker, fieldData.getInt("teleopLower"));
+        setNumberPickerVal(outerCellsPicker, fieldData.getInt("teleopOuter"));
+        setNumberPickerVal(innerCellsPicker, fieldData.getInt("teleopInner"));
+        setNumberPickerVal(missedCellsPicker, fieldData.getInt("teleopMissed"));
+        setCheckbox(stage1CB, fieldData.getBoolean("shieldStage1"));
+        setCheckbox(stage2CB, fieldData.getBoolean("shieldStage2"));
+        setCheckbox(stage3CB, fieldData.getBoolean("shieldStage3"));
+        setCheckbox(rotationCB, fieldData.getBoolean("controlPanelRotated"));
+        setCheckbox(positionCB, fieldData.getBoolean("controlPanelPositioned"));
+    }
+
+    @Override
+    public JSONObject getFields()
+    {
+        try
+        {
+            JSONObject data = new JSONObject();
+            data.put("teleopLower", lowerCellsPicker.getValue());
+            data.put("teleopOuter", outerCellsPicker.getValue());
+            data.put("teleopInner", innerCellsPicker.getValue());
+            data.put("teleopMissed", missedCellsPicker.getValue());
+            data.put("shieldStage1", stage1CB.isChecked());
+            data.put("shieldStage2", stage2CB.isChecked());
+            data.put("shieldStage3", stage3CB.isChecked());
+            data.put("controlPanelRotated", rotationCB.isChecked());
+            data.put("controlPanelPositioned", positionCB.isChecked());
+            return data;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public int getPage()
+    {
+        return mPage;
     }
 }
