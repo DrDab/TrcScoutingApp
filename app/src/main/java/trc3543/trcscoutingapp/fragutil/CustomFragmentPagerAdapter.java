@@ -1,4 +1,4 @@
-package trc3543.trcscoutingapp.activities;
+package trc3543.trcscoutingapp.fragutil;
 
 import android.os.Bundle;
 

@@ -37,6 +37,7 @@ import trc3543.trcscoutingapp.data.DataStore;
 import trc3543.trcscoutingapp.data.MatchInfo;
 import trc3543.trcscoutingapp.R;
 import trc3543.trcscoutingapp.fragments.FragmentsDataViewModel;
+import trc3543.trcscoutingapp.fragutil.CustomFragmentPagerAdapter;
 
 import android.os.Bundle;
 import android.util.Log;
