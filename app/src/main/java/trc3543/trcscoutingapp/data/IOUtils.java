@@ -49,7 +49,6 @@ import static trc3543.trcscoutingapp.data.AppInfo.YEAR_NUMBER;
 @SuppressWarnings("All")
 public class IOUtils extends AppCompatActivity
 {
-    public static boolean autoSaveRunnableInit = false;
     public static boolean deviceSupportsNfc = false;
 
     public static String getTextFileContents(File file)

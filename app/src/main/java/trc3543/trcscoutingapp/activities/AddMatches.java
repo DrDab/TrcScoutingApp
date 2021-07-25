@@ -77,14 +77,15 @@ public class AddMatches extends AppCompatActivity
     public static final int LAUNCH_SETTINGS_REQUEST = 101;
     public static final int LAUNCH_SENDER_REQUEST = 102;
 
-    public static List<MatchInfo> matchList;
+    private List<MatchInfo> matchList;
     private ArrayAdapter<MatchInfo> adapter;
     private ListView matchListView;
     private boolean elementsInitialized;
 
     private AppSettings settings;
 
-    private Runnable autosaverunnable = null;
+    private Runnable autosaverunnable;
+    private boolean autoSaveRunnableInit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -99,6 +100,7 @@ public class AddMatches extends AppCompatActivity
         IOUtils.deviceSupportsNfc = nfcadapter != null && nfcadapter.isEnabled();
 
         elementsInitialized = false;
+        autoSaveRunnableInit = false;
 
         // let's check if we have file permissions before running.
         if (verifySystemPermissions(this))
@@ -119,6 +121,33 @@ public class AddMatches extends AppCompatActivity
                 }
             });
             alertDialog1.show();
+        }
+    }
+
+    public void initializeAppSettings()
+    {
+        File writeDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
+        if (!writeDirectory.exists())
+            writeDirectory.mkdir();
+
+        File settingsFile = new File(writeDirectory, AppInfo.SETTINGS_FILENAME);
+
+        if (settingsFile.exists())
+        {
+            try
+            {
+                settings = IOUtils.readSettingsFromJSON(settingsFile);
+                initializeElements();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else
+        {
+            settings = new AppSettings();
+            openSettingsPrompt();
         }
     }
 
@@ -197,7 +226,7 @@ public class AddMatches extends AppCompatActivity
             }
         });
 
-        if (!IOUtils.autoSaveRunnableInit)
+        if (!autoSaveRunnableInit)
         {
             autosaverunnable = new Runnable()
             {
@@ -209,34 +238,7 @@ public class AddMatches extends AppCompatActivity
                 }
             };
             new Thread(autosaverunnable).start();
-            IOUtils.autoSaveRunnableInit = true;
-        }
-    }
-
-    public void initializeAppSettings()
-    {
-        File writeDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
-        if (!writeDirectory.exists())
-            writeDirectory.mkdir();
-
-        File settingsFile = new File(writeDirectory, AppInfo.SETTINGS_FILENAME);
-
-        if (settingsFile.exists())
-        {
-            try
-            {
-                settings = IOUtils.readSettingsFromJSON(settingsFile);
-                initializeElements();
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-        }
-        else
-        {
-            settings = new AppSettings();
-            openSettingsPrompt();
+            autoSaveRunnableInit = true;
         }
     }
 
@@ -332,31 +334,6 @@ public class AddMatches extends AppCompatActivity
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    public void openMatchEditPrompt(boolean modifyingExisting, int option)
-    {
-        Intent intent = new Intent(this, SetMatchInfo.class);
-        if (!modifyingExisting)
-        {
-            MatchInfo prev = matchList == null ? null :
-                    matchList.size() > 0 ?
-                            matchList.get(matchList.size() - 1) : null;
-            intent.putExtra("EditOption", -1);
-            if (prev != null)
-            {
-                intent.putExtra("PrevMatch", prev.matchNumber);
-                intent.putExtra("PrevAlliance", prev.alliance);
-                intent.putExtra("PrevMatchType", prev.matchType);
-            }
-        }
-        else
-        {
-            intent.putExtra("EditOption", option);
-            intent.putExtra("matchInfo", matchList.get(option));
-        }
-
-        startActivityForResult(intent, LAUNCH_SETMATCHINFO_REQUEST);
     }
 
     @Override
@@ -464,6 +441,31 @@ public class AddMatches extends AppCompatActivity
 
             }
         }
+    }
+
+    public void openMatchEditPrompt(boolean modifyingExisting, int option)
+    {
+        Intent intent = new Intent(this, SetMatchInfo.class);
+        if (!modifyingExisting)
+        {
+            MatchInfo prev = matchList == null ? null :
+                    matchList.size() > 0 ?
+                            matchList.get(matchList.size() - 1) : null;
+            intent.putExtra("EditOption", -1);
+            if (prev != null)
+            {
+                intent.putExtra("PrevMatch", prev.matchNumber);
+                intent.putExtra("PrevAlliance", prev.alliance);
+                intent.putExtra("PrevMatchType", prev.matchType);
+            }
+        }
+        else
+        {
+            intent.putExtra("EditOption", option);
+            intent.putExtra("matchInfo", matchList.get(option));
+        }
+
+        startActivityForResult(intent, LAUNCH_SETMATCHINFO_REQUEST);
     }
 
     public void openSettingsPrompt()
