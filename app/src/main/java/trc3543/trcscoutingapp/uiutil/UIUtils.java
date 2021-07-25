@@ -55,4 +55,9 @@ public class UIUtils
     {
         return editText.getText().toString();
     }
+
+    public static boolean isEditTextEmpty(EditText editText)
+    {
+        return editText.getText().toString().trim().length() == 0;
+    }
 }

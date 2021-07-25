@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="trc3543.trcscoutingapp.activities.Settings">
+    tools:context="trc3543.trcscoutingapp.activities.SettingsActivity">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/settingsTeamNumText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/teamNumForm"
+        android:id="@+id/settingsTeamNumForm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
@@ -26,51 +26,86 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/settingsTeamNumText" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/settingsNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:text="Your Name"
-        app:layout_constraintEnd_toEndOf="@+id/teamNumForm"
-        app:layout_constraintStart_toStartOf="@+id/teamNumForm"
-        app:layout_constraintTop_toBottomOf="@+id/teamNumForm" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsTeamNumForm" />
 
     <EditText
-        android:id="@+id/firstNameForm"
+        android:id="@+id/settingsFirstNameET"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="First Name..."
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/teamNumForm"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsNameText" />
 
     <EditText
-        android:id="@+id/lastNameForm"
+        android:id="@+id/settingsLastNameET"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:ems="10"
         android:hint="Last Name..."
         android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/firstNameForm"
-        app:layout_constraintTop_toBottomOf="@+id/firstNameForm" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsFirstNameET" />
 
     <Button
         android:id="@+id/btnConfirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="89dp"
+        android:onClick="confirmSettings"
         android:text="OK"
         android:textStyle="bold"
-        android:onClick="parseSettings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckBox
+        android:id="@+id/settingsAutosaveCB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Auto CSV Export"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsLastNameET" />
+
+    <TextView
+        android:id="@+id/settingsCSVExportText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Auto-CSV Export Interval (seconds)"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsAutosaveCB" />
+
+    <EditText
+        android:id="@+id/settingsCSVExportIntervalET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsCSVExportText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

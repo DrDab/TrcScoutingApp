@@ -34,7 +34,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
-import trc3543.trcscoutingapp.data.DataStore;
 import trc3543.trcscoutingapp.data.MatchInfo;
 import trc3543.trcscoutingapp.R;
 import trc3543.trcscoutingapp.fragutil.FragmentsDataViewModel;
@@ -46,12 +45,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.Spinner;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.IOException;
 
 @SuppressWarnings("all")
 public class SetMatchInfo extends AppCompatActivity
@@ -87,7 +83,7 @@ public class SetMatchInfo extends AppCompatActivity
 
         // populate the boxes if already filled.
         Log.d(MODULE_NAME, "Fetching match JSON information from edit option index...");
-        matchInfo = editingoption == -1 ? null : DataStore.matchList.get(editingoption);
+        matchInfo = (MatchInfo) myIntent.getSerializableExtra("matchInfo");
         String matchInfoJsonObjStr = null;
 
         try
@@ -115,15 +111,6 @@ public class SetMatchInfo extends AppCompatActivity
 
         // initialize all fragments at start of activity.
         viewPager.setOffscreenPageLimit(fpa.getCount());
-
-        try
-        {
-            DataStore.parseUserInfoGeneral();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
 
         Log.d(MODULE_NAME, "Initializing " + FragmentsDataViewModel.MODULE_NAME + "...");
         viewModel = new ViewModelProvider(this).get(FragmentsDataViewModel.class);

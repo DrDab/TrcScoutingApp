@@ -27,8 +27,4 @@
     <item
         android:id="@+id/action_ac"
         android:title="Clear all entries..." />
-    <item
-        android:id="@+id/action_autosave_set"
-        android:orderInCategory="102"
-        android:title="Auto Save..." />
 </menu>

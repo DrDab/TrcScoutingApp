@@ -1,5 +1,6 @@
 package trc3543.trcscoutingapp.activities;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,8 +12,11 @@ import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import qrutils.QRCode;
-import trc3543.trcscoutingapp.data.DataStore;
+import trc3543.trcscoutingapp.data.AppSettings;
 import trc3543.trcscoutingapp.data.GsonUtilz;
 import trc3543.trcscoutingapp.data.MatchInfo;
 import trc3543.trcscoutingapp.R;
@@ -25,10 +29,13 @@ public class QrDataSender extends AppCompatActivity
     private Button prevButton;
     private Button nextButton;
 
-    private static int page = 0;
+    private int page = 0;
 
     private static final int QR_VIEW_HEIGHT = 240;
     private static final int QR_VIEW_WIDTH = 240;
+
+    private List<MatchInfo> matchList;
+    private AppSettings appSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -37,6 +44,10 @@ public class QrDataSender extends AppCompatActivity
         setContentView(R.layout.activity_qr_data_sender);
         setTitle("Send QR data");
 
+        Intent intent = getIntent();
+        matchList = (ArrayList) intent.getSerializableExtra("matchList");
+        appSettings = (AppSettings) intent.getSerializableExtra("appSettings");
+
         qrDisplay = (ImageView) findViewById(R.id.qrDisplayImageView);
         counter = (TextView) findViewById(R.id.qrPageCounter);
         prevButton = (Button) findViewById(R.id.qrPrevButton);
@@ -44,12 +55,12 @@ public class QrDataSender extends AppCompatActivity
 
         Bitmap placeholder = QRCode.encodeMessage("Hello world!", QR_VIEW_WIDTH, QR_VIEW_HEIGHT);
 
-        if (page >= DataStore.matchList.size())
+        if (page >= matchList.size())
         {
-            page = DataStore.matchList.size() - 1;
+            page = matchList.size() - 1;
         }
 
-        if (AddMatches.listEmpty())
+        if (matchList.size() == 0)
         {
             qrDisplay.setImageResource(0);
         }
@@ -68,7 +79,7 @@ public class QrDataSender extends AppCompatActivity
             page--;
         }
 
-        if (AddMatches.listEmpty())
+        if (matchList.size() == 0)
         {
             qrDisplay.setImageResource(0);
         }
@@ -81,12 +92,12 @@ public class QrDataSender extends AppCompatActivity
 
     public void onNextClicked(View vue)
     {
-        if (page < DataStore.matchList.size() - 1)
+        if (page < matchList.size() - 1)
         {
             page++;
         }
 
-        if (AddMatches.listEmpty())
+        if (matchList.size() == 0)
         {
             qrDisplay.setImageResource(0);
         }
@@ -100,7 +111,7 @@ public class QrDataSender extends AppCompatActivity
 
     private void updateCounter()
     {
-        if (page >= DataStore.matchList.size() - 1)
+        if (page >= matchList.size() - 1)
         {
             nextButton.setEnabled(false);
         }
@@ -118,23 +129,23 @@ public class QrDataSender extends AppCompatActivity
             prevButton.setEnabled(true);
         }
 
-        if (AddMatches.listEmpty())
+        if (matchList.size() == 0)
         {
-            counter.setText("No data yet! ÒwÓ ");
+            counter.setText("No data yet!");
         }
         else
         {
-            counter.setText(String.format("%d of %d", page + 1, DataStore.matchList.size()));
+            counter.setText(String.format("%d of %d", page + 1, matchList.size()));
         }
     }
 
     private String getJSONSerializedMessage(int id)
     {
-        MatchInfo match = DataStore.matchList.get(id);
+        MatchInfo match = matchList.get(id);
         try
         {
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("phoneId", DataStore.firstName + "_" + DataStore.lastName + "_" + DataStore.selfTeamNumber);
+            jsonObject.put("phoneId", appSettings.firstName + "_" + appSettings.lastName + "_" + appSettings.selfTeamNumber);
             jsonObject.put("match", GsonUtilz.MatchInfoToJSONObject(match));
             return jsonObject.toString();
         }

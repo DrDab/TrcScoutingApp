@@ -40,8 +40,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import trc3543.trcscoutingapp.data.AppInfo;
+import trc3543.trcscoutingapp.data.AppSettings;
 import trc3543.trcscoutingapp.threads.AutoSaveThread;
-import trc3543.trcscoutingapp.data.DataStore;
+import trc3543.trcscoutingapp.data.IOUtils;
 import trc3543.trcscoutingapp.data.MatchInfo;
 import trc3543.trcscoutingapp.R;
 
@@ -55,11 +57,10 @@ import android.widget.ListView;
 
 import org.json.JSONException;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static trc3543.trcscoutingapp.data.AppInfo.DATA_FOLDER_NAME;
 
@@ -72,10 +73,16 @@ public class AddMatches extends AppCompatActivity
     public static final int WRITE_EXT_STORAGE_PERM_CODE = 621;
 
     // activity request code
-    public static final int LAUNCH_SETMATCHINFO_REQUEST = 42;
+    public static final int LAUNCH_SETMATCHINFO_REQUEST = 100;
+    public static final int LAUNCH_SETTINGS_REQUEST = 101;
+    public static final int LAUNCH_SENDER_REQUEST = 102;
 
-    static ArrayAdapter<MatchInfo> adapter;
-    static ListView contestList;
+    public static List<MatchInfo> matchList;
+    private ArrayAdapter<MatchInfo> adapter;
+    private ListView matchListView;
+    private boolean elementsInitialized;
+
+    private AppSettings settings;
 
     private Runnable autosaverunnable = null;
 
@@ -89,12 +96,14 @@ public class AddMatches extends AppCompatActivity
 
         NfcManager nfcmanager = (NfcManager) getApplicationContext().getSystemService(Context.NFC_SERVICE);
         NfcAdapter nfcadapter = nfcmanager.getDefaultAdapter();
-        DataStore.deviceSupportsNfc = nfcadapter != null && nfcadapter.isEnabled();
+        IOUtils.deviceSupportsNfc = nfcadapter != null && nfcadapter.isEnabled();
+
+        elementsInitialized = false;
 
         // let's check if we have file permissions before running.
         if (verifySystemPermissions(this))
         {
-            initializeAppElements();
+            initializeAppSettings();
         }
         else
         {
@@ -113,11 +122,14 @@ public class AddMatches extends AppCompatActivity
         }
     }
 
-    public void initializeAppElements()
+    public void initializeElements()
     {
+        Log.d(MODULE_NAME, "Initializing elements.");
+        elementsInitialized = true;
+
         try
         {
-            DataStore.readArraylistsFromJSON();
+            matchList = IOUtils.readArraylistsFromJSON(matchList);
         }
         catch (IOException | JSONException e)
         {
@@ -126,12 +138,12 @@ public class AddMatches extends AppCompatActivity
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        contestList = (ListView) findViewById(R.id.listView);
+        matchListView = (ListView) findViewById(R.id.listView);
 
-        adapter = new ArrayAdapter<MatchInfo>(AddMatches.this, android.R.layout.simple_list_item_1, DataStore.matchList);
+        adapter = new ArrayAdapter<MatchInfo>(AddMatches.this, android.R.layout.simple_list_item_1, matchList);
 
-        contestList.setAdapter(adapter);
-        contestList.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        matchListView.setAdapter(adapter);
+        matchListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView arg0, View arg1, int position, long arg3)
@@ -139,7 +151,7 @@ public class AddMatches extends AppCompatActivity
                 openMatchEditPrompt(true, position);
             }
         });
-        contestList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+        matchListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
         {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int i, long l)
@@ -154,7 +166,7 @@ public class AddMatches extends AppCompatActivity
                                 removeFromList(i);
                                 try
                                 {
-                                    DataStore.writeArraylistsToJSON();
+                                    IOUtils.writeArraylistsToJSON(matchList);
                                 }
                                 catch (IOException | JSONException e)
                                 {
@@ -185,97 +197,46 @@ public class AddMatches extends AppCompatActivity
             }
         });
 
-        // check if user information is saved. if not, open the settings window.
-        boolean openSettingsCondition = false;
-        if (!DataStore.existsSave())
-        {
-            File writeDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
-            if (!writeDirectory.exists())
-            {
-                Log.d("FileIO", "Creating write directory: " + writeDirectory.toString());
-                writeDirectory.mkdir();
-            }
-            Intent intent = new Intent(this, Settings.class);
-            startActivity(intent);
-        }
-        else
-        {
-            // if file exists, check that all data is entered.
-            File writeDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
-            if (!writeDirectory.exists())
-            {
-                writeDirectory.mkdir();
-            }
-            File log = new File(writeDirectory, "settings.coda");
-            if(!log.exists())
-            {
-                try
-                {
-                    Log.d("FileIO", "Creating settings file: " + log.toString());
-                    log.createNewFile();
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-            BufferedReader br = null;
-            try
-            {
-                br = new BufferedReader(new FileReader(log));
-            }
-            catch (FileNotFoundException e)
-            {
-                openSettingsCondition = true;
-            }
-            try
-            {
-                for(int i = 0; i < 3; i++)
-                {
-                    if (br.readLine() == null)
-                    {
-                        openSettingsCondition = true;
-                    }
-                }
-            }
-            catch (IOException e)
-            {
-                openSettingsCondition = true;
-            }
-        }
-        // if all user data is not entered, open a settings screen. (This is if older versions are upgraded)
-        if (openSettingsCondition)
-        {
-            Intent intent = new Intent(this, Settings.class);
-            startActivity(intent);
-        }
-        else
-        {
-            try
-            {
-                DataStore.parseAutoSaveInfo();
-                DataStore.parseUserInfoGeneral();
-                DataStore.parseServerLoginData();
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-        }
-
-        if (!DataStore.autoSaveRunnableInit)
+        if (!IOUtils.autoSaveRunnableInit)
         {
             autosaverunnable = new Runnable()
             {
                 @Override
                 public void run()
                 {
-                    AutoSaveThread autosave = new AutoSaveThread();
+                    AutoSaveThread autosave = new AutoSaveThread(settings, matchList);
                     autosave.run();
                 }
             };
             new Thread(autosaverunnable).start();
-            DataStore.autoSaveRunnableInit = true;
+            IOUtils.autoSaveRunnableInit = true;
+        }
+    }
+
+    public void initializeAppSettings()
+    {
+        File writeDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
+        if (!writeDirectory.exists())
+            writeDirectory.mkdir();
+
+        File settingsFile = new File(writeDirectory, AppInfo.SETTINGS_FILENAME);
+
+        if (settingsFile.exists())
+        {
+            try
+            {
+                settings = IOUtils.readSettingsFromJSON(settingsFile);
+                initializeElements();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else
+        {
+            settings = new AppSettings();
+            openSettingsPrompt();
         }
     }
 
@@ -299,10 +260,10 @@ public class AddMatches extends AppCompatActivity
                 return true;
 
             case R.id.action_makecsv:
-                String filename = DataStore.getFileName(DataStore.firstName + "_" + DataStore.lastName);
+                String filename = IOUtils.getFileName(settings.firstName + "_" + settings.lastName);
                 try
                 {
-                    DataStore.writeContestsToCsv(filename);
+                    IOUtils.writeContestsToCsv(settings, matchList, filename);
                 }
                 catch (IOException e)
                 {
@@ -323,7 +284,9 @@ public class AddMatches extends AppCompatActivity
 
             case R.id.action_transmitresults:
                 intent = new Intent(this, SendReport.class);
-                startActivity(intent);
+                intent.putExtra("matchList", (ArrayList) matchList);
+                intent.putExtra("appSettings", settings);
+                startActivityForResult(intent, LAUNCH_SENDER_REQUEST);
                 return true;
 
             case R.id.action_ac:
@@ -334,10 +297,10 @@ public class AddMatches extends AppCompatActivity
                         {
                             public void onClick(DialogInterface dialog, int whichButton)
                             {
-                                DataStore.matchList.clear();
+                                matchList.clear();
                                 try
                                 {
-                                    DataStore.writeArraylistsToJSON();
+                                    IOUtils.writeArraylistsToJSON(matchList);
                                 }
                                 catch (IOException | JSONException e)
                                 {
@@ -356,17 +319,13 @@ public class AddMatches extends AppCompatActivity
                 return true;
 
             case R.id.action_config:
-                intent = new Intent(this, Settings.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.action_autosave_set:
-                intent = new Intent(this, AutoSaveSettings.class);
-                startActivity(intent);
+                openSettingsPrompt();
                 return true;
 
             case R.id.action_qrsend:
                 intent = new Intent(this, QrDataSender.class);
+                intent.putExtra("matchList", (ArrayList) matchList);
+                intent.putExtra("appSettings", settings);
                 startActivity(intent);
                 return true;
 
@@ -375,55 +334,14 @@ public class AddMatches extends AppCompatActivity
         }
     }
 
-    public static synchronized void addToList(MatchInfo matchInfo)
-    {
-        synchronized (DataStore.matchList)
-        {
-            DataStore.matchList.add(matchInfo);
-            adapter.notifyDataSetChanged();
-        }
-    }
-
-    public static synchronized void resetListItem(MatchInfo matchInfo, int pos)
-    {
-        synchronized (DataStore.matchList)
-        {
-            DataStore.matchList.set(pos, matchInfo);
-            adapter.notifyDataSetChanged();
-        }
-    }
-
-    public static synchronized void removeFromList(int index)
-    {
-        synchronized (DataStore.matchList)
-        {
-            DataStore.matchList.remove(index);
-            adapter.notifyDataSetChanged();
-        }
-    }
-
-    public static synchronized boolean listEmpty()
-    {
-        synchronized (DataStore.matchList)
-        {
-            if (DataStore.matchList.size() == 0)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     public void openMatchEditPrompt(boolean modifyingExisting, int option)
     {
-        Intent intent = null;
+        Intent intent = new Intent(this, SetMatchInfo.class);
         if (!modifyingExisting)
         {
-            MatchInfo prev = DataStore.matchList == null ? null :
-                    DataStore.matchList.size() > 0 ?
-                            DataStore.matchList.get(DataStore.matchList.size() - 1) : null;
-            intent = new Intent(this, SetMatchInfo.class);
+            MatchInfo prev = matchList == null ? null :
+                    matchList.size() > 0 ?
+                            matchList.get(matchList.size() - 1) : null;
             intent.putExtra("EditOption", -1);
             if (prev != null)
             {
@@ -434,20 +352,11 @@ public class AddMatches extends AppCompatActivity
         }
         else
         {
-            intent = new Intent(this, SetMatchInfo.class);
             intent.putExtra("EditOption", option);
+            intent.putExtra("matchInfo", matchList.get(option));
         }
+
         startActivityForResult(intent, LAUNCH_SETMATCHINFO_REQUEST);
-    }
-
-    public static boolean verifySystemPermissions(Activity activity)
-    {
-        return ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
-    }
-
-    public void spawnExternalMemoryPermsRequest()
-    {
-        ActivityCompat.requestPermissions(AddMatches.this, new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE }, WRITE_EXT_STORAGE_PERM_CODE);
     }
 
     @Override
@@ -460,7 +369,7 @@ public class AddMatches extends AppCompatActivity
         if (requestCode == WRITE_EXT_STORAGE_PERM_CODE)
         {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                initializeAppElements();
+                initializeAppSettings();
             else
                 spawnExternalMemoryPermsRequest();
         }
@@ -471,35 +380,130 @@ public class AddMatches extends AppCompatActivity
     {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == LAUNCH_SETMATCHINFO_REQUEST)
-            if(resultCode == Activity.RESULT_OK)
+        if (resultCode == Activity.RESULT_OK)
+        {
+            switch (requestCode)
             {
-                Log.d(MODULE_NAME, "SetMatchInfo activity result callback triggered with reuslt.");
-                boolean editExisting = data.getBooleanExtra("editExisting", false);
-                int existingEntryIndex = data.getIntExtra("existingEntryIndex", -1);
-                MatchInfo matchInfo = (MatchInfo) data.getSerializableExtra("matchInfo");
-                if (editExisting)
-                {
-                    Log.d(MODULE_NAME, "Resetting list entry " + existingEntryIndex);
-                    resetListItem(matchInfo, existingEntryIndex);
-                    Log.d(MODULE_NAME, "List entry " + existingEntryIndex + " reset.");
-                }
-                else
-                {
-                    Log.d(MODULE_NAME, "Adding new entry to list.");
-                    addToList(matchInfo);
-                }
+                case LAUNCH_SETMATCHINFO_REQUEST:
+                    Log.d(MODULE_NAME, "SetMatchInfo activity result callback triggered with result.");
+                    boolean editExisting = data.getBooleanExtra("editExisting", false);
+                    int existingEntryIndex = data.getIntExtra("existingEntryIndex", -1);
+                    MatchInfo matchInfo = (MatchInfo) data.getSerializableExtra("matchInfo");
 
-                try
-                {
-                    Log.d(MODULE_NAME, "Writing updated match list to JSON file.");
-                    DataStore.writeArraylistsToJSON();
-                }
-                catch (IOException | JSONException e)
-                {
-                    e.printStackTrace();
-                };
+                    if (editExisting)
+                    {
+                        Log.d(MODULE_NAME, "Resetting list entry " + existingEntryIndex);
+                        resetListItem(matchInfo, existingEntryIndex);
+                        Log.d(MODULE_NAME, "List entry " + existingEntryIndex + " reset.");
+                    }
+                    else
+                    {
+                        Log.d(MODULE_NAME, "Adding new entry to list.");
+                        addToList(matchInfo);
+                    }
+
+                    try
+                    {
+                        Log.d(MODULE_NAME, "Writing updated match list to JSON file.");
+                        IOUtils.writeArraylistsToJSON(matchList);
+                    }
+                    catch (IOException | JSONException e)
+                    {
+                        e.printStackTrace();
+                    }
+                    break;
+
+                case LAUNCH_SETTINGS_REQUEST:
+                    Log.d(MODULE_NAME, "SettingsActivity result callback triggered with result.");
+                    AppSettings newSettings = (AppSettings) data.getSerializableExtra("appSettings");
+
+                    Log.d(MODULE_NAME, "Got result from SettingsActivity.");
+                    if (!elementsInitialized)
+                    {
+                        initializeElements();
+                    }
+
+                    File writeDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
+                    File settingsFile = new File(writeDirectory, AppInfo.SETTINGS_FILENAME);
+
+                    settings.copyFieldsFromOtherSettings(newSettings);
+
+                    try
+                    {
+                        Log.d(MODULE_NAME, "Writing updated settings to JSON file.");
+                        IOUtils.writeSettingsToJSON(settings, settingsFile);
+                    }
+                    catch (IOException | JSONException e)
+                    {
+                        e.printStackTrace();
+                    }
+                    break;
             }
+        }
+        else if (resultCode == Activity.RESULT_CANCELED)
+        {
+            File writeDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
+            File settingsFile = new File(writeDirectory, AppInfo.SETTINGS_FILENAME);
+            switch (requestCode)
+            {
+                case LAUNCH_SETTINGS_REQUEST:
+                    if (!settingsFile.exists())
+                        openSettingsPrompt();
+                    break;
+
+                case LAUNCH_SENDER_REQUEST:
+                    try
+                    {
+                        settings.copyFieldsFromOtherSettings(IOUtils.readSettingsFromJSON(settingsFile));
+                    }
+                    catch (IOException | JSONException exception)
+                    {
+                        exception.printStackTrace();
+                    }
+                    break;
+
+            }
+        }
+    }
+
+    public void openSettingsPrompt()
+    {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        intent.putExtra("appSettings", settings);
+        startActivityForResult(intent, LAUNCH_SETTINGS_REQUEST);
+    }
+
+    public boolean verifySystemPermissions(Activity activity)
+    {
+        return ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    public void spawnExternalMemoryPermsRequest()
+    {
+        ActivityCompat.requestPermissions(AddMatches.this, new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE }, WRITE_EXT_STORAGE_PERM_CODE);
+    }
+
+    public void addToList(MatchInfo matchInfo)
+    {
+        matchList.add(matchInfo);
+        adapter.notifyDataSetChanged();
+    }
+
+    public void resetListItem(MatchInfo matchInfo, int pos)
+    {
+        matchList.set(pos, matchInfo);
+        adapter.notifyDataSetChanged();
+    }
+
+    public void removeFromList(int index)
+    {
+        matchList.remove(index);
+        adapter.notifyDataSetChanged();
+    }
+
+    public boolean listEmpty()
+    {
+        return matchList.size() == 0;
     }
 
 }

@@ -23,10 +23,15 @@
 package trc3543.trcscoutingapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import trc3543.trcscoutingapp.data.DataStore;
+import trc3543.trcscoutingapp.data.AppInfo;
+import trc3543.trcscoutingapp.data.AppSettings;
 import trc3543.trcscoutingapp.R;
+import trc3543.trcscoutingapp.data.IOUtils;
+import trc3543.trcscoutingapp.data.MatchInfo;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -35,15 +40,23 @@ import org.json.JSONArray;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
+
+import static trc3543.trcscoutingapp.data.AppInfo.DATA_FOLDER_NAME;
 
 public class SendReport extends AppCompatActivity
 {
+    private AppSettings appSettings;
+    private List<MatchInfo> matchList;
+
     private EditText ipBox = null;
     private EditText portBox = null;
     private EditText usernameBox = null;
@@ -57,19 +70,20 @@ public class SendReport extends AppCompatActivity
         setContentView(R.layout.activity_send_report);
         setTitle("Send Reports");
 
+        Intent intent = getIntent();
+        appSettings = (AppSettings) intent.getSerializableExtra("appSettings");
+        matchList = (ArrayList) intent.getSerializableExtra("matchList");
+
         ipBox = (EditText) findViewById(R.id.serverIPForm);
         portBox = (EditText) findViewById(R.id.serverPortForm);
         usernameBox = (EditText) findViewById(R.id.usernameForm);
         passwordBox = (EditText) findViewById(R.id.passwordForm);
         statusBox = (TextView) findViewById(R.id.uploaderStatusBox);
 
-        if (DataStore.serverIP != null && DataStore.username != null && DataStore.password != null)
-        {
-            ipBox.setText(DataStore.serverIP);
-            portBox.setText(DataStore.serverPort + "");
-            usernameBox.setText(DataStore.username);
-            passwordBox.setText(DataStore.password);
-        }
+        ipBox.setText(appSettings.serverIP);
+        portBox.setText(appSettings.serverPort + "");
+        usernameBox.setText(appSettings.serverUsername);
+        passwordBox.setText(appSettings.serverPassword);
     }
 
     public void onSendClicked(View vue)
@@ -151,9 +165,9 @@ public class SendReport extends AppCompatActivity
                                 else if (receiveMessage.equals("auth_successful"))
                                 {
                                     JSONArray csvContestsArray = new JSONArray();
-                                    for(int i = 0; i < DataStore.matchList.size(); i++)
+                                    for(int i = 0; i < matchList.size(); i++)
                                     {
-                                        csvContestsArray.put(DataStore.matchList.get(i).getCsvString());
+                                        csvContestsArray.put(matchList.get(i).getCsvString());
                                     }
                                     bw.write(csvContestsArray.toString() + "\n");
                                     bw.flush();
@@ -165,7 +179,7 @@ public class SendReport extends AppCompatActivity
                                 }
                                 else if (receiveMessage.equals("json_success"))
                                 {
-                                    updateStatusDisplay(String.format("[SUCCESS] %d entries sent successfully!", DataStore.matchList.size()));
+                                    updateStatusDisplay(String.format("[SUCCESS] %d entries sent successfully!", matchList.size()));
                                     isclosed = true;
                                 }
                                 else
@@ -240,18 +254,21 @@ public class SendReport extends AppCompatActivity
 
     public synchronized void saveCredentials(String ip, int port, String username, String password)
     {
-        DataStore.serverIP = ip;
-        DataStore.serverPort = port;
-        DataStore.username = username;
-        DataStore.password = password;
+        appSettings.serverIP = ip;
+        appSettings.serverPort = port;
+        appSettings.serverUsername = username;
+        appSettings.serverPassword = password;
         try
         {
-            DataStore.writeServerLoginData();
+            File writeDirectory = new File(Environment.getExternalStorageDirectory(), DATA_FOLDER_NAME);
+            File settingsFile = new File(writeDirectory, AppInfo.SETTINGS_FILENAME);
+            IOUtils.writeSettingsToJSON(appSettings, settingsFile);
             statusBox.setText("*** Login saved. ***");
         }
-        catch (IOException e)
+        catch (Exception e)
         {
             e.printStackTrace();
         }
     }
+
 }

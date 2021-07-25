@@ -1,7 +1,7 @@
 package trc3543.trcscoutingapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import trc3543.trcscoutingapp.data.DataStore;
+import trc3543.trcscoutingapp.data.IOUtils;
 import trc3543.trcscoutingapp.R;
 
 import android.os.Bundle;
@@ -22,7 +22,7 @@ public class NfcDataSender extends AppCompatActivity
 
         setTitle("Send CSV");
 
-        if (DataStore.deviceSupportsNfc)
+        if (IOUtils.deviceSupportsNfc)
         {
             nfcMainStatus.setText("NFC Ready to Pair! :>");
         }

@@ -7,10 +7,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GsonUtilz
 {
-    public static ArrayList<MatchInfo> JSONArrayToMatchInfoArrayList(JSONArray input) throws JSONException
+    public static ArrayList<MatchInfo> JSONArrayToMatchInfoList(JSONArray input) throws JSONException
     {
         ArrayList<MatchInfo> toReturn = new ArrayList<MatchInfo>();
         for (int i = 0; i < input.length(); i++)
@@ -20,7 +21,7 @@ public class GsonUtilz
         return toReturn;
     }
 
-    public static JSONArray MatchInfoArrayListToJSONArray(ArrayList<MatchInfo> input) throws JSONException
+    public static JSONArray MatchInfoListToJSONArray(List<MatchInfo> input) throws JSONException
     {
         JSONArray toReturn = new JSONArray();
         for (MatchInfo matchInfo : input)

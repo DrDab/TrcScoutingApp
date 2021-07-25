@@ -35,7 +35,7 @@
             android:configChanges="orientation|keyboardHidden"
             />
         <activity android:name=".activities.About" />
-        <activity android:name=".activities.Settings" />
+        <activity android:name=".activities.SettingsActivity" />
         <activity android:name=".activities.AutoSaveSettings" />
         <activity android:name=".activities.SendReport" />
         <activity android:name=".activities.NfcDataSender" />

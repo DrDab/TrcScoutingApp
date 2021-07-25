@@ -25,14 +25,22 @@ package trc3543.trcscoutingapp.threads;
 import android.util.Log;
 
 import java.io.IOException;
+import java.util.List;
 
-import trc3543.trcscoutingapp.data.DataStore;
+import trc3543.trcscoutingapp.data.AppSettings;
+import trc3543.trcscoutingapp.data.IOUtils;
+import trc3543.trcscoutingapp.data.MatchInfo;
 
 public class AutoSaveThread
 {
-    public AutoSaveThread()
+    private AppSettings appSettings;
+    private List<MatchInfo> matchList;
+
+    public AutoSaveThread(AppSettings appSettings, List<MatchInfo> matchList)
     {
         Log.d("AutoSave", "Initialized autosave thread.");
+        this.appSettings = appSettings;
+        this.matchList = matchList;
     }
 
     public void run()
@@ -41,17 +49,19 @@ public class AutoSaveThread
         for(;;)
         {
             double time = System.currentTimeMillis() / 1000.0;
-            if (time % DataStore.autosaveSeconds != 0)
+
+            if (time % appSettings.autosaveSeconds != 0)
             {
                 done = false;
             }
-            if (time % DataStore.autosaveSeconds == 0 && !done && DataStore.useAutosave)
+
+            if (time % appSettings.autosaveSeconds == 0 && !done && appSettings.useAutosave)
             {
                 Log.d("AutoSave", "Auto saving at time=" + time);
-                String filename = DataStore.getFileName(DataStore.firstName + "_" + DataStore.lastName);
+                String filename = IOUtils.getFileName(appSettings.firstName + "_" + appSettings.lastName);
                 try
                 {
-                    DataStore.writeContestsToCsv(filename);
+                    IOUtils.writeContestsToCsv(appSettings, matchList, filename);
                 }
                 catch (IOException e)
                 {

@@ -25,7 +25,7 @@ package trc3543.trcscoutingapp.activities;
 import android.graphics.Color;
 import androidx.appcompat.app.AppCompatActivity;
 import trc3543.trcscoutingapp.BuildConfig;
-import trc3543.trcscoutingapp.data.DataStore;
+import trc3543.trcscoutingapp.data.IOUtils;
 import trc3543.trcscoutingapp.R;
 
 import android.os.Bundle;
@@ -57,6 +57,6 @@ public class About extends AppCompatActivity
         buildDateText.setText("Build Date: " + buildDate.getTime());
 
         nfcSupportedText = (TextView) findViewById(R.id.nfcSupportedText);
-        nfcSupportedText.setText(DataStore.deviceSupportsNfc ? "NFC Supported" : "NFC Not Supported");
+        nfcSupportedText.setText(IOUtils.deviceSupportsNfc ? "NFC Supported" : "NFC Not Supported");
     }
 }
