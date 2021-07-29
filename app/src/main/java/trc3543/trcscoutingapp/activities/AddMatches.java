@@ -87,6 +87,8 @@ public class AddMatches extends AppCompatActivity
     private Runnable autosaverunnable;
     private boolean autoSaveRunnableInit;
 
+    private boolean deviceSupportsNfc;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -97,7 +99,7 @@ public class AddMatches extends AppCompatActivity
 
         NfcManager nfcmanager = (NfcManager) getApplicationContext().getSystemService(Context.NFC_SERVICE);
         NfcAdapter nfcadapter = nfcmanager.getDefaultAdapter();
-        IOUtils.deviceSupportsNfc = nfcadapter != null && nfcadapter.isEnabled();
+        deviceSupportsNfc = nfcadapter != null && nfcadapter.isEnabled();
 
         elementsInitialized = false;
         autoSaveRunnableInit = false;
@@ -258,6 +260,7 @@ public class AddMatches extends AppCompatActivity
         {
             case R.id.action_about:
                 Intent intent = new Intent(this, About.class);
+                intent.putExtra("deviceSupportsNfc", deviceSupportsNfc);
                 startActivity(intent);
                 return true;
 

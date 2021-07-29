@@ -22,13 +22,7 @@ public class NfcDataSender extends AppCompatActivity
 
         setTitle("Send CSV");
 
-        if (IOUtils.deviceSupportsNfc)
-        {
-            nfcMainStatus.setText("NFC Ready to Pair! :>");
-        }
-        else
-        {
-
-        }
+        boolean nfcSupported = getIntent().getBooleanExtra("deviceSupportsNfc", false);
+        nfcMainStatus.setText(nfcSupported ? "NFC Ready to Pair" : "NFC not supported or disabled");
     }
 }

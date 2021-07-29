@@ -49,6 +49,8 @@ public class About extends AppCompatActivity
         setTitle("About This App");
         setTitleColor(Color.parseColor("#ff669900"));
 
+        boolean nfcSupported = getIntent().getBooleanExtra("deviceSupportsNfc", false);
+
         versionIdText = (TextView) findViewById(R.id.versionIdText);
         versionIdText.setText("Version: " + VERSION_NUMBER);
 
@@ -57,6 +59,6 @@ public class About extends AppCompatActivity
         buildDateText.setText("Build Date: " + buildDate.getTime());
 
         nfcSupportedText = (TextView) findViewById(R.id.nfcSupportedText);
-        nfcSupportedText.setText(IOUtils.deviceSupportsNfc ? "NFC Supported" : "NFC Not Supported");
+        nfcSupportedText.setText(nfcSupported ? "NFC Supported" : "NFC Not Supported");
     }
 }
