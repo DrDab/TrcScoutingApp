@@ -97,7 +97,7 @@ public class IOUtils extends AppCompatActivity
         }
         PrintWriter pw = new PrintWriter(new FileWriter(cache));
         JSONObject jsonObject = new JSONObject();
-        JSONArray matchArray = GsonUtilz.MatchInfoListToJSONArray(matchList);
+        JSONArray matchArray = GsonUtil.MatchInfoListToJSONArray(matchList);
         jsonObject.put("matches", matchArray);
         pw.println(jsonObject.toString());
         pw.close();
@@ -115,7 +115,7 @@ public class IOUtils extends AppCompatActivity
         {
             String jsonData = IOUtils.getTextFileContents(cache);
             JSONObject jsonCacheObject = new JSONObject(jsonData);
-            return GsonUtilz.JSONArrayToMatchInfoList(jsonCacheObject.getJSONArray("matches"));
+            return GsonUtil.JSONArrayToMatchInfoList(jsonCacheObject.getJSONArray("matches"));
         }
         return new ArrayList<>();
     }

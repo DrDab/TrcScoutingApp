@@ -9,7 +9,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GsonUtilz
+public class GsonUtil
 {
     public static ArrayList<MatchInfo> JSONArrayToMatchInfoList(JSONArray input) throws JSONException
     {

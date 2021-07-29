@@ -17,7 +17,7 @@ import java.util.List;
 
 import qrutils.QRCode;
 import trc3543.trcscoutingapp.data.AppSettings;
-import trc3543.trcscoutingapp.data.GsonUtilz;
+import trc3543.trcscoutingapp.data.GsonUtil;
 import trc3543.trcscoutingapp.data.MatchInfo;
 import trc3543.trcscoutingapp.R;
 
@@ -146,7 +146,7 @@ public class QrDataSender extends AppCompatActivity
         {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("phoneId", appSettings.firstName + "_" + appSettings.lastName + "_" + appSettings.selfTeamNumber);
-            jsonObject.put("match", GsonUtilz.MatchInfoToJSONObject(match));
+            jsonObject.put("match", GsonUtil.MatchInfoToJSONObject(match));
             return jsonObject.toString();
         }
         catch (JSONException e)
