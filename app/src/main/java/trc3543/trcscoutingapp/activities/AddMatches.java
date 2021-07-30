@@ -111,10 +111,10 @@ public class AddMatches extends AppCompatActivity
         }
         else
         {
-            AlertDialog alertDialog1 = new AlertDialog.Builder(AddMatches.this).create();
-            alertDialog1.setTitle("Permission Request");
-            alertDialog1.setMessage("Please enable external storage permission.");
-            alertDialog1.setButton(Dialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener()
+            AlertDialog alertDialog = new AlertDialog.Builder(AddMatches.this).create();
+            alertDialog.setTitle("Permission Request");
+            alertDialog.setMessage("Please enable external storage permission.");
+            alertDialog.setButton(Dialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener()
             {
                 @Override
                 public void onClick(DialogInterface dialog, int which)
@@ -122,7 +122,7 @@ public class AddMatches extends AppCompatActivity
                     spawnExternalMemoryPermsRequest();
                 }
             });
-            alertDialog1.show();
+            alertDialog.show();
         }
     }
 
