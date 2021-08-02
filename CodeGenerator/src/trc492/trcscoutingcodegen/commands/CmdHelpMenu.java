@@ -6,7 +6,7 @@ import java.util.List;
 public class CmdHelpMenu extends Command
 {
     private List<Command> commands;
-    
+
     public CmdHelpMenu(List<Command> commands)
     {
         super("help", "Lists syntax and usage all commands, or of optional given command.", "Usage: help [command]");
@@ -21,14 +21,36 @@ public class CmdHelpMenu extends Command
             System.out.println("No commands to list!");
             return false;
         }
-        
+
+        String searchCmd = null;
+        boolean searchSuccess = false;
+
+        if (args.size() > 1)
+        {
+            searchCmd = args.get(1);
+        }
+
         for (Command command : commands)
         {
+            if (searchCmd != null)
+            {
+                if (searchCmd.equals(command.getName()))
+                {
+                    searchSuccess = true;
+                }
+                else
+                {
+                    continue;
+                }
+            }
             System.out.printf("%s - %s\n\t", command.getName(), command.getDescription());
             command.printSyntax();
         }
         
-        return true;
+        if (searchCmd != null && !searchSuccess)
+            System.out.printf("\"%s\" is not a valid command. Please type \"help\" for a list of commands.\n", searchCmd);
+
+        return searchCmd == null ? true : searchSuccess;
     }
 
 }
