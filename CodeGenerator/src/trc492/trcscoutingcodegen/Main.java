@@ -7,11 +7,17 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import trc492.trcscoutingcodegen.data.Field;
-import trc492.trcscoutingcodegen.data.Page;
+import trc492.trcscoutingcodegen.commands.CmdCreateFile;
+import trc492.trcscoutingcodegen.commands.CmdExit;
+import trc492.trcscoutingcodegen.commands.CmdListFields;
+import trc492.trcscoutingcodegen.commands.CmdListPages;
+import trc492.trcscoutingcodegen.commands.CmdLoadFile;
+import trc492.trcscoutingcodegen.commands.CmdUnloadFile;
+import trc492.trcscoutingcodegen.commands.Command;
 
 public class Main
 {
+    public static List<Command> commands;
 
     public static void main(String[] args)
     {
@@ -19,7 +25,9 @@ public class Main
         System.out.println("(C) 2021 Titan Robotics Club");
 
         Scanner sc = new Scanner(System.in);
-        FileIOUtil util = new FileIOUtil(sc);
+        GeneratorUtil util = new GeneratorUtil(sc);
+
+        loadCommands(util);
 
         while (true)
         {
@@ -29,10 +37,10 @@ public class Main
                 System.out.println("Invalid command");
             else
             {
-                List<String> commandParts = splitCommand(command);
+                List<String> cmdArgs = splitCommand(command);
                 try
                 {
-                    processCommand(commandParts, util);
+                    processCommand(cmdArgs, util);
                 }
                 catch (Exception e)
                 {
@@ -42,150 +50,28 @@ public class Main
         }
     }
 
-    public static void processCommand(List<String> commandParts, FileIOUtil util) throws IOException
+    public static void loadCommands(GeneratorUtil util)
     {
-        if (commandParts == null || commandParts.size() == 0)
+        commands = new ArrayList<>();
+        commands.add(new CmdCreateFile(util));
+        commands.add(new CmdLoadFile(util));
+        commands.add(new CmdUnloadFile(util));
+        commands.add(new CmdListFields(util));
+        commands.add(new CmdListPages(util));
+        commands.add(new CmdExit());
+    }
+
+    public static void processCommand(List<String> cmdArgs, GeneratorUtil util) throws IOException
+    {
+        if (cmdArgs == null || cmdArgs.size() == 0)
             return;
 
-        String root = commandParts.get(0);
-
-        switch (root)
+        String root = cmdArgs.get(0);
+        
+        for (Command cmd : commands)
         {
-            case "create":
-                if (commandParts.size() < 2)
-                {
-                    System.out.println("Usage: create <filename>");
-                    return;
-                }
-
-                String filename = commandParts.get(1);
-
-                if (util.fileExists(filename))
-                {
-                    if (util.promptYN("File already exists. Would you like to overwrite file %s? (Y/N)", filename))
-                    {
-                        util.createNewSession(filename);
-                        System.out.printf("Overwrote and loaded file %s\n", filename);
-                    }
-                }
-                else
-                {
-                    util.createNewSession(filename);
-                    System.out.printf("Created and loaded file %s\n", filename);
-                }
-
-                break;
-
-            case "load":
-                if (commandParts.size() < 2)
-                {
-                    System.out.println("Usage: load <filename>");
-                    return;
-                }
-
-                filename = commandParts.get(1);
-
-                if (!util.fileExists(filename))
-                {
-                    System.out.printf("Error: File %s doesn't exist.\n", filename);
-                    break;
-                }
-
-                if (util.loadSessionData(filename))
-                {
-                    System.out.printf("Loaded file %s\n", filename);
-                }
-                else
-                {
-                    System.out.printf("Did not load file %s successfully\n", filename);
-                }
-
-                break;
-
-            case "pages":
-                if (!util.sessionLoaded())
-                {
-                    System.out.println("No session loaded!");
-                    break;
-                }
-
-                System.out.printf("%d Pages:\n", util.sessionData.pages.size());
-                for (Page page : util.sessionData.pages)
-                {
-                    System.out.println(page);
-                }
-                System.out.println("---");
-                break;
-
-            case "fields":
-                if (!util.sessionLoaded())
-                {
-                    System.out.println("No session loaded!");
-                    break;
-                }
-                
-                System.out.printf("%d Fields:\n", util.sessionData.fields.size());
-                for (Field field : util.sessionData.fields)
-                {
-                    System.out.println(field);
-                }
-                System.out.println("---");
-                break;
-                
-            case "unload":
-                util.unloadSession();
-                System.out.println("Session unloaded.");
-                break;
-                
-            case "setfield":
-                break;
-                
-            case "delfield":
-                break;
-                
-            case "mapcol":
-                break;
-                
-            case "delcol":
-                break;
-                
-            case "newpage":
-                break;
-                
-            case "pagetabname":
-                break;
-                
-            case "setpage":
-                break;
-                
-            case "delpage":
-                break;
-                
-            case "elements":
-                break;
-                
-            case "typefields":
-                break;
-                
-            case "addelement":
-                break;
-                
-            case "mapelement":
-                break;
-                
-            case "delelement":
-                break;
-                
-            case "exportcode":
-                break;
-
-            case "exit":
-                System.out.println("Bye");
-                System.exit(0);
-                break;
-
-            default:
-                break;
+            if (cmd.getName().equals(root))
+                cmd.call(cmdArgs);
         }
     }
 
