@@ -1,9 +1,10 @@
-package trc492.trcscoutingcodegen.commands;
+package trc492.trcscoutingcodegen.commands.io;
 
 import java.io.IOException;
 import java.util.List;
 
 import trc492.trcscoutingcodegen.GeneratorUtil;
+import trc492.trcscoutingcodegen.commands.Command;
 
 public class CmdUnloadFile extends Command
 {

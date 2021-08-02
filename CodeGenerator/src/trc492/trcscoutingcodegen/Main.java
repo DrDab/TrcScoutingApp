@@ -7,13 +7,14 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import trc492.trcscoutingcodegen.commands.CmdCreateFile;
 import trc492.trcscoutingcodegen.commands.CmdExit;
-import trc492.trcscoutingcodegen.commands.CmdListFields;
-import trc492.trcscoutingcodegen.commands.CmdListPages;
-import trc492.trcscoutingcodegen.commands.CmdLoadFile;
-import trc492.trcscoutingcodegen.commands.CmdUnloadFile;
+import trc492.trcscoutingcodegen.commands.CmdHelpMenu;
 import trc492.trcscoutingcodegen.commands.Command;
+import trc492.trcscoutingcodegen.commands.displays.CmdListFields;
+import trc492.trcscoutingcodegen.commands.displays.CmdListPages;
+import trc492.trcscoutingcodegen.commands.io.CmdCreateFile;
+import trc492.trcscoutingcodegen.commands.io.CmdLoadFile;
+import trc492.trcscoutingcodegen.commands.io.CmdUnloadFile;
 
 public class Main
 {
@@ -59,6 +60,7 @@ public class Main
         commands.add(new CmdListFields(util));
         commands.add(new CmdListPages(util));
         commands.add(new CmdExit());
+        commands.add(new CmdHelpMenu(commands));
     }
 
     public static void processCommand(List<String> cmdArgs, GeneratorUtil util) throws IOException

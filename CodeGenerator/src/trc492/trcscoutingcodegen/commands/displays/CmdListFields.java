@@ -1,9 +1,10 @@
-package trc492.trcscoutingcodegen.commands;
+package trc492.trcscoutingcodegen.commands.displays;
 
 import java.io.IOException;
 import java.util.List;
 
 import trc492.trcscoutingcodegen.GeneratorUtil;
+import trc492.trcscoutingcodegen.commands.Command;
 import trc492.trcscoutingcodegen.data.Field;
 
 public class CmdListFields extends Command
