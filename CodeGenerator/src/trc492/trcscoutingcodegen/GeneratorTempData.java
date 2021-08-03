@@ -6,12 +6,15 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+import trc492.trcscoutingcodegen.data.Page;
 import trc492.trcscoutingcodegen.data.SessionData;
 
 public class GeneratorTempData
 {
     public SessionData sessionData;
     public File sessionFile;
+    
+    public Page curWorkingPage;
     
     private Scanner sc;
     

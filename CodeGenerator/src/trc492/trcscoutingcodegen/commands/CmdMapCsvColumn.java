@@ -75,7 +75,7 @@ public class CmdMapCsvColumn extends Command
             case "unmap":
                 if (size < 3)
                 {
-                    System.out.println(super.getSyntax()[1]);
+                    System.out.println("Usage: " + super.getSyntax()[1]);
                     return false;
                 }
                 

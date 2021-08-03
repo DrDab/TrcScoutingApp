@@ -15,10 +15,10 @@ public class CmdEditField extends Command
 
     public CmdEditField(GeneratorTempData util)
     {
-        super("fields",
+        super("field",
             "Creates, edits or removes a field, consisting of a name and type.\n\tTypes include: int, double, bool(ean), str(ing)",
-            "Usage: fields add <name> <type>", "fields rename <oldname> <newname>", "fields settype <name> <type>",
-            "fields del <name>");
+            "Usage: field add <name> <type>", "field rename <oldname> <newname>", "field settype <name> <type>",
+            "field del <name>");
         this.util = util;
     }
 

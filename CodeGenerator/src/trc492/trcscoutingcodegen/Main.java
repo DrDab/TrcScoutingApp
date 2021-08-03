@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import trc492.trcscoutingcodegen.commands.CmdCreateFile;
 import trc492.trcscoutingcodegen.commands.CmdEditField;
+import trc492.trcscoutingcodegen.commands.CmdEditPage;
 import trc492.trcscoutingcodegen.commands.CmdExit;
 import trc492.trcscoutingcodegen.commands.CmdHelpMenu;
 import trc492.trcscoutingcodegen.commands.CmdListFields;
@@ -63,6 +64,7 @@ public class Main
         commands.add(new CmdListPages(util));
         commands.add(new CmdEditField(util));
         commands.add(new CmdMapCsvColumn(util));
+        commands.add(new CmdEditPage(util));
         commands.add(new CmdExit());
         commands.add(new CmdHelpMenu(commands));
     }
@@ -77,8 +79,14 @@ public class Main
         for (Command cmd : commands)
         {
             if (cmd.getName().equals(root))
+            {
                 cmd.call(cmdArgs);
+                return;
+            }
         }
+        
+        System.out.printf("Command \"%s\" doesn't exist!\n", root);
+        System.out.println("Type \"help\" for a list of commands.");
     }
 
     public static List<String> splitCommand(String command)
