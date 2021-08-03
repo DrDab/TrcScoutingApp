@@ -4,16 +4,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import trc492.trcscoutingcodegen.GeneratorTempData;
+import trc492.trcscoutingcodegen.CurSessionHandlerUtil;
 import trc492.trcscoutingcodegen.StrUtil;
 import trc492.trcscoutingcodegen.data.Field;
 import trc492.trcscoutingcodegen.data.FieldType;
 
 public class CmdEditField extends Command
 {
-    private GeneratorTempData util;
+    private CurSessionHandlerUtil util;
 
-    public CmdEditField(GeneratorTempData util)
+    public CmdEditField(CurSessionHandlerUtil util)
     {
         super("field",
             "Creates, edits or removes a field, consisting of a name and type.\n\tTypes include: int, double, bool(ean), str(ing)",

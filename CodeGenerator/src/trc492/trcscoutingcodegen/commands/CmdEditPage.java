@@ -4,14 +4,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import trc492.trcscoutingcodegen.GeneratorTempData;
+import trc492.trcscoutingcodegen.CurSessionHandlerUtil;
 import trc492.trcscoutingcodegen.data.Page;
 
 public class CmdEditPage extends Command
 {
-    private GeneratorTempData util;
+    private CurSessionHandlerUtil util;
 
-    public CmdEditPage(GeneratorTempData util)
+    public CmdEditPage(CurSessionHandlerUtil util)
     {
         super("page", "Adds a page, sets a property of a page or deletes a page.",
             "Usage: page add <tabname> <classname> <fragmentname> <pagenum>",
@@ -65,55 +65,6 @@ public class CmdEditPage extends Command
                 util.writeSessionData();
                 System.out.printf("Added page %s.\n", newPage);
                 return true;
-
-            case "set":
-                if (size < 4)
-                {
-                    System.out.println("Usage: " + super.getSyntax()[1]);
-                    return false;
-                }
-                
-                Page curWorkingPage = util.curWorkingPage;
-                
-                if (curWorkingPage == null)
-                {
-                    System.out.println("No current working page!");
-                }
-
-                String pageFieldToUpdate = args.get(2);
-                switch (pageFieldToUpdate)
-                {
-                    case "tabname":
-                        curWorkingPage.tabName = args.get(3);
-                        return true;
-
-                    case "classname":
-                        curWorkingPage.className = args.get(3);
-                        return true;
-
-                    case "fragname":
-                        curWorkingPage.fragmentName = args.get(3);
-                        return true;
-
-                    case "pagenum":
-                        try
-                        {
-                            curWorkingPage.pageNum = Integer.parseInt(args.get(3));
-                        }
-                        catch (NumberFormatException uwu)
-                        {
-                            System.out.println("pagenum must be an integer.");
-                            return false;
-                        }
-                        return true;
-
-                    default:
-                        System.out.printf("Page field \"%s\" not recognized.\n", pageFieldToUpdate);
-                        System.out.println("Recognized page fields: tabname, classname, fragname, pagenum");
-                        break;
-                }
-
-                break;
 
             case "del":
                 if (size < 3)

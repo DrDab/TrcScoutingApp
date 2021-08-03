@@ -9,7 +9,7 @@ import java.util.Scanner;
 import trc492.trcscoutingcodegen.data.Page;
 import trc492.trcscoutingcodegen.data.SessionData;
 
-public class GeneratorTempData
+public class CurSessionHandlerUtil
 {
     public SessionData sessionData;
     public File sessionFile;
@@ -18,7 +18,7 @@ public class GeneratorTempData
     
     private Scanner sc;
     
-    public GeneratorTempData(Scanner sc)
+    public CurSessionHandlerUtil(Scanner sc)
     {
         this.sc = sc;
     }

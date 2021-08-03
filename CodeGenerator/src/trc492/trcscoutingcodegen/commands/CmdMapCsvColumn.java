@@ -4,14 +4,14 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
-import trc492.trcscoutingcodegen.GeneratorTempData;
+import trc492.trcscoutingcodegen.CurSessionHandlerUtil;
 import trc492.trcscoutingcodegen.data.Field;
 
 public class CmdMapCsvColumn extends Command
 {
-    private GeneratorTempData util;
+    private CurSessionHandlerUtil util;
 
-    public CmdMapCsvColumn(GeneratorTempData util)
+    public CmdMapCsvColumn(CurSessionHandlerUtil util)
     {
         super("csv", "Binds or unbinds a field to a column, or lists CSV bindings.", "Usage: csv map <col#> <field name>",
             "csv unmap <col#>", "csv list");

@@ -3,13 +3,13 @@ package trc492.trcscoutingcodegen.commands;
 import java.io.IOException;
 import java.util.List;
 
-import trc492.trcscoutingcodegen.GeneratorTempData;
+import trc492.trcscoutingcodegen.CurSessionHandlerUtil;
 
 public class CmdCreateFile extends Command
 {
-    private GeneratorTempData util;
+    private CurSessionHandlerUtil util;
     
-    public CmdCreateFile(GeneratorTempData util)
+    public CmdCreateFile(CurSessionHandlerUtil util)
     {
         super("create", "Creates a data file with a given filename.", "Usage: create <filename>");
         this.util = util;

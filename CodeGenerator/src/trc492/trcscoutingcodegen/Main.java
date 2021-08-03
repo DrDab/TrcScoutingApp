@@ -2,6 +2,7 @@ package trc492.trcscoutingcodegen;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -16,6 +17,7 @@ import trc492.trcscoutingcodegen.commands.CmdListFields;
 import trc492.trcscoutingcodegen.commands.CmdListPages;
 import trc492.trcscoutingcodegen.commands.CmdLoadFile;
 import trc492.trcscoutingcodegen.commands.CmdMapCsvColumn;
+import trc492.trcscoutingcodegen.commands.CmdSetWorkingPage;
 import trc492.trcscoutingcodegen.commands.CmdUnloadFile;
 import trc492.trcscoutingcodegen.commands.Command;
 
@@ -29,7 +31,7 @@ public class Main
         System.out.println("(C) 2021 Titan Robotics Club");
 
         Scanner sc = new Scanner(System.in);
-        GeneratorTempData util = new GeneratorTempData(sc);
+        CurSessionHandlerUtil util = new CurSessionHandlerUtil(sc);
 
         loadCommands(util);
 
@@ -54,7 +56,7 @@ public class Main
         }
     }
 
-    public static void loadCommands(GeneratorTempData util)
+    public static void loadCommands(CurSessionHandlerUtil util)
     {
         commands = new ArrayList<>();
         commands.add(new CmdCreateFile(util));
@@ -65,11 +67,13 @@ public class Main
         commands.add(new CmdEditField(util));
         commands.add(new CmdMapCsvColumn(util));
         commands.add(new CmdEditPage(util));
+        commands.add(new CmdSetWorkingPage(util));
         commands.add(new CmdExit());
         commands.add(new CmdHelpMenu(commands));
+        Collections.sort(commands);
     }
 
-    public static void processCommand(List<String> cmdArgs, GeneratorTempData util) throws IOException
+    public static void processCommand(List<String> cmdArgs, CurSessionHandlerUtil util) throws IOException
     {
         if (cmdArgs == null || cmdArgs.size() == 0)
             return;
