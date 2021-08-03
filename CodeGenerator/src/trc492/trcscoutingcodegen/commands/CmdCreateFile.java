@@ -1,10 +1,9 @@
-package trc492.trcscoutingcodegen.commands.io;
+package trc492.trcscoutingcodegen.commands;
 
 import java.io.IOException;
 import java.util.List;
 
 import trc492.trcscoutingcodegen.GeneratorTempData;
-import trc492.trcscoutingcodegen.commands.Command;
 
 public class CmdCreateFile extends Command
 {

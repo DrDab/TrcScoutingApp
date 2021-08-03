@@ -7,16 +7,16 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import trc492.trcscoutingcodegen.commands.CmdCreateFile;
+import trc492.trcscoutingcodegen.commands.CmdEditField;
 import trc492.trcscoutingcodegen.commands.CmdExit;
 import trc492.trcscoutingcodegen.commands.CmdHelpMenu;
+import trc492.trcscoutingcodegen.commands.CmdListFields;
+import trc492.trcscoutingcodegen.commands.CmdListPages;
+import trc492.trcscoutingcodegen.commands.CmdLoadFile;
+import trc492.trcscoutingcodegen.commands.CmdMapCsvColumn;
+import trc492.trcscoutingcodegen.commands.CmdUnloadFile;
 import trc492.trcscoutingcodegen.commands.Command;
-import trc492.trcscoutingcodegen.commands.csvformat.CmdMapCsvColumn;
-import trc492.trcscoutingcodegen.commands.displays.CmdListFields;
-import trc492.trcscoutingcodegen.commands.displays.CmdListPages;
-import trc492.trcscoutingcodegen.commands.fields.CmdEditField;
-import trc492.trcscoutingcodegen.commands.io.CmdCreateFile;
-import trc492.trcscoutingcodegen.commands.io.CmdLoadFile;
-import trc492.trcscoutingcodegen.commands.io.CmdUnloadFile;
 
 public class Main
 {

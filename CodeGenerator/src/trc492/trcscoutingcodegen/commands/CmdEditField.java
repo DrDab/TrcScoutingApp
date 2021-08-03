@@ -1,4 +1,4 @@
-package trc492.trcscoutingcodegen.commands.fields;
+package trc492.trcscoutingcodegen.commands;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -6,7 +6,6 @@ import java.util.List;
 
 import trc492.trcscoutingcodegen.GeneratorTempData;
 import trc492.trcscoutingcodegen.StrUtil;
-import trc492.trcscoutingcodegen.commands.Command;
 import trc492.trcscoutingcodegen.data.Field;
 import trc492.trcscoutingcodegen.data.FieldType;
 
@@ -16,10 +15,10 @@ public class CmdEditField extends Command
 
     public CmdEditField(GeneratorTempData util)
     {
-        super("field",
+        super("fields",
             "Creates, edits or removes a field, consisting of a name and type.\n\tTypes include: int, double, bool(ean), str(ing)",
-            "Usage: field add <name> <type>", "field rename <oldname> <newname>", "field settype <name> <type>",
-            "field del <name>");
+            "Usage: fields add <name> <type>", "fields rename <oldname> <newname>", "fields settype <name> <type>",
+            "fields del <name>");
         this.util = util;
     }
 

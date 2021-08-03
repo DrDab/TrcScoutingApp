@@ -1,11 +1,10 @@
-package trc492.trcscoutingcodegen.commands.csvformat;
+package trc492.trcscoutingcodegen.commands;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
 import trc492.trcscoutingcodegen.GeneratorTempData;
-import trc492.trcscoutingcodegen.commands.Command;
 import trc492.trcscoutingcodegen.data.Field;
 
 public class CmdMapCsvColumn extends Command
