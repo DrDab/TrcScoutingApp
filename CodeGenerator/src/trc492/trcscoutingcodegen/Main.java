@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import trc492.trcscoutingcodegen.commands.CmdExit;
 import trc492.trcscoutingcodegen.commands.CmdHelpMenu;
 import trc492.trcscoutingcodegen.commands.Command;
+import trc492.trcscoutingcodegen.commands.csvformat.CmdMapCsvColumn;
 import trc492.trcscoutingcodegen.commands.displays.CmdListFields;
 import trc492.trcscoutingcodegen.commands.displays.CmdListPages;
 import trc492.trcscoutingcodegen.commands.fields.CmdEditField;
@@ -61,6 +62,7 @@ public class Main
         commands.add(new CmdListFields(util));
         commands.add(new CmdListPages(util));
         commands.add(new CmdEditField(util));
+        commands.add(new CmdMapCsvColumn(util));
         commands.add(new CmdExit());
         commands.add(new CmdHelpMenu(commands));
     }

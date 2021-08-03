@@ -18,7 +18,7 @@ public class CmdEditField extends Command
     {
         super("field",
             "Creates, edits or removes a field, consisting of a name and type.\n\tTypes include: int, double, bool(ean), str(ing)",
-            "Usage: field new <name> <type>", "field rename <oldname> <newname>", "field settype <name> <type>",
+            "Usage: field add <name> <type>", "field rename <oldname> <newname>", "field settype <name> <type>",
             "field del <name>");
         this.util = util;
     }
@@ -43,7 +43,7 @@ public class CmdEditField extends Command
 
         switch (mode)
         {
-            case "new":
+            case "add":
                 if (size < 4)
                 {
                     System.out.println(super.getSyntax()[0]);
@@ -97,6 +97,7 @@ public class CmdEditField extends Command
                     if (field.fieldName.equals(oldName))
                     {
                         field.fieldName = newName;
+                        util.writeSessionData();
                         System.out.printf("Renamed field %s to %s\n", oldName, newName);
                         return true;
                     }
@@ -127,6 +128,7 @@ public class CmdEditField extends Command
                     if (field.fieldName.equals(setName))
                     {
                         field.fieldType = newType;
+                        util.writeSessionData();
                         System.out.printf("Set type of field %s to %s\n", setName, newType);
                         return true;
                     }
@@ -149,6 +151,7 @@ public class CmdEditField extends Command
                     if (util.sessionData.fields.get(i).fieldName.equals(delName))
                     {
                         util.sessionData.fields.remove(i);
+                        util.writeSessionData();
                         System.out.printf("Removed field %s\n", delName);
                         return true;
                     }

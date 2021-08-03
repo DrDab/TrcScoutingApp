@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
@@ -20,16 +22,20 @@ public class SessionData implements Serializable
 
     @SerializedName("pages")
     public List<Page> pages;
+    
+    @SerializedName("csvBindings")
+    public SortedMap<Integer, Field> csvBindings;
 
-    public SessionData(List<Field> fields, List<Page> pages)
+    public SessionData(List<Field> fields, List<Page> pages, SortedMap<Integer, Field> csvBindings)
     {
         this.fields = fields;
         this.pages = pages;
+        this.csvBindings = csvBindings;
     }
     
     public SessionData()
     {
-        this(new ArrayList<>(), new ArrayList<>());
+        this(new ArrayList<>(), new ArrayList<>(), new TreeMap<>());
     }
 
     public SessionData(File file) throws FileNotFoundException
@@ -42,6 +48,7 @@ public class SessionData implements Serializable
         SessionData data = (SessionData) new Gson().fromJson(jsonData, SessionData.class);
         this.fields = data.fields;
         this.pages = data.pages;
+        this.csvBindings = data.csvBindings;
     }
     
     public SessionData(String jsonStr)
@@ -49,6 +56,7 @@ public class SessionData implements Serializable
         SessionData data = (SessionData) new Gson().fromJson(jsonStr, SessionData.class);
         this.fields = data.fields;
         this.pages = data.pages;
+        this.csvBindings = data.csvBindings;
     }
     
     public String toJSONString()
