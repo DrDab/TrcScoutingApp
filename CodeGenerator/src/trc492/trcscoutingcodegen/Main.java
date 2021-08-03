@@ -12,6 +12,7 @@ import trc492.trcscoutingcodegen.commands.CmdHelpMenu;
 import trc492.trcscoutingcodegen.commands.Command;
 import trc492.trcscoutingcodegen.commands.displays.CmdListFields;
 import trc492.trcscoutingcodegen.commands.displays.CmdListPages;
+import trc492.trcscoutingcodegen.commands.fields.CmdEditField;
 import trc492.trcscoutingcodegen.commands.io.CmdCreateFile;
 import trc492.trcscoutingcodegen.commands.io.CmdLoadFile;
 import trc492.trcscoutingcodegen.commands.io.CmdUnloadFile;
@@ -26,7 +27,7 @@ public class Main
         System.out.println("(C) 2021 Titan Robotics Club");
 
         Scanner sc = new Scanner(System.in);
-        GeneratorUtil util = new GeneratorUtil(sc);
+        GeneratorTempData util = new GeneratorTempData(sc);
 
         loadCommands(util);
 
@@ -51,7 +52,7 @@ public class Main
         }
     }
 
-    public static void loadCommands(GeneratorUtil util)
+    public static void loadCommands(GeneratorTempData util)
     {
         commands = new ArrayList<>();
         commands.add(new CmdCreateFile(util));
@@ -59,11 +60,12 @@ public class Main
         commands.add(new CmdUnloadFile(util));
         commands.add(new CmdListFields(util));
         commands.add(new CmdListPages(util));
+        commands.add(new CmdEditField(util));
         commands.add(new CmdExit());
         commands.add(new CmdHelpMenu(commands));
     }
 
-    public static void processCommand(List<String> cmdArgs, GeneratorUtil util) throws IOException
+    public static void processCommand(List<String> cmdArgs, GeneratorTempData util) throws IOException
     {
         if (cmdArgs == null || cmdArgs.size() == 0)
             return;

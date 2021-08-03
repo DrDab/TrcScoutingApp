@@ -2,6 +2,7 @@ package trc492.trcscoutingcodegen.data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
@@ -35,7 +36,7 @@ public class Field implements Serializable
     public String toString()
     {
         return String.format("Field[fieldType=%s, fieldName=%s, fieldFlags=%s]", fieldType, fieldName,
-            fieldFlags == null ? "NULL" : fieldFlags.toArray().toString());
+            fieldFlags == null ? "NULL" : Arrays.toString(fieldFlags.toArray()));
     }
 
 }

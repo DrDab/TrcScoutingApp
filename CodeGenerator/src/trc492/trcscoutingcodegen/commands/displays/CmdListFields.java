@@ -3,17 +3,17 @@ package trc492.trcscoutingcodegen.commands.displays;
 import java.io.IOException;
 import java.util.List;
 
-import trc492.trcscoutingcodegen.GeneratorUtil;
+import trc492.trcscoutingcodegen.GeneratorTempData;
 import trc492.trcscoutingcodegen.commands.Command;
 import trc492.trcscoutingcodegen.data.Field;
 
 public class CmdListFields extends Command
 {
-    private GeneratorUtil util;
+    private GeneratorTempData util;
     
-    public CmdListFields(GeneratorUtil util)
+    public CmdListFields(GeneratorTempData util)
     {
-        super("fields", "Lists the current fields in the editor session.", "Usage: fields");
+        super("lsfields", "Lists the current fields in the editor session.", "Usage: fields");
         this.util = util;
     }
 

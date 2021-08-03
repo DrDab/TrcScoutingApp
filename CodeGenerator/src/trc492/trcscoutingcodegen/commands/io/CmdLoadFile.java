@@ -3,14 +3,14 @@ package trc492.trcscoutingcodegen.commands.io;
 import java.io.IOException;
 import java.util.List;
 
-import trc492.trcscoutingcodegen.GeneratorUtil;
+import trc492.trcscoutingcodegen.GeneratorTempData;
 import trc492.trcscoutingcodegen.commands.Command;
 
 public class CmdLoadFile extends Command
 {
-    private GeneratorUtil util;
+    private GeneratorTempData util;
 
-    public CmdLoadFile(GeneratorUtil util)
+    public CmdLoadFile(GeneratorTempData util)
     {
         super("load", "Loads a data file given the filename.", "Usage: load <filename>");
         this.util = util;

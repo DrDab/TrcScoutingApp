@@ -3,14 +3,14 @@ package trc492.trcscoutingcodegen.commands.io;
 import java.io.IOException;
 import java.util.List;
 
-import trc492.trcscoutingcodegen.GeneratorUtil;
+import trc492.trcscoutingcodegen.GeneratorTempData;
 import trc492.trcscoutingcodegen.commands.Command;
 
 public class CmdUnloadFile extends Command
 {
-    private GeneratorUtil util;
+    private GeneratorTempData util;
 
-    public CmdUnloadFile(GeneratorUtil util)
+    public CmdUnloadFile(GeneratorTempData util)
     {
         super("unload", "Unloads the currently loaded session file, if any.", "Usage: unload");
         this.util = util;

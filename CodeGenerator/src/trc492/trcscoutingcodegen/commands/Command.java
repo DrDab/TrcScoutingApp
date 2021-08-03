@@ -35,7 +35,7 @@ public abstract class Command
     {
         for (String line : syntax)
         {
-            System.out.println(line);
+            System.out.println("\t" + line);
         }
     }
     

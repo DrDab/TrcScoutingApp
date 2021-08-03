@@ -8,14 +8,14 @@ import java.util.Scanner;
 
 import trc492.trcscoutingcodegen.data.SessionData;
 
-public class GeneratorUtil
+public class GeneratorTempData
 {
     public SessionData sessionData;
     public File sessionFile;
     
     private Scanner sc;
     
-    public GeneratorUtil(Scanner sc)
+    public GeneratorTempData(Scanner sc)
     {
         this.sc = sc;
     }

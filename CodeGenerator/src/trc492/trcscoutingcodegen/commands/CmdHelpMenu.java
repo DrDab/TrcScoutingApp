@@ -43,7 +43,7 @@ public class CmdHelpMenu extends Command
                     continue;
                 }
             }
-            System.out.printf("%s - %s\n\t", command.getName(), command.getDescription());
+            System.out.printf("%s - %s\n", command.getName(), command.getDescription());
             command.printSyntax();
         }
         

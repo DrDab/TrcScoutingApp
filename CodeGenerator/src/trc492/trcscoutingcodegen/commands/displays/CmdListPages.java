@@ -3,17 +3,17 @@ package trc492.trcscoutingcodegen.commands.displays;
 import java.io.IOException;
 import java.util.List;
 
-import trc492.trcscoutingcodegen.GeneratorUtil;
+import trc492.trcscoutingcodegen.GeneratorTempData;
 import trc492.trcscoutingcodegen.commands.Command;
 import trc492.trcscoutingcodegen.data.Page;
 
 public class CmdListPages extends Command
 {
-    private GeneratorUtil util;
+    private GeneratorTempData util;
     
-    public CmdListPages(GeneratorUtil util)
+    public CmdListPages(GeneratorTempData util)
     {
-        super("pages", "Lists the current pages in the editor session.", "Usage: pages");
+        super("lspages", "Lists the current pages in the editor session.", "Usage: pages");
         this.util = util;
     }
 
