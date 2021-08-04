@@ -47,7 +47,7 @@ public class Main
                 List<String> cmdArgs = splitCommand(command);
                 try
                 {
-                    processCommand(cmdArgs, util);
+                    processCommand(cmdArgs);
                 }
                 catch (Exception e)
                 {
@@ -76,7 +76,7 @@ public class Main
         System.out.printf("\nLoaded %d command modules.\n\n", commands.size());
     }
 
-    public static void processCommand(List<String> cmdArgs, CurSessionHandlerUtil util) throws IOException
+    public static void processCommand(List<String> cmdArgs) throws IOException
     {
         if (cmdArgs == null || cmdArgs.size() == 0)
             return;
