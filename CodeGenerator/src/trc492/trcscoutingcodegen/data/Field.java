@@ -38,5 +38,15 @@ public class Field implements Serializable
         return String.format("Field[fieldType=%s, fieldName=%s, fieldFlags=%s]", fieldType, fieldName,
             fieldFlags == null ? "NULL" : Arrays.toString(fieldFlags.toArray()));
     }
+    
+    public boolean supportedByElementType(ElementType type)
+    {
+        for (FieldType check : type.eligibleFields)
+        {
+            if (fieldType == check)
+                return true;
+        }
+        return false;
+    }
 
 }

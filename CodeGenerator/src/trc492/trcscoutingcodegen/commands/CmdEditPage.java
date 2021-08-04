@@ -14,8 +14,7 @@ public class CmdEditPage extends Command
     public CmdEditPage(CurSessionHandlerUtil util)
     {
         super("page", "Adds a page, sets a property of a page or deletes a page.",
-            "Usage: page add <tabname> <classname> <fragmentname> <pagenum>",
-            "page set {tabname | classname | fragname | pagenum} <name | pagenum>", "page del <classname>");
+            "Usage: page add <tabname> <classname> <fragmentname> <pagenum>", "page del <classname>");
         this.util = util;
     }
 
@@ -69,12 +68,12 @@ public class CmdEditPage extends Command
             case "del":
                 if (size < 3)
                 {
-                    System.out.println("Usage: " + super.getSyntax()[2]);
+                    System.out.println("Usage: " + super.getSyntax()[1]);
                     return false;
                 }
-                
+
                 String deletionClassName = args.get(2);
-                
+
                 for (Page page : util.sessionData.pages)
                 {
                     if (page.className.equals(deletionClassName))
@@ -84,7 +83,7 @@ public class CmdEditPage extends Command
                         return true;
                     }
                 }
-                
+
                 System.out.printf("Page %s doesn't exist!\n", deletionClassName);
                 break;
 

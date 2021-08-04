@@ -79,22 +79,27 @@ public class CmdSetWorkingPage extends Command
                     case "tabname":
                         curWorkingPage.tabName = args.get(3);
                         util.writeSessionData();
+                        System.out.printf("Set attribute %s of working page to %s.\n", pageFieldToUpdate, args.get(3));
                         return true;
 
                     case "classname":
                         curWorkingPage.className = args.get(3);
                         util.writeSessionData();
+                        System.out.printf("Set attribute %s of working page to %s.\n", pageFieldToUpdate, args.get(3));
                         return true;
 
                     case "fragname":
                         curWorkingPage.fragmentName = args.get(3);
                         util.writeSessionData();
+                        System.out.printf("Set attribute %s of working page to %s.\n", pageFieldToUpdate, args.get(3));
                         return true;
 
                     case "pagenum":
                         try
                         {
                             curWorkingPage.pageNum = Integer.parseInt(args.get(3));
+                            util.writeSessionData();
+                            System.out.printf("Set attribute %s of working page to %s.\n", pageFieldToUpdate, args.get(3));
                         }
                         catch (NumberFormatException uwu)
                         {
@@ -114,6 +119,10 @@ public class CmdSetWorkingPage extends Command
                 util.curWorkingPage = null;
                 System.out.println("Unset current working page.");
                 return true;
+                
+            default:
+                System.out.printf("Mode not recognized: %s\n", mode);
+                break;
         }
         
         return false;

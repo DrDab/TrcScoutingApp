@@ -16,6 +16,7 @@ import trc492.trcscoutingcodegen.commands.CmdHelpMenu;
 import trc492.trcscoutingcodegen.commands.CmdListFields;
 import trc492.trcscoutingcodegen.commands.CmdListPages;
 import trc492.trcscoutingcodegen.commands.CmdLoadFile;
+import trc492.trcscoutingcodegen.commands.CmdManageElements;
 import trc492.trcscoutingcodegen.commands.CmdMapCsvColumn;
 import trc492.trcscoutingcodegen.commands.CmdSetWorkingPage;
 import trc492.trcscoutingcodegen.commands.CmdUnloadFile;
@@ -68,9 +69,11 @@ public class Main
         commands.add(new CmdMapCsvColumn(util));
         commands.add(new CmdEditPage(util));
         commands.add(new CmdSetWorkingPage(util));
+        commands.add(new CmdManageElements(util));
         commands.add(new CmdExit());
         commands.add(new CmdHelpMenu(commands));
         Collections.sort(commands);
+        System.out.printf("\nLoaded %d command modules.\n\n", commands.size());
     }
 
     public static void processCommand(List<String> cmdArgs, CurSessionHandlerUtil util) throws IOException

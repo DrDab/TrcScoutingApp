@@ -6,7 +6,7 @@ public enum ElementType
     CheckBox(FieldType.Boolean),
     NumberPicker(FieldType.Integer),
     Spinner(FieldType.String),
-    RadioButton(FieldType.String),
+    // RadioButton(FieldType.String), TODO to be added
     Switch(FieldType.Boolean);
     
     public FieldType[] eligibleFields;
