@@ -7,6 +7,7 @@ import java.util.List;
 import trc492.trcscoutingcodegen.CurSessionHandlerUtil;
 import trc492.trcscoutingcodegen.StrUtil;
 import trc492.trcscoutingcodegen.data.Field;
+import trc492.trcscoutingcodegen.data.FieldFlag;
 import trc492.trcscoutingcodegen.data.FieldType;
 
 public class CmdEditField extends Command
@@ -18,7 +19,7 @@ public class CmdEditField extends Command
         super("field",
             "Creates, edits or removes a field, consisting of a name and type.\n\tTypes include: int, double, bool(ean), str(ing)",
             "Usage: field add <name> <type>", "field rename <oldname> <newname>", "field settype <name> <type>",
-            "field del <name>");
+            "field del <name>", "field flag {add|del} <name> <flag>", "field flag list <name>");
         this.util = util;
     }
 
@@ -136,6 +137,16 @@ public class CmdEditField extends Command
                 System.out.printf("Field %s doesn't exist\n", setName);
                 return false;
 
+            case "flag":
+                if (size < 3)
+                {
+                    System.out.println("Usage: " + super.getSyntax()[4]);
+                    System.out.println(super.getSyntax()[5]);
+                    return false;
+                }
+
+                return handleFieldFlagOp(args, size);
+
             case "del":
                 if (size < 3)
                 {
@@ -165,6 +176,145 @@ public class CmdEditField extends Command
         }
 
         // TODO Auto-generated method stub
+        return false;
+    }
+
+    private boolean handleFieldFlagOp(List<String> args, int size) throws IOException
+    {
+        String flagOp = args.get(2);
+
+        switch (flagOp)
+        {
+            case "list":
+                if (size < 4)
+                {
+                    System.out.println("Usage: " + super.getSyntax()[5]);
+                    return false;
+                }
+
+                String fieldName = args.get(3);
+                Field tgtField = null;
+
+                for (Field field : util.sessionData.fields)
+                {
+                    if (field.fieldName.equals(fieldName))
+                    {
+                        tgtField = field;
+                        break;
+                    }
+                }
+
+                if (tgtField == null)
+                {
+                    System.out.printf("Field %s doesn't exist\n", fieldName);
+                    return false;
+                }
+                
+                System.out.printf("Field %s - %d flags:\n", fieldName, tgtField.fieldFlags.size());
+                for (FieldFlag flag : tgtField.fieldFlags)
+                {
+                    System.out.println(flag);
+                }
+                System.out.println("---");
+                return true;
+
+            case "add":
+                if (size < 5)
+                {
+                    System.out.println("Usage: " + super.getSyntax()[4]);
+                    return false;
+                }
+
+                fieldName = args.get(3);
+                String flagStr = args.get(4);
+                FieldFlag flag = StrUtil.fieldFlagFromStr(flagStr);
+
+                if (flag == null)
+                {
+                    System.out.println("flag must be one of the following: must_be_filled, match_num, alliance_type");
+                    return false;
+                }
+
+                Field editField = null;
+
+                for (Field field : util.sessionData.fields)
+                {
+                    if (field.fieldName.equals(fieldName))
+                    {
+                        editField = field;
+                        break;
+                    }
+                }
+
+                if (editField == null)
+                {
+                    System.out.printf("Field %s doesn't exist\n", fieldName);
+                    return false;
+                }
+
+                for (FieldFlag check : editField.fieldFlags)
+                {
+                    if (check == flag)
+                    {
+                        System.out.printf("Field %s already contains flag %s!\n", fieldName, flagStr);
+                        return false;
+                    }
+                }
+
+                editField.fieldFlags.add(flag);
+                util.writeSessionData();
+                System.out.printf("Added flag %s to field %s.\n", flagStr, fieldName);
+                return true;
+
+            case "del":
+                if (size < 5)
+                {
+                    System.out.println("Usage: " + super.getSyntax()[4]);
+                    return false;
+                }
+
+                fieldName = args.get(3);
+                flagStr = args.get(4);
+                flag = StrUtil.fieldFlagFromStr(flagStr);
+
+                if (flag == null)
+                {
+                    System.out.println("flag must be one of the following: must_be_filled, match_num, alliance_type");
+                    return false;
+                }
+
+                editField = null;
+
+                for (Field field : util.sessionData.fields)
+                {
+                    if (field.fieldName.equals(fieldName))
+                    {
+                        editField = field;
+                        break;
+                    }
+                }
+
+                if (editField == null)
+                {
+                    System.out.printf("Field %s doesn't exist\n", fieldName);
+                    return false;
+                }
+
+                for (FieldFlag check : editField.fieldFlags)
+                {
+                    if (check == flag)
+                    {
+                        editField.fieldFlags.remove(check);
+                        util.writeSessionData();
+                        System.out.printf("Removed flag %s from field %s.\n", flagStr, fieldName);
+                        return true;
+                    }
+                }
+
+                System.out.printf("Field %s does not contain flag %s.\n", fieldName, flagStr);
+                break;
+        }
+
         return false;
     }
 
