@@ -25,17 +25,21 @@ public class SessionData implements Serializable
     
     @SerializedName("csvBindings")
     public SortedMap<Integer, Field> csvBindings;
+    
+    @SerializedName("appInfoSettings")
+    public AppInfoSettings appInfoSettings;
 
-    public SessionData(List<Field> fields, List<Page> pages, SortedMap<Integer, Field> csvBindings)
+    public SessionData(List<Field> fields, List<Page> pages, SortedMap<Integer, Field> csvBindings, AppInfoSettings appInfoSettings)
     {
         this.fields = fields;
         this.pages = pages;
         this.csvBindings = csvBindings;
+        this.appInfoSettings = appInfoSettings;
     }
     
     public SessionData()
     {
-        this(new ArrayList<>(), new ArrayList<>(), new TreeMap<>());
+        this(new ArrayList<>(), new ArrayList<>(), new TreeMap<>(), new AppInfoSettings());
     }
 
     public SessionData(File file) throws FileNotFoundException
@@ -49,6 +53,7 @@ public class SessionData implements Serializable
         this.fields = data.fields;
         this.pages = data.pages;
         this.csvBindings = data.csvBindings;
+        this.appInfoSettings = data.appInfoSettings;
     }
     
     public SessionData(String jsonStr)
@@ -57,6 +62,7 @@ public class SessionData implements Serializable
         this.fields = data.fields;
         this.pages = data.pages;
         this.csvBindings = data.csvBindings;
+        this.appInfoSettings = data.appInfoSettings;
     }
     
     public String toJSONString()

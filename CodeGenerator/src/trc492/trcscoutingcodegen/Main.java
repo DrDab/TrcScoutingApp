@@ -9,6 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import trc492.trcscoutingcodegen.commands.CmdCreateFile;
+import trc492.trcscoutingcodegen.commands.CmdEditAppInfo;
 import trc492.trcscoutingcodegen.commands.CmdEditField;
 import trc492.trcscoutingcodegen.commands.CmdEditPage;
 import trc492.trcscoutingcodegen.commands.CmdExit;
@@ -70,6 +71,7 @@ public class Main
         commands.add(new CmdEditPage(util));
         commands.add(new CmdSetWorkingPage(util));
         commands.add(new CmdManageElements(util));
+        commands.add(new CmdEditAppInfo(util));
         commands.add(new CmdExit());
         commands.add(new CmdHelpMenu(commands));
         Collections.sort(commands);
@@ -82,7 +84,7 @@ public class Main
             return;
 
         String root = cmdArgs.get(0);
-        
+
         for (Command cmd : commands)
         {
             if (cmd.getName().equals(root))
@@ -91,7 +93,7 @@ public class Main
                 return;
             }
         }
-        
+
         System.out.printf("Command \"%s\" doesn't exist!\n", root);
         System.out.println("Type \"help\" for a list of commands.");
     }

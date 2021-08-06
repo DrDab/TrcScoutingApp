@@ -44,11 +44,13 @@ public class CmdHelpMenu extends Command
                 }
             }
             System.out.printf("%s - %s\n", command.getName(), command.getDescription());
-            command.printSyntax();
+            if (searchCmd != null)
+                command.printSyntax();
         }
-        
+
         if (searchCmd != null && !searchSuccess)
-            System.out.printf("\"%s\" is not a valid command. Please type \"help\" for a list of commands.\n", searchCmd);
+            System.out.printf("\"%s\" is not a valid command. Please type \"help\" for a list of commands.\n",
+                searchCmd);
 
         return searchCmd == null ? true : searchSuccess;
     }
