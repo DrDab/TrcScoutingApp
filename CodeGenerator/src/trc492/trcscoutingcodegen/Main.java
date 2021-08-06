@@ -8,11 +8,13 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import trc492.trcscoutingcodegen.commands.CmdClearTerm;
 import trc492.trcscoutingcodegen.commands.CmdCreateFile;
 import trc492.trcscoutingcodegen.commands.CmdEditAppInfo;
 import trc492.trcscoutingcodegen.commands.CmdEditField;
 import trc492.trcscoutingcodegen.commands.CmdEditPage;
 import trc492.trcscoutingcodegen.commands.CmdExit;
+import trc492.trcscoutingcodegen.commands.CmdGenerateCode;
 import trc492.trcscoutingcodegen.commands.CmdHelpMenu;
 import trc492.trcscoutingcodegen.commands.CmdListFields;
 import trc492.trcscoutingcodegen.commands.CmdListPages;
@@ -72,8 +74,10 @@ public class Main
         commands.add(new CmdSetWorkingPage(util));
         commands.add(new CmdManageElements(util));
         commands.add(new CmdEditAppInfo(util));
-        commands.add(new CmdExit());
+        commands.add(new CmdGenerateCode(util));
         commands.add(new CmdHelpMenu(commands));
+        commands.add(new CmdClearTerm());
+        commands.add(new CmdExit());
         Collections.sort(commands);
         System.out.printf("\nLoaded %d command modules.\n\n", commands.size());
     }

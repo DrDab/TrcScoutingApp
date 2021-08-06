@@ -3,19 +3,32 @@ package trc492.trcscoutingcodegen.commands;
 import java.io.IOException;
 import java.util.List;
 
+import trc492.trcscoutingcodegen.CurSessionHandlerUtil;
+import trc492.trcscoutingcodegen.classgen.AppInfoClassGen;
+
 public class CmdGenerateCode extends Command
 {
+    private CurSessionHandlerUtil util;
 
-    public CmdGenerateCode(String name, String description, String... syntax)
+    public CmdGenerateCode(CurSessionHandlerUtil util)
     {
-        super(name, description, syntax);
-        // TODO Auto-generated constructor stub
+        super("generatecode", "Generates code from variables", "OwO");
+        this.util = util;
     }
 
     @Override
     public boolean call(List<String> args) throws IOException
     {
-        // TODO Auto-generated method stub
+        if (!util.sessionLoaded())
+        {
+            System.out.println("No session loaded!");
+            return false;
+        }
+        
+        // generate AppInfo
+        AppInfoClassGen a = new AppInfoClassGen(util.sessionData);
+        System.out.println(a.generateCode());
+
         return false;
     }
 

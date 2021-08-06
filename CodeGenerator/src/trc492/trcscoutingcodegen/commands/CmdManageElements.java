@@ -49,6 +49,7 @@ public class CmdManageElements extends Command
                 if (curWorkingPage == null)
                 {
                     System.out.println("No current working page!");
+                    return false;
                 }
 
                 System.out.printf("%d elements in working page:\n", curWorkingPage.elements.size());
@@ -73,6 +74,7 @@ public class CmdManageElements extends Command
                 if (curWorkingPage == null)
                 {
                     System.out.println("No current working page!");
+                    return false;
                 }
 
                 String id = args.get(2);
@@ -131,6 +133,7 @@ public class CmdManageElements extends Command
                 if (curWorkingPage == null)
                 {
                     System.out.println("No current working page!");
+                    return false;
                 }
 
                 id = args.get(2);
