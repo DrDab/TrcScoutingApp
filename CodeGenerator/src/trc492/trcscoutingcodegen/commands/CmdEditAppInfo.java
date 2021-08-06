@@ -40,7 +40,7 @@ public class CmdEditAppInfo extends Command
         switch (mode)
         {
             case "list":
-                System.out.printf("csv_header: %s\n, year_number:%s\n",
+                System.out.printf("csv_header: \"%s\"\nyear_number: %s\n",
                     info.csvHeader == null ? "NULL" : info.csvHeader,
                     info.yearNumber == null ? "NULL" : info.yearNumber);
                 return true;
@@ -48,7 +48,7 @@ public class CmdEditAppInfo extends Command
             case "set":
                 if (size < 4)
                 {
-                    System.out.println("Usage: " + super.getSyntax()[2]);
+                    System.out.println("Usage: " + super.getSyntax()[1]);
                     return false;
                 }
 
@@ -60,6 +60,7 @@ public class CmdEditAppInfo extends Command
                     case "csv_header":
                         info.csvHeader = valueStr;
                         util.writeSessionData();
+                        System.out.printf("Assigned AppInfo csv_header to %s.\n", valueStr);
                         return true;
 
                     case "year_number":
@@ -67,6 +68,7 @@ public class CmdEditAppInfo extends Command
                         {
                             info.yearNumber = Integer.parseInt(valueStr);
                             util.writeSessionData();
+                            System.out.printf("Assigned AppInfo year_number to %s.\n", valueStr);
                             return true;
                         }
                         catch (NumberFormatException uwu)
