@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.google.gson.annotations.SerializedName;
 
 public class Page implements Serializable
@@ -45,6 +48,25 @@ public class Page implements Serializable
     {
         return String.format("Page[pageNum=%d, tabName=%s, className=%s, fragmentName=%s, elements=%s]", pageNum, tabName,
             className, fragmentName, elements == null ? "NULL" : Arrays.toString(elements.toArray()));
+    }
+    
+    public JSONObject toJSONObject()
+    {
+        JSONObject head = new JSONObject();
+        head.put("pageNum", pageNum);
+        head.put("tabName", tabName);
+        head.put("className", className);
+        head.put("fragmentName", fragmentName);
+        
+        JSONArray elementsArr = new JSONArray();
+        for (Element element : elements)
+        {
+            elementsArr.put(element.toJSONObject());
+        }
+        
+        head.put("elements", elementsArr);
+        
+        return head;
     }
 
 }
