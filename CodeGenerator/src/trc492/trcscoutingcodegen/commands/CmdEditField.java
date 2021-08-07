@@ -6,9 +6,11 @@ import java.util.List;
 
 import trc492.trcscoutingcodegen.CurSessionHandlerUtil;
 import trc492.trcscoutingcodegen.StrUtil;
+import trc492.trcscoutingcodegen.data.Element;
 import trc492.trcscoutingcodegen.data.Field;
 import trc492.trcscoutingcodegen.data.FieldFlag;
 import trc492.trcscoutingcodegen.data.FieldType;
+import trc492.trcscoutingcodegen.data.Page;
 
 public class CmdEditField extends Command
 {
@@ -158,11 +160,34 @@ public class CmdEditField extends Command
 
                 for (int i = 0; i < util.sessionData.fields.size(); i++)
                 {
-                    if (util.sessionData.fields.get(i).fieldName.equals(delName))
+                    Field field = util.sessionData.fields.get(i);
+                    if (field.fieldName.equals(delName))
                     {
                         util.sessionData.fields.remove(i);
+                        
+                        // TODO remove elements mapped to field as well
+                        int cnt = 0;
+                        for (Page page : util.sessionData.pages)
+                        {
+                            List<Element> toRemove = new ArrayList<>();
+                            for (Element element : page.elements)
+                            {
+                                if (element.field == field)
+                                {
+                                    toRemove.add(element);
+                                }
+                            }
+                            
+                            for (Element element : toRemove)
+                            {
+                                page.elements.remove(element);
+                                cnt++;
+                            }
+                        }
+                        
                         util.writeSessionData();
-                        System.out.printf("Removed field %s\n", delName);
+                        System.out.printf("Removed field %s and %d mapped elements.\n", delName, cnt);
+                        
                         return true;
                     }
                 }
