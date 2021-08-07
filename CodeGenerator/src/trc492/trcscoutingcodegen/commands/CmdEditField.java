@@ -164,8 +164,7 @@ public class CmdEditField extends Command
                     if (field.fieldName.equals(delName))
                     {
                         util.sessionData.fields.remove(i);
-                        
-                        // TODO remove elements mapped to field as well
+
                         int cnt = 0;
                         for (Page page : util.sessionData.pages)
                         {
@@ -177,17 +176,33 @@ public class CmdEditField extends Command
                                     toRemove.add(element);
                                 }
                             }
-                            
+
                             for (Element element : toRemove)
                             {
                                 page.elements.remove(element);
                                 cnt++;
                             }
                         }
-                        
+
+                        List<Integer> csvColToRemove = new ArrayList<>();
+                        for (Integer csvCol : util.sessionData.csvBindings.keySet())
+                        {
+                            Field check = util.sessionData.csvBindings.get(csvCol);
+                            if (check == field)
+                            {
+                                csvColToRemove.add(csvCol);
+                            }
+                        }
+
+                        for (Integer csvCol : csvColToRemove)
+                        {
+                            util.sessionData.csvBindings.remove(csvCol);
+                        }
+
                         util.writeSessionData();
-                        System.out.printf("Removed field %s and %d mapped elements.\n", delName, cnt);
-                        
+                        System.out.printf("Removed field %s, %d mapped elements and %d CSV columns.\n", delName, cnt,
+                            csvColToRemove.size());
+
                         return true;
                     }
                 }
@@ -234,7 +249,7 @@ public class CmdEditField extends Command
                     System.out.printf("Field %s doesn't exist\n", fieldName);
                     return false;
                 }
-                
+
                 System.out.printf("Field %s - %d flags:\n", fieldName, tgtField.fieldFlags.size());
                 for (FieldFlag flag : tgtField.fieldFlags)
                 {

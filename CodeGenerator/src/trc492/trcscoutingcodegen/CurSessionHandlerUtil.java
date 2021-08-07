@@ -50,9 +50,20 @@ public class CurSessionHandlerUtil
     public boolean writeSessionData() throws FileNotFoundException
     {
         if (sessionFile == null || sessionData == null)
+        {
+            System.out.println("WARNING: Current session data is NULL. Changes have not been written.");
             return false;
+        }
+            
+        String jsonStr = sessionData.toJSONString();
+        if (jsonStr == null)
+        {
+            System.out.println("WARNING: Current session data is corrupt. Changes have not been written.");
+            return false;
+        }
+        
         PrintStream ps = new PrintStream(sessionFile);
-        ps.println(sessionData.toJSONString());
+        ps.println(jsonStr);
         ps.close();
         return true;
     }
