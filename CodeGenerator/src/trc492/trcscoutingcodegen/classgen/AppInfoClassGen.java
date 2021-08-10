@@ -19,28 +19,7 @@ public class AppInfoClassGen
     
     public String generateCode()
     {
-        String codeTemp = "package trc3543.trcscoutingapp.data;\r\n"
-            + "\r\n"
-            + "import trc3543.trcscoutingapp.fragments.*;\r\n"
-            + "\r\n"
-            + "public class AppInfo\r\n"
-            + "{\r\n"
-            + "    //\r\n"
-            + "    // General app settings.\r\n"
-            + "    //\r\n"
-            + "    public static final String DATA_FOLDER_NAME = \"TrcScoutingApp\";\r\n"
-            + "    public static final String SETTINGS_FILENAME = \"app_settings.json\";\r\n"
-            + "    public static final String CSV_HEADER = \"%s\";\r\n"
-            + "    public static final String VERSION_NUMBER = \"1.4.0-frc\";\r\n"
-            + "    public static final int YEAR_NUMBER = %d;\r\n"
-            + "\r\n"
-            + "    //\r\n"
-            + "    // SetMatchInfo and child Fragment settings.\r\n"
-            + "    //\r\n"
-            + "    public static final int NUM_PAGES = %d;\r\n"
-            + "    public static final String[] TAB_NAMES = %s;\r\n"
-            + "    public static final Class<?>[] FRAGMENT_CLASSES = %s;\r\n"
-            + "}";
+        String codeTemp = CodeTemplates.APPINFO_CLASS_TEMPLATE;
         
         AppInfoSettings settings = sessionData.appInfoSettings;
         List<Page> pages = sessionData.pages;

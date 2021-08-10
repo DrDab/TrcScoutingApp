@@ -72,6 +72,7 @@ public class CurSessionHandlerUtil
     {
         sessionFile = null;
         sessionData = null;
+        curWorkingPage = null;
     }
     
     public boolean promptYN(String promptMsg, Object... args)

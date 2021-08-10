@@ -271,7 +271,7 @@ public class CmdEditField extends Command
 
                 if (flag == null)
                 {
-                    System.out.println("flag must be one of the following: must_be_filled, match_num, alliance_type");
+                    System.out.println("flag must be one of the following: must_be_filled, match_num, alliance_type, match_type");
                     return false;
                 }
 
@@ -319,7 +319,7 @@ public class CmdEditField extends Command
 
                 if (flag == null)
                 {
-                    System.out.println("flag must be one of the following: must_be_filled, match_num, alliance_type");
+                    System.out.println("flag must be one of the following: must_be_filled, match_num, alliance_type, match_type");
                     return false;
                 }
 

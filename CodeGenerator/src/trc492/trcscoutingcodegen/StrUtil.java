@@ -72,6 +72,9 @@ public class StrUtil
                 
             case "must_be_filled":
                 return FieldFlag.MUST_BE_FILLED;
+                
+            case "match_type":
+                return FieldFlag.MATCH_TYPE;
         }
         
         return null;

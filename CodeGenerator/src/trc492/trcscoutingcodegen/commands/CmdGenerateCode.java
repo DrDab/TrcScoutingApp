@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.util.List;
 
 import trc492.trcscoutingcodegen.CurSessionHandlerUtil;
+import trc492.trcscoutingcodegen.classgen.AddMatchesClassGen;
 import trc492.trcscoutingcodegen.classgen.AppInfoClassGen;
+import trc492.trcscoutingcodegen.data.AppInfoSettings;
+import trc492.trcscoutingcodegen.data.SessionData;
 
 public class CmdGenerateCode extends Command
 {
@@ -25,9 +28,22 @@ public class CmdGenerateCode extends Command
             return false;
         }
         
+        // check all necessary info is filled
+        SessionData data = util.sessionData;
+        AppInfoSettings appInfoSettings = data.appInfoSettings;
+        
+        if (appInfoSettings.csvHeader == null)
+        {
+            System.out.println("CSV header cannot be null! Use \"appinfo set csv_header <csv header>\" to set a CSV header.");
+            return false;
+        }
+        
         // generate AppInfo
         AppInfoClassGen a = new AppInfoClassGen(util.sessionData);
         System.out.println(a.generateCode());
+        
+        AddMatchesClassGen b = new AddMatchesClassGen(util.sessionData);
+        System.out.println(b.generateCode());
 
         return false;
     }
