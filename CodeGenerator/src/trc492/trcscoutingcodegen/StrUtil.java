@@ -75,6 +75,9 @@ public class StrUtil
                 
             case "match_type":
                 return FieldFlag.MATCH_TYPE;
+                
+            case "team_num":
+                return FieldFlag.TEAM_NUM;
         }
         
         return null;

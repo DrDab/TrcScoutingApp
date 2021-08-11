@@ -49,8 +49,8 @@ public class AddMatchesClassGen
             }
         }
 
-        codeTemp = String.format(codeTemp, pt1);
-        return codeTemp;
+        String codeFormatted = String.format(codeTemp, pt1);
+        return codeFormatted;
     }
 
 }

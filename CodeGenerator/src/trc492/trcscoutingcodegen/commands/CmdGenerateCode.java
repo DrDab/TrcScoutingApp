@@ -6,6 +6,7 @@ import java.util.List;
 import trc492.trcscoutingcodegen.CurSessionHandlerUtil;
 import trc492.trcscoutingcodegen.classgen.AddMatchesClassGen;
 import trc492.trcscoutingcodegen.classgen.AppInfoClassGen;
+import trc492.trcscoutingcodegen.classgen.MatchInfoClassGen;
 import trc492.trcscoutingcodegen.data.AppInfoSettings;
 import trc492.trcscoutingcodegen.data.SessionData;
 
@@ -44,6 +45,9 @@ public class CmdGenerateCode extends Command
         
         AddMatchesClassGen b = new AddMatchesClassGen(util.sessionData);
         System.out.println(b.generateCode());
+        
+        MatchInfoClassGen c = new MatchInfoClassGen(util.sessionData);
+        System.out.println(c.generateCode());
 
         return false;
     }
