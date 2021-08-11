@@ -2,6 +2,7 @@ package trc492.trcscoutingcodegen.commands;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import trc492.trcscoutingcodegen.CurSessionHandlerUtil;
@@ -289,6 +290,26 @@ public class CmdEditField extends Command
                 if (editField == null)
                 {
                     System.out.printf("Field %s doesn't exist\n", fieldName);
+                    return false;
+                }
+                
+                boolean fieldTypePassed = flag.eligibleFields.length == 0;
+                
+                if (flag.eligibleFields != null)
+                {
+                    for (FieldType fieldType : flag.eligibleFields)
+                    {
+                        if (fieldType == editField.fieldType)
+                        {
+                            fieldTypePassed = true;
+                        }
+                    }
+                }
+                
+                if (!fieldTypePassed)
+                {
+                    System.out.printf("Field %s does not support flag %s.\n", editField.fieldName, flag);
+                    System.out.printf("Supported fields for flag %s are: %s\n", flag, Arrays.toString(flag.eligibleFields));
                     return false;
                 }
 
