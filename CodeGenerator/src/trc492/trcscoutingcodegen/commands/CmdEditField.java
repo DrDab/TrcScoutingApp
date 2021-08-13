@@ -302,6 +302,7 @@ public class CmdEditField extends Command
                         if (fieldType == editField.fieldType)
                         {
                             fieldTypePassed = true;
+                            break;
                         }
                     }
                 }
