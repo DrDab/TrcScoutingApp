@@ -44,15 +44,24 @@ public class AutonomousFragment extends AbstractPageFragment
     @Override
     public void setFields(JSONObject fieldData) throws JSONException
     {
-        UIUtils.setEditTextValue(matchNumET, fieldData.getInt("matchNumber"));
-        UIUtils.setSpinnerByTextValue(matchTypeSpinner, fieldData.getString("matchType"));
-        UIUtils.setSpinnerByTextValue(allianceSpinner, fieldData.getString("alliance"));
-        UIUtils.setEditTextValue(teamNumET, fieldData.getInt("teamNumber"));
-        UIUtils.setCheckbox(initLineCrossedCB, fieldData.getBoolean("initLineCrossed"));
-        UIUtils.setNumberPickerVal(lowerCellsPicker, fieldData.getInt("autonomousLower"));
-        UIUtils.setNumberPickerVal(outerCellsPicker, fieldData.getInt("autonomousOuter"));
-        UIUtils.setNumberPickerVal(innerCellsPicker, fieldData.getInt("autonomousInner"));
-        UIUtils.setNumberPickerVal(missedCellsPicker, fieldData.getInt("autonomousMissed"));
+        if (fieldData.has("matchNumber"))
+            UIUtils.setEditTextValue(matchNumET, fieldData.getInt("matchNumber"));
+        if (fieldData.has("matchType"))
+            UIUtils.setSpinnerByTextValue(matchTypeSpinner, fieldData.getString("matchType"));
+        if (fieldData.has("alliance"))
+            UIUtils.setSpinnerByTextValue(allianceSpinner, fieldData.getString("alliance"));
+        if (fieldData.has("teamNumber"))
+            UIUtils.setEditTextValue(teamNumET, fieldData.getInt("teamNumber"));
+        if (fieldData.has("initLineCrossed"))
+            UIUtils.setCheckbox(initLineCrossedCB, fieldData.getBoolean("initLineCrossed"));
+        if (fieldData.has("autonomousLower"))
+            UIUtils.setNumberPickerVal(lowerCellsPicker, fieldData.getInt("autonomousLower"));
+        if (fieldData.has("autonomousOuter"))
+            UIUtils.setNumberPickerVal(outerCellsPicker, fieldData.getInt("autonomousOuter"));
+        if (fieldData.has("autonomousInner"))
+            UIUtils.setNumberPickerVal(innerCellsPicker, fieldData.getInt("autonomousInner"));
+        if (fieldData.has("autonomousMissed"))
+            UIUtils.setNumberPickerVal(missedCellsPicker, fieldData.getInt("autonomousMissed"));
     }
 
     @Override

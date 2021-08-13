@@ -42,15 +42,24 @@ public class TeleOpFragment extends AbstractPageFragment
     @Override
     public void setFields(JSONObject fieldData) throws JSONException
     {
-        UIUtils.setNumberPickerVal(lowerCellsPicker, fieldData.getInt("teleopLower"));
-        UIUtils.setNumberPickerVal(outerCellsPicker, fieldData.getInt("teleopOuter"));
-        UIUtils.setNumberPickerVal(innerCellsPicker, fieldData.getInt("teleopInner"));
-        UIUtils.setNumberPickerVal(missedCellsPicker, fieldData.getInt("teleopMissed"));
-        UIUtils.setCheckbox(stage1CB, fieldData.getBoolean("shieldStage1"));
-        UIUtils.setCheckbox(stage2CB, fieldData.getBoolean("shieldStage2"));
-        UIUtils.setCheckbox(stage3CB, fieldData.getBoolean("shieldStage3"));
-        UIUtils.setCheckbox(rotationCB, fieldData.getBoolean("controlPanelRotated"));
-        UIUtils.setCheckbox(positionCB, fieldData.getBoolean("controlPanelPositioned"));
+        if (fieldData.has("teleopLower"))
+            UIUtils.setNumberPickerVal(lowerCellsPicker, fieldData.getInt("teleopLower"));
+        if (fieldData.has("teleopOuter"))
+            UIUtils.setNumberPickerVal(outerCellsPicker, fieldData.getInt("teleopOuter"));
+        if (fieldData.has("teleopInner"))
+            UIUtils.setNumberPickerVal(innerCellsPicker, fieldData.getInt("teleopInner"));
+        if (fieldData.has("teleopMissed"))
+            UIUtils.setNumberPickerVal(missedCellsPicker, fieldData.getInt("teleopMissed"));
+        if (fieldData.has("shieldStage1"))
+            UIUtils.setCheckbox(stage1CB, fieldData.getBoolean("shieldStage1"));
+        if (fieldData.has("shieldStage2"))
+            UIUtils.setCheckbox(stage2CB, fieldData.getBoolean("shieldStage2"));
+        if (fieldData.has("shieldStage3"))
+            UIUtils.setCheckbox(stage3CB, fieldData.getBoolean("shieldStage3"));
+        if (fieldData.has("controlPanelRotated"))
+            UIUtils.setCheckbox(rotationCB, fieldData.getBoolean("controlPanelRotated"));
+        if (fieldData.has("controlPanelPositioned"))
+            UIUtils.setCheckbox(positionCB, fieldData.getBoolean("controlPanelPositioned"));
     }
 
     @Override

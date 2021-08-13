@@ -36,11 +36,16 @@ public class EndgameFragment extends AbstractPageFragment
     @Override
     public void setFields(JSONObject fieldData) throws JSONException
     {
-        UIUtils.setCheckbox(parkedCB, fieldData.getBoolean("generatorSwitchParked"));
-        UIUtils.setCheckbox(hangingCB, fieldData.getBoolean("generatorSwitchHanging"));
-        UIUtils.setCheckbox(supportingCB, fieldData.getBoolean("generatorSwitchSupportingMechanism"));
-        UIUtils.setCheckbox(levelCB, fieldData.getBoolean("generatorSwitchLevel"));
-        UIUtils.setEditTextValue(notesET, fieldData.getString("notes"));
+        if (fieldData.has("generatorSwitchParked"))
+            UIUtils.setCheckbox(parkedCB, fieldData.getBoolean("generatorSwitchParked"));
+        if (fieldData.has("generatorSwitchHanging"))
+            UIUtils.setCheckbox(hangingCB, fieldData.getBoolean("generatorSwitchHanging"));
+        if (fieldData.has("generatorSwitchSupportingMechanism"))
+            UIUtils.setCheckbox(supportingCB, fieldData.getBoolean("generatorSwitchSupportingMechanism"));
+        if (fieldData.has("generatorSwitchLevel"))
+            UIUtils.setCheckbox(levelCB, fieldData.getBoolean("generatorSwitchLevel"));
+        if (fieldData.has("notes"))
+            UIUtils.setEditTextValue(notesET, fieldData.getString("notes"));
     }
 
     @Override
