@@ -1,18 +1,21 @@
 package trc492.trcscoutingcodegen.classgen;
 
+import trc492.trcscoutingcodegen.data.CodeTemplates;
 import trc492.trcscoutingcodegen.data.Field;
 import trc492.trcscoutingcodegen.data.FieldFlag;
 import trc492.trcscoutingcodegen.data.SessionData;
 
-public class MatchInfoClassGen
+public class MatchInfoClassGen extends ClassGenerator
 {
     private SessionData sessionData;
 
     public MatchInfoClassGen(SessionData sessionData)
     {
+        super("output", "data", "MatchInfo.java");
         this.sessionData = sessionData;
     }
 
+    @Override
     public String generateCode()
     {
         String codeTemp = CodeTemplates.MATCHINFO_CLASS_TEMPLATE;

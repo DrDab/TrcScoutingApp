@@ -2,20 +2,23 @@ package trc492.trcscoutingcodegen.classgen;
 
 import java.util.List;
 
+import trc492.trcscoutingcodegen.data.CodeTemplates;
 import trc492.trcscoutingcodegen.data.Element;
 import trc492.trcscoutingcodegen.data.Field;
 import trc492.trcscoutingcodegen.data.FieldFlag;
 import trc492.trcscoutingcodegen.data.Page;
 
-public class FragmentClassGen
+public class FragmentClassGen extends ClassGenerator
 {
     private Page page;
 
     public FragmentClassGen(Page page)
     {
+        super("output", "fragments", page.className + ".java");
         this.page = page;
     }
 
+    @Override
     public String generateCode()
     {
         String codeTemp = CodeTemplates.FRAGMENT_CLASS_TEMPLATE;

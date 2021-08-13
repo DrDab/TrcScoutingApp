@@ -5,18 +5,21 @@ import java.util.Comparator;
 import java.util.List;
 
 import trc492.trcscoutingcodegen.data.AppInfoSettings;
+import trc492.trcscoutingcodegen.data.CodeTemplates;
 import trc492.trcscoutingcodegen.data.Page;
 import trc492.trcscoutingcodegen.data.SessionData;
 
-public class AppInfoClassGen
+public class AppInfoClassGen extends ClassGenerator
 {
     private SessionData sessionData;
 
     public AppInfoClassGen(SessionData sessionData)
     {
+        super("output", "data", "AppInfo.java");
         this.sessionData = sessionData;
     }
     
+    @Override
     public String generateCode()
     {
         String codeTemp = CodeTemplates.APPINFO_CLASS_TEMPLATE;

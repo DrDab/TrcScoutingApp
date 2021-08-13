@@ -1,4 +1,4 @@
-package trc492.trcscoutingcodegen.classgen;
+package trc492.trcscoutingcodegen.data;
 
 public class CodeTemplates
 {
@@ -655,6 +655,8 @@ public class CodeTemplates
         + "import android.view.LayoutInflater;\r\n"
         + "import android.view.ViewGroup;\r\n"
         + "import android.widget.*;\r\n"
+        + "\r\n"
+        + "import com.travijuu.numberpicker.library.*;\r\n"
         + "\r\n"
         + "import org.json.JSONException;\r\n"
         + "import org.json.JSONObject;\r\n"
