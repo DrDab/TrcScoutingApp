@@ -6,8 +6,10 @@ import java.util.List;
 import trc492.trcscoutingcodegen.CurSessionHandlerUtil;
 import trc492.trcscoutingcodegen.classgen.AddMatchesClassGen;
 import trc492.trcscoutingcodegen.classgen.AppInfoClassGen;
+import trc492.trcscoutingcodegen.classgen.FragmentClassGen;
 import trc492.trcscoutingcodegen.classgen.MatchInfoClassGen;
 import trc492.trcscoutingcodegen.data.AppInfoSettings;
+import trc492.trcscoutingcodegen.data.Page;
 import trc492.trcscoutingcodegen.data.SessionData;
 
 public class CmdGenerateCode extends Command
@@ -48,6 +50,12 @@ public class CmdGenerateCode extends Command
         
         MatchInfoClassGen c = new MatchInfoClassGen(util.sessionData);
         System.out.println(c.generateCode());
+        
+        for (Page page : util.sessionData.pages)
+        {
+            FragmentClassGen owo = new FragmentClassGen(page);
+            System.out.println(owo.generateCode());
+        }
 
         return false;
     }

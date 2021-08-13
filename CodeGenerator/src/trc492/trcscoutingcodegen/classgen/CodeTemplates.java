@@ -691,7 +691,7 @@ public class CodeTemplates
         + "        {\r\n"
         + "            e.printStackTrace();\r\n"
         + "            return null;\r\n"
-        + "        }"
+        + "        }\r\n"
         + "    }\r\n"
         + "}";
     
