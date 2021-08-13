@@ -72,9 +72,9 @@ public class FragmentClassGen extends ClassGenerator
                         || fieldFlags.contains(FieldFlag.TEAM_NUM))
                     {
                         // must be filled
-                        getFieldsCode += String.format("        if (!UIUtils.isEditTextEmpty(%s)) {\n", element.elementId);
+                        getFieldsCode += String.format("            if (!UIUtils.isEditTextEmpty(%s)) {\n", element.elementId);
                         getFieldsCode += String.format("                data.put(\"%s\", %s);\n", field.fieldName, parseStr);
-                        getFieldsCode += "        }\n";
+                        getFieldsCode +=               "            }\n";
                     }
                     else
                     {
