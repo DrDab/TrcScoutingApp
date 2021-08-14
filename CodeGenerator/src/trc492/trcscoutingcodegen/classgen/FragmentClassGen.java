@@ -78,6 +78,10 @@ public class FragmentClassGen extends ClassGenerator
                             element.elementId);
                         getFieldsCode += String.format("                data.put(\"%s\", %s);\n", field.fieldName,
                             parseStr);
+                        getFieldsCode += "            } else {\n";
+                        getFieldsCode += String.format(
+                            "                UIUtils.launchPopUpMessage(getContext(), \"Error\", \"%s cannot be empty!\");\n                return null;\n",
+                            element.elementId);
                         getFieldsCode += "            }\n";
                     }
                     else

@@ -1,0 +1,579 @@
+TRC Scouting App Code Generator
+(C) 2021 Titan Robotics Club
+
+Loaded 15 command modules.
+
+codegen>create Frc2020InfiniteRecharge
+Created and loaded file Frc2020InfiniteRecharge.
+codegen>help
+appinfo - Edits the AppInfo variables of TrcScoutingApp code.
+	The AppInfo variables are: csv_header (a string), and year_number (an integer).
+cls - Clears the terminal history.
+create - Creates a data file with a given filename.
+csv - Binds or unbinds a field to a column, or lists CSV bindings.
+elements - Adds, remaps, deletes or lists elements on the current working page.
+exit - Exits the code generator utility.
+field - Creates, edits or removes a field, consisting of a name and type.
+	Types include: int, double, bool(ean), str(ing)
+generatecode - Generates code from variables
+help - Lists syntax and usage all commands, or of optional given command.
+load - Loads a data file given the filename.
+lsfields - Lists the current fields in the editor session.
+lspages - Lists the current pages in the editor session.
+page - Adds a page, sets a property of a page or deletes a page.
+unload - Unloads the currently loaded session file, if any.
+wp - Sets, unsets, or updates an attribute of the current working page.
+codegen>field
+	Usage: field add <name> <type>
+	field rename <oldname> <newname>
+	field settype <name> <type>
+	field del <name>
+	field flag {add|del} <name> <flag>
+	field flag list <name>
+codegen>field add matchNumber int
+Created new field matchNumber, type Integer
+codegen>field add teamNumber int
+Created new field teamNumber, type Integer
+codegen>field add alliance str
+Created new field alliance, type String
+codegen>field add matchtype str
+Created new field matchtype, type String
+codegen>field add notes str
+Created new field notes, type String
+codegen>field add initLineCrossed bool
+Created new field initLineCrossed, type Boolean
+codegen>field add autonomousLower int
+Created new field autonomousLower, type Integer
+codegen>field add autonomousUpper int
+Created new field autonomousUpper, type Integer
+codegen>field add autonomousMissed int
+Created new field autonomousMissed, type Integer
+codegen>field add teleopLower int
+Created new field teleopLower, type Integer
+codegen>field add teleopOuter int
+Created new field teleopOuter, type Integer
+codegen>field add teleopInner int
+Created new field teleopInner, type Integer
+codegen>field add teleopMissed int
+Created new field teleopMissed, type Integer
+codegen>field add shieldStage1 bool
+Created new field shieldStage1, type Boolean
+codegen>field add shieldStage2 bool
+Created new field shieldStage2, type Boolean
+codegen>field add shieldStage3 bool
+Created new field shieldStage3, type Boolean
+codegen>field add controlPanelRotated bool
+Created new field controlPanelRotated, type Boolean
+codegen>field add controlpanelPositioned Bool
+Created new field controlpanelPositioned, type Boolean
+codegen>field add generatorSwitchPakred bool
+Created new field generatorSwitchPakred, type Boolean
+codegen>field add generatorSwitchHanging bool
+Created new field generatorSwitchHanging, type Boolean
+codegen>field add generatorSwitchSupportingMechanism bool
+Created new field generatorSwitchSupportingMechanism, type Boolean
+codegen>field add generatorSwitchLevel bool
+Created new field generatorSwitchLevel, type Boolean
+codegen>lsfields
+22 Fields:
+Field[fieldType=Integer, fieldName=matchNumber, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=teamNumber, fieldFlags=[]]
+Field[fieldType=String, fieldName=alliance, fieldFlags=[]]
+Field[fieldType=String, fieldName=matchtype, fieldFlags=[]]
+Field[fieldType=String, fieldName=notes, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=initLineCrossed, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=autonomousLower, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=autonomousUpper, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=autonomousMissed, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=teleopLower, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=teleopOuter, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=teleopInner, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=teleopMissed, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=shieldStage1, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=shieldStage2, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=shieldStage3, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=controlPanelRotated, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=controlpanelPositioned, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=generatorSwitchPakred, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=generatorSwitchHanging, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=generatorSwitchSupportingMechanism, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=generatorSwitchLevel, fieldFlags=[]]
+---
+codegen>field flag add
+Usage: field flag {add|del} <name> <flag>
+codegen>field flag add matchNumber MATCH_NUM
+Added flag MATCH_NUM to field matchNumber.
+codegen>field flag add teamNumber TEAM_NUM
+Added flag TEAM_NUM to field teamNumber.
+codegen>field flag add alliance ALLIA
+flag must be one of the following: must_be_filled, match_num, alliance_type, match_type, team_num
+codegen>field add alliance ALLIANCE_TYPE
+A field with name "alliance" already exists!
+codegen>field flag add alliance ALLIANCE_TYPE
+Added flag ALLIANCE_TYPE to field alliance.
+codegen>field flag add matchtype MATCH_TYPE
+Added flag MATCH_TYPE to field matchtype.
+codegen>lsfields
+22 Fields:
+Field[fieldType=Integer, fieldName=matchNumber, fieldFlags=[MATCH_NUM]]
+Field[fieldType=Integer, fieldName=teamNumber, fieldFlags=[TEAM_NUM]]
+Field[fieldType=String, fieldName=alliance, fieldFlags=[ALLIANCE_TYPE]]
+Field[fieldType=String, fieldName=matchtype, fieldFlags=[MATCH_TYPE]]
+Field[fieldType=String, fieldName=notes, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=initLineCrossed, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=autonomousLower, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=autonomousUpper, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=autonomousMissed, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=teleopLower, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=teleopOuter, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=teleopInner, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=teleopMissed, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=shieldStage1, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=shieldStage2, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=shieldStage3, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=controlPanelRotated, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=controlpanelPositioned, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=generatorSwitchPakred, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=generatorSwitchHanging, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=generatorSwitchSupportingMechanism, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=generatorSwitchLevel, fieldFlags=[]]
+---
+codegen>help
+appinfo - Edits the AppInfo variables of TrcScoutingApp code.
+	The AppInfo variables are: csv_header (a string), and year_number (an integer).
+cls - Clears the terminal history.
+create - Creates a data file with a given filename.
+csv - Binds or unbinds a field to a column, or lists CSV bindings.
+elements - Adds, remaps, deletes or lists elements on the current working page.
+exit - Exits the code generator utility.
+field - Creates, edits or removes a field, consisting of a name and type.
+	Types include: int, double, bool(ean), str(ing)
+generatecode - Generates code from variables
+help - Lists syntax and usage all commands, or of optional given command.
+load - Loads a data file given the filename.
+lsfields - Lists the current fields in the editor session.
+lspages - Lists the current pages in the editor session.
+page - Adds a page, sets a property of a page or deletes a page.
+unload - Unloads the currently loaded session file, if any.
+wp - Sets, unsets, or updates an attribute of the current working page.
+codegen>pages
+Command "pages" doesn't exist!
+Type "help" for a list of commands.
+codegen>lspages
+0 Pages:
+---
+codegen>page
+	Usage: page add <tabname> <classname> <fragmentname> <pagenum>
+	page del <classname>
+codegen>page add "Autonomous" AutonomousFragment fragment_autonomous_page 1
+Added page Page[pageNum=1, tabName=Autonomous, className=AutonomousFragment, fragmentName=fragment_autonomous_page, elements=[]].
+codegen>page add "Teleoperated" TeleOpFragment fragment_teleop_page 2
+Added page Page[pageNum=2, tabName=Teleoperated, className=TeleOpFragment, fragmentName=fragment_teleop_page, elements=[]].
+codegen>page add "Endgame" EndgameFragment fragment_endgame_page 3
+Added page Page[pageNum=3, tabName=Endgame, className=EndgameFragment, fragmentName=fragment_endgame_page, elements=[]].
+codegen>lspages
+3 Pages:
+Page[pageNum=1, tabName=Autonomous, className=AutonomousFragment, fragmentName=fragment_autonomous_page, elements=[]]
+Page[pageNum=2, tabName=Teleoperated, className=TeleOpFragment, fragmentName=fragment_teleop_page, elements=[]]
+Page[pageNum=3, tabName=Endgame, className=EndgameFragment, fragmentName=fragment_endgame_page, elements=[]]
+---
+codegen>wp set AutonomousFragment
+Set current working page to page AutonomousFragment.
+codegen>elements
+	Usage: elements list
+	elements add <Android R-id> <type> <fieldname>
+	elements remap <Android R-id> <fieldname>
+	elements maptypes <Android R-id>
+	elements del <Android R-id>
+codegen>elements add match
+Usage: elements add <Android R-id> <type> <fieldname>
+codegen>elements add matchNum edittext matchNumber
+Added element Element[elementId=matchNum, elementType=EditText, field=Field[fieldType=Integer, fieldName=matchNumber, fieldFlags=[MATCH_NUM]]].
+codegen>elements add teamNum edittext teamNumber
+Added element Element[elementId=teamNum, elementType=EditText, field=Field[fieldType=Integer, fieldName=teamNumber, fieldFlags=[TEAM_NUM]]].
+codegen>elements add matchTypeSpinner spinner matchtype
+Added element Element[elementId=matchTypeSpinner, elementType=Spinner, field=Field[fieldType=String, fieldName=matchtype, fieldFlags=[MATCH_TYPE]]].
+codegen>elements add spectatingTeamSpinner spinner alliance
+Added element Element[elementId=spectatingTeamSpinner, elementType=Spinner, field=Field[fieldType=String, fieldName=alliance, fieldFlags=[ALLIANCE_TYPE]]].
+codegen>elements add initLineCrossedCB checkbox initLineCrossed
+Added element Element[elementId=initLineCrossedCB, elementType=CheckBox, field=Field[fieldType=Boolean, fieldName=initLineCrossed, fieldFlags=[]]].
+codegen>elements add lowerCellsCounter numberpicker autonomousLower
+Added element Element[elementId=lowerCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=autonomousLower, fieldFlags=[]]].
+codegen>elements add outerCellsCounter numberpicker autnomousOuter
+Field autnomousOuter doesn't exist!
+codegen>elements add outerCellsCounter numberpicker autonomousOuter
+Field autonomousOuter doesn't exist!
+codegen>fields add autonomousouter int
+Command "fields" doesn't exist!
+Type "help" for a list of commands.
+codegen>field add autonomousouter int
+Created new field autonomousouter, type Integer
+codegen>field del autonomousouter
+Removed field autonomousouter, 0 mapped elements and 0 CSV columns.
+codegen>field add autonomousOuter
+Usage: field add <name> <type>
+codegen>field add autonomousOuter int
+Created new field autonomousOuter, type Integer
+codegen>elements add outerCellsCounter numberpicker autonomousOuter
+Added element Element[elementId=outerCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=autonomousOuter, fieldFlags=[]]].
+codegen>elements add innerCellsCounter numberpicker autonomousInner
+Field autonomousInner doesn't exist!
+codegen>lsfields
+23 Fields:
+Field[fieldType=Integer, fieldName=matchNumber, fieldFlags=[MATCH_NUM]]
+Field[fieldType=Integer, fieldName=teamNumber, fieldFlags=[TEAM_NUM]]
+Field[fieldType=String, fieldName=alliance, fieldFlags=[ALLIANCE_TYPE]]
+Field[fieldType=String, fieldName=matchtype, fieldFlags=[MATCH_TYPE]]
+Field[fieldType=String, fieldName=notes, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=initLineCrossed, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=autonomousLower, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=autonomousUpper, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=autonomousMissed, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=teleopLower, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=teleopOuter, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=teleopInner, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=teleopMissed, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=shieldStage1, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=shieldStage2, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=shieldStage3, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=controlPanelRotated, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=controlpanelPositioned, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=generatorSwitchPakred, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=generatorSwitchHanging, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=generatorSwitchSupportingMechanism, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=generatorSwitchLevel, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=autonomousOuter, fieldFlags=[]]
+---
+codegen>field add autonomousInner int
+Created new field autonomousInner, type Integer
+codegen>field add autonomousMissed int
+A field with name "autonomousMissed" already exists!
+codegen>elements add innerCellsCounter numberpicker autonomousInner
+Added element Element[elementId=innerCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=autonomousInner, fieldFlags=[]]].
+codegen>elements add missedCellsCounter numberpicker autonomousMissed
+Added element Element[elementId=missedCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=autonomousMissed, fieldFlags=[]]].
+codegen>elements list
+9 elements in working page:
+Element[elementId=matchNum, elementType=EditText, field=Field[fieldType=Integer, fieldName=matchNumber, fieldFlags=[MATCH_NUM]]]
+Element[elementId=teamNum, elementType=EditText, field=Field[fieldType=Integer, fieldName=teamNumber, fieldFlags=[TEAM_NUM]]]
+Element[elementId=matchTypeSpinner, elementType=Spinner, field=Field[fieldType=String, fieldName=matchtype, fieldFlags=[MATCH_TYPE]]]
+Element[elementId=spectatingTeamSpinner, elementType=Spinner, field=Field[fieldType=String, fieldName=alliance, fieldFlags=[ALLIANCE_TYPE]]]
+Element[elementId=initLineCrossedCB, elementType=CheckBox, field=Field[fieldType=Boolean, fieldName=initLineCrossed, fieldFlags=[]]]
+Element[elementId=lowerCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=autonomousLower, fieldFlags=[]]]
+Element[elementId=outerCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=autonomousOuter, fieldFlags=[]]]
+Element[elementId=innerCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=autonomousInner, fieldFlags=[]]]
+Element[elementId=missedCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=autonomousMissed, fieldFlags=[]]]
+---
+codegen>lspages
+3 Pages:
+Page[pageNum=1, tabName=Autonomous, className=AutonomousFragment, fragmentName=fragment_autonomous_page, elements=[Element[elementId=matchNum, elementType=EditText, field=Field[fieldType=Integer, fieldName=matchNumber, fieldFlags=[MATCH_NUM]]], Element[elementId=teamNum, elementType=EditText, field=Field[fieldType=Integer, fieldName=teamNumber, fieldFlags=[TEAM_NUM]]], Element[elementId=matchTypeSpinner, elementType=Spinner, field=Field[fieldType=String, fieldName=matchtype, fieldFlags=[MATCH_TYPE]]], Element[elementId=spectatingTeamSpinner, elementType=Spinner, field=Field[fieldType=String, fieldName=alliance, fieldFlags=[ALLIANCE_TYPE]]], Element[elementId=initLineCrossedCB, elementType=CheckBox, field=Field[fieldType=Boolean, fieldName=initLineCrossed, fieldFlags=[]]], Element[elementId=lowerCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=autonomousLower, fieldFlags=[]]], Element[elementId=outerCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=autonomousOuter, fieldFlags=[]]], Element[elementId=innerCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=autonomousInner, fieldFlags=[]]], Element[elementId=missedCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=autonomousMissed, fieldFlags=[]]]]]
+Page[pageNum=2, tabName=Teleoperated, className=TeleOpFragment, fragmentName=fragment_teleop_page, elements=[]]
+Page[pageNum=3, tabName=Endgame, className=EndgameFragment, fragmentName=fragment_endgame_page, elements=[]]
+---
+codegen>wp set TeleOpFragment
+Set current working page to page TeleOpFragment.
+codegen>elements list
+0 elements in working page:
+---
+codegen>elements add lowerCellsCounter numberpicker teleopLower
+Added element Element[elementId=lowerCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=teleopLower, fieldFlags=[]]].
+codegen>elements add outerCellsCounter numberpicker teleopOuter
+Added element Element[elementId=outerCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=teleopOuter, fieldFlags=[]]].
+codegen>elements add innerCellsCounter numberpicker teleopInner
+Added element Element[elementId=innerCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=teleopInner, fieldFlags=[]]].
+codegen>elements add missedCellsCounter numberpicker teleopMissed
+Added element Element[elementId=missedCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=teleopMissed, fieldFlags=[]]].
+codegen>elements add shieldGeneratorStage1 checkbox shieldStage1
+Added element Element[elementId=shieldGeneratorStage1, elementType=CheckBox, field=Field[fieldType=Boolean, fieldName=shieldStage1, fieldFlags=[]]].
+codegen>elements add shieldGeneratorStage2 checkbox shieldStage2
+Added element Element[elementId=shieldGeneratorStage2, elementType=CheckBox, field=Field[fieldType=Boolean, fieldName=shieldStage2, fieldFlags=[]]].
+codegen>elements add shieldGeneratorStage3 checkbox shieldStage3
+Added element Element[elementId=shieldGeneratorStage3, elementType=CheckBox, field=Field[fieldType=Boolean, fieldName=shieldStage3, fieldFlags=[]]].
+codegen>elements add ctrlPanelRotationCheckBox checkbox controlPanelRotated
+Added element Element[elementId=ctrlPanelRotationCheckBox, elementType=CheckBox, field=Field[fieldType=Boolean, fieldName=controlPanelRotated, fieldFlags=[]]].
+codegen>elements add ctrlPanelPositionCheckBox checkbox controlPanelPositioned
+Field controlPanelPositioned doesn't exist!
+codegen>field rename
+Usage: field rename <oldname> <newname>
+codegen>field rename controlpanelPositioned controlPanelPositioned
+Renamed field controlpanelPositioned to controlPanelPositioned
+codegen>elements add ctrlPanelPositionCheckBox checkbox controlPanelPositioned
+Added element Element[elementId=ctrlPanelPositionCheckBox, elementType=CheckBox, field=Field[fieldType=Boolean, fieldName=controlPanelPositioned, fieldFlags=[]]].
+codegen>wp set endgame
+No page with class name endgame exists.
+codegen>lspages
+3 Pages:
+Page[pageNum=1, tabName=Autonomous, className=AutonomousFragment, fragmentName=fragment_autonomous_page, elements=[Element[elementId=matchNum, elementType=EditText, field=Field[fieldType=Integer, fieldName=matchNumber, fieldFlags=[MATCH_NUM]]], Element[elementId=teamNum, elementType=EditText, field=Field[fieldType=Integer, fieldName=teamNumber, fieldFlags=[TEAM_NUM]]], Element[elementId=matchTypeSpinner, elementType=Spinner, field=Field[fieldType=String, fieldName=matchtype, fieldFlags=[MATCH_TYPE]]], Element[elementId=spectatingTeamSpinner, elementType=Spinner, field=Field[fieldType=String, fieldName=alliance, fieldFlags=[ALLIANCE_TYPE]]], Element[elementId=initLineCrossedCB, elementType=CheckBox, field=Field[fieldType=Boolean, fieldName=initLineCrossed, fieldFlags=[]]], Element[elementId=lowerCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=autonomousLower, fieldFlags=[]]], Element[elementId=outerCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=autonomousOuter, fieldFlags=[]]], Element[elementId=innerCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=autonomousInner, fieldFlags=[]]], Element[elementId=missedCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=autonomousMissed, fieldFlags=[]]]]]
+Page[pageNum=2, tabName=Teleoperated, className=TeleOpFragment, fragmentName=fragment_teleop_page, elements=[Element[elementId=lowerCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=teleopLower, fieldFlags=[]]], Element[elementId=outerCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=teleopOuter, fieldFlags=[]]], Element[elementId=innerCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=teleopInner, fieldFlags=[]]], Element[elementId=missedCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=teleopMissed, fieldFlags=[]]], Element[elementId=shieldGeneratorStage1, elementType=CheckBox, field=Field[fieldType=Boolean, fieldName=shieldStage1, fieldFlags=[]]], Element[elementId=shieldGeneratorStage2, elementType=CheckBox, field=Field[fieldType=Boolean, fieldName=shieldStage2, fieldFlags=[]]], Element[elementId=shieldGeneratorStage3, elementType=CheckBox, field=Field[fieldType=Boolean, fieldName=shieldStage3, fieldFlags=[]]], Element[elementId=ctrlPanelRotationCheckBox, elementType=CheckBox, field=Field[fieldType=Boolean, fieldName=controlPanelRotated, fieldFlags=[]]], Element[elementId=ctrlPanelPositionCheckBox, elementType=CheckBox, field=Field[fieldType=Boolean, fieldName=controlPanelPositioned, fieldFlags=[]]]]]
+Page[pageNum=3, tabName=Endgame, className=EndgameFragment, fragmentName=fragment_endgame_page, elements=[]]
+---
+codegen>wp set EndgameFragment
+Set current working page to page EndgameFragment.
+codegen>wp set endgamefragment
+No page with class name endgamefragment exists.
+codegen>field rename generatorSwitchParked
+Usage: field rename <oldname> <newname>
+codegen>field rename generatorSwitchPakred generatorSwitchParked
+Renamed field generatorSwitchPakred to generatorSwitchParked
+codegen>elements add endgameparkedCB checkbox generatorSwitchParked
+Added element Element[elementId=endgameparkedCB, elementType=CheckBox, field=Field[fieldType=Boolean, fieldName=generatorSwitchParked, fieldFlags=[]]].
+codegen>elements add endgamehangingCB checkbox geneatorSwitchHanging
+Field geneatorSwitchHanging doesn't exist!
+codegen>elements add endgamehangingCB checkbox generatorSwitchHanging
+Added element Element[elementId=endgamehangingCB, elementType=CheckBox, field=Field[fieldType=Boolean, fieldName=generatorSwitchHanging, fieldFlags=[]]].
+codegen>elements add endgameSupportingMechanismCB checkbox generatorSwitchSupportingMechanism
+Added element Element[elementId=endgameSupportingMechanismCB, elementType=CheckBox, field=Field[fieldType=Boolean, fieldName=generatorSwitchSupportingMechanism, fieldFlags=[]]].
+codegen>elements add endgameLevelCB checkbox generatorSwitchLevel
+Added element Element[elementId=endgameLevelCB, elementType=CheckBox, field=Field[fieldType=Boolean, fieldName=generatorSwitchLevel, fieldFlags=[]]].
+codegen>elements add gameNotes edittext notes
+Added element Element[elementId=gameNotes, elementType=EditText, field=Field[fieldType=String, fieldName=notes, fieldFlags=[]]].
+codegen>wp
+	Usage: wp set <classname>
+	wp update {tabname | classname | fragname | pagenum} <name | pagenum>
+	wp unset
+codegen>wp unset
+Unset current working page.
+codegen>elements
+	Usage: elements list
+	elements add <Android R-id> <type> <fieldname>
+	elements remap <Android R-id> <fieldname>
+	elements maptypes <Android R-id>
+	elements del <Android R-id>
+codegen>elements add a b c
+No current working page!
+codegen>lsfields
+24 Fields:
+Field[fieldType=Integer, fieldName=matchNumber, fieldFlags=[MATCH_NUM]]
+Field[fieldType=Integer, fieldName=teamNumber, fieldFlags=[TEAM_NUM]]
+Field[fieldType=String, fieldName=alliance, fieldFlags=[ALLIANCE_TYPE]]
+Field[fieldType=String, fieldName=matchtype, fieldFlags=[MATCH_TYPE]]
+Field[fieldType=String, fieldName=notes, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=initLineCrossed, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=autonomousLower, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=autonomousUpper, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=autonomousMissed, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=teleopLower, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=teleopOuter, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=teleopInner, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=teleopMissed, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=shieldStage1, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=shieldStage2, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=shieldStage3, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=controlPanelRotated, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=controlPanelPositioned, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=generatorSwitchParked, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=generatorSwitchHanging, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=generatorSwitchSupportingMechanism, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=generatorSwitchLevel, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=autonomousOuter, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=autonomousInner, fieldFlags=[]]
+---
+codegen>field 
+	Usage: field add <name> <type>
+	field rename <oldname> <newname>
+	field settype <name> <type>
+	field del <name>
+	field flag {add|del} <name> <flag>
+	field flag list <name>
+codegen>field flag add matchNumber must_be_filled
+Added flag must_be_filled to field matchNumber.
+codegen>field flag add teamNumber must_be_filled
+Added flag must_be_filled to field teamNumber.
+codegen>generatecode
+CSV header cannot be null! Use "appinfo set csv_header <csv header>" to set a CSV header.
+codegen>"matchNum, teamNum, matchType, alliance, initLineCrossed, autonomousLowerCells, autonomousOuterCells, autonomousInnerCells, autonomousMissedCells, teleopLowerCells, teleopOuterCells, teleopInnerCells, teleopMissedCells, shieldStage1, shieldStage2, shieldStage3, controlPanelRotated, controlPanelPositioned, generatorSwitchParked, generatorSwitchHanging, generatorSwitchSupportingMechanism, generatorSwitchLevel, notes";appinfo set csv_header 
+    public static final String VERSION_NUMBER = "1.4.0-frc";
+    public static final int YEAR_NUMBER = 2020;
+
+    //
+    // SetMatchInfo and child Fragment settings.
+    //
+    public static final int NUM_PAGES = 3;
+    public static final String[] TAB_NAMES = {"Autonomous", "Teleoperated", "Endgame"};
+    public static final Class<?>[] FRAGMENT_CLASSES = {AutonomousFragment.class, TeleOpFragment.class, EndgameFragment.class};
+}
+Command "matchNum, teamNum, matchType, alliance, initLineCrossed, autonomousLowerCells, autonomousOuterCells, autonomousInnerCells, autonomousMissedCells, teleopLowerCells, teleopOuterCells, teleopInnerCells, teleopMissedCells, shieldStage1, shieldStage2, shieldStage3, controlPanelRotated, controlPanelPositioned, generatorSwitchParked, generatorSwitchHanging, generatorSwitchSupportingMechanism, generatorSwitchLevel, notes" doesn't exist!
+Type "help" for a list of commands.
+codegen>Command "public" doesn't exist!
+Type "help" for a list of commands.
+codegen>Command "public" doesn't exist!
+Type "help" for a list of commands.
+codegen>codegen>Command "//" doesn't exist!
+Type "help" for a list of commands.
+codegen>Command "//" doesn't exist!
+Type "help" for a list of commands.
+codegen>Command "//" doesn't exist!
+Type "help" for a list of commands.
+codegen>Command "public" doesn't exist!
+Type "help" for a list of commands.
+codegen>Command "public" doesn't exist!
+Type "help" for a list of commands.
+codegen>Command "public" doesn't exist!
+Type "help" for a list of commands.
+codegen>Command "}" doesn't exist!
+Type "help" for a list of commands.
+codegen>appinfo set csv_header "matchNum, teamNum, matchType, alliance, initLineCrossed, autonomousLowerCells, autonomousOuterCells, autonomousInnerCells, autonomousMissedCells, teleopLowerCells, teleopOuterCells, teleopInnerCells, teleopMissedCells, shieldStage1, shieldStage2, shieldStage3, controlPanelRotated, controlPanelPositioned, generatorSwitchParked, generatorSwitchHanging, generatorSwitchSupportingMechanism, generatorSwitchLevel, notes"
+Assigned AppInfo csv_header to matchNum, teamNum, matchType, alliance, initLineCrossed, autonomousLowerCells, autonomousOuterCells, autonomousInnerCells, autonomousMissedCells, teleopLowerCells, teleopOuterCells, teleopInnerCells, teleopMissedCells, shieldStage1, shieldStage2, shieldStage3, controlPanelRotated, controlPanelPositioned, generatorSwitchParked, generatorSwitchHanging, generatorSwitchSupportingMechanism, generatorSwitchLevel, notes.
+codegen>help
+appinfo - Edits the AppInfo variables of TrcScoutingApp code.
+	The AppInfo variables are: csv_header (a string), and year_number (an integer).
+cls - Clears the terminal history.
+create - Creates a data file with a given filename.
+csv - Binds or unbinds a field to a column, or lists CSV bindings.
+elements - Adds, remaps, deletes or lists elements on the current working page.
+exit - Exits the code generator utility.
+field - Creates, edits or removes a field, consisting of a name and type.
+	Types include: int, double, bool(ean), str(ing)
+generatecode - Generates code from variables
+help - Lists syntax and usage all commands, or of optional given command.
+load - Loads a data file given the filename.
+lsfields - Lists the current fields in the editor session.
+lspages - Lists the current pages in the editor session.
+page - Adds a page, sets a property of a page or deletes a page.
+unload - Unloads the currently loaded session file, if any.
+wp - Sets, unsets, or updates an attribute of the current working page.
+codegen>appinfo
+	Usage: appinfo list
+	appinfo set <variable> <value>
+codegen>appinfo list
+csv_header: "matchNum, teamNum, matchType, alliance, initLineCrossed, autonomousLowerCells, autonomousOuterCells, autonomousInnerCells, autonomousMissedCells, teleopLowerCells, teleopOuterCells, teleopInnerCells, teleopMissedCells, shieldStage1, shieldStage2, shieldStage3, controlPanelRotated, controlPanelPositioned, generatorSwitchParked, generatorSwitchHanging, generatorSwitchSupportingMechanism, generatorSwitchLevel, notes"
+year_number: 2021
+codegen>appinfo set year_number 2020
+Assigned AppInfo year_number to 2020.
+codegen>lspages
+3 Pages:
+Page[pageNum=1, tabName=Autonomous, className=AutonomousFragment, fragmentName=fragment_autonomous_page, elements=[Element[elementId=matchNum, elementType=EditText, field=Field[fieldType=Integer, fieldName=matchNumber, fieldFlags=[MATCH_NUM, MUST_BE_FILLED]]], Element[elementId=teamNum, elementType=EditText, field=Field[fieldType=Integer, fieldName=teamNumber, fieldFlags=[TEAM_NUM, MUST_BE_FILLED]]], Element[elementId=matchTypeSpinner, elementType=Spinner, field=Field[fieldType=String, fieldName=matchtype, fieldFlags=[MATCH_TYPE]]], Element[elementId=spectatingTeamSpinner, elementType=Spinner, field=Field[fieldType=String, fieldName=alliance, fieldFlags=[ALLIANCE_TYPE]]], Element[elementId=initLineCrossedCB, elementType=CheckBox, field=Field[fieldType=Boolean, fieldName=initLineCrossed, fieldFlags=[]]], Element[elementId=lowerCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=autonomousLower, fieldFlags=[]]], Element[elementId=outerCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=autonomousOuter, fieldFlags=[]]], Element[elementId=innerCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=autonomousInner, fieldFlags=[]]], Element[elementId=missedCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=autonomousMissed, fieldFlags=[]]]]]
+Page[pageNum=2, tabName=Teleoperated, className=TeleOpFragment, fragmentName=fragment_teleop_page, elements=[Element[elementId=lowerCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=teleopLower, fieldFlags=[]]], Element[elementId=outerCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=teleopOuter, fieldFlags=[]]], Element[elementId=innerCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=teleopInner, fieldFlags=[]]], Element[elementId=missedCellsCounter, elementType=NumberPicker, field=Field[fieldType=Integer, fieldName=teleopMissed, fieldFlags=[]]], Element[elementId=shieldGeneratorStage1, elementType=CheckBox, field=Field[fieldType=Boolean, fieldName=shieldStage1, fieldFlags=[]]], Element[elementId=shieldGeneratorStage2, elementType=CheckBox, field=Field[fieldType=Boolean, fieldName=shieldStage2, fieldFlags=[]]], Element[elementId=shieldGeneratorStage3, elementType=CheckBox, field=Field[fieldType=Boolean, fieldName=shieldStage3, fieldFlags=[]]], Element[elementId=ctrlPanelRotationCheckBox, elementType=CheckBox, field=Field[fieldType=Boolean, fieldName=controlPanelRotated, fieldFlags=[]]], Element[elementId=ctrlPanelPositionCheckBox, elementType=CheckBox, field=Field[fieldType=Boolean, fieldName=controlPanelPositioned, fieldFlags=[]]]]]
+Page[pageNum=3, tabName=Endgame, className=EndgameFragment, fragmentName=fragment_endgame_page, elements=[Element[elementId=endgameparkedCB, elementType=CheckBox, field=Field[fieldType=Boolean, fieldName=generatorSwitchParked, fieldFlags=[]]], Element[elementId=endgamehangingCB, elementType=CheckBox, field=Field[fieldType=Boolean, fieldName=generatorSwitchHanging, fieldFlags=[]]], Element[elementId=endgameSupportingMechanismCB, elementType=CheckBox, field=Field[fieldType=Boolean, fieldName=generatorSwitchSupportingMechanism, fieldFlags=[]]], Element[elementId=endgameLevelCB, elementType=CheckBox, field=Field[fieldType=Boolean, fieldName=generatorSwitchLevel, fieldFlags=[]]], Element[elementId=gameNotes, elementType=EditText, field=Field[fieldType=String, fieldName=notes, fieldFlags=[]]]]]
+---
+codegen>csv
+	Usage: csv map <col#> <field name>
+	csv unmap <col#>
+	csv list
+codegen>csv list
+0 CSV bindings:
+---
+codegen>lsfields
+24 Fields:
+Field[fieldType=Integer, fieldName=matchNumber, fieldFlags=[MATCH_NUM, MUST_BE_FILLED]]
+Field[fieldType=Integer, fieldName=teamNumber, fieldFlags=[TEAM_NUM, MUST_BE_FILLED]]
+Field[fieldType=String, fieldName=alliance, fieldFlags=[ALLIANCE_TYPE]]
+Field[fieldType=String, fieldName=matchtype, fieldFlags=[MATCH_TYPE]]
+Field[fieldType=String, fieldName=notes, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=initLineCrossed, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=autonomousLower, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=autonomousUpper, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=autonomousMissed, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=teleopLower, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=teleopOuter, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=teleopInner, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=teleopMissed, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=shieldStage1, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=shieldStage2, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=shieldStage3, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=controlPanelRotated, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=controlPanelPositioned, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=generatorSwitchParked, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=generatorSwitchHanging, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=generatorSwitchSupportingMechanism, fieldFlags=[]]
+Field[fieldType=Boolean, fieldName=generatorSwitchLevel, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=autonomousOuter, fieldFlags=[]]
+Field[fieldType=Integer, fieldName=autonomousInner, fieldFlags=[]]
+---
+codegen>csv map 1 matchNumber
+Bound field matchNumber to CSV column 1.
+codegen>csv map 2 teamNumber
+Bound field teamNumber to CSV column 2.
+codegen>csv map 3 matchType
+Field "matchType" doesn't exist!
+codegen>csv map 3 matchtype
+Bound field matchtype to CSV column 3.
+codegen>csv map 4 alliance
+Bound field alliance to CSV column 4.
+codegen>csv map 5 initLineCrossed
+Bound field initLineCrossed to CSV column 5.
+codegen>csv map 6 autonomousLower
+Bound field autonomousLower to CSV column 6.
+codegen>csv map 7 autonomousOuter 7
+Bound field autonomousOuter to CSV column 7.
+codegen>csv map 8 autonomousInner
+Bound field autonomousInner to CSV column 8.
+codegen>csv map 9 autonomousMissed
+Bound field autonomousMissed to CSV column 9.
+codegen>csv map 10 teleopLower
+Bound field teleopLower to CSV column 10.
+codegen>csv map 11 teleopOuter
+Bound field teleopOuter to CSV column 11.
+codegen>csv map 12 teleopInner
+Bound field teleopInner to CSV column 12.
+codegen>csv map 13 teleopMissed
+Bound field teleopMissed to CSV column 13.
+codegen>csv map 14 shieldStage1
+Bound field shieldStage1 to CSV column 14.
+codegen>csv map 15 shieldStage2
+Bound field shieldStage2 to CSV column 15.
+codegen>csv map 16 shieldstage3
+Field "shieldstage3" doesn't exist!
+codegen>csv map 16 shieldStage3
+Bound field shieldStage3 to CSV column 16.
+codegen>csv map 17 controlPanelRotated
+Bound field controlPanelRotated to CSV column 17.
+codegen>csv map 18 controlPanelPositioned
+Bound field controlPanelPositioned to CSV column 18.
+codegen>csv map 19 generatorSwitchParked
+Bound field generatorSwitchParked to CSV column 19.
+codegen>csv map 20 generatorSwitchHanging
+Bound field generatorSwitchHanging to CSV column 20.
+codegen>csv map 21 generatorSwitchSupportingMechanism
+Bound field generatorSwitchSupportingMechanism to CSV column 21.
+codegen>csv map 22 generatorSwitchLevel
+Bound field generatorSwitchLevel to CSV column 22.
+codegen>csv map 23 notes
+Bound field notes to CSV column 23.
+codegen>csv list
+23 CSV bindings:
+Col 1: Field[fieldType=Integer, fieldName=matchNumber, fieldFlags=[MATCH_NUM, MUST_BE_FILLED]]
+Col 2: Field[fieldType=Integer, fieldName=teamNumber, fieldFlags=[TEAM_NUM, MUST_BE_FILLED]]
+Col 3: Field[fieldType=String, fieldName=matchtype, fieldFlags=[MATCH_TYPE]]
+Col 4: Field[fieldType=String, fieldName=alliance, fieldFlags=[ALLIANCE_TYPE]]
+Col 5: Field[fieldType=Boolean, fieldName=initLineCrossed, fieldFlags=[]]
+Col 6: Field[fieldType=Integer, fieldName=autonomousLower, fieldFlags=[]]
+Col 7: Field[fieldType=Integer, fieldName=autonomousOuter, fieldFlags=[]]
+Col 8: Field[fieldType=Integer, fieldName=autonomousInner, fieldFlags=[]]
+Col 9: Field[fieldType=Integer, fieldName=autonomousMissed, fieldFlags=[]]
+Col 10: Field[fieldType=Integer, fieldName=teleopLower, fieldFlags=[]]
+Col 11: Field[fieldType=Integer, fieldName=teleopOuter, fieldFlags=[]]
+Col 12: Field[fieldType=Integer, fieldName=teleopInner, fieldFlags=[]]
+Col 13: Field[fieldType=Integer, fieldName=teleopMissed, fieldFlags=[]]
+Col 14: Field[fieldType=Boolean, fieldName=shieldStage1, fieldFlags=[]]
+Col 15: Field[fieldType=Boolean, fieldName=shieldStage2, fieldFlags=[]]
+Col 16: Field[fieldType=Boolean, fieldName=shieldStage3, fieldFlags=[]]
+Col 17: Field[fieldType=Boolean, fieldName=controlPanelRotated, fieldFlags=[]]
+Col 18: Field[fieldType=Boolean, fieldName=controlPanelPositioned, fieldFlags=[]]
+Col 19: Field[fieldType=Boolean, fieldName=generatorSwitchParked, fieldFlags=[]]
+Col 20: Field[fieldType=Boolean, fieldName=generatorSwitchHanging, fieldFlags=[]]
+Col 21: Field[fieldType=Boolean, fieldName=generatorSwitchSupportingMechanism, fieldFlags=[]]
+Col 22: Field[fieldType=Boolean, fieldName=generatorSwitchLevel, fieldFlags=[]]
+Col 23: Field[fieldType=String, fieldName=notes, fieldFlags=[]]
+---
+codegen>generatecode
+Instantiated 7 class generators.
+Exporting output\data\AppInfo.java... Success!
+Exporting output\activities\AddMatches.java... Success!
+Exporting output\data\MatchInfo.java... Success!
+Exporting output\activities\SetMatchInfo.java... Success!
+Exporting output\fragments\AutonomousFragment.java... Success!
+Exporting output\fragments\TeleOpFragment.java... Success!
+Exporting output\fragments\EndgameFragment.java... Success!
+Successfully exported 7 files.
+codegen>generatecode
+Instantiated 7 class generators.
+Exporting output\data\AppInfo.java... Success!
+Exporting output\activities\AddMatches.java... Success!
+Exporting output\data\MatchInfo.java... Success!
+Exporting output\activities\SetMatchInfo.java... Success!
+Exporting output\fragments\AutonomousFragment.java... Success!
+Exporting output\fragments\TeleOpFragment.java... Success!
+Exporting output\fragments\EndgameFragment.java... Success!
+Successfully exported 7 files.
+codegen>
