@@ -95,6 +95,25 @@ public class SetMatchInfo extends AppCompatActivity
             jsonException.printStackTrace();
         }
 
+        if (matchInfoJsonObjStr == null)
+        {
+            try
+            {
+                JSONObject prePopObj = new JSONObject();
+                if (myIntent.hasExtra("PrevMatch"))
+                    prePopObj.put("matchNumber", 1 + myIntent.getIntExtra("PrevMatch", -1));
+                if (myIntent.hasExtra("PrevAlliance"))
+                    prePopObj.put("alliance", myIntent.getStringExtra("PrevAlliance"));
+                if (myIntent.hasExtra("PrevMatchType"))
+                    prePopObj.put("matchType", myIntent.getStringExtra("PrevMatchType"));
+                matchInfoJsonObjStr = prePopObj.toString();
+            }
+            catch (JSONException e)
+            {
+                e.printStackTrace();
+            }
+        }
+
         Log.d(MODULE_NAME, matchInfoJsonObjStr == null ? "No match JSON info to fetch." :
                 "Fetched match JSON info: " + matchInfoJsonObjStr);
 
