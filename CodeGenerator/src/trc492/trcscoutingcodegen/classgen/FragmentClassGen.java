@@ -64,49 +64,64 @@ public class FragmentClassGen extends ClassGenerator
                             break;
                     }
 
-                    setFieldsCode += String.format("        UIUtils.setEditTextValue(%s, fieldData.%s);\n",
+                    setFieldsCode += String.format("        if (fieldData.has(\"%s\") {\n", field.fieldName);
+                    setFieldsCode += String.format("            UIUtils.setEditTextValue(%s, fieldData.%s);\n",
                         element.elementId, jsonFieldData);
+                    setFieldsCode += "        }\n";
 
                     List<FieldFlag> fieldFlags = field.fieldFlags;
                     if (fieldFlags.contains(FieldFlag.MUST_BE_FILLED) || fieldFlags.contains(FieldFlag.MATCH_NUM)
                         || fieldFlags.contains(FieldFlag.TEAM_NUM))
                     {
                         // must be filled
-                        getFieldsCode += String.format("            if (!UIUtils.isEditTextEmpty(%s)) {\n", element.elementId);
-                        getFieldsCode += String.format("                data.put(\"%s\", %s);\n", field.fieldName, parseStr);
-                        getFieldsCode +=               "            }\n";
+                        getFieldsCode += String.format("            if (!UIUtils.isEditTextEmpty(%s)) {\n",
+                            element.elementId);
+                        getFieldsCode += String.format("                data.put(\"%s\", %s);\n", field.fieldName,
+                            parseStr);
+                        getFieldsCode += "            }\n";
                     }
                     else
                     {
-                        getFieldsCode += String.format("            data.put(\"%s\", %s);\n", field.fieldName, parseStr);
+                        getFieldsCode += String.format("            data.put(\"%s\", %s);\n", field.fieldName,
+                            parseStr);
                     }
                     break;
 
                 case CheckBox:
-                    setFieldsCode += String.format("        UIUtils.setCheckbox(%s, fieldData.getBoolean(\"%s\"));\n",
-                        element.elementId, field.fieldName);
+                    setFieldsCode += String.format("        if (fieldData.has(\"%s\") {\n", field.fieldName);
+                    setFieldsCode += String.format(
+                        "            UIUtils.setCheckbox(%s, fieldData.getBoolean(\"%s\"));\n", element.elementId,
+                        field.fieldName);
+                    setFieldsCode += "        }\n";
                     getFieldsCode += String.format("            data.put(\"%s\", %s.isChecked());\n", field.fieldName,
                         element.elementId);
                     break;
 
                 case NumberPicker:
-                    setFieldsCode += String.format("        UIUtils.setNumberPickerVal(%s, fieldData.getInt(\"%s\"));\n",
-                        element.elementId, field.fieldName);
+                    setFieldsCode += String.format("        if (fieldData.has(\"%s\") {\n", field.fieldName);
+                    setFieldsCode += String.format(
+                        "            UIUtils.setNumberPickerVal(%s, fieldData.getInt(\"%s\"));\n", element.elementId,
+                        field.fieldName);
+                    setFieldsCode += "        }\n";
                     getFieldsCode += String.format("            data.put(\"%s\", %s.getValue());\n", field.fieldName,
                         element.elementId);
                     break;
 
                 case Spinner:
+                    setFieldsCode += String.format("        if (fieldData.has(\"%s\") {\n", field.fieldName);
                     setFieldsCode += String.format(
-                        "        UIUtils.setSpinnerByTextValue(%s, fieldData.getString(\"%s\"));\n", element.elementId,
-                        field.fieldName);
+                        "            UIUtils.setSpinnerByTextValue(%s, fieldData.getString(\"%s\"));\n",
+                        element.elementId, field.fieldName);
+                    setFieldsCode += "        }\n";
                     getFieldsCode += String.format("            data.put(\"%s\", %s.getSelectedItem().toString());\n",
                         field.fieldName, element.elementId);
                     break;
 
                 case Switch:
-                    setFieldsCode += String.format("        %s.setChecked(fieldData.getBoolean(\"%s\"));\n\n",
+                    setFieldsCode += String.format("        if (fieldData.has(\"%s\") {\n", field.fieldName);
+                    setFieldsCode += String.format("            %s.setChecked(fieldData.getBoolean(\"%s\"));\n",
                         element.elementId, field.fieldName);
+                    setFieldsCode += "        }\n";
                     getFieldsCode += String.format("            data.put(\"%s\", %s.isChecked());\n", field.fieldName,
                         element.elementId);
                     break;
