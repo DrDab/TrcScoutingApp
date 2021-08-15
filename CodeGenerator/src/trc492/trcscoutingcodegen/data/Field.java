@@ -35,7 +35,7 @@ public class Field implements Serializable
     @Override
     public String toString()
     {
-        return String.format("Field[fieldType=%s, fieldName=%s, fieldFlags=%s]", fieldType, fieldName,
+        return String.format("[fieldType=%s, fieldName=%s, fieldFlags=%s]", fieldType, fieldName,
             fieldFlags == null ? "NULL" : Arrays.toString(fieldFlags.toArray()));
     }
     

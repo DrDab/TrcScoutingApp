@@ -2,7 +2,6 @@ package trc492.trcscoutingcodegen.data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -46,8 +45,8 @@ public class Page implements Serializable
     @Override
     public String toString()
     {
-        return String.format("Page[pageNum=%d, tabName=%s, className=%s, fragmentName=%s, elements=%s]", pageNum, tabName,
-            className, fragmentName, elements == null ? "NULL" : Arrays.toString(elements.toArray()));
+        return String.format("[pageNum=%d, tabName=%s, className=%s, fragmentName=%s, numElements=%d]", pageNum, tabName,
+            className, fragmentName, elements == null ? 0 : elements.size());
     }
     
     public JSONObject toJSONObject()

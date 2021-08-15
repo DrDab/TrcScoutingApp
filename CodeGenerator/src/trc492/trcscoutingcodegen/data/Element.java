@@ -24,7 +24,7 @@ public class Element implements Serializable
     @Override
     public String toString()
     {
-        return String.format("Element[elementId=%s, elementType=%s, field=%s]", elementId, elementType, field);
+        return String.format("[elementId=%s, elementType=%s, field=%s]", elementId, elementType, field);
     }
     
     public JSONObject toJSONObject()
