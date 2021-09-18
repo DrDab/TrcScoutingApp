@@ -17,6 +17,6 @@ public class AppInfo
     // SetMatchInfo and child Fragment settings.
     //
     public static final int NUM_PAGES = 3;
-    public static final String[] TAB_NAMES = {Autonomous,Teleoperated,Endgame};
+    public static final String[] TAB_NAMES = {"Autonomous","Teleoperated","Endgame"};
     public static final Class<?>[] FRAGMENT_CLASSES = {AutonomousFragment.class,TeleOpFragment.class,EndgameFragment.class};
 }

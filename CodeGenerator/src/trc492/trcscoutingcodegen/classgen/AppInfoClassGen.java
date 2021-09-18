@@ -45,7 +45,7 @@ public class AppInfoClassGen extends ClassGenerator
         for (int i = 0; i < pages.size(); i++)
         {
             Page page = pages.get(i);
-            tabNamesStr += page.tabName;
+            tabNamesStr += "\"" + page.tabName + "\"";
             fragClassesStr += page.className + ".class";
             if (i != pages.size() - 1)
             {
